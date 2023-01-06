@@ -18,6 +18,13 @@ mod benchmarking;
 pub mod pallet {
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
+	// use ark_bls12_381::{Bls12_381, Fr as BlsFr, G1Affine, G2Affine};
+	// use ark_ec::{pairing::*, AffineRepr};
+	// use ark_ff::Fp;
+	// use ark_groth16::Groth16;
+	// use ark_serialize::{CanonicalDeserialize, Compress, Validate};
+	// use ark_snark::SNARK;
+	// use ark_std::{vec, vec::Vec};
 
 	#[pallet::pallet]
 	#[pallet::generate_store(pub(super) trait Store)]
