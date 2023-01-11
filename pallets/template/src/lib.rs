@@ -23,7 +23,38 @@ pub mod pallet {
 	use ark_std::{vec, vec::Vec};
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
-	use sp_ark_bls12_381::{Bls12_381, Fr as BlsFr};
+	use sp_ark_bls12_381::{Bls12_381 as Bls12_381_Host, Fr as BlsFr, HostFunctions};
+
+	struct Host {}
+
+	impl HostFunctions for Host {
+		fn bls12_381_multi_miller_loop(a: Vec<Vec<u8>>, b: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::crypto::bls12_381_multi_miller_loop(a, b)
+		}
+		fn bls12_381_final_exponentiation(f12: &[u8]) -> Vec<u8> {
+			sp_io::crypto::bls12_381_final_exponentiation(f12)
+		}
+		fn bls12_381_msm_g1(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::crypto::bls12_381_msm_g1(bases, bigints)
+		}
+		fn bls12_381_mul_projective_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::crypto::bls12_381_mul_projective_g1(base, scalar)
+		}
+		fn bls12_381_mul_affine_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::crypto::bls12_381_mul_affine_g1(base, scalar)
+		}
+		fn bls12_381_msm_g2(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::crypto::bls12_381_msm_g2(bases, bigints)
+		}
+		fn bls12_381_mul_projective_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::crypto::bls12_381_mul_projective_g2(base, scalar)
+		}
+		fn bls12_381_mul_affine_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::crypto::bls12_381_mul_affine_g2(base, scalar)
+		}
+	}
+
+	type Bls12_381 = Bls12_381_Host<Host>;
 
 	#[pallet::pallet]
 	#[pallet::generate_store(pub(super) trait Store)]
@@ -89,7 +120,7 @@ pub mod pallet {
 
 		#[pallet::call_index(2)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn verify_groth16(_origin: OriginFor<T>, _something: u32) -> DispatchResult {
+		pub fn verify_groth16(_origin: OriginFor<T>) -> DispatchResult {
 			let vk_serialized: Vec<u8> = vec![
 				183, 29, 177, 250, 95, 65, 54, 46, 147, 2, 91, 53, 86, 215, 110, 173, 18, 37, 207,
 				89, 13, 28, 219, 158, 56, 42, 31, 235, 183, 150, 61, 205, 36, 165, 30, 24, 223, 4,

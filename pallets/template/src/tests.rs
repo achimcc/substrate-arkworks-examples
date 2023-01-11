@@ -30,6 +30,6 @@ fn correct_error_for_none_value() {
 fn groth16_verification_works() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::verify_groth16(RuntimeOrigin::signed(1), 42));
+		assert_ok!(TemplateModule::verify_groth16(RuntimeOrigin::signed(1)));
 	});
 }

@@ -12,7 +12,6 @@ sp-core = { version = "7.0.0", git = "https://github.com/paritytech/substrate.gi
 sp-runtime = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
 sp-std = { version = "5.0.0", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
 sp-io = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-ark-bls12-381 = { version = "0.4.0-alpha.1", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
 
 ark-serialize = { git = "https://github.com/arkworks-rs/algebra/", branch = "releases"  }
 ark-ff = { git = "https://github.com/arkworks-rs/algebra/", branch = "releases"  }
