@@ -37,11 +37,25 @@ sp-runtime = { version = "7.0.0", default-features = false, git = "https://githu
 default = []
 std = [
 	"codec/std",
-	"frame-benchmarking?/std",
+	"frame-benchmarking/std",
 	"frame-support/std",
 	"frame-system/std",
 	"scale-info/std",
-	"sp-ark-bls12-381/std"
+	"sp-ark-bls12-381/std",
+	"sp-io/std",
+	"ark-serialize/std",
+	"ark-ec/std",
+	"ark-ff/std",
+	"ark-std/std",
+	"ark-groth16/std",
+	"scale-info/std",
+	"frame-benchmarking/std",
+	"frame-support/std",
+	"frame-system/std",
+	"sp-core/std",
+	"sp-runtime/std",
+	"codec/std",
+	"sp-ark-bls12-381/std",
 ]
 runtime-benchmarks = ["frame-benchmarking/runtime-benchmarks"]
 try-runtime = ["frame-support/try-runtime"]
