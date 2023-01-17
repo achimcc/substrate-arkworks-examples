@@ -31,7 +31,7 @@ pub mod pallet {
 		fn bls12_381_multi_miller_loop(a: Vec<Vec<u8>>, b: Vec<Vec<u8>>) -> Vec<u8> {
 			sp_io::crypto::bls12_381_multi_miller_loop(a, b)
 		}
-		fn bls12_381_final_exponentiation(f12: &[u8]) -> Vec<u8> {
+		fn bls12_381_final_exponentiation(f12: Vec<u8>) -> Vec<u8> {
 			sp_io::crypto::bls12_381_final_exponentiation(f12)
 		}
 		fn bls12_381_msm_g1(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
