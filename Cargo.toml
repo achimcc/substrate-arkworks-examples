@@ -8,17 +8,13 @@ members = [
 panic = "unwind"
 
 [patch.crates-io]
-sp-core = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-runtime = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-std = { version = "5.0.0", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-io = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
+sp-core = { git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
+sp-runtime = { git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
+sp-std = { git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
+sp-io = { git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
+frame-benchmarking = { git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
+frame-support = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
+frame-system = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
 
-ark-serialize = { git = "https://github.com/arkworks-rs/algebra/", branch = "releases"  }
-ark-ff = { git = "https://github.com/arkworks-rs/algebra/", branch = "releases"  }
-ark-ec = { git = "https://github.com/arkworks-rs/algebra/", branch = "releases"  }
-ark-poly = { git = "https://github.com/arkworks-rs/algebra/", branch = "releases"  }
-ark-bls12-381 = { git = "https://github.com/arkworks-rs/curves" }
-ark-bls12-377 = { git = "https://github.com/arkworks-rs/curves" }
-ark-bw6-761 = { git = "https://github.com/arkworks-rs/curves" }
-ark-ed-on-bls12-381 = { git = "https://github.com/arkworks-rs/curves" }
-ark-ed-on-bls12-377 = { git = "https://github.com/arkworks-rs/curves" }
+sp-ark-bls12-381 = { git = "https://github.com/paritytech/ark-substrate" }
+ark-groth16 = { git = "https://github.com/achimcc/groth16", branch = "master" }
