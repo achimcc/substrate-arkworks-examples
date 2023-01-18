@@ -4,7 +4,6 @@ version = "4.0.0-dev"
 description = "An example implementation of a groth16 verificaton in a Substrate pallet"
 authors = ["Achim Schneider <achim@parity.io>"]
 homepage = "https://substrate.io"
-edition = "2021"
 publish = false
 repository = "https://github.com/achimcc/groth16"
 license = "MIT/Apache-2.0"
