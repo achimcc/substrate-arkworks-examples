@@ -5,7 +5,6 @@ description = "An example implementation of a groth16 verificaton in a Substrate
 authors = ["Achim Schneider <achim@parity.io>"]
 homepage = "https://substrate.io"
 edition = "2021"
-license = "Unlicense"
 publish = false
 repository = "https://github.com/achimcc/groth16"
 license = "MIT/Apache-2.0"
