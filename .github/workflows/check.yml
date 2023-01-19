@@ -118,14 +118,17 @@ jobs:
         with:
           tool: protoc
 
-      - name: ls
-        run: cls
-
       - name: echo
         run: echo $PWD
       
       - name: Build for benchmark
-        run: cargo build --package node-template profile production --features runtime-benchmarks
+        run: cargo build --package node-template --profile production --features runtime-benchmarks
+
+      - name: ls
+        run: ls
+
+      - name: Run benchmark
+        run: ls $(pwd)/target/production
 
       - name: Run benchmark
         run: $(pwd)/target/production/node-template benchmark pallet --list
