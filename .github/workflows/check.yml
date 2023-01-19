@@ -43,6 +43,12 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
+          target: wasm32-unknown-unknown 
+      
+      - name: Install protoc
+        uses: taiki-e/install-action@v1
+        with:
+          tool: protoc
 
       - name: Check Build
         run: |
@@ -58,12 +64,14 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: nightly
+          target: wasm32-unknown-unknown
           components: rustfmt      
           
       - name: Cargo clippy
         uses: actions-rs/cargo@v1
         with:
           toolchain: stable
+          target: wasm32-unknown-unknown
           command: clippy
           args: --all-targets
 
@@ -77,7 +85,14 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           profile: minimal
+          target: wasm32-unknown-unknown
           toolchain: nightly
+          
+      - name: Install protoc
+        uses: taiki-e/install-action@v1
+        with:
+          tool: protoc
+
       - name: Run tests
         run: cargo test --verbose
 
