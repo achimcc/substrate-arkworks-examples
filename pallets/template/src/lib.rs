@@ -86,7 +86,7 @@ pub mod pallet {
 
 	#[pallet::error]
 	pub enum Error<T> {
-		/// Invalid groth16 proof
+		/// Verification of groth16 proof failed
 		VerificationFailed,
 	}
 
@@ -95,7 +95,7 @@ pub mod pallet {
 		#[pallet::call_index(0)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn verify_groth16(origin: OriginFor<T>) -> DispatchResult {
-			let who = ensure_signed(origin)?;
+			let who = ensure_signed(origin).unwrap();
 
 			let vk_serialized: Vec<u8> = vec![
 				183, 29, 177, 250, 95, 65, 54, 46, 147, 2, 91, 53, 86, 215, 110, 173, 18, 37, 207,
@@ -160,12 +160,11 @@ pub mod pallet {
 			.unwrap();
 
 			if !Groth16::<Bls12_381>::verify(&vk, &[c], &proof).unwrap() {
-				Err(Error::<T>::VerificationFailed)
+				Err(Error::<T>::VerificationFailed.into())
+			} else {
+				Self::deposit_event(Event::VerificationSuccess { who });
+				Ok(())
 			}
-
-			Self::deposit_event(Event::VerificationSuccess { who });
-
-			Ok(())
 		}
 	}
 }
