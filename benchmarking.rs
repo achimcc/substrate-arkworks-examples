@@ -4,8 +4,8 @@ use super::*;
 
 #[allow(unused)]
 use crate::Pallet as Template;
-use frame_benchmarking::{benchmarks, whitelisted_caller};
-use frame_system::RawOrigin;
+use frame_benchmarking::{benchmarks, whitelisted_caller, baseline::Pallet};
+use frame_system::{RawOrigin, Config, Call};
 
 benchmarks! {
 	verify_groth16 {
