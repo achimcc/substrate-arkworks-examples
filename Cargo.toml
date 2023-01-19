@@ -8,8 +8,9 @@ members = [
 [profile.release]
 panic = "unwind"
 
-[profile.production]
+codegen-units = 1
 inherits = "release"
+lto = "fat"
 
 [patch.crates-io]
 sp-core = { git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
