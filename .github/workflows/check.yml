@@ -101,4 +101,24 @@ jobs:
       - name: Run tests
         run: cargo test --verbose
 
+  bench:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          target: wasm32-unknown-unknown   
+
+      - name: Install protoc
+        uses: taiki-e/install-action@v1
+        with:
+          tool: protoc
+
+      - name: Run benchmark
+        run: cargo +nightly bench | tee output.txt
+
       
