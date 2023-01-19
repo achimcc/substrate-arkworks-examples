@@ -4675,6 +4675,7 @@ dependencies = [
 name = "pallet-template"
 version = "4.0.0-dev"
 dependencies = [
+ "ark-bls12-381",
  "ark-ec",
  "ark-ff",
  "ark-groth16",
