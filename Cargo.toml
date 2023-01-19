@@ -9,7 +9,6 @@ members = [
 panic = "unwind"
 
 [profile.production]
-debug = false
 inherits = "release"
 
 [patch.crates-io]
