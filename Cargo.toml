@@ -4,6 +4,7 @@ members = [
     "pallets/template",
     "runtime",
 ]
+
 [profile.release]
 panic = "unwind"
 
