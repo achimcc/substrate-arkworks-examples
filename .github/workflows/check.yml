@@ -117,18 +117,9 @@ jobs:
         uses: taiki-e/install-action@v1
         with:
           tool: protoc
-
-      - name: echo
-        run: echo $PWD
       
       - name: Build for benchmark
         run: cargo build --package node-template --profile production --features runtime-benchmarks
-
-      - name: ls
-        run: ls
-
-      - name: ls production folder
-        run: ls $(pwd)/target/production
 
       - name: Run benchmark
         run: $(pwd)/target/production/node-template benchmark pallet --list

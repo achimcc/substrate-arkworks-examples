@@ -12,6 +12,15 @@ edition = "2021"
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
+[profile.production]
+codegen-units = 1
+inherits = 'release'
+lto = 'fat'
+
+[profile.release]
+lto = 'thin'
+panic = 'abort'
+
 [dependencies]
 codec = { package = "parity-scale-codec", version = "3.0.0", features = [ "derive" ], default-features = false }
 scale-info = { version = "2.1.1", features = ["derive"], default-features = false }
