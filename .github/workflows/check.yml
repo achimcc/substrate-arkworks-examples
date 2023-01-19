@@ -120,8 +120,11 @@ jobs:
       
       - name: Build for benchmark
         run: cargo build --package node-template --release --features runtime-benchmarks
+      
+      - name: Build for benchmark
+        run: ls
 
       - name: Run benchmark
-        run: ./target/production/node-template benchmark pallet --list
+        run: $(pwd)/target/production/node-template benchmark pallet --list
 
       
