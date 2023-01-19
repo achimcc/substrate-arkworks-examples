@@ -119,7 +119,7 @@ jobs:
           tool: protoc
       
       - name: Build for benchmark
-        run: cargo build --package node-template --profile production --features runtime-benchmarks
+        run: cargo build --package node-template --production --features runtime-benchmarks
 
       - name: Run benchmark
         run: $(pwd)/target/production/node-template benchmark pallet --list
