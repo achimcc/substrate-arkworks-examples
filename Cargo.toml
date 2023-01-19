@@ -8,6 +8,7 @@ members = [
 [profile.release]
 panic = "unwind"
 
+[profile.productions]
 codegen-units = 1
 inherits = "release"
 lto = "fat"

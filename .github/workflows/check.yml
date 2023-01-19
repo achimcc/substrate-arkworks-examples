@@ -127,7 +127,7 @@ jobs:
       - name: ls
         run: ls
 
-      - name: Run benchmark
+      - name: ls production folder
         run: ls $(pwd)/target/production
 
       - name: Run benchmark
