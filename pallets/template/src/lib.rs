@@ -16,6 +16,7 @@ mod benchmarking;
 
 #[frame_support::pallet]
 pub mod pallet {
+	use ark_bls12_381::{Bls12_381, Fr as BlsFr};
 	use ark_ff::Fp;
 	use ark_groth16::Groth16;
 	use ark_serialize::{CanonicalDeserialize, Compress, Validate};
@@ -24,7 +25,6 @@ pub mod pallet {
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
 	use sp_ark_bls12_381::{Bls12_381 as Bls12_381_Host, Fr as BlsFrOptimized, HostFunctions};
-	use ark_bls12_381::{Bls12_381, Fr as BlsFr};
 
 	struct Host {}
 
