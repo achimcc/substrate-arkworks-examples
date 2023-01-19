@@ -117,6 +117,9 @@ jobs:
         uses: taiki-e/install-action@v1
         with:
           tool: protoc
+      
+      - name: Build for benchmark
+        run: cargo build --package node-template --release --features runtime-benchmarks
 
       - name: Run benchmark
         run: cargo +nightly bench | tee output.txt
