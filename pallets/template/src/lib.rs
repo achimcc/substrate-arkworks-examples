@@ -80,18 +80,14 @@ pub mod pallet {
 	#[pallet::event]
 	#[pallet::generate_deposit(pub(super) fn deposit_event)]
 	pub enum Event<T: Config> {
-		/// Event documentation should end with an array that provides descriptive names for event
-		/// parameters. [something, who]
+		/// Successfull groth16 verification event
 		VerificationSuccess { who: T::AccountId },
 	}
 
-	// Errors inform users that something went wrong.
 	#[pallet::error]
 	pub enum Error<T> {
-		/// Error names should be descriptive.
-		NoneValue,
-		/// Errors should have helpful documentation associated with them.
-		StorageOverflow,
+		/// Invalid groth16 proof
+		VerificationFailed,
 	}
 
 	#[pallet::call]
@@ -164,7 +160,7 @@ pub mod pallet {
 			.unwrap();
 
 			if !Groth16::<Bls12_381>::verify(&vk, &[c], &proof).unwrap() {
-				Err(Error::<T>::StorageOverflow)?
+				Err(Error::<T>::VerificationFailed)
 			}
 
 			Self::deposit_event(Event::VerificationSuccess { who });
