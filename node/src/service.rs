@@ -17,7 +17,17 @@ pub struct ExecutorDispatch;
 impl sc_executor::NativeExecutionDispatch for ExecutorDispatch {
 	/// Only enable the benchmarking host functions when we actually want to benchmark.
 	#[cfg(feature = "runtime-benchmarks")]
-	type ExtendHostFunctions = sp_io::elliptic_curves;
+	type ExtendHostFunctions = frame_benchmarking::benchmarking::HostFunctions;
+	sp_io::elliptic_curves::bls12_381_multi_miller_loop;
+    sp_io::elliptic_curves::bls12_381_final_exponentiation;
+	sp_io::elliptic_curves::bls12_381_msm_g1;
+	sp_io::elliptic_curves::bls12_381_mul_projective_g1;
+	sp_io::elliptic_curves::bls12_381_mul_affine_g1;
+	sp_io::elliptic_curves::bls12_381_msm_g2;
+	sp_io::elliptic_curves::bls12_381_mul_projective_g2;
+	sp_io::elliptic_curves::bls12_381_mul_affine_g2;
+
+	
 	/// Otherwise we only use the default Substrate host functions.
 	#[cfg(not(feature = "runtime-benchmarks"))]
 	type ExtendHostFunctions = ();
