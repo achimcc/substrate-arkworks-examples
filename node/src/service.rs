@@ -9,8 +9,8 @@ use sc_keystore::LocalKeystore;
 use sc_service::{error::Error as ServiceError, Configuration, TaskManager};
 use sc_telemetry::{Telemetry, TelemetryWorker};
 use sp_consensus_aura::sr25519::AuthorityPair as AuraPair;
-use sp_wasm_interface::{ExtendedHostFunctions, NativeExecutionDispatch};
 use std::{sync::Arc, time::Duration};
+use sp_wasm_interface::ExtendedHostFunctions;
 
 // Our native executor instance.
 pub struct ExecutorDispatch;
@@ -18,11 +18,11 @@ pub struct ExecutorDispatch;
 impl sc_executor::NativeExecutionDispatch for ExecutorDispatch {
 	/// Only enable the benchmarking host functions when we actually want to benchmark.
 	#[cfg(feature = "runtime-benchmarks")]
-	type HostFunctionsOf<E> = ExtendedHostFunctions<
-		frame_benchmarking::benchmarking::HostFunctions,
-		<sp_io::elliptic_curves as NativeExecutionDispatch>::ExtendHostFunctions,
-	>;
-
+	type ExtendHostFunctions = ExtendedHostFunctions<
+	                frame_benchmarking::benchmarking::HostFunctions,
+					sp_io::SubstrateHostFunctions,
+			>;
+	
 	/// Otherwise we only use the default Substrate host functions.
 	#[cfg(not(feature = "runtime-benchmarks"))]
 	type ExtendHostFunctions = ();
