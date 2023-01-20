@@ -4318,7 +4318,6 @@ dependencies = [
  "sp-keyring",
  "sp-runtime",
  "sp-timestamp",
- "sp-wasm-interface",
  "substrate-build-script-utils",
  "substrate-frame-rpc-system",
  "try-runtime-cli",
