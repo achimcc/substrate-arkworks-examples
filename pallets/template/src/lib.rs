@@ -190,7 +190,7 @@ pub mod pallet {
 		}
 	}
 
-	static PROOF_SERIALIZED: &'static [u8] = &[
+	static PROOF_SERIALIZED: &[u8] = &[
 		160, 91, 229, 15, 171, 87, 149, 187, 135, 132, 57, 58, 80, 69, 249, 135, 71, 23, 58, 210,
 		135, 245, 94, 33, 52, 113, 189, 85, 151, 69, 85, 20, 82, 69, 60, 76, 58, 57, 231, 200, 131,
 		16, 132, 159, 60, 122, 31, 195, 173, 99, 72, 182, 183, 179, 76, 134, 191, 55, 167, 72, 205,
@@ -203,7 +203,7 @@ pub mod pallet {
 		219, 107, 193, 226, 218, 157, 152, 229, 83, 229, 234, 237,
 	];
 
-	const VK_SERIALIZED: &'static [u8] = &[
+	const VK_SERIALIZED: &[u8] = &[
 		183, 29, 177, 250, 95, 65, 54, 46, 147, 2, 91, 53, 86, 215, 110, 173, 18, 37, 207, 89, 13,
 		28, 219, 158, 56, 42, 31, 235, 183, 150, 61, 205, 36, 165, 30, 24, 223, 4, 171, 34, 27,
 		236, 175, 41, 22, 159, 175, 37, 179, 162, 107, 11, 71, 18, 231, 141, 93, 113, 120, 109,
@@ -228,7 +228,7 @@ pub mod pallet {
 		122, 216, 118, 225, 240, 43, 91, 224, 52, 173, 175, 115, 149, 42, 232, 175, 254, 229, 245,
 		24, 65, 222,
 	];
-	const C_SERIALIZED: &'static [u8] = &[
+	const C_SERIALIZED: &[u8] = &[
 		24, 246, 200, 56, 227, 0, 59, 95, 49, 157, 206, 57, 13, 141, 238, 168, 24, 78, 144, 62,
 		155, 209, 70, 78, 67, 71, 89, 204, 203, 208, 132, 24,
 	];
@@ -275,17 +275,16 @@ pub mod pallet {
 			let who = ensure_signed(origin).unwrap();
 
 			let vk = <Groth16<Bls12_381Optimized> as SNARK<BlsFrOptimized>>::VerifyingKey::deserialize_with_mode(
-				&VK_SERIALIZED[..],
+				VK_SERIALIZED,
 				Compress::Yes,
 				Validate::No,
 			)
 			.unwrap();
 
-			let c =
-				Fp::deserialize_with_mode(&C_SERIALIZED[..], Compress::Yes, Validate::No).unwrap();
+			let c = Fp::deserialize_with_mode(C_SERIALIZED, Compress::Yes, Validate::No).unwrap();
 
 			let proof = <Groth16<Bls12_381Optimized> as SNARK<BlsFrOptimized>>::Proof::deserialize_with_mode(
-				&PROOF_SERIALIZED[..],
+				PROOF_SERIALIZED,
 				Compress::Yes,
 				Validate::No,
 			)
@@ -305,17 +304,16 @@ pub mod pallet {
 			let who = ensure_signed(origin).unwrap();
 
 			let vk = <Groth16<Bls12_381> as SNARK<BlsFr>>::VerifyingKey::deserialize_with_mode(
-				&VK_SERIALIZED[..],
+				VK_SERIALIZED,
 				Compress::Yes,
 				Validate::No,
 			)
 			.unwrap();
 
-			let c =
-				Fp::deserialize_with_mode(&C_SERIALIZED[..], Compress::Yes, Validate::No).unwrap();
+			let c = Fp::deserialize_with_mode(C_SERIALIZED, Compress::Yes, Validate::No).unwrap();
 
 			let proof = <Groth16<Bls12_381> as SNARK<BlsFr>>::Proof::deserialize_with_mode(
-				&PROOF_SERIALIZED[..],
+				PROOF_SERIALIZED,
 				Compress::Yes,
 				Validate::No,
 			)
@@ -399,8 +397,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn pairing_arkworks_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = Bls12_381Optimized::multi_pairing(
-				&[G1AffineBls12_381::generator()],
-				&[G2AffineBls12_381::generator()],
+				[G1AffineBls12_381::generator()],
+				[G2AffineBls12_381::generator()],
 			);
 			Ok(())
 		}
@@ -409,8 +407,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn pairing_arkworks_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = Bls12_377Optimized::multi_pairing(
-				&[G1AffineBls12_377::generator()],
-				&[G2AffineBls12_377::generator()],
+				[G1AffineBls12_377::generator()],
+				[G2AffineBls12_377::generator()],
 			);
 			Ok(())
 		}
@@ -483,8 +481,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn pairing_arkworks_bw6_761_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = BW6_761Optimized::multi_pairing(
-				&[G1AffineBW6_761::generator()],
-				&[G2AffineBW6_761::generator()],
+				[G1AffineBW6_761::generator()],
+				[G2AffineBW6_761::generator()],
 			);
 			Ok(())
 		}
@@ -678,8 +676,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn pairing_arkworks_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = ark_bls12_381::Bls12_381::multi_pairing(
-				&[ark_bls12_381::G1Affine::generator()],
-				&[ark_bls12_381::G2Affine::generator()],
+				[ark_bls12_381::G1Affine::generator()],
+				[ark_bls12_381::G2Affine::generator()],
 			);
 			Ok(())
 		}
@@ -688,8 +686,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn pairing_arkworks_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = ark_bls12_377::Bls12_377::multi_pairing(
-				&[ark_bls12_377::G1Affine::generator()],
-				&[ark_bls12_377::G2Affine::generator()],
+				[ark_bls12_377::G1Affine::generator()],
+				[ark_bls12_377::G2Affine::generator()],
 			);
 			Ok(())
 		}
@@ -760,8 +758,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn pairing_arkworks_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = ark_bw6_761::BW6_761::multi_pairing(
-				&[ark_bw6_761::G1Affine::generator()],
-				&[ark_bw6_761::G2Affine::generator()],
+				[ark_bw6_761::G1Affine::generator()],
+				[ark_bw6_761::G2Affine::generator()],
 			);
 			Ok(())
 		}
