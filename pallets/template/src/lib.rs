@@ -21,14 +21,32 @@ pub mod pallet {
 	use ark_groth16::Groth16;
 	use ark_serialize::{CanonicalDeserialize, Compress, Validate};
 	use ark_snark::SNARK;
-	use ark_std::{vec, vec::Vec};
+	use ark_std::{test_rng, vec, vec::Vec, UniformRand};
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
-	use sp_ark_bls12_381::{Bls12_381 as Bls12_381_Host, Fr as BlsFrOptimized, HostFunctions};
+	use sp_ark_bls12_377::{
+		Bls12_377 as Bls12_377_Host, Fq, G1Affine as G1AffineBls12_377_Host,
+		G1Projective as G1ProjectiveBls12_377_Host, G2Affine as G2AffineBls12_377_Host,
+		G2Projective as G2ProjectiveBls12_377_Host, HostFunctions as Bls12_377HostFunctions,
+	};
+	use sp_ark_bls12_381::{
+		Bls12_381 as Bls12_381_Host, Fr as BlsFrOptimized, FrConfig,
+		G1Affine as G1AffineBls12_381_Host, G1Projective as G1ProjectiveBls12_381_Host,
+		G2Affine as G2AffineBls12_381_Host, G2Projective as G2ProjectiveBls12_381_Host,
+		HostFunctions as Bls12_381HostFunctions,
+	};
+	use sp_ark_bw6_761::{
+		G1Affine as G1AffineBW6_761_Host, G1Projective as G1ProjectiveBW6_761_Host,
+		G2Affine as G2AffineBW6_761_Host, G2Projective as G2ProjectiveBW6_761_Host,
+		HostFunctions as BW6_761HostFunctions, BW6_761 as BW6_761_Host,
+	};
+	use sp_ark_models::{
+		bls12::Bls12, pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group,
+	};
 
-	struct Host {}
+	struct HostBls12_381 {}
 
-	impl HostFunctions for Host {
+	impl Bls12_381HostFunctions for HostBls12_381 {
 		fn bls12_381_multi_miller_loop(a: Vec<Vec<u8>>, b: Vec<Vec<u8>>) -> Vec<u8> {
 			sp_io::elliptic_curves::bls12_381_multi_miller_loop(a, b)
 		}
@@ -55,7 +73,82 @@ pub mod pallet {
 		}
 	}
 
-	type Bls12_381Optimized = Bls12_381_Host<Host>;
+	type Bls12_381Optimized = Bls12_381_Host<HostBls12_381>;
+	type G1AffineBls12_381 = G1AffineBls12_381_Host<HostBls12_381>;
+	type G2AffineBls12_381 = G2AffineBls12_381_Host<HostBls12_381>;
+	type G1ProjectiveBls12_381 = G1ProjectiveBls12_381_Host<HostBls12_381>;
+	type G2ProjectiveBls12_381 = G2ProjectiveBls12_381_Host<HostBls12_381>;
+	// type Bls12 = Bls12Config<sp_ark_bls12_381::Config<HostBls12_381>>;
+
+	struct HostBls12_377 {}
+
+	impl Bls12_377HostFunctions for HostBls12_377 {
+		fn bls12_377_multi_miller_loop(a: Vec<Vec<u8>>, b: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::elliptic_curves::bls12_377_multi_miller_loop(a, b)
+		}
+		fn bls12_377_final_exponentiation(f12: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bls12_377_final_exponentiation(f12)
+		}
+		fn bls12_377_msm_g1(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::elliptic_curves::bls12_377_msm_g1(bases, bigints)
+		}
+		fn bls12_377_mul_projective_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bls12_377_mul_projective_g1(base, scalar)
+		}
+		fn bls12_377_mul_affine_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bls12_377_mul_affine_g1(base, scalar)
+		}
+		fn bls12_377_msm_g2(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::elliptic_curves::bls12_377_msm_g2(bases, bigints)
+		}
+		fn bls12_377_mul_projective_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bls12_377_mul_projective_g2(base, scalar)
+		}
+		fn bls12_377_mul_affine_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bls12_377_mul_affine_g2(base, scalar)
+		}
+	}
+
+	type Bls12_377Optimized = Bls12_377_Host<HostBls12_377>;
+	type G1AffineBls12_377 = G1AffineBls12_377_Host<HostBW6_761>;
+	type G2AffineBls12_377 = G2AffineBls12_377_Host<HostBW6_761>;
+	type G1ProjectiveBls12_377 = G1ProjectiveBls12_377_Host<HostBW6_761>;
+	type G2ProjectiveBls12_377 = G2ProjectiveBls12_377_Host<HostBW6_761>;
+
+	struct HostBW6_761 {}
+
+	impl BW6_761HostFunctions for HostBW6_761 {
+		fn bw6_761_multi_miller_loop(a: Vec<Vec<u8>>, b: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_multi_miller_loop(a, b)
+		}
+		fn bw6_761_final_exponentiation(f12: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_final_exponentiation(f12)
+		}
+		fn bw6_761_mul_projective_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_mul_projective_g2(base, scalar)
+		}
+		fn bw6_761_mul_affine_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_mul_affine_g2(base, scalar)
+		}
+		fn bw6_761_mul_projective_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_mul_projective_g1(base, scalar)
+		}
+		fn bw6_761_mul_affine_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_mul_affine_g1(base, scalar)
+		}
+		fn bw6_761_msm_g1(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_msm_g1(bases, bigints)
+		}
+		fn bw6_761_msm_g2(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_msm_g2(bases, bigints)
+		}
+	}
+
+	type BW6_761Optimized = BW6_761_Host<HostBW6_761>;
+	type G1AffineBW6_761 = G1AffineBW6_761_Host<HostBW6_761>;
+	type G2AffineBW6_761 = G2AffineBW6_761_Host<HostBW6_761>;
+	type G1ProjectiveBW6_761 = G1ProjectiveBW6_761_Host<HostBW6_761>;
+	type G2ProjectiveBW6_761 = G2ProjectiveBW6_761_Host<HostBW6_761>;
 
 	#[pallet::pallet]
 	#[pallet::generate_store(pub(super) trait Store)]
@@ -242,5 +335,291 @@ pub mod pallet {
 				Ok(())
 			}
 		}
+
+		#[pallet::call_index(2)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn msm_g1_Bls12_381(origin: OriginFor<T>) -> DispatchResult {
+			//for a fair benchmark, this would probably need some deserialization from the
+			// arguments
+			let mut rng = test_rng();
+			let scalar = sp_ark_bls12_381::Fr::rand(&mut rng);
+			let out = <sp_ark_bls12_381::g1::Config<HostBls12_381> as SWCurveConfig>::msm(
+				&[G1AffineBls12_381::generator()],
+				&[scalar],
+			);
+
+			Ok(())
+		}
+
+		#[pallet::call_index(3)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn msm_g2_Bls12_381(origin: OriginFor<T>) -> DispatchResult {
+			//for a fair benchmark, this would probably need some deserialization from the
+			// arguments
+			let mut rng = test_rng();
+			let scalar = sp_ark_bls12_381::Fr::rand(&mut rng);
+			let out = <sp_ark_bls12_381::g2::Config<HostBls12_381> as SWCurveConfig>::msm(
+				&[G2AffineBls12_381::generator()],
+				&[scalar],
+			);
+
+			Ok(())
+		}
+
+		#[pallet::call_index(4)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn mul_affine_g1_Bls12_381(origin: OriginFor<T>) -> DispatchResult {
+			//for a fair benchmark, this would probably need some deserialization from the
+			// arguments
+			let out = <sp_ark_bls12_381::g1::Config<HostBls12_381> as SWCurveConfig>::mul_affine(
+				&G1AffineBls12_381::generator(),
+				&[2u64],
+			);
+
+			Ok(())
+		}
+
+		#[pallet::call_index(5)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn mul_projective_g1_Bls12_381(origin: OriginFor<T>) -> DispatchResult {
+			//for a fair benchmark, this would probably need some deserialization from the
+			// arguments
+			let mut rng = test_rng();
+			let out =
+				<sp_ark_bls12_381::g1::Config<HostBls12_381> as SWCurveConfig>::mul_projective(
+					&G1ProjectiveBls12_381::generator(),
+					&[2u64],
+				);
+
+			Ok(())
+		}
+
+		#[pallet::call_index(6)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn mul_affine_g2_Bls12_381(origin: OriginFor<T>) -> DispatchResult {
+			//for a fair benchmark, this would probably need some deserialization from the
+			// arguments
+			let out = <sp_ark_bls12_381::g2::Config<HostBls12_381> as SWCurveConfig>::mul_affine(
+				&G2ProjectiveBls12_381::generator(),
+				&[2u64],
+			);
+
+			Ok(())
+		}
+
+		#[pallet::call_index(7)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn mul_projective_g2_Bls12_381(origin: OriginFor<T>) -> DispatchResult {
+			//for a fair benchmark, this would probably need some deserialization from the
+			// arguments
+			let out =
+				<sp_ark_bls12_381::g2::Config<HostBls12_381> as SWCurveConfig>::mul_projective(
+					G2ProjectiveBls12_381::generator(),
+					&[2u64],
+				);
+
+			Ok(())
+		}
+
+		#[pallet::call_index(8)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn pairing_arkworks_bls12_381(origin: OriginFor<T>) -> DispatchResult {
+			//for a fair benchmark, this would probably need some deserialization from the
+			// arguments
+			let out = Bls12_381Optimized::multi_pairing(
+				&[G1AffineBls12_381::generator()],
+				&[G2AffineBls12_381::generator()],
+			);
+
+			Ok(())
+		}
+
+		// #[pallet::call_index(9)]
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		// pub fn pairing_arkworks_Bls12_377(origin: OriginFor<T>) -> DispatchResult {
+		// 	//for a fair benchmark, this would probably need some deserialization from the
+		// 	// arguments
+		// 	let out = Bls12_377Optimized::multi_pairing(
+		// 		&[G1AffineBls12_377::generator()],
+		// 		&[G2AffineBls12_377::generator()],
+		// 	);
+
+		// 	Ok(())
+		// }
+
+		// #[pallet::call_index(10)]
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		// pub fn msm_g1_Bls12_377(origin: OriginFor<T>) -> DispatchResult {
+		// 	//for a fair benchmark, this would probably need some deserialization from the
+		// 	// arguments
+		// 	let out = Bls12_377Optimized::g1::msm(
+		// 		G1AffineBls12_377::generator(),
+		// 		G1AffineBls12_377::generator(),
+		// 	);
+
+		// 	Ok(())
+		// }
+
+		// #[pallet::call_index(11)]
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		// pub fn msm_g2_Bls12_377(origin: OriginFor<T>) -> DispatchResult {
+		// 	//for a fair benchmark, this would probably need some deserialization from the
+		// 	// arguments
+		// 	let out = Bls12_377Optimized::g2::msm(
+		// 		G2AffineBls12_377::generator(),
+		// 		G2AffineBls12_377::generator(),
+		// 	);
+
+		// 	Ok(())
+		// }
+
+		// #[pallet::call_index(12)]
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		// pub fn mul_affine_g1_Bls12_377(origin: OriginFor<T>) -> DispatchResult {
+		// 	//for a fair benchmark, this would probably need some deserialization from the
+		// 	// arguments
+		// 	let mut rng = test_rng();
+		// 	let out = Bls12_377Optimized::g1::mul_affine(
+		// 		Fq::rand(&mut rng),
+		// 		G1AffineBls12_377::generator(),
+		// 	);
+
+		// 	Ok(())
+		// }
+
+		// #[pallet::call_index(13)]
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		// pub fn mul_projective_g1_Bls12_377(origin: OriginFor<T>) -> DispatchResult {
+		// 	//for a fair benchmark, this would probably need some deserialization from the
+		// 	// arguments
+		// 	let mut rng = test_rng();
+		// 	let out = Bls12_377Optimized::g1::mul_projective(
+		// 		Fq::rand(&mut rng),
+		// 		G1AffineBls12_377::generator(),
+		// 	);
+
+		// 	Ok(())
+		// }
+
+		// #[pallet::call_index(14)]
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		// pub fn mul_affine_g2_Bls12_377(origin: OriginFor<T>) -> DispatchResult {
+		// 	//for a fair benchmark, this would probably need some deserialization from the
+		// 	// arguments
+		// 	let mut rng = test_rng();
+		// 	let out = Bls12_377Optimized::g2::mul_affine(
+		// 		Fq::rand(&mut rng),
+		// 		G2ProjectiveBls12_377::generator(),
+		// 	);
+
+		// 	Ok(())
+		// }
+
+		// #[pallet::call_index(15)]
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		// pub fn mul_projective_g2_Bls12_377(origin: OriginFor<T>) -> DispatchResult {
+		// 	//for a fair benchmark, this would probably need some deserialization from the
+		// 	// arguments
+		// 	let mut rng = test_rng();
+		// 	let out = Bls12_377Optimized::g2::mul_projective(
+		// 		Fq::rand(&mut rng),
+		// 		G2ProjectiveBls12_377::generator(),
+		// 	);
+
+		// 	Ok(())
+		// }
+
+		// #[pallet::call_index(16)]
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		// pub fn pairing_arkworks_BW6_761(origin: OriginFor<T>) -> DispatchResult {
+		// 	//for a fair benchmark, this would probably need some deserialization from the
+		// 	// arguments
+		// 	let out = Bls12_377Optimized::multi_pairing(
+		// 		&[G1AffineBW6_761::generator()],
+		// 		&[G2AffineBW6_761::generator()],
+		// 	);
+
+		// 	Ok(())
+		// }
+
+		// #[pallet::call_index(17)]
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		// pub fn msm_g1_BW6_761(origin: OriginFor<T>) -> DispatchResult {
+		// 	//for a fair benchmark, this would probably need some deserialization from the
+		// 	// arguments
+		// 	let out = BW6_761Optimized::g1::msm(
+		// 		G1AffineBW6_761::generator(),
+		// 		G1AffineBW6_761::generator(),
+		// 	);
+
+		// 	Ok(())
+		// }
+
+		// #[pallet::call_index(18)]
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		// pub fn msm_g2__BW6_761(origin: OriginFor<T>) -> DispatchResult {
+		// 	//for a fair benchmark, this would probably need some deserialization from the
+		// 	// arguments
+		// 	let out = BW6_761Optimized::g2::msm(
+		// 		G2AffineBW6_761::generator(),
+		// 		G2AffineBW6_761::generator(),
+		// 	);
+
+		// 	Ok(())
+		// }
+
+		// #[pallet::call_index(19)]
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		// pub fn mul_affine_g1_BW6_761(origin: OriginFor<T>) -> DispatchResult {
+		// 	//for a fair benchmark, this would probably need some deserialization from the
+		// 	// arguments
+		// 	let mut rng = test_rng();
+		// 	let out =
+		// 		BW6_761Optimized::g1::mul_affine(Fq::rand(&mut rng), G1AffineBW6_761::generator());
+
+		// 	Ok(())
+		// }
+
+		// #[pallet::call_index(20)]
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		// pub fn mul_projective_g1_BW6_761(origin: OriginFor<T>) -> DispatchResult {
+		// 	//for a fair benchmark, this would probably need some deserialization from the
+		// 	// arguments
+		// 	let mut rng = test_rng();
+		// 	let out = BW6_761Optimized::g1::mul_projective(
+		// 		Fq::rand(&mut rng),
+		// 		G1AffineBW6_761::generator(),
+		// 	);
+
+		// 	Ok(())
+		// }
+
+		// #[pallet::call_index(21)]
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		// pub fn mul_affine_g2_BW6_761(origin: OriginFor<T>) -> DispatchResult {
+		// 	//for a fair benchmark, this would probably need some deserialization from the
+		// 	// arguments
+		// 	let mut rng = test_rng();
+		// 	let out = BW6_761Optimized::g2::mul_affine(
+		// 		Fq::rand(&mut rng),
+		// 		G2ProjectiveBW6_761::generator(),
+		// 	);
+
+		// 	Ok(())
+		// }
+
+		// #[pallet::call_index(22)]
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		// pub fn mul_projective_g2_BW6_761(origin: OriginFor<T>) -> DispatchResult {
+		// 	//for a fair benchmark, this would probably need some deserialization from the
+		// 	// arguments
+		// 	let mut rng = test_rng();
+		// 	let out = BW6_761Optimized::g2::mul_projective(
+		// 		Fq::rand(&mut rng),
+		// 		G2ProjectiveBW6_761::generator(),
+		// 	);
+
+		// 	Ok(())
+		// }
 	}
 }
