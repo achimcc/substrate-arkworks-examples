@@ -18,14 +18,12 @@ impl sc_executor::NativeExecutionDispatch for ExecutorDispatch {
 	/// Only enable the benchmarking host functions when we actually want to benchmark.
 	#[cfg(feature = "runtime-benchmarks")]
 	type ExtendHostFunctions = frame_benchmarking::benchmarking::HostFunctions;
-	sp_io::elliptic_curves::bls12_381_multi_miller_loop;
-    sp_io::elliptic_curves::bls12_381_final_exponentiation;
-	sp_io::elliptic_curves::bls12_381_msm_g1;
-	sp_io::elliptic_curves::bls12_381_mul_projective_g1;
-	sp_io::elliptic_curves::bls12_381_mul_affine_g1;
-	sp_io::elliptic_curves::bls12_381_msm_g2;
-	sp_io::elliptic_curves::bls12_381_mul_projective_g2;
-	sp_io::elliptic_curves::bls12_381_mul_affine_g2;
+    fn bls12_381_multi_miller_loop(a: Vec<Vec<u8>>, b: Vec<Vec<u8>>) -> Vec<u8>;
+	fn bls12_381_mul_affine_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8>;
+	fn bls12_381_mul_projective_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8>; 
+	fn bls12_381_mul_affine_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8>; 
+	fn bls12_381_msm_g1(bases: Vec<Vec<u8>>, scalars: Vec<Vec<u8>>) -> Vec<u8>; 
+	fn bls12_381_msm_g2(bases: Vec<Vec<u8>>, scalars: Vec<Vec<u8>>) -> Vec<u8>; 
 
 	
 	/// Otherwise we only use the default Substrate host functions.
