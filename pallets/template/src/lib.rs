@@ -817,6 +817,16 @@ pub mod pallet {
 
 		#[pallet::call_index(48)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn mul_projective_g2_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
+			let _out = <ark_bw6_761::g2::Config as SWCurveConfig>::mul_projective(
+				&ark_bw6_761::G2Projective::generator(),
+				&[2u64],
+			);
+			Ok(())
+		}
+
+		#[pallet::call_index(49)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn msm_ed_on_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
 			let scalar = ark_ed_on_bls12_377::Fr::rand(&mut rng);
@@ -827,7 +837,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(49)]
+		#[pallet::call_index(50)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_affine_ed_on_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_ed_on_bls12_377::EdwardsConfig as TECurveConfig>::mul_affine(
@@ -837,7 +847,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(50)]
+		#[pallet::call_index(51)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_projective_ed_on_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_ed_on_bls12_377::EdwardsConfig as TECurveConfig>::mul_projective(
@@ -847,7 +857,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(51)]
+		#[pallet::call_index(52)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn msm_ed_on_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
@@ -859,7 +869,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(52)]
+		#[pallet::call_index(53)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_affine_ed_on_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_ed_on_bls12_381::EdwardsConfig as SWCurveConfig>::mul_affine(
@@ -869,7 +879,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(53)]
+		#[pallet::call_index(54)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_projective_ed_on_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_ed_on_bls12_381::EdwardsConfig as SWCurveConfig>::mul_projective(
