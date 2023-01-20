@@ -88,6 +88,26 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
+	mul_affine_ed_on_bls12_377_optimized {
+		let caller: T::AccountId = whitelisted_caller();
+	}: _(RawOrigin::Signed(caller))
+
+	mul_projective_ed_on_bls12_377_optimized {
+		let caller: T::AccountId = whitelisted_caller();
+	}: _(RawOrigin::Signed(caller))
+
+	msm_ed_on_bls12_381_optimized {
+		let caller: T::AccountId = whitelisted_caller();
+	}: _(RawOrigin::Signed(caller))
+
+	mul_affine_ed_on_bls12_381_optimized {
+		let caller: T::AccountId = whitelisted_caller();
+	}: _(RawOrigin::Signed(caller))
+
+	mul_projective_ed_on_bls12_381_optimized {
+		let caller: T::AccountId = whitelisted_caller();
+	}: _(RawOrigin::Signed(caller))
+
 	pairing_arkworks_bls12_381 {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
@@ -156,9 +176,31 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	pairing_arkworks_bw6_761 {
+	msm_ed_on_bls12_377 {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
+
+	mul_affine_ed_on_bls12_377 {
+		let caller: T::AccountId = whitelisted_caller();
+	}: _(RawOrigin::Signed(caller))
+
+	mul_projective_ed_on_bls12_377 {
+		let caller: T::AccountId = whitelisted_caller();
+	}: _(RawOrigin::Signed(caller))
+
+	msm_ed_on_bls12_381 {
+		let caller: T::AccountId = whitelisted_caller();
+	}: _(RawOrigin::Signed(caller))
+
+	mul_affine_ed_on_bls12_381 {
+		let caller: T::AccountId = whitelisted_caller();
+	}: _(RawOrigin::Signed(caller))
+
+	mul_projective_ed_on_bls12_381 {
+		let caller: T::AccountId = whitelisted_caller();
+	}: _(RawOrigin::Signed(caller))
+
+
 
 
 

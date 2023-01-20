@@ -40,7 +40,12 @@ pub mod pallet {
 		G2Affine as G2AffineBW6_761_Host, G2Projective as G2ProjectiveBW6_761_Host,
 		HostFunctions as BW6_761HostFunctions, BW6_761 as BW6_761_Host,
 	};
-	use sp_ark_models::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group};
+	use sp_ark_ed_on_bls12_377::HostFunctions as EdwardBls12_377HostFunctions;
+	use sp_ark_ed_on_bls12_381::HostFunctions as EdwardBls12_381HostFunctions;
+
+	use sp_ark_models::{
+		pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group, TECurveConfig,
+	};
 
 	struct HostBls12_381 {}
 
@@ -115,6 +120,76 @@ pub mod pallet {
 
 	struct HostBW6_761 {}
 
+	impl BW6_761HostFunctions for HostBW6_761 {
+		fn bw6_761_multi_miller_loop(a: Vec<Vec<u8>>, b: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_multi_miller_loop(a, b)
+		}
+		fn bw6_761_final_exponentiation(f12: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_final_exponentiation(f12)
+		}
+		fn bw6_761_mul_projective_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_mul_projective_g2(base, scalar)
+		}
+		fn bw6_761_mul_affine_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_mul_affine_g2(base, scalar)
+		}
+		fn bw6_761_mul_projective_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_mul_projective_g1(base, scalar)
+		}
+		fn bw6_761_mul_affine_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_mul_affine_g1(base, scalar)
+		}
+		fn bw6_761_msm_g1(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_msm_g1(bases, bigints)
+		}
+		fn bw6_761_msm_g2(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::elliptic_curves::bw6_761_msm_g2(bases, bigints)
+		}
+	}
+
+	type BW6_761Optimized = BW6_761_Host<HostBW6_761>;
+	type G1AffineBW6_761 = G1AffineBW6_761_Host<HostBW6_761>;
+	type G2AffineBW6_761 = G2AffineBW6_761_Host<HostBW6_761>;
+	type G1ProjectiveBW6_761 = G1ProjectiveBW6_761_Host<HostBW6_761>;
+	type G2ProjectiveBW6_761 = G2ProjectiveBW6_761_Host<HostBW6_761>;
+
+	struct HostEdOnBls12_377 {}
+
+	impl EdwardBls12_377HostFunctions for HostEdOnBls12_377 {
+		fn ed_on_bls12_377_mul_affine(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::ed_on_bls12_377_mul_affine(base, scalar)
+		}
+		fn ed_on_bls12_377_mul_projective(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::ed_on_bls12_377_mul_projective(base, scalar)
+		}
+		fn ed_on_bls12_377_msm(bases: Vec<Vec<u8>>, scalars: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::elliptic_curves::ed_on_bls12_377_msm(bases, scalars)
+		}
+	}
+
+	pub struct HostEdOnBls12_381 {}
+
+	impl EdwardBls12_381HostFunctions for HostEdOnBls12_381 {
+		fn ed_on_bls12_381_sw_mul_affine(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::ed_on_bls12_381_sw_mul_affine(base, scalar)
+		}
+		fn ed_on_bls12_381_te_mul_projective(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::ed_on_bls12_381_te_mul_projective(base, scalar)
+		}
+		fn ed_on_bls12_381_te_mul_affine(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::ed_on_bls12_381_te_mul_affine(base, scalar)
+		}
+		fn ed_on_bls12_381_sw_mul_projective(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+			sp_io::elliptic_curves::ed_on_bls12_381_sw_mul_projective(base, scalar)
+		}
+		fn ed_on_bls12_381_te_msm(bases: Vec<Vec<u8>>, scalars: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::elliptic_curves::ed_on_bls12_381_te_msm(bases, scalars)
+		}
+		fn ed_on_bls12_381_sw_msm(bases: Vec<Vec<u8>>, scalars: Vec<Vec<u8>>) -> Vec<u8> {
+			sp_io::elliptic_curves::ed_on_bls12_381_sw_msm(bases, scalars)
+		}
+	}
+
 	static PROOF_SERIALIZED: &'static [u8] = &[
 		160, 91, 229, 15, 171, 87, 149, 187, 135, 132, 57, 58, 80, 69, 249, 135, 71, 23, 58, 210,
 		135, 245, 94, 33, 52, 113, 189, 85, 151, 69, 85, 20, 82, 69, 60, 76, 58, 57, 231, 200, 131,
@@ -157,39 +232,6 @@ pub mod pallet {
 		24, 246, 200, 56, 227, 0, 59, 95, 49, 157, 206, 57, 13, 141, 238, 168, 24, 78, 144, 62,
 		155, 209, 70, 78, 67, 71, 89, 204, 203, 208, 132, 24,
 	];
-
-	impl BW6_761HostFunctions for HostBW6_761 {
-		fn bw6_761_multi_miller_loop(a: Vec<Vec<u8>>, b: Vec<Vec<u8>>) -> Vec<u8> {
-			sp_io::elliptic_curves::bw6_761_multi_miller_loop(a, b)
-		}
-		fn bw6_761_final_exponentiation(f12: Vec<u8>) -> Vec<u8> {
-			sp_io::elliptic_curves::bw6_761_final_exponentiation(f12)
-		}
-		fn bw6_761_mul_projective_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
-			sp_io::elliptic_curves::bw6_761_mul_projective_g2(base, scalar)
-		}
-		fn bw6_761_mul_affine_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
-			sp_io::elliptic_curves::bw6_761_mul_affine_g2(base, scalar)
-		}
-		fn bw6_761_mul_projective_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
-			sp_io::elliptic_curves::bw6_761_mul_projective_g1(base, scalar)
-		}
-		fn bw6_761_mul_affine_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
-			sp_io::elliptic_curves::bw6_761_mul_affine_g1(base, scalar)
-		}
-		fn bw6_761_msm_g1(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
-			sp_io::elliptic_curves::bw6_761_msm_g1(bases, bigints)
-		}
-		fn bw6_761_msm_g2(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
-			sp_io::elliptic_curves::bw6_761_msm_g2(bases, bigints)
-		}
-	}
-
-	type BW6_761Optimized = BW6_761_Host<HostBW6_761>;
-	type G1AffineBW6_761 = G1AffineBW6_761_Host<HostBW6_761>;
-	type G2AffineBW6_761 = G2AffineBW6_761_Host<HostBW6_761>;
-	type G1ProjectiveBW6_761 = G1ProjectiveBW6_761_Host<HostBW6_761>;
-	type G2ProjectiveBW6_761 = G2ProjectiveBW6_761_Host<HostBW6_761>;
 
 	#[pallet::pallet]
 	#[pallet::generate_store(pub(super) trait Store)]
@@ -500,15 +542,75 @@ pub mod pallet {
 
 		#[pallet::call_index(22)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_g2_bw6_761_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let _out = <sp_ark_bw6_761::g2::Config<HostBW6_761> as SWCurveConfig>::mul_affine(
-				&G2AffineBW6_761::generator(),
-				&[2u64],
-			);
+		pub fn msm_ed_on_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
+			let mut rng = test_rng();
+			let scalar = sp_ark_ed_on_bls12_377::Fr::rand(&mut rng);
+			let _out =
+				<sp_ark_ed_on_bls12_377::EdwardsConfig<HostEdOnBls12_377> as TECurveConfig>::msm(
+					&[sp_ark_ed_on_bls12_377::EdwardsAffine::<HostEdOnBls12_377>::generator()],
+					&[scalar],
+				);
 			Ok(())
 		}
 
 		#[pallet::call_index(23)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn mul_affine_ed_on_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
+			let _out =
+				<sp_ark_ed_on_bls12_377::EdwardsConfig::<HostEdOnBls12_377> as TECurveConfig>::mul_affine(
+					&sp_ark_ed_on_bls12_377::EdwardsAffine::<HostEdOnBls12_377>::generator(),
+					&[2u64],
+				);
+			Ok(())
+		}
+
+		#[pallet::call_index(24)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn mul_projective_ed_on_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
+			let _out =
+				<sp_ark_ed_on_bls12_377::EdwardsConfig::<HostEdOnBls12_377> as TECurveConfig>::mul_projective(
+					&sp_ark_ed_on_bls12_377::EdwardsProjective::<HostEdOnBls12_377>::generator(),
+					&[2u64],
+				);
+			Ok(())
+		}
+
+		#[pallet::call_index(25)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn msm_ed_on_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
+			let mut rng = test_rng();
+			let scalar = sp_ark_ed_on_bls12_381::Fr::rand(&mut rng);
+			let _out =
+				<sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381> as SWCurveConfig>::msm(
+					&[sp_ark_ed_on_bls12_381::SWAffine::<HostEdOnBls12_381>::generator()],
+					&[scalar],
+				);
+			Ok(())
+		}
+
+		#[pallet::call_index(26)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn mul_affine_ed_on_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
+			let _out =
+				<sp_ark_ed_on_bls12_381::EdwardsConfig::<HostEdOnBls12_381> as SWCurveConfig>::mul_affine(
+					&sp_ark_ed_on_bls12_381::SWAffine::<HostEdOnBls12_381>::generator(),
+					&[2u64],
+				);
+			Ok(())
+		}
+
+		#[pallet::call_index(27)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn mul_projective_ed_on_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
+			let _out =
+				<sp_ark_ed_on_bls12_381::EdwardsConfig::<HostEdOnBls12_381> as SWCurveConfig>::mul_projective(
+					&sp_ark_ed_on_bls12_381::SWProjective::<HostEdOnBls12_381>::generator(),
+					&[2u64],
+				);
+			Ok(())
+		}
+
+		#[pallet::call_index(28)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn msm_g1_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
@@ -520,7 +622,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(24)]
+		#[pallet::call_index(29)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn msm_g2_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
@@ -532,7 +634,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(25)]
+		#[pallet::call_index(30)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_affine_g1_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_381::g1::Config as SWCurveConfig>::mul_affine(
@@ -542,7 +644,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(26)]
+		#[pallet::call_index(31)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_projective_g1_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_381::g1::Config as SWCurveConfig>::mul_projective(
@@ -552,7 +654,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(27)]
+		#[pallet::call_index(32)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_affine_g2_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_381::g2::Config as SWCurveConfig>::mul_affine(
@@ -562,7 +664,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(28)]
+		#[pallet::call_index(33)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_projective_g2_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_381::g2::Config as SWCurveConfig>::mul_projective(
@@ -572,7 +674,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(29)]
+		#[pallet::call_index(34)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn pairing_arkworks_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = ark_bls12_381::Bls12_381::multi_pairing(
@@ -582,7 +684,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(30)]
+		#[pallet::call_index(35)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn pairing_arkworks_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = ark_bls12_377::Bls12_377::multi_pairing(
@@ -592,7 +694,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(31)]
+		#[pallet::call_index(36)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn msm_g1_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
@@ -604,7 +706,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(32)]
+		#[pallet::call_index(37)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn msm_g2_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_377::g2::Config as SWCurveConfig>::msm(
@@ -614,7 +716,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(33)]
+		#[pallet::call_index(38)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_affine_g1_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::mul_affine(
@@ -624,7 +726,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(34)]
+		#[pallet::call_index(39)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_projective_g1_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::mul_projective(
@@ -634,7 +736,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(35)]
+		#[pallet::call_index(40)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_affine_g2_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_377::g2::Config as SWCurveConfig>::mul_affine(
@@ -644,7 +746,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(36)]
+		#[pallet::call_index(41)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_projective_g2_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_377::g2::Config as SWCurveConfig>::mul_projective(
@@ -654,7 +756,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(37)]
+		#[pallet::call_index(42)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn pairing_arkworks_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = ark_bw6_761::BW6_761::multi_pairing(
@@ -664,7 +766,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(38)]
+		#[pallet::call_index(43)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn msm_g1_bw6761(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bw6_761::g1::Config as SWCurveConfig>::msm(
@@ -674,7 +776,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(39)]
+		#[pallet::call_index(44)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn msm_g2_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bw6_761::g2::Config as SWCurveConfig>::msm(
@@ -685,7 +787,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(40)]
+		#[pallet::call_index(45)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_affine_g1_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bw6_761::g1::Config as SWCurveConfig>::mul_affine(
@@ -695,7 +797,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(41)]
+		#[pallet::call_index(46)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_projective_g1_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bw6_761::g1::Config as SWCurveConfig>::mul_projective(
@@ -705,11 +807,75 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(42)]
+		#[pallet::call_index(47)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn mul_affine_g2_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bw6_761::g2::Config as SWCurveConfig>::mul_affine(
 				&ark_bw6_761::G2Affine::generator(),
+				&[2u64],
+			);
+			Ok(())
+		}
+
+		#[pallet::call_index(48)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn msm_ed_on_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
+			let mut rng = test_rng();
+			let scalar = ark_ed_on_bls12_377::Fr::rand(&mut rng);
+			let _out = <ark_ed_on_bls12_377::EdwardsConfig as ark_ec::models::twisted_edwards::TECurveConfig>::msm(
+				&[ark_ed_on_bls12_377::EdwardsAffine::generator()],
+				&[scalar],
+			);
+			Ok(())
+		}
+
+		#[pallet::call_index(49)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn mul_affine_ed_on_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
+			let _out = <ark_ed_on_bls12_377::EdwardsConfig as TECurveConfig>::mul_affine(
+				&ark_ed_on_bls12_377::EdwardsAffine::generator(),
+				&[2u64],
+			);
+			Ok(())
+		}
+
+		#[pallet::call_index(50)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn mul_projective_ed_on_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
+			let _out = <ark_ed_on_bls12_377::EdwardsConfig as TECurveConfig>::mul_projective(
+				&ark_ed_on_bls12_377::EdwardsProjective::generator(),
+				&[2u64],
+			);
+			Ok(())
+		}
+
+		#[pallet::call_index(51)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn msm_ed_on_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
+			let mut rng = test_rng();
+			let scalar = ark_ed_on_bls12_381::Fr::rand(&mut rng);
+			let _out = <ark_ed_on_bls12_381::EdwardsConfig as SWCurveConfig>::msm(
+				&[ark_ed_on_bls12_381::SWAffine::generator()],
+				&[scalar],
+			);
+			Ok(())
+		}
+
+		#[pallet::call_index(52)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn mul_affine_ed_on_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
+			let _out = <ark_ed_on_bls12_381::EdwardsConfig as SWCurveConfig>::mul_affine(
+				&ark_ed_on_bls12_381::SWAffine::generator(),
+				&[2u64],
+			);
+			Ok(())
+		}
+
+		#[pallet::call_index(53)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn mul_projective_ed_on_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
+			let _out = <ark_ed_on_bls12_381::EdwardsConfig as SWCurveConfig>::mul_projective(
+				&ark_ed_on_bls12_381::SWProjective::generator(),
 				&[2u64],
 			);
 			Ok(())

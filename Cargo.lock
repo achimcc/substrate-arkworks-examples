@@ -4665,6 +4665,8 @@ dependencies = [
  "ark-bls12-381",
  "ark-bw6-761",
  "ark-ec",
+ "ark-ed-on-bls12-377",
+ "ark-ed-on-bls12-381",
  "ark-ff",
  "ark-groth16",
  "ark-serialize",
@@ -4678,6 +4680,8 @@ dependencies = [
  "sp-ark-bls12-377",
  "sp-ark-bls12-381",
  "sp-ark-bw6-761",
+ "sp-ark-ed-on-bls12-377",
+ "sp-ark-ed-on-bls12-381",
  "sp-ark-models",
  "sp-core",
  "sp-io",
@@ -7245,6 +7249,32 @@ version = "0.4.0"
 source = "git+https://github.com/paritytech/ark-substrate#f5198158a815a8d20c477fc29fbb93151489daae"
 dependencies = [
  "ark-bw6-761",
+ "ark-ff",
+ "ark-serialize",
+ "ark-std",
+ "sp-ark-models",
+ "sp-ark-utils",
+]
+
+[[package]]
+name = "sp-ark-ed-on-bls12-377"
+version = "0.4.0"
+source = "git+https://github.com/paritytech/ark-substrate#f5198158a815a8d20c477fc29fbb93151489daae"
+dependencies = [
+ "ark-ed-on-bls12-377",
+ "ark-ff",
+ "ark-serialize",
+ "ark-std",
+ "sp-ark-models",
+ "sp-ark-utils",
+]
+
+[[package]]
+name = "sp-ark-ed-on-bls12-381"
+version = "0.4.0"
+source = "git+https://github.com/paritytech/ark-substrate#f5198158a815a8d20c477fc29fbb93151489daae"
+dependencies = [
+ "ark-ed-on-bls12-381",
  "ark-ff",
  "ark-serialize",
  "ark-std",

@@ -12,15 +12,6 @@ edition = "2021"
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
-[profile.production]
-codegen-units = 1
-inherits = 'release'
-lto = 'fat'
-
-[profile.release]
-lto = 'thin'
-panic = 'abort'
-
 [dependencies]
 codec = { package = "parity-scale-codec", version = "3.0.0", features = [ "derive" ], default-features = false }
 scale-info = { version = "2.1.1", features = ["derive"], default-features = false }
@@ -29,11 +20,15 @@ frame-support = { version = "4.0.0-dev",  default-features = false }
 frame-system = { version = "4.0.0-dev", default-features = false }
 sp-ark-bls12-381 = { version = "0.4.0", features = ["curve"], default-features = false }
 sp-ark-bls12-377 = { version = "0.4.0", features = ["curve"], default-features = false }
+sp-ark-ed-on-bls12-381 = { version = "0.4.0", default-features = false }
+sp-ark-ed-on-bls12-377 = { version = "0.4.0", default-features = false }
 sp-ark-bw6-761 = { version = "0.4.0", default-features = false }
 sp-ark-models = { version = "0.4.0", default-features = false }
 ark-bls12-381 = { version = "0.4.0", features = ["curve"], default-features = false }
 ark-bls12-377 = { version = "0.4.0", features = ["curve"], default-features = false }
 ark-bw6-761 = { version = "0.4.0", default-features = false }
+ark-ed-on-bls12-381 = { version = "0.4.0", default-features = false }
+ark-ed-on-bls12-377 = { version = "0.4.0", default-features = false }
 ark-serialize = { version = "0.4.0", default-features = false }
 ark-ff = { version = "0.4.0", default-features = false }
 ark-ec = { version = "0.4.0", default-features = false }
