@@ -25,3 +25,4 @@ frame-system = { version = "4.0.0-dev", git = "https://github.com/paritytech/sub
 
 sp-ark-bls12-381 = { git = "https://github.com/paritytech/ark-substrate" }
 ark-groth16 = { git = "https://github.com/achimcc/groth16", branch = "master" }
+
