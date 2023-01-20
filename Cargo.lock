@@ -4661,7 +4661,9 @@ dependencies = [
 name = "pallet-template"
 version = "4.0.0-dev"
 dependencies = [
+ "ark-bls12-377",
  "ark-bls12-381",
+ "ark-bw6-761",
  "ark-ec",
  "ark-ff",
  "ark-groth16",
@@ -7214,7 +7216,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-bls12-377"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#b62bd30d3a7d73376cd798ad280828457eea26d3"
+source = "git+https://github.com/paritytech/ark-substrate#f5198158a815a8d20c477fc29fbb93151489daae"
 dependencies = [
  "ark-bls12-377",
  "ark-ff",
@@ -7227,7 +7229,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-bls12-381"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#b62bd30d3a7d73376cd798ad280828457eea26d3"
+source = "git+https://github.com/paritytech/ark-substrate#f5198158a815a8d20c477fc29fbb93151489daae"
 dependencies = [
  "ark-bls12-381",
  "ark-ff",
@@ -7240,7 +7242,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-bw6-761"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#b62bd30d3a7d73376cd798ad280828457eea26d3"
+source = "git+https://github.com/paritytech/ark-substrate#f5198158a815a8d20c477fc29fbb93151489daae"
 dependencies = [
  "ark-bw6-761",
  "ark-ff",
@@ -7253,7 +7255,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-models"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#b62bd30d3a7d73376cd798ad280828457eea26d3"
+source = "git+https://github.com/paritytech/ark-substrate#f5198158a815a8d20c477fc29fbb93151489daae"
 dependencies = [
  "ark-ec",
  "ark-ff",
@@ -7269,7 +7271,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-utils"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#b62bd30d3a7d73376cd798ad280828457eea26d3"
+source = "git+https://github.com/paritytech/ark-substrate#f5198158a815a8d20c477fc29fbb93151489daae"
 dependencies = [
  "ark-serialize",
  "ark-std",
