@@ -13,15 +13,6 @@ build = "build.rs"
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
-[profile.production]
-codegen-units = 1
-inherits = 'release'
-lto = 'fat'
-
-[profile.release]
-lto = 'thin'
-panic = 'abort'
-
 [[bin]]
 name = "node-template"
 
