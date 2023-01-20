@@ -30,19 +30,16 @@ pub mod pallet {
 		G2Projective as G2ProjectiveBls12_377_Host, HostFunctions as Bls12_377HostFunctions,
 	};
 	use sp_ark_bls12_381::{
-		Bls12_381 as Bls12_381_Host, Fr as BlsFrOptimized,
-		G1Affine as G1AffineBls12_381_Host, G1Projective as G1ProjectiveBls12_381_Host,
-		G2Affine as G2AffineBls12_381_Host, G2Projective as G2ProjectiveBls12_381_Host,
-		HostFunctions as Bls12_381HostFunctions,
+		Bls12_381 as Bls12_381_Host, Fr as BlsFrOptimized, G1Affine as G1AffineBls12_381_Host,
+		G1Projective as G1ProjectiveBls12_381_Host, G2Affine as G2AffineBls12_381_Host,
+		G2Projective as G2ProjectiveBls12_381_Host, HostFunctions as Bls12_381HostFunctions,
 	};
 	use sp_ark_bw6_761::{
 		G1Affine as G1AffineBW6_761_Host, G1Projective as G1ProjectiveBW6_761_Host,
 		G2Affine as G2AffineBW6_761_Host, G2Projective as G2ProjectiveBW6_761_Host,
 		HostFunctions as BW6_761HostFunctions, BW6_761 as BW6_761_Host,
 	};
-	use sp_ark_models::{
-		pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group,
-	};
+	use sp_ark_models::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group};
 
 	struct HostBls12_381 {}
 
