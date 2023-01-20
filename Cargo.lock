@@ -7214,7 +7214,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-bls12-377"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#35b3f5f016303431a7179fa6a510ba293e24f408"
+source = "git+https://github.com/paritytech/ark-substrate#b62bd30d3a7d73376cd798ad280828457eea26d3"
 dependencies = [
  "ark-bls12-377",
  "ark-ff",
@@ -7227,7 +7227,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-bls12-381"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#35b3f5f016303431a7179fa6a510ba293e24f408"
+source = "git+https://github.com/paritytech/ark-substrate#b62bd30d3a7d73376cd798ad280828457eea26d3"
 dependencies = [
  "ark-bls12-381",
  "ark-ff",
@@ -7240,7 +7240,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-bw6-761"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#35b3f5f016303431a7179fa6a510ba293e24f408"
+source = "git+https://github.com/paritytech/ark-substrate#b62bd30d3a7d73376cd798ad280828457eea26d3"
 dependencies = [
  "ark-bw6-761",
  "ark-ff",
@@ -7253,7 +7253,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-models"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#35b3f5f016303431a7179fa6a510ba293e24f408"
+source = "git+https://github.com/paritytech/ark-substrate#b62bd30d3a7d73376cd798ad280828457eea26d3"
 dependencies = [
  "ark-ec",
  "ark-ff",
@@ -7269,7 +7269,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-utils"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#35b3f5f016303431a7179fa6a510ba293e24f408"
+source = "git+https://github.com/paritytech/ark-substrate#b62bd30d3a7d73376cd798ad280828457eea26d3"
 dependencies = [
  "ark-serialize",
  "ark-std",
@@ -9438,9 +9438,9 @@ dependencies = [
 
 [[package]]
 name = "which"
-version = "4.3.0"
+version = "4.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "1c831fbbee9e129a8cf93e7747a82da9d95ba8e16621cae60ec2cdc849bacb7b"
+checksum = "2441c784c52b289a054b7201fc93253e288f094e2f4be9058343127c4226a269"
 dependencies = [
  "either",
  "libc",
