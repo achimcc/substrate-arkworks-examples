@@ -4,10 +4,22 @@ We provide example implementations of ellipic curve operations for arkworks curv
 
 ## build
 
-`cargo build --release`
+Run cargo build command:
+
+```shell
+cargo build --release
+```
 
 ## benachmark
 
-`cargo build --package node-template --profile production --features runtime-benchmarks`
+First build for benachmark:
 
-`./target/production/node-template benchmark pallet pallet_template --extrinsic "*"`
+```shell
+cargo build --package node-template --profile production --features runtime-benchmarks
+```
+
+Then run:
+
+```shell
+./target/production/node-template benchmark pallet pallet_template --extrinsic "*"
+```
