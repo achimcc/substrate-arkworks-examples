@@ -122,6 +122,14 @@ jobs:
         run: cargo build --package node-template --profile production --features runtime-benchmarks
 
       - name: Run benchmark
-        run: $(pwd)/target/production/node-template benchmark pallet --pallet pallet_template  --all-features --extrinsic "*"
+        run: $(pwd)/target/production/node-template benchmark pallet \
+              --chain dev \ # Configurable Chain Spec
+              --execution=wasm \ # Always test with Wasm
+              --wasm-execution=compiled \ # Always used `wasm-time`
+              --pallet pallet_template \ # Select the pallet
+              --extrinsic "*" \ # Select the extrinsic
+              --steps 50 \ # Modify the range of values to test for this extrinsic
+              --repeat 20 \ # Adjust the number of times we repeat a benchmark
+              --raw \ # Output the raw data from the benchmark process
 
       
