@@ -12,7 +12,7 @@ Run cargo build command:
 cargo build --release
 ```
 
-## benachmark
+## benchmark
 
 First build for benachmark:
 
