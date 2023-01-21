@@ -5,28 +5,28 @@ use frame_support::assert_ok;
 fn groth16_verificaton_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::verify_groth16_optimized_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::verify_groth16_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn msm_g1_bls12_381_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::msm_g1_bls12_381_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::msm_g1_bls12_381_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn msm_g2_bls12_381_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::msm_g2_bls12_381_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::msm_g2_bls12_381_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_affine_g1_bls12_381_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_affine_g1_bls12_381_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_affine_g1_bls12_381_optimized(Runtime::signed(1)));
 	});
 }
 
@@ -34,28 +34,28 @@ fn mul_affine_g1_bls12_381_works_optimized() {
 fn mul_projective_g1_bls12_381_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_projective_g1_bls12_381_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_projective_g1_bls12_381_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_affine_g2_bls12_381_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_affine_g2_bls12_381_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_affine_g2_bls12_381_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_projective_g2_bls12_381_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::pairing_arkworks_bls12_377_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::pairing_arkworks_bls12_377_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn pairing_arkworks_bls12_381_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::pairing_arkworks_bls12_381_optimized_works(
+		assert_ok!(TemplateModule::pairing_arkworks_bls12_381_optimized(
 			RuntimeOrigin::signed(1)
 		));
 	});
@@ -64,140 +64,140 @@ fn pairing_arkworks_bls12_381_works_optimized() {
 fn msm_g1_bls12_377_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::msm_g1_bls12_377_optimized_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::msm_g1_bls12_377_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn msm_g2_bls12_377_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::msm_g2_bls12_377_optimized_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::msm_g2_bls12_377_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_affine_g1_bls12_377_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_affine_g1_bls12_377_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_affine_g1_bls12_377_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_affine_g2_bls12_377_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_affine_g2_bls12_377_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_affine_g2_bls12_377_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_projective_g1_bls12_377_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_projective_g1_bls12_377_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_projective_g1_bls12_377_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_projective_g2_bls12_377_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_projective_g2_bls12_377_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_projective_g2_bls12_377_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn pairing_arkworks_bls12_377_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::pairing_arkworks_bls12_377_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::pairing_arkworks_bls12_377_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn msm_g1_bw6_761_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::msm_g1_bw6_761_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::msm_g1_bw6_761_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn msm_g2_bw6_761_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::msm_g2_bw6_761_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::msm_g2_bw6_761_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_affine_g1_bw6_761_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_affine_g1_bw6_761_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_affine_g1_bw6_761_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_affine_g2_bw6_761_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_affine_g2_bw6_761_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_affine_g2_bw6_761_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_projective_g1_bw6_761_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_projective_g1_bw6_761_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_projective_g1_bw6_761_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_projective_g2_bw6_761_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_projective_g2_bw6_761_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_projective_g2_bw6_761_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn msm_ed_on_bls12_377_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::msm_ed_on_bls12_377_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::msm_ed_on_bls12_377_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_affine_ed_on_bls12_377_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_affine_ed_on_bls12_377_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_affine_ed_on_bls12_377_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_projective_ed_on_bls12_377_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_projective_ed_on_bls12_377_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_projective_ed_on_bls12_377_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn msm_ed_on_bls12_381_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::msm_ed_on_bls12_381_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::msm_ed_on_bls12_381_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_affine_ed_on_bls12_381_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_affine_ed_on_bls12_381_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_affine_ed_on_bls12_381_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn mul_projective_ed_on_bls12_381_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::mul_projective_ed_on_bls12_381_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::mul_projective_ed_on_bls12_381_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
 fn pairing_arkworks_bw6_761_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::pairing_arkworks_bw6_761_works(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::pairing_arkworks_bw6_761_optimized(Runtime::signed(1)));
 	});
 }
 #[test]
