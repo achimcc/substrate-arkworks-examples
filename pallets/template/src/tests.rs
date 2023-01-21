@@ -270,4 +270,3 @@ fn pairing_arkworks_bw6_761_works() {
 		assert_ok!(TemplateModule::pairing_arkworks_bw6_761(RuntimeOrigin::signed(1)));
 	});
 }
-
