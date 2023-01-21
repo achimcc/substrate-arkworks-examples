@@ -122,6 +122,6 @@ jobs:
         run: cargo build --package node-template --profile production --features runtime-benchmarks
 
       - name: Run benchmark
-        run: $(pwd)/target/production/node-template benchmark pallet pallet_template
+        run: $(pwd)/target/production/node-template benchmark pallet pallet_template --extrinsic "*"
 
       
