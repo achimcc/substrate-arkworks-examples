@@ -2,7 +2,7 @@ use crate::mock::*;
 use frame_support::assert_ok;
 
 #[test]
-fn groth16_optimized_verification() {
+fn groth16_verificaton_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
 		assert_ok!(TemplateModule::verify_groth16_optimized(RuntimeOrigin::signed(1)));
@@ -137,10 +137,10 @@ fn pairing_arkworks_bw6_761_works_optimized() {
 }
 
 #[test]
-fn groth16_optimized_verification() {
+fn groth16_verification_works() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::verify_groth16_optimized(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::verify_groth16(RuntimeOrigin::signed(1)));
 	});
 }
 #[test]
