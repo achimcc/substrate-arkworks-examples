@@ -81,7 +81,6 @@ pub mod pallet {
 	type G2AffineBls12_381 = G2AffineBls12_381_Host<HostBls12_381>;
 	type G1ProjectiveBls12_381 = G1ProjectiveBls12_381_Host<HostBls12_381>;
 	type G2ProjectiveBls12_381 = G2ProjectiveBls12_381_Host<HostBls12_381>;
-	// type Bls12 = Bls12Config<sp_ark_bls12_381::Config<HostBls12_381>>;
 
 	struct HostBls12_377 {}
 
