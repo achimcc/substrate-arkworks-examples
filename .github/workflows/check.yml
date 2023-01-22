@@ -99,7 +99,7 @@ jobs:
           tool: protoc
 
       - name: Run tests
-        run: cargo test --verbose
+        run: cargo +nigtly test --verbose
 
   bench:
     runs-on: ubuntu-22.04
