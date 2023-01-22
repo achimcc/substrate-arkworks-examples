@@ -635,7 +635,7 @@ fn mul_projective_ed_on_bls12_381(c: &mut Criterion) {
 }
 
 criterion_group! {
-	name = arkwrorks;
+	name = arkworks;
 	config = Criterion::default();
 	targets =
 	  pairing_arkworks_bls12_381, msm_g1_bls12_381, msm_g2_bls12_381, mul_affine_g1_bls12_381,
