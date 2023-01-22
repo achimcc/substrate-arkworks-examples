@@ -649,7 +649,7 @@ criterion_group! {
 }
 
 criterion_group! {
-	name = arkwork_optimized;
+	name = arkworks_optimized;
 	config = Criterion::default();
 	targets = verify_groth16_optimized, pairing_arkworks_bls12_381_optimized,
 	  msm_g1_bls12_381_optimized, msm_g2_bls12_381_optimized, mul_affine_g1_bls12_381_optimized,
