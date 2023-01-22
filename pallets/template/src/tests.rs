@@ -55,9 +55,7 @@ fn mul_projective_g2_bls12_381_works_optimized() {
 fn pairing_arkworks_bls12_381_works_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::pairing_arkworks_bls12_381_optimized(
-			RuntimeOrigin::signed(1)
-		));
+		assert_ok!(TemplateModule::pairing_arkworks_bls12_381_optimized(RuntimeOrigin::signed(1)));
 	});
 }
 #[test]
