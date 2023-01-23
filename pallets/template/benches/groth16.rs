@@ -5,7 +5,7 @@ mod mock;
 use mock::{new_test_ext, AccountId, TemplateModule};
 
 pub fn bench_groth16(c: &mut Criterion) {
-	let mut group = c.benchmark_group("Fibonacci");
+	let mut group = c.benchmark_group("groth16");
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("verify_groth16_optimized", |b| {
 		b.iter(|| {
