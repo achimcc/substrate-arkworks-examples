@@ -125,7 +125,7 @@ jobs:
         run: cargo install criterion-table
       
       - name: Run benchmark
-        run: cargo +nightly bench --bench "*" -- --format=json -Z unstable-options | criterion-table > BENCHMARKS.md
+        run: cargo +nightly bench --bench "*" --message-format json | criterion-table > BENCHMARKS.md
 
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
