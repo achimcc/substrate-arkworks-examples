@@ -123,7 +123,17 @@ jobs:
 
       - name: Run benchmark
         run: |
-          cargo +nightly bench | tee output.txt
+          ./target/production/node-template benchmark pallet \
+            --chain dev \
+            --execution=wasm \
+            --wasm-execution=compiled \
+            --pallet "*" \
+            --extrinsic "*" \
+            --steps 50 \
+            --repeat 20 | tee output.txt
+
+      - name: ls
+        run: ls
 
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
