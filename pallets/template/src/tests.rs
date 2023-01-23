@@ -1,5 +1,6 @@
 use crate::mock::*;
 use frame_support::assert_ok;
+use node_template_runtime::Runtime;
 
 #[test]
 fn groth16_verificaton_works_optimized() {

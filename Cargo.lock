@@ -4676,6 +4676,7 @@ dependencies = [
  "frame-benchmarking",
  "frame-support",
  "frame-system",
+ "node-template-runtime",
  "parity-scale-codec",
  "scale-info",
  "sp-ark-bls12-377",
