@@ -5,7 +5,7 @@ mod mock;
 use mock::{new_test_ext, AccountId, TemplateModule};
 
 pub fn bench_msm_ed_on_bls12_377(c: &mut Criterion) {
-	let mut group = c.benchmark_group("msm_ed_on_bls12_377");
+	let mut group = c.benchmark_group("bench_msm_ed_on_bls12_377");
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("msm_ed_on_bls12_377_optimized", |b| {
 		b.iter(|| {
@@ -33,7 +33,7 @@ fn msm_ed_on_bls12_377(caller: AccountId) {
 }
 
 pub fn bench_mul_affine_ed_on_bls12_377(c: &mut Criterion) {
-	let mut group = c.benchmark_group("mul_affine_ed_on_bls12_377");
+	let mut group = c.benchmark_group("bench_mul_affine_ed_on_bls12_377");
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("msm_ed_on_bls12_377_optimized", |b| {
 		b.iter(|| {
@@ -62,7 +62,7 @@ fn mul_affine_ed_on_bls12_377(caller: AccountId) {
 }
 
 pub fn bench_mul_projective_ed_on_bls12_377(c: &mut Criterion) {
-	let mut group = c.benchmark_group("mul_projective_ed_on_bls12_377");
+	let mut group = c.benchmark_group("bench_mul_projective_ed_on_bls12_377");
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("mul_projective_ed_on_bls12_377_optimized", |b| {
 		b.iter(|| {

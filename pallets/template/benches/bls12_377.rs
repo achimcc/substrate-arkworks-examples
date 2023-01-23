@@ -5,7 +5,7 @@ mod mock;
 use mock::{new_test_ext, AccountId, TemplateModule};
 
 pub fn bench_mul_affine_g1_bls12_377(c: &mut Criterion) {
-	let mut group = c.benchmark_group("mul_affine_g1_bls12_377");
+	let mut group = c.benchmark_group("bench_mul_affine_g1_bls12_377");
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("mul_affine_g1_bls12_377_optimized", |b| {
 		b.iter(|| {
@@ -33,7 +33,7 @@ fn mul_affine_g1_bls12_377(caller: AccountId) {
 }
 
 pub fn bench_mul_projective_g1_bls12_377(c: &mut Criterion) {
-	let mut group = c.benchmark_group("mul_projective_g1_bls12_377");
+	let mut group = c.benchmark_group("bench_mul_projective_g1_bls12_377");
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("mul_projective_g1_bls12_377_optimized", |b| {
 		b.iter(|| {
@@ -62,7 +62,7 @@ fn mul_projective_g1_bls12_377(caller: AccountId) {
 }
 
 pub fn bench_mul_affine_g2_bls12_377(c: &mut Criterion) {
-	let mut group = c.benchmark_group("mul_affine_g2_bls12_377");
+	let mut group = c.benchmark_group("bench_mul_affine_g2_bls12_377");
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("mul_affine_g2_bls12_377_optimized", |b| {
 		b.iter(|| {
@@ -90,7 +90,7 @@ fn mul_affine_g2_bls12_377(caller: AccountId) {
 }
 
 pub fn bench_mul_projective_g2_bls12_377(c: &mut Criterion) {
-	let mut group = c.benchmark_group("mul_projective_g2_bls12_377");
+	let mut group = c.benchmark_group("Fibonacci");
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("mul_projective_g2_bls12_377_optimized", |b| {
 		b.iter(|| {
@@ -119,7 +119,7 @@ fn mul_projective_g2_bls12_377(caller: AccountId) {
 }
 
 pub fn bench_pairing_arkworks_bls12_377(c: &mut Criterion) {
-	let mut group = c.benchmark_group("pairing_arkworks_bls12_377");
+	let mut group = c.benchmark_group("Fibonacci");
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("pairing_arkworks_bls12_377_optimized", |b| {
 		b.iter(|| {
