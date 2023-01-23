@@ -26,7 +26,7 @@ fn msm_g1_bw6_761_optimized(caller: AccountId) {
 	});
 }
 
-fn msm_g1_bw6_761(caller: AccountId) {
+fn msm_g2_bw6_761(caller: AccountId) {
 	new_test_ext().execute_with(|| {
 		let _ = TemplateModule::msm_g1_bw6_761(RawOrigin::Signed(caller).into());
 	});
