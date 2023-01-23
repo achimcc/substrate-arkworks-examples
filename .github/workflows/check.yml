@@ -119,7 +119,8 @@ jobs:
           tool: protoc
       
       - name: Run benchmark
-        run: cargo +nightly bench --bench arkworks -- --output-format bencher | tee output.txt
+        run: |
+          cargo +nightly bench -- --output-format bencher | tee output.txt
 
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
