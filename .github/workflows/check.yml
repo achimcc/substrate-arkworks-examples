@@ -140,7 +140,7 @@ jobs:
         with:
           name: Rust Benchmark
           tool: 'cargo'
-          output-file-path: $(pwd)/
+          output-file-path: $(pwd)/tatrget/productionoutput.txt
           github-token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
           auto-push: true
           # Show alert with commit comment on detecting possible performance regression
