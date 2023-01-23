@@ -138,6 +138,6 @@ jobs:
           fail-on-alert: true
           alert-comment-cc-users: '@achimcc'
           gh-pages-branch: main
-          output-file-path: /benchmark-results//
+          output-file-path: benchmark-results/
 
       
