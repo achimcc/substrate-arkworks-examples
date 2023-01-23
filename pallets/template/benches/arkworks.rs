@@ -18,9 +18,9 @@ use bls12_377::{
 
 mod bw6_761;
 use bw6_761::{
-	bench_msm_g1_bw6_761, bench_msm_g2_bw6_761, bench_mul_affine_g1_bw6_761, 
-	bench_mul_affine_g2_bw6_761, bench_mul_projective_g1_bw6_761, 
-	bench_mul_projective_g2_bw6_761, bench_pairing_arkworks_bw6_761,
+	bench_msm_g1_bw6_761, bench_msm_g2_bw6_761, bench_mul_affine_g1_bw6_761,
+	bench_mul_affine_g2_bw6_761, bench_mul_projective_g1_bw6_761, bench_mul_projective_g2_bw6_761,
+	bench_pairing_arkworks_bw6_761,
 };
 
 mod ed_on_bls12_381;
