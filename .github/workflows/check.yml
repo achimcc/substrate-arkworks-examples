@@ -117,15 +117,9 @@ jobs:
         uses: taiki-e/install-action@v1
         with:
           tool: protoc
-
-      - name: Install cargo-criterion
-        run: cargo install cargo-criterion
-
-      - name: Install criterion-table
-        run: cargo install criterion-table
       
       - name: Run benchmark
-        run: cargo +nightly bench --bench "*" -- --format=json -Z unstable-options | criterion-table > BENCHMARKS.md
+        run: cargo +nightly bench --bench arkworks -- --output-format bencher | tee output.txt
 
       - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@v1
