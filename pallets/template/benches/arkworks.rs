@@ -82,4 +82,4 @@ criterion_group! {
 	targets =
 	bench_msm_ed_on_bls12_381, bench_mul_affine_ed_on_bls12_381, bench_mul_projective_ed_on_bls12_381
 }
-criterion_main!(groth16, bls12_381, bls12_377, blw6_761, ed_on_bls12_377, ed_on_bls12_381);
+criterion_main!(arkworks);

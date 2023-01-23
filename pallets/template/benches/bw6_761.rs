@@ -20,18 +20,6 @@ pub fn bench_msm_g1_bw6_761(c: &mut Criterion) {
 	group.finish();
 }
 
-fn msm_g1_bw6_761_optimized(caller: AccountId) {
-	new_test_ext().execute_with(|| {
-		let _ = TemplateModule::msm_g1_bw6_761_optimized(RawOrigin::Signed(caller).into());
-	});
-}
-
-fn msm_g2_bw6_761(caller: AccountId) {
-	new_test_ext().execute_with(|| {
-		let _ = TemplateModule::msm_g1_bw6_761(RawOrigin::Signed(caller).into());
-	});
-}
-
 pub fn bench_msm_g2_bw6_761(c: &mut Criterion) {
 	let mut group = c.benchmark_group("bench_msm_g2_bw6_761");
 	let caller: AccountId = whitelisted_caller();
