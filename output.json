@@ -1,0 +1,2581 @@
+[
+  {
+    "pallet": "frame_benchmarking",
+    "instance": "BaselineBench :: < Runtime >",
+    "benchmark": "addition",
+    "time_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 637,
+        "storage_root_time": 1418,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000000
+          ]
+        ],
+        "extrinsic_time": 710,
+        "storage_root_time": 1575,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 710,
+        "storage_root_time": 1461,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000000
+          ]
+        ],
+        "extrinsic_time": 625,
+        "storage_root_time": 1417,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "frame_benchmarking",
+    "instance": "BaselineBench :: < Runtime >",
+    "benchmark": "subtraction",
+    "time_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 580,
+        "storage_root_time": 1401,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000000
+          ]
+        ],
+        "extrinsic_time": 464,
+        "storage_root_time": 1328,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 658,
+        "storage_root_time": 1407,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000000
+          ]
+        ],
+        "extrinsic_time": 538,
+        "storage_root_time": 1409,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "frame_benchmarking",
+    "instance": "BaselineBench :: < Runtime >",
+    "benchmark": "multiplication",
+    "time_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 540,
+        "storage_root_time": 1343,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000000
+          ]
+        ],
+        "extrinsic_time": 563,
+        "storage_root_time": 1381,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 563,
+        "storage_root_time": 1338,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000000
+          ]
+        ],
+        "extrinsic_time": 576,
+        "storage_root_time": 1313,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "frame_benchmarking",
+    "instance": "BaselineBench :: < Runtime >",
+    "benchmark": "division",
+    "time_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 456,
+        "storage_root_time": 1367,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000000
+          ]
+        ],
+        "extrinsic_time": 632,
+        "storage_root_time": 1383,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 551,
+        "storage_root_time": 1339,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000000
+          ]
+        ],
+        "extrinsic_time": 533,
+        "storage_root_time": 1409,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "frame_benchmarking",
+    "instance": "BaselineBench :: < Runtime >",
+    "benchmark": "hashing",
+    "time_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 30291690,
+        "storage_root_time": 1833,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            100
+          ]
+        ],
+        "extrinsic_time": 30558016,
+        "storage_root_time": 2279,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 30945664,
+        "storage_root_time": 2624,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            100
+          ]
+        ],
+        "extrinsic_time": 31119425,
+        "storage_root_time": 2225,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "frame_benchmarking",
+    "instance": "BaselineBench :: < Runtime >",
+    "benchmark": "sr25519_verification",
+    "time_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 534,
+        "storage_root_time": 1358,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            100
+          ]
+        ],
+        "extrinsic_time": 5863867,
+        "storage_root_time": 2250,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 644,
+        "storage_root_time": 1503,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            100
+          ]
+        ],
+        "extrinsic_time": 6839426,
+        "storage_root_time": 2628,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "frame_benchmarking",
+    "instance": "BaselineBench :: < Runtime >",
+    "benchmark": "storage_read",
+    "time_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 517,
+        "storage_root_time": 1254,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000
+          ]
+        ],
+        "extrinsic_time": 3711281,
+        "storage_root_time": 3232,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 975,
+        "storage_root_time": 1608,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000
+          ]
+        ],
+        "extrinsic_time": 4699695,
+        "storage_root_time": 6184,
+        "reads": 1000,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "frame_benchmarking",
+    "instance": "BaselineBench :: < Runtime >",
+    "benchmark": "storage_write",
+    "time_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 535,
+        "storage_root_time": 2149,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000
+          ]
+        ],
+        "extrinsic_time": 496399,
+        "storage_root_time": 9253,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 630,
+        "storage_root_time": 1463,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000
+          ]
+        ],
+        "extrinsic_time": 497303,
+        "storage_root_time": 3367,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 1000,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "frame_system",
+    "instance": "SystemBench :: < Runtime >",
+    "benchmark": "remark",
+    "time_results": [
+      {
+        "components": [
+          [
+            "b",
+            0
+          ]
+        ],
+        "extrinsic_time": 8829,
+        "storage_root_time": 1585,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "b",
+            3932160
+          ]
+        ],
+        "extrinsic_time": 2385686,
+        "storage_root_time": 2509,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [
+          [
+            "b",
+            0
+          ]
+        ],
+        "extrinsic_time": 9705,
+        "storage_root_time": 1628,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "b",
+            3932160
+          ]
+        ],
+        "extrinsic_time": 2293775,
+        "storage_root_time": 2251,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "frame_system",
+    "instance": "SystemBench :: < Runtime >",
+    "benchmark": "remark_with_event",
+    "time_results": [
+      {
+        "components": [
+          [
+            "b",
+            0
+          ]
+        ],
+        "extrinsic_time": 23440,
+        "storage_root_time": 1859,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "b",
+            3932160
+          ]
+        ],
+        "extrinsic_time": 8483152,
+        "storage_root_time": 3166,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [
+          [
+            "b",
+            0
+          ]
+        ],
+        "extrinsic_time": 26479,
+        "storage_root_time": 1992,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "b",
+            3932160
+          ]
+        ],
+        "extrinsic_time": 7808682,
+        "storage_root_time": 3615,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "frame_system",
+    "instance": "SystemBench :: < Runtime >",
+    "benchmark": "set_heap_pages",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 15938,
+        "storage_root_time": 1804,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 18428,
+        "storage_root_time": 2044,
+        "reads": 1,
+        "repeat_reads": 0,
+        "writes": 2,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "frame_system",
+    "instance": "SystemBench :: < Runtime >",
+    "benchmark": "set_storage",
+    "time_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 8418,
+        "storage_root_time": 1529,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000
+          ]
+        ],
+        "extrinsic_time": 853812,
+        "storage_root_time": 4894,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 8699,
+        "storage_root_time": 1596,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000
+          ]
+        ],
+        "extrinsic_time": 914305,
+        "storage_root_time": 4198,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 1000,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "frame_system",
+    "instance": "SystemBench :: < Runtime >",
+    "benchmark": "kill_storage",
+    "time_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 9875,
+        "storage_root_time": 1568,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000
+          ]
+        ],
+        "extrinsic_time": 816001,
+        "storage_root_time": 4075,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [
+          [
+            "i",
+            0
+          ]
+        ],
+        "extrinsic_time": 9294,
+        "storage_root_time": 1625,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "i",
+            1000
+          ]
+        ],
+        "extrinsic_time": 869641,
+        "storage_root_time": 7247,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 1000,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "frame_system",
+    "instance": "SystemBench :: < Runtime >",
+    "benchmark": "kill_prefix",
+    "time_results": [
+      {
+        "components": [
+          [
+            "p",
+            0
+          ]
+        ],
+        "extrinsic_time": 13251,
+        "storage_root_time": 1633,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "p",
+            1000
+          ]
+        ],
+        "extrinsic_time": 1517034,
+        "storage_root_time": 3056,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [
+          [
+            "p",
+            0
+          ]
+        ],
+        "extrinsic_time": 14136,
+        "storage_root_time": 1646,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      },
+      {
+        "components": [
+          [
+            "p",
+            1000
+          ]
+        ],
+        "extrinsic_time": 1452077,
+        "storage_root_time": 2905,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 1000,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_balances",
+    "instance": "Balances",
+    "benchmark": "transfer",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 65668,
+        "storage_root_time": 1914,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 69072,
+        "storage_root_time": 1943,
+        "reads": 1,
+        "repeat_reads": 1,
+        "writes": 1,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_balances",
+    "instance": "Balances",
+    "benchmark": "transfer_keep_alive",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 50230,
+        "storage_root_time": 1873,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 52268,
+        "storage_root_time": 1947,
+        "reads": 1,
+        "repeat_reads": 1,
+        "writes": 1,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_balances",
+    "instance": "Balances",
+    "benchmark": "set_balance_creating",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 36408,
+        "storage_root_time": 1888,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 37968,
+        "storage_root_time": 1885,
+        "reads": 1,
+        "repeat_reads": 1,
+        "writes": 1,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_balances",
+    "instance": "Balances",
+    "benchmark": "set_balance_killing",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 41028,
+        "storage_root_time": 1791,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 41931,
+        "storage_root_time": 1883,
+        "reads": 1,
+        "repeat_reads": 1,
+        "writes": 1,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_balances",
+    "instance": "Balances",
+    "benchmark": "force_transfer",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 62474,
+        "storage_root_time": 1865,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 66948,
+        "storage_root_time": 2024,
+        "reads": 2,
+        "repeat_reads": 4,
+        "writes": 2,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_balances",
+    "instance": "Balances",
+    "benchmark": "transfer_all",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 74844,
+        "storage_root_time": 2390,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 59270,
+        "storage_root_time": 1977,
+        "reads": 1,
+        "repeat_reads": 1,
+        "writes": 1,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_balances",
+    "instance": "Balances",
+    "benchmark": "force_unreserve",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 47312,
+        "storage_root_time": 2793,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 50481,
+        "storage_root_time": 2423,
+        "reads": 1,
+        "repeat_reads": 2,
+        "writes": 1,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_timestamp",
+    "instance": "Timestamp",
+    "benchmark": "set",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 27905,
+        "storage_root_time": 2572,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 29106,
+        "storage_root_time": 2286,
+        "reads": 2,
+        "repeat_reads": 0,
+        "writes": 1,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_timestamp",
+    "instance": "Timestamp",
+    "benchmark": "on_finalize",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 11714,
+        "storage_root_time": 2698,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 12273,
+        "storage_root_time": 2682,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "verify_groth16",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 32968983,
+        "storage_root_time": 2112,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 34812274,
+        "storage_root_time": 3459,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "verify_groth16_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 10901336,
+        "storage_root_time": 3107,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 9067475,
+        "storage_root_time": 1724,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "pairing_arkworks_bls12_381_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 1748496,
+        "storage_root_time": 1779,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 1780744,
+        "storage_root_time": 1956,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "msm_g1_bls12_381_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 702646,
+        "storage_root_time": 1653,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 685799,
+        "storage_root_time": 1592,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "msm_g2_bls12_381_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2064884,
+        "storage_root_time": 2815,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2143339,
+        "storage_root_time": 2345,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_g1_bls12_381_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 365456,
+        "storage_root_time": 1652,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 377041,
+        "storage_root_time": 2105,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_g1_bls12_381_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 359449,
+        "storage_root_time": 1595,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 359653,
+        "storage_root_time": 1557,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_g2_bls12_381_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 1084694,
+        "storage_root_time": 1624,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 1069849,
+        "storage_root_time": 1634,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_g2_bls12_381_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 1068595,
+        "storage_root_time": 1596,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 1090949,
+        "storage_root_time": 1521,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_g1_bls12_377_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 590483,
+        "storage_root_time": 1527,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 591365,
+        "storage_root_time": 1530,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_g1_bls12_377_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 593185,
+        "storage_root_time": 1608,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 593597,
+        "storage_root_time": 1533,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_g2_bls12_377_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 1507022,
+        "storage_root_time": 1740,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 1506829,
+        "storage_root_time": 1742,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_g2_bls12_377_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 1634371,
+        "storage_root_time": 1760,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 1612327,
+        "storage_root_time": 1802,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "pairing_arkworks_bls12_377_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2224044,
+        "storage_root_time": 2504,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2244991,
+        "storage_root_time": 2846,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "msm_g2_bw6_761_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2580962,
+        "storage_root_time": 2423,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2501389,
+        "storage_root_time": 1634,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_g1_bw6_761_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2528367,
+        "storage_root_time": 2334,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2580306,
+        "storage_root_time": 2389,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_g1_bw6_761_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2830259,
+        "storage_root_time": 4159,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2471018,
+        "storage_root_time": 1672,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_g2_bw6_761_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2454032,
+        "storage_root_time": 1739,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2579308,
+        "storage_root_time": 2321,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_g2_bw6_761_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2992545,
+        "storage_root_time": 3012,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2544690,
+        "storage_root_time": 2080,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "pairing_arkworks_bw6_761_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 7549493,
+        "storage_root_time": 2819,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 7802195,
+        "storage_root_time": 3003,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_ed_on_bls12_377_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 220472,
+        "storage_root_time": 1816,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 216673,
+        "storage_root_time": 1663,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_ed_on_bls12_377_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 215419,
+        "storage_root_time": 1610,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 215969,
+        "storage_root_time": 1620,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "msm_ed_on_bls12_381_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 352249,
+        "storage_root_time": 1596,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 373697,
+        "storage_root_time": 1694,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_ed_on_bls12_381_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 202968,
+        "storage_root_time": 1672,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 199796,
+        "storage_root_time": 1604,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_ed_on_bls12_381_optimized",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 170658,
+        "storage_root_time": 1668,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 175009,
+        "storage_root_time": 1847,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "pairing_arkworks_bls12_381",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 10621980,
+        "storage_root_time": 2379,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 10753408,
+        "storage_root_time": 2562,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "msm_g1_bls12_381",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2620683,
+        "storage_root_time": 1939,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 2737916,
+        "storage_root_time": 2955,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "msm_g2_bls12_381",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 8159706,
+        "storage_root_time": 2756,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 8000938,
+        "storage_root_time": 2505,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_g1_bls12_381",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 21633,
+        "storage_root_time": 2232,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 14294,
+        "storage_root_time": 1592,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_g1_bls12_381",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 13532,
+        "storage_root_time": 1503,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 13934,
+        "storage_root_time": 1540,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_g2_bls12_381",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 20502,
+        "storage_root_time": 1548,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 21582,
+        "storage_root_time": 1502,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_g2_bls12_381",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 22314,
+        "storage_root_time": 1472,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 23179,
+        "storage_root_time": 1536,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_g1_bls12_377",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 13839,
+        "storage_root_time": 1633,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 13837,
+        "storage_root_time": 1684,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_g1_bls12_377",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 12907,
+        "storage_root_time": 1537,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 13031,
+        "storage_root_time": 1497,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_g2_bls12_377",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 26713,
+        "storage_root_time": 1856,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 23936,
+        "storage_root_time": 1596,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_g2_bls12_377",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 22836,
+        "storage_root_time": 1543,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 23524,
+        "storage_root_time": 1559,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "pairing_arkworks_bls12_377",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 11205074,
+        "storage_root_time": 1842,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 11337700,
+        "storage_root_time": 2534,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "msm_g2_bw6_761",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 661333,
+        "storage_root_time": 1664,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 660158,
+        "storage_root_time": 1580,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_g1_bw6_761",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 54539,
+        "storage_root_time": 1659,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 28115,
+        "storage_root_time": 1546,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_g1_bw6_761",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 28367,
+        "storage_root_time": 1618,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 32623,
+        "storage_root_time": 1741,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_g2_bw6_761",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 28384,
+        "storage_root_time": 1593,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 28620,
+        "storage_root_time": 1592,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_g2_bw6_761",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 27721,
+        "storage_root_time": 1592,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 27326,
+        "storage_root_time": 1602,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "msm_ed_on_bls12_377",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 4322086,
+        "storage_root_time": 1624,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 4331181,
+        "storage_root_time": 1675,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_ed_on_bls12_377",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 16028,
+        "storage_root_time": 1611,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 17711,
+        "storage_root_time": 1815,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_ed_on_bls12_377",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 15672,
+        "storage_root_time": 1581,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 15870,
+        "storage_root_time": 1624,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "msm_ed_on_bls12_381",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 1394720,
+        "storage_root_time": 2283,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 1518997,
+        "storage_root_time": 2775,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_affine_ed_on_bls12_381",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 11941,
+        "storage_root_time": 1535,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 12290,
+        "storage_root_time": 1630,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  },
+  {
+    "pallet": "pallet_template",
+    "instance": "TemplateModule",
+    "benchmark": "mul_projective_ed_on_bls12_381",
+    "time_results": [
+      {
+        "components": [],
+        "extrinsic_time": 11643,
+        "storage_root_time": 1561,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ],
+    "db_results": [
+      {
+        "components": [],
+        "extrinsic_time": 11986,
+        "storage_root_time": 1542,
+        "reads": 0,
+        "repeat_reads": 0,
+        "writes": 0,
+        "repeat_writes": 0,
+        "proof_size": 0
+      }
+    ]
+  }
+]
