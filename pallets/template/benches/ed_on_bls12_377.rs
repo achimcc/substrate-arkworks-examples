@@ -1,11 +1,7 @@
 use ark_std::{io::Error, test_rng, UniformRand};
 use criterion::Criterion;
 use sp_ark_ed_on_bls12_377::HostFunctions as EdwardBls12_377HostFunctions;
-use sp_ark_models::{
-	pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group, TECurveConfig,
-};
-
-type AccountId = u64;
+use sp_ark_models::{AffineRepr, Group, TECurveConfig};
 
 struct HostEdOnBls12_377 {}
 

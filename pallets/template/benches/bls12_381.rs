@@ -13,8 +13,6 @@ use sp_ark_bls12_381::{
 };
 use sp_ark_models::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group};
 
-type AccountId = u64;
-
 struct HostBls12_381 {}
 
 impl Bls12_381HostFunctions for HostBls12_381 {
@@ -52,7 +50,6 @@ type G2ProjectiveBls12_381 = G2ProjectiveBls12_381_Host<HostBls12_381>;
 
 pub fn bench_pairing_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("pairing__bls12_381");
-	let caller: AccountId = whitelisted_caller();
 	group.bench_function("pairing__bls12_381_optimized", |b| {
 		b.iter(|| {
 			let _ = do_pairing_bls12_381_optimized();
@@ -84,7 +81,7 @@ fn do_pairing_bls12_381() -> Result<(), Error> {
 
 pub fn bench_msm_g1_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("msm_g1_bls12_381");
-	let caller: AccountId = whitelisted_caller();
+
 	group.bench_function("msm_g1_bls12_381_optimized", |b| {
 		b.iter(|| {
 			let _ = do_msm_g1_bls12_381_optimized();
@@ -120,7 +117,7 @@ fn do_msm_g1_bls12_381() -> Result<(), Error> {
 
 pub fn bench_msm_g2_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("msm_g2_bls12_381");
-	let caller: AccountId = whitelisted_caller();
+
 	group.bench_function("msm_g2_bls12_381_optimized", |b| {
 		b.iter(|| {
 			let _ = do_msm_g2_bls12_381_optimized();
@@ -156,7 +153,7 @@ fn do_msm_g2_bls12_381() -> Result<(), Error> {
 
 pub fn bench_mul_affine_g1_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_affine_g1_bls12_381");
-	let caller: AccountId = whitelisted_caller();
+
 	group.bench_function("mul_affine_g1_bls12_381_optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_g1_bls12_381_optimized();
@@ -188,7 +185,7 @@ fn do_mul_affine_g1_bls12_381() -> Result<(), Error> {
 
 pub fn bench_mul_projective_g1_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_projective_g1_bls12_381");
-	let caller: AccountId = whitelisted_caller();
+
 	group.bench_function("mul_projective_g1_bls12_381_optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_g1_bls12_381_optimized();
@@ -220,7 +217,6 @@ fn do_mul_projective_g1_bls12_381() -> Result<(), Error> {
 
 pub fn bench_mul_affine_g2_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_affine_g2_bls12_381");
-	let caller: AccountId = whitelisted_caller();
 	group.bench_function("mul_affine_g2_bls12_381_optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_g2_bls12_381_optimized();
@@ -252,7 +248,6 @@ fn do_mul_affine_g2_bls12_381() -> Result<(), Error> {
 
 pub fn bench_mul_projective_g2_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_projective_g2_bls12_381");
-	let caller: AccountId = whitelisted_caller();
 	group.bench_function("mul_projective_g2_bls12_381_optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_g2_bls12_381_optimized();

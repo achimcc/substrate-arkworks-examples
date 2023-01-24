@@ -1,15 +1,11 @@
-use ark_serialize::{CanonicalDeserialize, Compress, Validate};
-use ark_std::{io::Error, test_rng, UniformRand};
+use ark_std::io::Error;
+use criterion::Criterion;
 use sp_ark_bw6_761::{
 	G1Affine as G1AffineBW6_761_Host, G1Projective as G1ProjectiveBW6_761_Host,
 	G2Affine as G2AffineBW6_761_Host, G2Projective as G2ProjectiveBW6_761_Host,
 	HostFunctions as BW6_761HostFunctions, BW6_761 as BW6_761_Host,
 };
-use sp_ark_models::{
-	pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group, TECurveConfig,
-};
-
-type AccountId = u64;
+use sp_ark_models::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group};
 
 struct HostBW6_761 {}
 
@@ -48,7 +44,7 @@ type G2ProjectiveBW6_761 = G2ProjectiveBW6_761_Host<HostBW6_761>;
 
 pub fn bench_msm_g1_bw6_761(c: &mut Criterion) {
 	let mut group = c.benchmark_group("msm_g1_bw6_761");
-	let caller: AccountId = whitelisted_caller();
+
 	group.bench_function("msm_g1_bw6_761_optimized", |b| {
 		b.iter(|| {
 			let _ = do_msm_g1_bw6_761_optimized();
@@ -81,7 +77,7 @@ fn do_msm_g1_bw6_761() -> Result<(), Error> {
 
 pub fn bench_msm_g2_bw6_761(c: &mut Criterion) {
 	let mut group = c.benchmark_group("msm_g2_bw6_761");
-	let caller: AccountId = whitelisted_caller();
+
 	group.bench_function("msm_g2_bw6_761_optimized", |b| {
 		b.iter(|| {
 			let _ = do_msm_g2_bw6_761_optimized();
@@ -115,7 +111,7 @@ fn do_msm_g2_bw6_761() -> Result<(), Error> {
 
 pub fn bench_mul_affine_g1_bw6_761(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_affine_g1_bw6_761");
-	let caller: AccountId = whitelisted_caller();
+
 	group.bench_function("mul_affine_g1_bw6_761_optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_g1_bw6_761_optimized();
@@ -147,7 +143,7 @@ fn do_mul_affine_g1_bw6_761() -> Result<(), Error> {
 
 pub fn bench_mul_projective_g1_bw6_761(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_projective_g1_bw6_761");
-	let caller: AccountId = whitelisted_caller();
+
 	group.bench_function("mul_projective_g1_bw6_761_optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_g1_bw6_761_optimized();
@@ -179,7 +175,7 @@ fn do_mul_projective_g1_bw6_761() -> Result<(), Error> {
 
 pub fn bench_mul_affine_g2_bw6_761(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_affine_g2_bw6_761");
-	let caller: AccountId = whitelisted_caller();
+
 	group.bench_function("mul_affine_g2_bw6_761_optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_g2_bw6_761_optimized();
@@ -211,7 +207,7 @@ fn do_mul_affine_g2_bw6_761() -> Result<(), Error> {
 
 pub fn bench_mul_projective_g2_bw6_761(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_projective_g2_bw6_761");
-	let caller: AccountId = whitelisted_caller();
+
 	group.bench_function("mul_projective_g2_bw6_761_optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_g2_bw6_761_optimized();
@@ -243,7 +239,7 @@ fn do_mul_projective_g2_bw6_761() -> Result<(), Error> {
 
 pub fn bench_pairing_bw6_761(c: &mut Criterion) {
 	let mut group = c.benchmark_group("pairing_arkworks_bw6_761");
-	let caller: AccountId = whitelisted_caller();
+
 	group.bench_function("pairing_arkworks_bw6_761_optimized", |b| {
 		b.iter(|| {
 			let _ = do_pairing_bw6_761_optimized();
