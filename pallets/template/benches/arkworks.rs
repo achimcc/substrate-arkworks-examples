@@ -2,12 +2,12 @@
 #![test_runner(criterion::runner)]
 #![feature(test)]
 use criterion::{criterion_group, criterion_main, Criterion};
-// mod bls12_381;
-// use bls12_381::{
-// 	bench_msm_g1_bls12_381, bench_msm_g2_bls12_381, bench_mul_affine_g1_bls12_381,
-// 	bench_mul_affine_g2_bls12_381, bench_mul_projective_g1_bls12_381,
-// 	bench_mul_projective_g2_bls12_381, bench_pairing_arkworks_bls12_381,
-// };
+mod bls12_381;
+use bls12_381::{
+	bench_msm_g1_bls12_381, bench_msm_g2_bls12_381, bench_mul_affine_g1_bls12_381,
+	bench_mul_affine_g2_bls12_381, bench_mul_projective_g1_bls12_381,
+	bench_mul_projective_g2_bls12_381, bench_pairing_arkworks_bls12_381,
+};
 
 mod bls12_377;
 use bls12_377::{
@@ -45,13 +45,13 @@ use bls12_377::{
 // 	bench_groth16
 // }
 
-// criterion_group! {
-// 	name = bls12_381;
-// 	config = Criterion::default();
-// 	targets =
-// 	bench_pairing_arkworks_bls12_381, bench_msm_g1_bls12_381, bench_msm_g2_bls12_381,
-// bench_mul_affine_g1_bls12_381, 	bench_mul_projective_g1_bls12_381, bench_mul_affine_g2_bls12_381,
-// bench_mul_projective_g2_bls12_381, }
+criterion_group! {
+	name = bls12_381;
+	config = Criterion::default();
+	targets =
+	bench_pairing_arkworks_bls12_381, bench_msm_g1_bls12_381, bench_msm_g2_bls12_381,
+bench_mul_affine_g1_bls12_381, 	bench_mul_projective_g1_bls12_381, bench_mul_affine_g2_bls12_381,
+bench_mul_projective_g2_bls12_381, }
 
 criterion_group! {
 	name = bls12_377;
