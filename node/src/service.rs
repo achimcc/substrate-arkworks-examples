@@ -17,11 +17,7 @@ pub struct ExecutorDispatch;
 impl sc_executor::NativeExecutionDispatch for ExecutorDispatch {
 	/// Only enable the benchmarking host functions when we actually want to benchmark.
 	#[cfg(feature = "runtime-benchmarks")]
-	type ExtendHostFunctions = sp_wasm_interface::ExtendedHostFunctions<
-		frame_benchmarking::benchmarking::HostFunctions,
-		sp_io::SubstrateHostFunctions,
-	>;
-
+	type ExtendHostFunctions = frame_benchmarking::benchmarking::HostFunctions;
 	/// Otherwise we only use the default Substrate host functions.
 	#[cfg(not(feature = "runtime-benchmarks"))]
 	type ExtendHostFunctions = ();

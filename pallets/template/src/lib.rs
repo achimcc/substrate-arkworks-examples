@@ -6,17 +6,14 @@
 /// <https://docs.substrate.io/reference/frame-pallets/>
 pub use pallet::*;
 
-// #[cfg(test)]
-// mod mock;
+#[cfg(test)]
+mod mock;
 
-// #[cfg(test)]
-// mod tests;
+#[cfg(test)]
+mod tests;
 
-// #[cfg(test)]
-// mod tests;
-
-// #[cfg(feature = "runtime-benchmarks")]
-// mod benchmarking;
+#[cfg(feature = "runtime-benchmarks")]
+mod benchmarking;
 
 #[frame_support::pallet]
 pub mod pallet {
@@ -331,7 +328,7 @@ pub mod pallet {
 
 		#[pallet::call_index(2)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn pairing_arkworks_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn pairing_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = ark_bls12_381::Bls12_381::multi_pairing(
 				[ark_bls12_381::G1Affine::generator()],
 				[ark_bls12_381::G2Affine::generator()],
@@ -341,7 +338,7 @@ pub mod pallet {
 
 		#[pallet::call_index(3)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn pairing_arkworks_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn pairing_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = Bls12_381Optimized::multi_pairing(
 				[G1AffineBls12_381::generator()],
 				[G2AffineBls12_381::generator()],
@@ -481,7 +478,7 @@ pub mod pallet {
 
 		#[pallet::call_index(16)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn pairing_arkworks_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn pairing_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = ark_bls12_377::Bls12_377::multi_pairing(
 				[ark_bls12_377::G1Affine::generator()],
 				[ark_bls12_377::G2Affine::generator()],
@@ -491,7 +488,7 @@ pub mod pallet {
 
 		#[pallet::call_index(17)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn pairing_arkworks_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn pairing_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = Bls12_377Optimized::multi_pairing(
 				[G1AffineBls12_377::generator()],
 				[G2AffineBls12_377::generator()],
@@ -627,7 +624,7 @@ pub mod pallet {
 
 		#[pallet::call_index(30)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn pairing_arkworks_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn pairing_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = ark_bw6_761::BW6_761::multi_pairing(
 				[ark_bw6_761::G1Affine::generator()],
 				[ark_bw6_761::G2Affine::generator()],
@@ -637,7 +634,7 @@ pub mod pallet {
 
 		#[pallet::call_index(31)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn pairing_arkworks_bw6_761_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn pairing_bw6_761_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = BW6_761Optimized::multi_pairing(
 				[G1AffineBW6_761::generator()],
 				[G2AffineBW6_761::generator()],

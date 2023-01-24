@@ -16,11 +16,11 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	pairing_arkworks_bls12_381 {
+	pairing_bls12_381 {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	pairing_arkworks_bls12_381_optimized {
+	pairing_bls12_381_optimized {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
@@ -40,7 +40,7 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	bench_9_mul_projective_g1_bls12_381 {
+	mul_projective_g1_bls12_381 {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
@@ -56,7 +56,7 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	bench_13_mul_projective_g2_bls12_381 {
+	mul_projective_g2_bls12_381 {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
@@ -72,11 +72,11 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	pairing_arkworks_bls12_377 {
+	pairing_bls12_377 {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	pairing_arkworks_bls12_377_optimized {
+	pairing_bls12_377_optimized {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
@@ -84,7 +84,7 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	bench_20_msm_g1_bls12_377_optimized {
+	msm_g1_bls12_377_optimized {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
@@ -128,11 +128,11 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	pairing_arkworks_bw6_761 {
+	pairing_bw6_761 {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	pairing_arkworks_bw6_761_optimized {
+	pairing_bw6_761_optimized {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
@@ -231,12 +231,6 @@ benchmarks! {
 	mul_affine_ed_on_bls12_377_optimized {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
-
-
-
-
-
-
 
 	impl_benchmark_test_suite!(Template, crate::mock::new_test_ext(), crate::mock::Test);
 }

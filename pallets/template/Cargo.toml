@@ -29,13 +29,14 @@ ark-bls12-377 = { version = "0.4.0", features = ["curve"], default-features = fa
 ark-bw6-761 = { version = "0.4.0", default-features = false }
 ark-ed-on-bls12-381 = { version = "0.4.0", default-features = false }
 ark-ed-on-bls12-377 = { version = "0.4.0", default-features = false }
-ark-serialize = { version = "0.4.0", default-features = false }
+ark-serialize = { version = "0.4.0", default-features = false, features = [ "derive" ] }
 ark-ff = { version = "0.4.0", default-features = false }
 ark-ec = { version = "0.4.0", default-features = false }
 ark-std = { version = "0.4.0", default-features = false }
 ark-snark = { version = "0.4.0", default-features = false }
-ark-groth16 = { version = "0.3.0", default-features = false }
+ark-groth16 = { version = "0.3.0", default-features = false, features = [ "r1cs" ] }
 sp-io = { version = "7.0.0", default-features = false }
+ark-crypto-primitives = { version = "0.4.0", default-features = false, features = [ "r1cs", "snark" ] } 
 
 [dev-dependencies]
 sp-core = { version = "7.0.0", default-features = false }
@@ -53,9 +54,7 @@ default = [ "std" ]
 std = [
 	"codec/std",
 	"scale-info/std",
-	"frame-benchmarking/std",
 	"frame-support/std",
-	"frame-system/std",
 	"sp-ark-bls12-381/std",
 	"ark-serialize/std",
 	"ark-ff/std",
@@ -63,6 +62,7 @@ std = [
 	"ark-std/std",
 	"ark-groth16/std",
 	"sp-io/std",
+	"ark-crypto-primitives/std",
 	"sp-core/std",
 	"sp-runtime/std",
 ]
