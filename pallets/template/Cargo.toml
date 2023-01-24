@@ -54,8 +54,20 @@ default = [ "std" ]
 std = [
 	"codec/std",
 	"scale-info/std",
+	"frame-benchmarking/std",
 	"frame-support/std",
+	"frame-system/std",
 	"sp-ark-bls12-381/std",
+	"sp-ark-bls12-377/std",
+	"sp-ark-ed-on-bls12-381/std",
+	"sp-ark-ed-on-bls12-377/std",
+	"sp-ark-bw6-761/std", 
+	"sp-ark-models/std",
+	"ark-bls12-381/std",
+	"ark-bls12-377/std",
+	"ark-bw6-761/std",
+	"ark-ed-on-bls12-381/std",
+	"ark-ed-on-bls12-377/std",
 	"ark-serialize/std",
 	"ark-ff/std",
 	"ark-ec/std",
@@ -65,6 +77,7 @@ std = [
 	"ark-crypto-primitives/std",
 	"sp-core/std",
 	"sp-runtime/std",
+	"tracing-subscriber/std",
 ]
 runtime-benchmarks = ["frame-benchmarking/runtime-benchmarks"]
 try-runtime = ["frame-support/try-runtime"]

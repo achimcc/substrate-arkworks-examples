@@ -55,7 +55,7 @@ pub fn bench_pairing_bls12_381(c: &mut Criterion) {
 			let _ = do_pairing_bls12_381();
 		});
 	});
-	group.bench_function("pairing__bls12_381_optimized", |b| {
+	group.bench_function("pairing_bls12_381_optimized", |b| {
 		b.iter(|| {
 			let _ = do_pairing_bls12_381_optimized();
 		});

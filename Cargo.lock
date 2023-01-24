@@ -7644,6 +7644,7 @@ source = "git+https://github.com/paritytech/ark-substrate#cc0c3496554180b2a3be45
 dependencies = [
  "ark-bls12-377",
  "ark-ff",
+ "ark-r1cs-std",
  "ark-serialize",
  "ark-std",
  "sp-ark-models",
@@ -7683,6 +7684,7 @@ source = "git+https://github.com/paritytech/ark-substrate#cc0c3496554180b2a3be45
 dependencies = [
  "ark-ed-on-bls12-377",
  "ark-ff",
+ "ark-r1cs-std",
  "ark-serialize",
  "ark-std",
  "sp-ark-models",
@@ -7696,6 +7698,7 @@ source = "git+https://github.com/paritytech/ark-substrate#cc0c3496554180b2a3be45
 dependencies = [
  "ark-ed-on-bls12-381",
  "ark-ff",
+ "ark-r1cs-std",
  "ark-serialize",
  "ark-std",
  "sp-ark-models",
