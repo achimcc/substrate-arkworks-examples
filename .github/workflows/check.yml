@@ -128,7 +128,7 @@ jobs:
         run: mkdir bench-results
       
       - name: Run benchmark
-        run: cargo +nightly bench --bench arkworks -- --Zunstable-options --format json | criterion-table > bench-results/BENCHMARKS.md
+        run: cargo +nightly bench --bench arkworks -message-format json | criterion-table > bench-results/BENCHMARKS.md
 
       - name: Publish Benchmark results on GitHub Pages
         uses: ftnext/action-push-ghpages@v1.0.0
