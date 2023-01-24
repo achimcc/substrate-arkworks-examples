@@ -1,9 +1,7 @@
 use ark_std::{io::Error, test_rng, UniformRand};
 use criterion::Criterion;
 use sp_ark_ed_on_bls12_381::HostFunctions as EdwardBls12_381HostFunctions;
-use sp_ark_models::{
-	short_weierstrass::SWCurveConfig, AffineRepr, Group, \
-};
+use sp_ark_models::{short_weierstrass::SWCurveConfig, AffineRepr, Group};
 
 pub struct HostEdOnBls12_381 {}
 
