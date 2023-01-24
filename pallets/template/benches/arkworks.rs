@@ -29,14 +29,14 @@ use bls12_377::{
 // 	bench_mul_projective_ed_on_bls12_381,
 // };
 
-mod ed_on_bls12_377;
-use ed_on_bls12_377::{
-	bench_msm_ed_on_bls12_377, bench_mul_affine_ed_on_bls12_377,
-	bench_mul_projective_ed_on_bls12_377,
-};
+// mod ed_on_bls12_377;
+// use ed_on_bls12_377::{
+// 	bench_msm_ed_on_bls12_377, bench_mul_affine_ed_on_bls12_377,
+// 	bench_mul_projective_ed_on_bls12_377,
+// };
 
-mod groth16;
-use groth16::bench_groth16;
+// mod groth16;
+// use groth16::bench_groth16;
 
 // criterion_group! {
 // 	name = groth16;

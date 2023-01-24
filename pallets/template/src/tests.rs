@@ -1,5 +1,5 @@
-use crate::mock::*;
-use frame_support::assert_ok;
+use crate::{mock::*, Error, Event};
+use frame_support::{assert_noop, assert_ok};
 
 #[test]
 fn groth16_verificaton_works_optimized() {
