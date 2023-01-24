@@ -1,7 +1,5 @@
+use ark_serialize::{CanonicalDeserialize, Compress, Validate};
 use ark_std::{io::Error, test_rng, UniformRand};
-use criterion::Criterion;
-use frame_benchmarking::whitelisted_caller;
-use frame_support::dispatch::RawOrigin;
 use sp_ark_bw6_761::{
 	G1Affine as G1AffineBW6_761_Host, G1Projective as G1ProjectiveBW6_761_Host,
 	G2Affine as G2AffineBW6_761_Host, G2Projective as G2ProjectiveBW6_761_Host,
@@ -53,12 +51,12 @@ pub fn bench_msm_g1_bw6_761(c: &mut Criterion) {
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("msm_g1_bw6_761_optimized", |b| {
 		b.iter(|| {
-			do_msm_g1_bw6_761_optimized();
+			let _ = do_msm_g1_bw6_761_optimized();
 		});
 	});
 	group.bench_function("msm_g1_bw6_761", |b| {
 		b.iter(|| {
-			do_msm_g1_bw6_761();
+			let _ = do_msm_g1_bw6_761();
 		});
 	});
 	group.finish();
@@ -86,12 +84,12 @@ pub fn bench_msm_g2_bw6_761(c: &mut Criterion) {
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("msm_g2_bw6_761_optimized", |b| {
 		b.iter(|| {
-			do_msm_g2_bw6_761_optimized();
+			let _ = do_msm_g2_bw6_761_optimized();
 		});
 	});
 	group.bench_function("msm_g2_bw6_761", |b| {
 		b.iter(|| {
-			do_msm_g2_bw6_761();
+			let _ = do_msm_g2_bw6_761();
 		});
 	});
 	group.finish();
@@ -120,12 +118,12 @@ pub fn bench_mul_affine_g1_bw6_761(c: &mut Criterion) {
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("mul_affine_g1_bw6_761_optimized", |b| {
 		b.iter(|| {
-			do_mul_affine_g1_bw6_761_optimized();
+			let _ = do_mul_affine_g1_bw6_761_optimized();
 		});
 	});
 	group.bench_function("mul_affine_g1_bw6_761", |b| {
 		b.iter(|| {
-			do_mul_affine_g1_bw6_761();
+			let _ = do_mul_affine_g1_bw6_761();
 		});
 	});
 	group.finish();
@@ -152,12 +150,12 @@ pub fn bench_mul_projective_g1_bw6_761(c: &mut Criterion) {
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("mul_projective_g1_bw6_761_optimized", |b| {
 		b.iter(|| {
-			do_mul_projective_g1_bw6_761_optimized();
+			let _ = do_mul_projective_g1_bw6_761_optimized();
 		});
 	});
 	group.bench_function("mul_projective_g1_bw6_761", |b| {
 		b.iter(|| {
-			do_mul_projective_g1_bw6_761();
+			let _ = do_mul_projective_g1_bw6_761();
 		});
 	});
 	group.finish();
@@ -184,12 +182,12 @@ pub fn bench_mul_affine_g2_bw6_761(c: &mut Criterion) {
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("mul_affine_g2_bw6_761_optimized", |b| {
 		b.iter(|| {
-			do_mul_affine_g2_bw6_761_optimized();
+			let _ = do_mul_affine_g2_bw6_761_optimized();
 		});
 	});
 	group.bench_function("mul_affine_g2_bw6_761", |b| {
 		b.iter(|| {
-			do_mul_affine_g2_bw6_761();
+			let _ = do_mul_affine_g2_bw6_761();
 		});
 	});
 	group.finish();
@@ -216,12 +214,12 @@ pub fn bench_mul_projective_g2_bw6_761(c: &mut Criterion) {
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("mul_projective_g2_bw6_761_optimized", |b| {
 		b.iter(|| {
-			do_mul_projective_g2_bw6_761_optimized();
+			let _ = do_mul_projective_g2_bw6_761_optimized();
 		});
 	});
 	group.bench_function("mul_projective_g2_bw6_761", |b| {
 		b.iter(|| {
-			do_mul_projective_g2_bw6_761();
+			let _ = do_mul_projective_g2_bw6_761();
 		});
 	});
 	group.finish();
@@ -243,23 +241,23 @@ fn do_mul_projective_g2_bw6_761() -> Result<(), Error> {
 	Ok(())
 }
 
-pub fn bench_pairing_arkworks_bw6_761(c: &mut Criterion) {
+pub fn bench_pairing_bw6_761(c: &mut Criterion) {
 	let mut group = c.benchmark_group("pairing_arkworks_bw6_761");
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("pairing_arkworks_bw6_761_optimized", |b| {
 		b.iter(|| {
-			do_pairing_arkworks_bw6_761_optimized();
+			let _ = do_pairing_bw6_761_optimized();
 		});
 	});
 	group.bench_function("pairing_arkworks_bw6_761", |b| {
 		b.iter(|| {
-			do_pairing_arkworks_bw6_761();
+			let _ = do_pairing_bw6_761();
 		});
 	});
 	group.finish();
 }
 
-fn do_pairing_arkworks_bw6_761_optimized() -> Result<(), Error> {
+fn do_pairing_bw6_761_optimized() -> Result<(), Error> {
 	let _out = BW6_761Optimized::multi_pairing(
 		[G1AffineBW6_761::generator()],
 		[G2AffineBW6_761::generator()],
@@ -267,7 +265,7 @@ fn do_pairing_arkworks_bw6_761_optimized() -> Result<(), Error> {
 	Ok(())
 }
 
-fn do_pairing_arkworks_bw6_761() -> Result<(), Error> {
+fn do_pairing_bw6_761() -> Result<(), Error> {
 	let _out = ark_bw6_761::BW6_761::multi_pairing(
 		[ark_bw6_761::G1Affine::generator()],
 		[ark_bw6_761::G2Affine::generator()],

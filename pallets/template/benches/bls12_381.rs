@@ -1,15 +1,17 @@
+use ark_bls12_381::{Bls12_381, Fr as BlsFr};
+use ark_ff::Fp;
+use ark_groth16::Groth16;
+use ark_serialize::{CanonicalDeserialize, Compress, Validate};
+use ark_snark::SNARK;
 use ark_std::{io::Error, test_rng, UniformRand};
 use criterion::Criterion;
-use frame_benchmarking::whitelisted_caller;
-use frame_support::dispatch::RawOrigin;
+use frame_support::assert_ok;
 use sp_ark_bls12_381::{
 	Bls12_381 as Bls12_381_Host, Fr as BlsFrOptimized, G1Affine as G1AffineBls12_381_Host,
 	G1Projective as G1ProjectiveBls12_381_Host, G2Affine as G2AffineBls12_381_Host,
 	G2Projective as G2ProjectiveBls12_381_Host, HostFunctions as Bls12_381HostFunctions,
 };
-use sp_ark_models::{
-	pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group, TECurveConfig,
-};
+use sp_ark_models::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group};
 
 type AccountId = u64;
 
@@ -48,23 +50,23 @@ type G2AffineBls12_381 = G2AffineBls12_381_Host<HostBls12_381>;
 type G1ProjectiveBls12_381 = G1ProjectiveBls12_381_Host<HostBls12_381>;
 type G2ProjectiveBls12_381 = G2ProjectiveBls12_381_Host<HostBls12_381>;
 
-pub fn bench_pairing_arkworks_bls12_381(c: &mut Criterion) {
-	let mut group = c.benchmark_group("pairing_arkworks_bls12_381");
+pub fn bench_pairing_bls12_381(c: &mut Criterion) {
+	let mut group = c.benchmark_group("pairing__bls12_381");
 	let caller: AccountId = whitelisted_caller();
-	group.bench_function("pairing_arkworks_bls12_381_optimized", |b| {
+	group.bench_function("pairing__bls12_381_optimized", |b| {
 		b.iter(|| {
-			let _ = do_pairing_arkworks_bls12_381_optimized();
+			let _ = do_pairing_bls12_381_optimized();
 		});
 	});
-	group.bench_function("pairing_arkworks_bls12_381", |b| {
+	group.bench_function("pairing__bls12_381", |b| {
 		b.iter(|| {
-			let _ = do_pairing_arkworks_bls12_381();
+			let _ = do_pairing_bls12_381();
 		});
 	});
 	group.finish();
 }
 
-fn do_pairing_arkworks_bls12_381_optimized() -> Result<(), Error> {
+fn do_pairing_bls12_381_optimized() -> Result<(), Error> {
 	let _ = Bls12_381Optimized::multi_pairing(
 		[G1AffineBls12_381::generator()],
 		[G2AffineBls12_381::generator()],
@@ -72,7 +74,7 @@ fn do_pairing_arkworks_bls12_381_optimized() -> Result<(), Error> {
 	Ok(())
 }
 
-fn do_pairing_arkworks_bls12_381() -> Result<(), Error> {
+fn do_pairing_bls12_381() -> Result<(), Error> {
 	let _ = ark_bls12_381::Bls12_381::multi_pairing(
 		[ark_bls12_381::G1Affine::generator()],
 		[ark_bls12_381::G2Affine::generator()],
@@ -354,7 +356,9 @@ pub fn do_verify_groth16() -> Result<(), Error> {
 	)
 	.unwrap();
 
-	Groth16::<Bls12_381>::verify(&vk, &[c], &proof)
+	assert_ok!(Groth16::<Bls12_381>::verify(&vk, &[c], &proof));
+
+	Ok(())
 }
 
 pub fn do_verify_groth16_optimized() -> Result<(), Error> {
@@ -375,5 +379,7 @@ pub fn do_verify_groth16_optimized() -> Result<(), Error> {
 		)
 		.unwrap();
 
-	Groth16::<Bls12_381Optimized>::verify(&vk, &[c], &proof)
+	assert_ok!(Groth16::<Bls12_381Optimized>::verify(&vk, &[c], &proof));
+
+	Ok(())
 }

@@ -1,7 +1,5 @@
 use ark_std::{io::Error, test_rng, UniformRand};
 use criterion::Criterion;
-use frame_benchmarking::whitelisted_caller;
-use frame_support::dispatch::RawOrigin;
 use sp_ark_bls12_377::{
 	Bls12_377 as Bls12_377_Host, G1Affine as G1AffineBls12_377_Host,
 	G1Projective as G1ProjectiveBls12_377_Host, G2Affine as G2AffineBls12_377_Host,
@@ -48,7 +46,7 @@ type G2AffineBls12_377 = G2AffineBls12_377_Host<HostBls12_377>;
 type G1ProjectiveBls12_377 = G1ProjectiveBls12_377_Host<HostBls12_377>;
 type G2ProjectiveBls12_377 = G2ProjectiveBls12_377_Host<HostBls12_377>;
 
-pub fn bench_pairing_arkworks_bls12_377(c: &mut Criterion) {
+pub fn bench_pairing_bls12_377(c: &mut Criterion) {
 	let mut group = c.benchmark_group("pairing_arkworks_bls12_377");
 	let caller: AccountId = whitelisted_caller();
 	group.bench_function("pairing_arkworks_bls12_377_optimized", |b| {
