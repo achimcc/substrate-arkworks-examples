@@ -57,20 +57,20 @@ pub fn bench_msm_g1_bw6_761(c: &mut Criterion) {
 	group.finish();
 }
 
-fn do_msm_g1_bw6_761_optimized() -> Result<(), Error> {
-	let _out = <sp_ark_bw6_761::g1::Config<HostBW6_761> as SWCurveConfig>::msm(
-		&[G1AffineBW6_761::generator()],
-		&[2u64.into()],
-	);
-	Ok(())
-}
-
 fn do_msm_g1_bw6_761() -> Result<(), Error> {
 	let _out = <ark_bw6_761::g1::Config as SWCurveConfig>::msm(
 		&[ark_bw6_761::G1Affine::generator()],
 		&[2u64.into()],
 	);
 
+	Ok(())
+}
+
+fn do_msm_g1_bw6_761_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bw6_761::g1::Config<HostBW6_761> as SWCurveConfig>::msm(
+		&[G1AffineBW6_761::generator()],
+		&[2u64.into()],
+	);
 	Ok(())
 }
 
@@ -89,18 +89,18 @@ pub fn bench_msm_g2_bw6_761(c: &mut Criterion) {
 	group.finish();
 }
 
-fn do_msm_g2_bw6_761_optimized() -> Result<(), Error> {
-	let _out = <sp_ark_bw6_761::g2::Config<HostBW6_761> as SWCurveConfig>::msm(
-		&[G2AffineBW6_761::generator()],
+fn do_msm_g2_bw6_761() -> Result<(), Error> {
+	let _out = <ark_bw6_761::g2::Config as SWCurveConfig>::msm(
+		&[ark_bw6_761::G2Affine::generator()],
 		&[2u64.into()],
 	);
 
 	Ok(())
 }
 
-fn do_msm_g2_bw6_761() -> Result<(), Error> {
-	let _out = <ark_bw6_761::g2::Config as SWCurveConfig>::msm(
-		&[ark_bw6_761::G2Affine::generator()],
+fn do_msm_g2_bw6_761_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bw6_761::g2::Config<HostBW6_761> as SWCurveConfig>::msm(
+		&[G2AffineBW6_761::generator()],
 		&[2u64.into()],
 	);
 
@@ -122,17 +122,17 @@ pub fn bench_mul_affine_g1_bw6_761(c: &mut Criterion) {
 	group.finish();
 }
 
-fn do_mul_affine_g1_bw6_761_optimized() -> Result<(), Error> {
-	let _out = <sp_ark_bw6_761::g1::Config<HostBW6_761> as SWCurveConfig>::mul_affine(
-		&G1AffineBW6_761::generator(),
+fn do_mul_affine_g1_bw6_761() -> Result<(), Error> {
+	let _out = <ark_bw6_761::g1::Config as SWCurveConfig>::mul_affine(
+		&ark_bw6_761::G1Affine::generator(),
 		&[2u64],
 	);
 	Ok(())
 }
 
-fn do_mul_affine_g1_bw6_761() -> Result<(), Error> {
-	let _out = <ark_bw6_761::g1::Config as SWCurveConfig>::mul_affine(
-		&ark_bw6_761::G1Affine::generator(),
+fn do_mul_affine_g1_bw6_761_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bw6_761::g1::Config<HostBW6_761> as SWCurveConfig>::mul_affine(
+		&G1AffineBW6_761::generator(),
 		&[2u64],
 	);
 	Ok(())
@@ -153,17 +153,17 @@ pub fn bench_mul_projective_g1_bw6_761(c: &mut Criterion) {
 	group.finish();
 }
 
-fn do_mul_projective_g1_bw6_761_optimized() -> Result<(), Error> {
-	let _out = <sp_ark_bw6_761::g1::Config<HostBW6_761> as SWCurveConfig>::mul_projective(
-		&G1ProjectiveBW6_761::generator(),
+fn do_mul_projective_g1_bw6_761() -> Result<(), Error> {
+	let _out = <ark_bw6_761::g1::Config as SWCurveConfig>::mul_projective(
+		&ark_bw6_761::G1Projective::generator(),
 		&[2u64],
 	);
 	Ok(())
 }
 
-fn do_mul_projective_g1_bw6_761() -> Result<(), Error> {
-	let _out = <ark_bw6_761::g1::Config as SWCurveConfig>::mul_projective(
-		&ark_bw6_761::G1Projective::generator(),
+fn do_mul_projective_g1_bw6_761_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bw6_761::g1::Config<HostBW6_761> as SWCurveConfig>::mul_projective(
+		&G1ProjectiveBW6_761::generator(),
 		&[2u64],
 	);
 	Ok(())
@@ -184,17 +184,17 @@ pub fn bench_mul_affine_g2_bw6_761(c: &mut Criterion) {
 	group.finish();
 }
 
-fn do_mul_affine_g2_bw6_761_optimized() -> Result<(), Error> {
-	let _out = <sp_ark_bw6_761::g2::Config<HostBW6_761> as SWCurveConfig>::mul_affine(
-		&G2AffineBW6_761::generator(),
+fn do_mul_affine_g2_bw6_761() -> Result<(), Error> {
+	let _out = <sp_ark_bw6_761::g1::Config<HostBW6_761> as SWCurveConfig>::mul_projective(
+		&G1ProjectiveBW6_761::generator(),
 		&[2u64],
 	);
 	Ok(())
 }
 
-fn do_mul_affine_g2_bw6_761() -> Result<(), Error> {
-	let _out = <sp_ark_bw6_761::g1::Config<HostBW6_761> as SWCurveConfig>::mul_projective(
-		&G1ProjectiveBW6_761::generator(),
+fn do_mul_affine_g2_bw6_761_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bw6_761::g2::Config<HostBW6_761> as SWCurveConfig>::mul_affine(
+		&G2AffineBW6_761::generator(),
 		&[2u64],
 	);
 	Ok(())
@@ -215,17 +215,17 @@ pub fn bench_mul_projective_g2_bw6_761(c: &mut Criterion) {
 	group.finish();
 }
 
-fn do_mul_projective_g2_bw6_761_optimized() -> Result<(), Error> {
-	let _out = <sp_ark_bw6_761::g2::Config<HostBW6_761> as SWCurveConfig>::mul_projective(
-		&G2ProjectiveBW6_761::generator(),
+fn do_mul_projective_g2_bw6_761() -> Result<(), Error> {
+	let _out = <ark_bw6_761::g2::Config as SWCurveConfig>::mul_projective(
+		&ark_bw6_761::G2Projective::generator(),
 		&[2u64],
 	);
 	Ok(())
 }
 
-fn do_mul_projective_g2_bw6_761() -> Result<(), Error> {
-	let _out = <ark_bw6_761::g2::Config as SWCurveConfig>::mul_projective(
-		&ark_bw6_761::G2Projective::generator(),
+fn do_mul_projective_g2_bw6_761_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bw6_761::g2::Config<HostBW6_761> as SWCurveConfig>::mul_projective(
+		&G2ProjectiveBW6_761::generator(),
 		&[2u64],
 	);
 	Ok(())
@@ -246,18 +246,18 @@ pub fn bench_pairing_bw6_761(c: &mut Criterion) {
 	group.finish();
 }
 
-fn do_pairing_bw6_761_optimized() -> Result<(), Error> {
-	let _out = BW6_761Optimized::multi_pairing(
-		[G1AffineBW6_761::generator()],
-		[G2AffineBW6_761::generator()],
-	);
-	Ok(())
-}
-
 fn do_pairing_bw6_761() -> Result<(), Error> {
 	let _out = ark_bw6_761::BW6_761::multi_pairing(
 		[ark_bw6_761::G1Affine::generator()],
 		[ark_bw6_761::G2Affine::generator()],
+	);
+	Ok(())
+}
+
+fn do_pairing_bw6_761_optimized() -> Result<(), Error> {
+	let _out = BW6_761Optimized::multi_pairing(
+		[G1AffineBW6_761::generator()],
+		[G2AffineBW6_761::generator()],
 	);
 	Ok(())
 }

@@ -129,21 +129,21 @@ pub fn bench_msm_g2_bls12_381(c: &mut Criterion) {
 	group.finish();
 }
 
-fn do_msm_g2_bls12_381_optimized() -> Result<(), Error> {
-	let mut rng = test_rng();
-	let scalar = sp_ark_bls12_381::Fr::rand(&mut rng);
-	let _out = <sp_ark_bls12_381::g2::Config<HostBls12_381> as SWCurveConfig>::msm(
-		&[G2AffineBls12_381::generator()],
-		&[scalar],
-	);
-	Ok(())
-}
-
 fn do_msm_g2_bls12_381() -> Result<(), Error> {
 	let mut rng = test_rng();
 	let scalar = ark_bls12_381::Fr::rand(&mut rng);
 	let _out = <ark_bls12_381::g2::Config as SWCurveConfig>::msm(
 		&[ark_bls12_381::G2Affine::generator()],
+		&[scalar],
+	);
+	Ok(())
+}
+
+fn do_msm_g2_bls12_381_optimized() -> Result<(), Error> {
+	let mut rng = test_rng();
+	let scalar = sp_ark_bls12_381::Fr::rand(&mut rng);
+	let _out = <sp_ark_bls12_381::g2::Config<HostBls12_381> as SWCurveConfig>::msm(
+		&[G2AffineBls12_381::generator()],
 		&[scalar],
 	);
 	Ok(())
@@ -164,17 +164,17 @@ pub fn bench_mul_affine_g1_bls12_381(c: &mut Criterion) {
 	group.finish();
 }
 
-fn do_mul_affine_g1_bls12_381_optimized() -> Result<(), Error> {
-	let _out = <sp_ark_bls12_381::g1::Config<HostBls12_381> as SWCurveConfig>::mul_affine(
-		&G1AffineBls12_381::generator(),
+fn do_mul_affine_g1_bls12_381() -> Result<(), Error> {
+	let _out = <ark_bls12_381::g1::Config as SWCurveConfig>::mul_affine(
+		&ark_bls12_381::G1Affine::generator(),
 		&[2u64],
 	);
 	Ok(())
 }
 
-fn do_mul_affine_g1_bls12_381() -> Result<(), Error> {
-	let _out = <ark_bls12_381::g1::Config as SWCurveConfig>::mul_affine(
-		&ark_bls12_381::G1Affine::generator(),
+fn do_mul_affine_g1_bls12_381_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bls12_381::g1::Config<HostBls12_381> as SWCurveConfig>::mul_affine(
+		&G1AffineBls12_381::generator(),
 		&[2u64],
 	);
 	Ok(())
@@ -195,17 +195,17 @@ pub fn bench_mul_projective_g1_bls12_381(c: &mut Criterion) {
 	group.finish();
 }
 
-fn do_mul_projective_g1_bls12_381_optimized() -> Result<(), Error> {
-	let _out = <sp_ark_bls12_381::g1::Config<HostBls12_381> as SWCurveConfig>::mul_projective(
-		&G1ProjectiveBls12_381::generator(),
+fn do_mul_projective_g1_bls12_381() -> Result<(), Error> {
+	let _out = <ark_bls12_381::g1::Config as SWCurveConfig>::mul_projective(
+		&ark_bls12_381::G1Projective::generator(),
 		&[2u64],
 	);
 	Ok(())
 }
 
-fn do_mul_projective_g1_bls12_381() -> Result<(), Error> {
-	let _out = <ark_bls12_381::g1::Config as SWCurveConfig>::mul_projective(
-		&ark_bls12_381::G1Projective::generator(),
+fn do_mul_projective_g1_bls12_381_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bls12_381::g1::Config<HostBls12_381> as SWCurveConfig>::mul_projective(
+		&G1ProjectiveBls12_381::generator(),
 		&[2u64],
 	);
 	Ok(())
@@ -226,17 +226,17 @@ pub fn bench_mul_affine_g2_bls12_381(c: &mut Criterion) {
 	group.finish();
 }
 
-fn do_mul_affine_g2_bls12_381_optimized() -> Result<(), Error> {
-	let _out = <sp_ark_bls12_381::g2::Config<HostBls12_381> as SWCurveConfig>::mul_affine(
-		&G2AffineBls12_381::generator(),
+fn do_mul_affine_g2_bls12_381() -> Result<(), Error> {
+	let _out = <ark_bls12_381::g2::Config as SWCurveConfig>::mul_affine(
+		&ark_bls12_381::G2Affine::generator(),
 		&[2u64],
 	);
 	Ok(())
 }
 
-fn do_mul_affine_g2_bls12_381() -> Result<(), Error> {
-	let _out = <ark_bls12_381::g2::Config as SWCurveConfig>::mul_affine(
-		&ark_bls12_381::G2Affine::generator(),
+fn do_mul_affine_g2_bls12_381_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bls12_381::g2::Config<HostBls12_381> as SWCurveConfig>::mul_affine(
+		&G2AffineBls12_381::generator(),
 		&[2u64],
 	);
 	Ok(())
@@ -257,17 +257,17 @@ pub fn bench_mul_projective_g2_bls12_381(c: &mut Criterion) {
 	group.finish();
 }
 
-fn do_mul_projective_g2_bls12_381_optimized() -> Result<(), Error> {
-	let _out = <sp_ark_bls12_381::g2::Config<HostBls12_381> as SWCurveConfig>::mul_projective(
-		&G2ProjectiveBls12_381::generator(),
+fn do_mul_projective_g2_bls12_381() -> Result<(), Error> {
+	let _out = <ark_bls12_381::g2::Config as SWCurveConfig>::mul_projective(
+		&ark_bls12_381::G2Projective::generator(),
 		&[2u64],
 	);
 	Ok(())
 }
 
-fn do_mul_projective_g2_bls12_381() -> Result<(), Error> {
-	let _out = <ark_bls12_381::g2::Config as SWCurveConfig>::mul_projective(
-		&ark_bls12_381::G2Projective::generator(),
+fn do_mul_projective_g2_bls12_381_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bls12_381::g2::Config<HostBls12_381> as SWCurveConfig>::mul_projective(
+		&G2ProjectiveBls12_381::generator(),
 		&[2u64],
 	);
 	Ok(())

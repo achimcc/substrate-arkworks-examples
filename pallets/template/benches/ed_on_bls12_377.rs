@@ -32,16 +32,6 @@ pub fn bench_msm_ed_on_bls12_377(c: &mut Criterion) {
 	group.finish();
 }
 
-fn do_msm_ed_on_bls12_377_optimized() -> Result<(), Error> {
-	let mut rng = test_rng();
-	let scalar = sp_ark_ed_on_bls12_377::Fr::rand(&mut rng);
-	let _out = <sp_ark_ed_on_bls12_377::EdwardsConfig<HostEdOnBls12_377> as TECurveConfig>::msm(
-		&[sp_ark_ed_on_bls12_377::EdwardsAffine::<HostEdOnBls12_377>::generator()],
-		&[scalar],
-	);
-	Ok(())
-}
-
 fn do_msm_ed_on_bls12_377() -> Result<(), Error> {
 	let mut rng = test_rng();
 	let scalar = ark_ed_on_bls12_377::Fr::rand(&mut rng);
@@ -50,6 +40,16 @@ fn do_msm_ed_on_bls12_377() -> Result<(), Error> {
 			&[ark_ed_on_bls12_377::EdwardsAffine::generator()],
 			&[scalar],
 		);
+	Ok(())
+}
+
+fn do_msm_ed_on_bls12_377_optimized() -> Result<(), Error> {
+	let mut rng = test_rng();
+	let scalar = sp_ark_ed_on_bls12_377::Fr::rand(&mut rng);
+	let _out = <sp_ark_ed_on_bls12_377::EdwardsConfig<HostEdOnBls12_377> as TECurveConfig>::msm(
+		&[sp_ark_ed_on_bls12_377::EdwardsAffine::<HostEdOnBls12_377>::generator()],
+		&[scalar],
+	);
 	Ok(())
 }
 
@@ -68,16 +68,6 @@ pub fn bench_mul_affine_ed_on_bls12_377(c: &mut Criterion) {
 	group.finish();
 }
 
-fn do_mul_affine_ed_on_bls12_377_optimized() -> Result<(), Error> {
-	let mut rng = test_rng();
-	let scalar = sp_ark_ed_on_bls12_377::Fr::rand(&mut rng);
-	let _out = <sp_ark_ed_on_bls12_377::EdwardsConfig<HostEdOnBls12_377> as TECurveConfig>::msm(
-		&[sp_ark_ed_on_bls12_377::EdwardsAffine::<HostEdOnBls12_377>::generator()],
-		&[scalar],
-	);
-	Ok(())
-}
-
 fn do_mul_affine_ed_on_bls12_377() -> Result<(), Error> {
 	let mut rng = test_rng();
 	let scalar = ark_ed_on_bls12_377::Fr::rand(&mut rng);
@@ -86,6 +76,16 @@ fn do_mul_affine_ed_on_bls12_377() -> Result<(), Error> {
 			&[ark_ed_on_bls12_377::EdwardsAffine::generator()],
 			&[scalar],
 		);
+	Ok(())
+}
+
+fn do_mul_affine_ed_on_bls12_377_optimized() -> Result<(), Error> {
+	let mut rng = test_rng();
+	let scalar = sp_ark_ed_on_bls12_377::Fr::rand(&mut rng);
+	let _out = <sp_ark_ed_on_bls12_377::EdwardsConfig<HostEdOnBls12_377> as TECurveConfig>::msm(
+		&[sp_ark_ed_on_bls12_377::EdwardsAffine::<HostEdOnBls12_377>::generator()],
+		&[scalar],
+	);
 	Ok(())
 }
 
@@ -104,19 +104,19 @@ pub fn bench_mul_projective_ed_on_bls12_377(c: &mut Criterion) {
 	group.finish();
 }
 
+fn do_mul_projective_ed_on_bls12_377() -> Result<(), Error> {
+	let _out = <ark_ed_on_bls12_377::EdwardsConfig as TECurveConfig>::mul_projective(
+		&ark_ed_on_bls12_377::EdwardsProjective::generator(),
+		&[2u64],
+	);
+	Ok(())
+}
+
 fn do_mul_projective_ed_on_bls12_377_optimized() -> Result<(), Error> {
 	let _out =
 		<sp_ark_ed_on_bls12_377::EdwardsConfig<HostEdOnBls12_377> as TECurveConfig>::mul_projective(
 			&sp_ark_ed_on_bls12_377::EdwardsProjective::<HostEdOnBls12_377>::generator(),
 			&[2u64],
 		);
-	Ok(())
-}
-
-fn do_mul_projective_ed_on_bls12_377() -> Result<(), Error> {
-	let _out = <ark_ed_on_bls12_377::EdwardsConfig as TECurveConfig>::mul_projective(
-		&ark_ed_on_bls12_377::EdwardsProjective::generator(),
-		&[2u64],
-	);
 	Ok(())
 }
