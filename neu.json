@@ -1,0 +1,224 @@
+{
+  "benchmark": "bench_1_verify_groth16",
+  "time": 35883095
+}
+{
+  "benchmark": "bench_2_verify_groth16_optimized",
+  "time": 8975343
+}
+{
+  "benchmark": "bench_3_pairing_arkworks_bls12_381",
+  "time": 9108159
+}
+{
+  "benchmark": "bench_4_pairing_arkworks_bls12_381_optimized",
+  "time": 1787729
+}
+{
+  "benchmark": "bench_5_msm_g1_bls12_381",
+  "time": 2901047
+}
+{
+  "benchmark": "bench_6_msm_g1_bls12_381_optimized",
+  "time": 663691
+}
+{
+  "benchmark": "bench_7_msm_g2_bls12_381",
+  "time": 6626200
+}
+{
+  "benchmark": "bench_8_msm_g2_bls12_381_optimized",
+  "time": 2085052
+}
+{
+  "benchmark": "bench_9_mul_projective_g1_bls12_381",
+  "time": 16062
+}
+{
+  "benchmark": "bench_10_mul_projective_g1_bls12_381_optimized",
+  "time": 361784
+}
+{
+  "benchmark": "bench_11_mul_affine_g1_bls12_381",
+  "time": 14020
+}
+{
+  "benchmark": "bench_12_mul_affine_g1_bls12_381_optimized",
+  "time": 373858
+}
+{
+  "benchmark": "bench_13_mul_projective_g2_bls12_381",
+  "time": 22756
+}
+{
+  "benchmark": "bench_14_mul_projective_g2_bls12_381_optimized",
+  "time": 1067798
+}
+{
+  "benchmark": "bench_15_mul_affine_g2_bls12_381",
+  "time": 21835
+}
+{
+  "benchmark": "bench_16_mul_affine_g2_bls12_381_optimized",
+  "time": 1062795
+}
+{
+  "benchmark": "bench_17_pairing_arkworks_bls12_377",
+  "time": 9382996
+}
+{
+  "benchmark": "bench_18_pairing_arkworks_bls12_377_optimized",
+  "time": 2102529
+}
+{
+  "benchmark": "bench_19_msm_g1_bls12_377",
+  "time": 2816892
+}
+{
+  "benchmark": "bench_20_msm_g1_bls12_377_optimized",
+  "time": 971168
+}
+{
+  "benchmark": "bench_21_msm_g2_bls12_377",
+  "time": 534403
+}
+{
+  "benchmark": "bench_22_msm_g2_bls12_377_optimized",
+  "time": 2685776
+}
+{
+  "benchmark": "bench_23_mul_projective_g1_bls12_377",
+  "time": 13117
+}
+{
+  "benchmark": "bench_24_mul_projective_g1_bls12_377_optimized",
+  "time": 591378
+}
+{
+  "benchmark": "bench_25_mul_affine_g1_bls12_377",
+  "time": 12665
+}
+{
+  "benchmark": "bench_26_mul_affine_g1_bls12_377_optimized",
+  "time": 654354
+}
+{
+  "benchmark": "bench_27_mul_projective_g2_bls12_377",
+  "time": 27898
+}
+{
+  "benchmark": "bench_28_mul_projective_g2_bls12_377_optimized",
+  "time": 2255944
+}
+{
+  "benchmark": "bench_29_mul_affine_g2_bls12_377",
+  "time": 22518
+}
+{
+  "benchmark": "bench_30_mul_affine_g2_bls12_377_optimized",
+  "time": 1600565
+}
+{
+  "benchmark": "bench_31_pairing_arkworks_bw6_761",
+  "time": 45748744
+}
+{
+  "benchmark": "bench_32_pairing_arkworks_bw6_761_optimized",
+  "time": 7410135
+}
+{
+  "benchmark": "bench_33_msm_g1_bw6_761",
+  "time": 652838
+}
+{
+  "benchmark": "bench_34_msm_g1_bw6_761_optimized",
+  "time": 2504262
+}
+{
+  "benchmark": "bench_35_msm_g2_bw6_761",
+  "time": 661733
+}
+{
+  "benchmark": "bench_36_msm_g2_bw6_761_optimized",
+  "time": 2910118
+}
+{
+  "benchmark": "bench_37_mul_projective_g1_bw6_761",
+  "time": 24711
+}
+{
+  "benchmark": "bench_38_mul_projective_g1_bw6_761_optimized",
+  "time": 2468779
+}
+{
+  "benchmark": "bench_39_mul_affine_g1_bw6_761",
+  "time": 29136
+}
+{
+  "benchmark": "bench_40_mul_affine_g1_bw6_761_optimized",
+  "time": 2464464
+}
+{
+  "benchmark": "bench_41_mul_projective_g2_bw6_761",
+  "time": 27774
+}
+{
+  "benchmark": "bench_42_mul_projective_g2_bw6_761_optimized",
+  "time": 2493371
+}
+{
+  "benchmark": "bench_43_mul_affine_g2_bw6_761",
+  "time": 41537
+}
+{
+  "benchmark": "bench_44_mul_affine_g2_bw6_761_optimized",
+  "time": 2610511
+}
+{
+  "benchmark": "bench_45_msm_ed_on_bls12_381",
+  "time": 1201576
+}
+{
+  "benchmark": "bench_46_msm_ed_on_bls12_381_optimized",
+  "time": 372133
+}
+{
+  "benchmark": "bench_47_mul_projective_ed_on_bls12_381",
+  "time": 11037
+}
+{
+  "benchmark": "bench_48_mul_projective_ed_on_bls12_381_optimized",
+  "time": 168220
+}
+{
+  "benchmark": "bench_49_mul_affine_ed_on_bls12_381",
+  "time": 13207
+}
+{
+  "benchmark": "bench_50_mul_affine_ed_on_bls12_381_optimized",
+  "time": 166463
+}
+{
+  "benchmark": "bench_51_msm_ed_on_bls12_377",
+  "time": 4351904
+}
+{
+  "benchmark": "bench_52_msm_ed_on_bls12_377_optimized",
+  "time": 747121
+}
+{
+  "benchmark": "bench_53_mul_projective_ed_on_bls12_377",
+  "time": 15323
+}
+{
+  "benchmark": "bench_54_mul_projective_ed_on_bls12_377_optimized",
+  "time": 216977
+}
+{
+  "benchmark": "bench_55_mul_affine_ed_on_bls12_377",
+  "time": 16627
+}
+{
+  "benchmark": "bench_56_mul_affine_ed_on_bls12_377_optimized",
+  "time": 215003
+}
