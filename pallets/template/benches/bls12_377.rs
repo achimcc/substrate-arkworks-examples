@@ -1,0 +1,277 @@
+use ark_std::{io::Error, test_rng, UniformRand};
+use criterion::Criterion;
+use frame_benchmarking::whitelisted_caller;
+use frame_support::dispatch::RawOrigin;
+use sp_ark_bls12_377::{
+	Bls12_377 as Bls12_377_Host, G1Affine as G1AffineBls12_377_Host,
+	G1Projective as G1ProjectiveBls12_377_Host, G2Affine as G2AffineBls12_377_Host,
+	G2Projective as G2ProjectiveBls12_377_Host, HostFunctions as Bls12_377HostFunctions,
+};
+use sp_ark_models::{
+	pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group, TECurveConfig,
+};
+
+type AccountId = u64;
+
+struct HostBls12_377 {}
+
+impl Bls12_377HostFunctions for HostBls12_377 {
+	fn bls12_377_multi_miller_loop(a: Vec<Vec<u8>>, b: Vec<Vec<u8>>) -> Vec<u8> {
+		sp_io::elliptic_curves::bls12_377_multi_miller_loop(a, b)
+	}
+	fn bls12_377_final_exponentiation(f12: Vec<u8>) -> Vec<u8> {
+		sp_io::elliptic_curves::bls12_377_final_exponentiation(f12)
+	}
+	fn bls12_377_msm_g1(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
+		sp_io::elliptic_curves::bls12_377_msm_g1(bases, bigints)
+	}
+	fn bls12_377_mul_projective_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+		sp_io::elliptic_curves::bls12_377_mul_projective_g1(base, scalar)
+	}
+	fn bls12_377_mul_affine_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+		sp_io::elliptic_curves::bls12_377_mul_affine_g1(base, scalar)
+	}
+	fn bls12_377_msm_g2(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
+		sp_io::elliptic_curves::bls12_377_msm_g2(bases, bigints)
+	}
+	fn bls12_377_mul_projective_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+		sp_io::elliptic_curves::bls12_377_mul_projective_g2(base, scalar)
+	}
+	fn bls12_377_mul_affine_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+		sp_io::elliptic_curves::bls12_377_mul_affine_g2(base, scalar)
+	}
+}
+
+type Bls12_377Optimized = Bls12_377_Host<HostBls12_377>;
+type G1AffineBls12_377 = G1AffineBls12_377_Host<HostBls12_377>;
+type G2AffineBls12_377 = G2AffineBls12_377_Host<HostBls12_377>;
+type G1ProjectiveBls12_377 = G1ProjectiveBls12_377_Host<HostBls12_377>;
+type G2ProjectiveBls12_377 = G2ProjectiveBls12_377_Host<HostBls12_377>;
+
+pub fn bench_pairing_arkworks_bls12_377(c: &mut Criterion) {
+	let mut group = c.benchmark_group("pairing_arkworks_bls12_377");
+	let caller: AccountId = whitelisted_caller();
+	group.bench_function("pairing_arkworks_bls12_377_optimized", |b| {
+		b.iter(|| {
+			let _ = do_pairing_bls12_377_optimized();
+		});
+	});
+	group.bench_function("pairing_arkworks_bls12_377", |b| {
+		b.iter(|| {
+			let _ = do_pairing_bls12_377();
+		});
+	});
+	group.finish();
+}
+
+pub fn do_pairing_bls12_377_optimized() -> Result<(), Error> {
+	let _out = Bls12_377Optimized::multi_pairing(
+		[G1AffineBls12_377::generator()],
+		[G2AffineBls12_377::generator()],
+	);
+	Ok(())
+}
+
+pub fn do_pairing_bls12_377() -> Result<(), Error> {
+	let _out = ark_bls12_377::Bls12_377::multi_pairing(
+		[ark_bls12_377::G1Affine::generator()],
+		[ark_bls12_377::G2Affine::generator()],
+	);
+	Ok(())
+}
+
+pub fn bench_msm_g1_arkworks_bls12_377(c: &mut Criterion) {
+	let mut group = c.benchmark_group("pairing_arkworks_msm_g1_bls12_377");
+	let caller: AccountId = whitelisted_caller();
+	group.bench_function("pairing_msm_g1_bls12_377_optimized", |b| {
+		b.iter(|| {
+			let _ = do_msm_g1_bls12_377_optimized();
+		});
+	});
+	group.bench_function("pairing_msm_g1_bls12_377", |b| {
+		b.iter(|| {
+			let _ = do_msm_g1_bls12_377();
+		});
+	});
+	group.finish();
+}
+
+pub fn do_msm_g1_bls12_377() -> Result<(), Error> {
+	let mut rng = test_rng();
+	let scalar = ark_bls12_377::Fr::rand(&mut rng);
+	let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::msm(
+		&[ark_bls12_377::G1Affine::generator()],
+		&[scalar],
+	);
+	Ok(())
+}
+
+pub fn do_msm_g1_bls12_377_optimized() -> Result<(), Error> {
+	let mut rng = test_rng();
+	let scalar = sp_ark_bls12_377::Fr::rand(&mut rng);
+	let _out = <sp_ark_bls12_377::g1::Config<HostBls12_377> as SWCurveConfig>::msm(
+		&[G1AffineBls12_377::generator()],
+		&[scalar],
+	);
+	Ok(())
+}
+
+pub fn bench_msm_g2_arkworks_bls12_377(c: &mut Criterion) {
+	let mut group = c.benchmark_group("pairing_arkworks_msm_g2_bls12_377");
+	let caller: AccountId = whitelisted_caller();
+	group.bench_function("pairing_arkworks_msm_g2_bls12_377_optimized", |b| {
+		b.iter(|| {
+			let _ = do_msm_g2_bls12_377_optimized();
+		});
+	});
+	group.bench_function("pairing_arkworks_msm_g2_bls12_377", |b| {
+		b.iter(|| {
+			let _ = do_msm_g2_bls12_377();
+		});
+	});
+	group.finish();
+}
+
+pub fn do_msm_g2_bls12_377() -> Result<(), Error> {
+	let _out = <ark_bls12_377::g2::Config as SWCurveConfig>::msm(
+		&[ark_bls12_377::G2Affine::generator()],
+		&[2u64.into()],
+	);
+	Ok(())
+}
+
+pub fn do_msm_g2_bls12_377_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bls12_377::g2::Config<HostBls12_377> as SWCurveConfig>::msm(
+		&[G2AffineBls12_377::generator()],
+		&[2u64.into()],
+	);
+	Ok(())
+}
+
+pub fn bench_mul_projective_g1_bls12_377(c: &mut Criterion) {
+	let mut group = c.benchmark_group("mul_projective_g1_bls12_377");
+	let caller: AccountId = whitelisted_caller();
+	group.bench_function("mul_projective_g1_bls12_377_optimized", |b| {
+		b.iter(|| {
+			let _ = do_mul_projective_g1_bls12_377_optimized();
+		})
+	});
+	group.bench_function("mul_projective_g1_bls12_377", |b| {
+		b.iter(|| {
+			let _ = do_mul_projective_g1_bls12_377();
+		});
+	});
+	group.finish();
+}
+
+pub fn do_mul_projective_g1_bls12_377_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bls12_377::g1::Config<HostBls12_377> as SWCurveConfig>::mul_projective(
+		&G1ProjectiveBls12_377::generator(),
+		&[2u64],
+	);
+	Ok(())
+}
+
+pub fn do_mul_projective_g1_bls12_377() -> Result<(), Error> {
+	let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::mul_projective(
+		&ark_bls12_377::G1Projective::generator(),
+		&[2u64],
+	);
+	Ok(())
+}
+
+pub fn bench_mul_affine_g1_bls12_377(c: &mut Criterion) {
+	let mut group = c.benchmark_group("mul_affine_g1_bls12_377");
+	let caller: AccountId = whitelisted_caller();
+	group.bench_function("mul_affine_g1_bls12_377_optimized", |b| {
+		b.iter(|| {
+			let _ = do_mul_affine_g1_bls12_377();
+		});
+	});
+	group.bench_function("mul_affine_g1_bls12_377", |b| {
+		b.iter(|| {
+			let _ = do_mul_affine_g1_bls12_377_optimized();
+		});
+	});
+	group.finish();
+}
+
+pub fn do_mul_affine_g1_bls12_377() -> Result<(), Error> {
+	let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::mul_affine(
+		&ark_bls12_377::G1Affine::generator(),
+		&[2u64],
+	);
+	Ok(())
+}
+
+pub fn do_mul_affine_g1_bls12_377_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bls12_377::g1::Config<HostBls12_377> as SWCurveConfig>::mul_affine(
+		&G1AffineBls12_377::generator(),
+		&[2u64],
+	);
+	Ok(())
+}
+
+pub fn bench_mul_projective_g2_bls12_377(c: &mut Criterion) {
+	let mut group = c.benchmark_group("mul_projective_g2_bls12_377");
+	let caller: AccountId = whitelisted_caller();
+	group.bench_function("mul_projective_g2_bls12_377", |b| {
+		b.iter(|| {
+			let _ = do_mul_projective_g2_bls12_377();
+		});
+	});
+	group.bench_function("mul_projective_g2_bls12_377_optimized", |b| {
+		b.iter(|| {
+			let _ = do_mul_projective_g2_bls12_377_optimized();
+		});
+	});
+	group.finish();
+}
+
+pub fn do_mul_projective_g2_bls12_377() -> Result<(), Error> {
+	let _out = <ark_bls12_377::g2::Config as SWCurveConfig>::mul_projective(
+		&ark_bls12_377::G2Projective::generator(),
+		&[2u64],
+	);
+	Ok(())
+}
+
+pub fn do_mul_projective_g2_bls12_377_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bls12_377::g2::Config<HostBls12_377> as SWCurveConfig>::mul_projective(
+		&G2ProjectiveBls12_377::generator(),
+		&[2u64],
+	);
+	Ok(())
+}
+
+pub fn bench_mul_affine_g2_bls12_377(c: &mut Criterion) {
+	let mut group = c.benchmark_group("mul_affine_g2_bls12_377");
+	let caller: AccountId = whitelisted_caller();
+	group.bench_function("mul_affine_g2_bls12_377_optimized", |b| {
+		b.iter(|| {
+			let _ = do_mul_affine_g2_bls12_377();
+		});
+	});
+	group.bench_function("mul_affine_g2_bls12_377", |b| {
+		b.iter(|| {
+			let _ = do_mul_affine_g2_bls12_377_optimized();
+		});
+	});
+	group.finish();
+}
+
+pub fn do_mul_affine_g2_bls12_377() -> Result<(), Error> {
+	let _out = <ark_bls12_377::g2::Config as SWCurveConfig>::mul_affine(
+		&ark_bls12_377::G2Affine::generator(),
+		&[2u64],
+	);
+	Ok(())
+}
+
+pub fn do_mul_affine_g2_bls12_377_optimized() -> Result<(), Error> {
+	let _out = <sp_ark_bls12_377::g2::Config<HostBls12_377> as SWCurveConfig>::mul_affine(
+		&G2AffineBls12_377::generator(),
+		&[2u64],
+	);
+	Ok(())
+}
