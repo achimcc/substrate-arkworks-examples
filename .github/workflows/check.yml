@@ -132,8 +132,8 @@ jobs:
 
       - name: Publish Benchmark results on GitHub Pages
         uses: ftnext/action-push-ghpages@v1.0.0
-           with:
-             build_dir: bench-results
-             github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
+        with:
+          build_dir: bench-results
+          github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
      
