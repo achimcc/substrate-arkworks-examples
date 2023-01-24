@@ -43,15 +43,15 @@ type G1ProjectiveBls12_377 = G1ProjectiveBls12_377_Host<HostBls12_377>;
 type G2ProjectiveBls12_377 = G2ProjectiveBls12_377_Host<HostBls12_377>;
 
 pub fn bench_pairing_bls12_377(c: &mut Criterion) {
-	let mut group = c.benchmark_group("pairing_arkworks_bls12_377");
-	group.bench_function("pairing_arkworks_bls12_377_optimized", |b| {
-		b.iter(|| {
-			let _ = do_pairing_bls12_377_optimized();
-		});
-	});
-	group.bench_function("pairing_arkworks_bls12_377", |b| {
+	let mut group = c.benchmark_group("pairing_bls12_377");
+	group.bench_function("pairing_bls12_377", |b| {
 		b.iter(|| {
 			let _ = do_pairing_bls12_377();
+		});
+	});
+	group.bench_function("pairing_=bls12_377_optimized", |b| {
+		b.iter(|| {
+			let _ = do_pairing_bls12_377_optimized();
 		});
 	});
 	group.finish();
@@ -74,15 +74,15 @@ pub fn do_pairing_bls12_377() -> Result<(), Error> {
 }
 
 pub fn bench_msm_g1_bls12_377(c: &mut Criterion) {
-	let mut group = c.benchmark_group("pairing_arkworks_msm_g1_bls12_377");
-	group.bench_function("pairing_msm_g1_bls12_377_optimized", |b| {
-		b.iter(|| {
-			let _ = do_msm_g1_bls12_377_optimized();
-		});
-	});
+	let mut group = c.benchmark_group("pairing_msm_g1_bls12_377");
 	group.bench_function("pairing_msm_g1_bls12_377", |b| {
 		b.iter(|| {
 			let _ = do_msm_g1_bls12_377();
+		});
+	});
+	group.bench_function("pairing_msm_g1_bls12_377_optimized", |b| {
+		b.iter(|| {
+			let _ = do_msm_g1_bls12_377_optimized();
 		});
 	});
 	group.finish();
@@ -109,15 +109,15 @@ pub fn do_msm_g1_bls12_377_optimized() -> Result<(), Error> {
 }
 
 pub fn bench_msm_g2_bls12_377(c: &mut Criterion) {
-	let mut group = c.benchmark_group("pairing_arkworks_msm_g2_bls12_377");
-	group.bench_function("pairing_arkworks_msm_g2_bls12_377_optimized", |b| {
-		b.iter(|| {
-			let _ = do_msm_g2_bls12_377_optimized();
-		});
-	});
-	group.bench_function("pairing_arkworks_msm_g2_bls12_377", |b| {
+	let mut group = c.benchmark_group("pairing_msm_g2_bls12_377");
+	group.bench_function("pairing_msm_g2_bls12_377", |b| {
 		b.iter(|| {
 			let _ = do_msm_g2_bls12_377();
+		});
+	});
+	group.bench_function("pairing_msm_g2_bls12_377_optimized", |b| {
+		b.iter(|| {
+			let _ = do_msm_g2_bls12_377_optimized();
 		});
 	});
 	group.finish();
@@ -141,15 +141,15 @@ pub fn do_msm_g2_bls12_377_optimized() -> Result<(), Error> {
 
 pub fn bench_mul_projective_g1_bls12_377(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_projective_g1_bls12_377");
-	group.bench_function("mul_projective_g1_bls12_377_optimized", |b| {
-		b.iter(|| {
-			let _ = do_mul_projective_g1_bls12_377_optimized();
-		})
-	});
 	group.bench_function("mul_projective_g1_bls12_377", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_g1_bls12_377();
 		});
+	});
+	group.bench_function("mul_projective_g1_bls12_377_optimized", |b| {
+		b.iter(|| {
+			let _ = do_mul_projective_g1_bls12_377_optimized();
+		})
 	});
 	group.finish();
 }
@@ -172,14 +172,14 @@ pub fn do_mul_projective_g1_bls12_377() -> Result<(), Error> {
 
 pub fn bench_mul_affine_g1_bls12_377(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_affine_g1_bls12_377");
-	group.bench_function("mul_affine_g1_bls12_377_optimized", |b| {
-		b.iter(|| {
-			let _ = do_mul_affine_g1_bls12_377();
-		});
-	});
 	group.bench_function("mul_affine_g1_bls12_377", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_g1_bls12_377_optimized();
+		});
+	});
+	group.bench_function("mul_affine_g1_bls12_377_optimized", |b| {
+		b.iter(|| {
+			let _ = do_mul_affine_g1_bls12_377();
 		});
 	});
 	group.finish();
@@ -234,14 +234,14 @@ pub fn do_mul_projective_g2_bls12_377_optimized() -> Result<(), Error> {
 
 pub fn bench_mul_affine_g2_bls12_377(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_affine_g2_bls12_377");
-	group.bench_function("mul_affine_g2_bls12_377_optimized", |b| {
-		b.iter(|| {
-			let _ = do_mul_affine_g2_bls12_377();
-		});
-	});
 	group.bench_function("mul_affine_g2_bls12_377", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_g2_bls12_377_optimized();
+		});
+	});
+	group.bench_function("mul_affine_g2_bls12_377_optimized", |b| {
+		b.iter(|| {
+			let _ = do_mul_affine_g2_bls12_377();
 		});
 	});
 	group.finish();

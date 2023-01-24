@@ -27,15 +27,15 @@ impl EdwardBls12_381HostFunctions for HostEdOnBls12_381 {
 }
 
 pub fn bench_msm_ed_on_bls12_381(c: &mut Criterion) {
-	let mut group = c.benchmark_group("pairing_arkworks_bls12_381");
-	group.bench_function("msm_ed_on_bls12_381_optimized", |b| {
-		b.iter(|| {
-			let _ = do_msm_ed_on_bls12_381_optimized();
-		});
-	});
+	let mut group = c.benchmark_group("msm_ed_on_bls12_381");
 	group.bench_function("msm_ed_on_bls12_381", |b| {
 		b.iter(|| {
 			let _ = do_msm_ed_on_bls12_381();
+		});
+	});
+	group.bench_function("msm_ed_on_bls12_381_optimized", |b| {
+		b.iter(|| {
+			let _ = do_msm_ed_on_bls12_381_optimized();
 		});
 	});
 	group.finish();
@@ -62,15 +62,15 @@ fn do_msm_ed_on_bls12_381() -> Result<(), Error> {
 }
 
 pub fn bench_mul_affine_ed_on_bls12_381(c: &mut Criterion) {
-	let mut group = c.benchmark_group("pairing_arkworks_bls12_381");
-	group.bench_function("mul_affine_ed_on_bls12_381_optimized", |b| {
-		b.iter(|| {
-			let _ = do_mul_affine_ed_on_bls12_381_optimized();
-		});
-	});
+	let mut group = c.benchmark_group("mul_affine_ed_on_bls12_381");
 	group.bench_function("mul_affine_ed_on_bls12_381", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_ed_on_bls12_381();
+		});
+	});
+	group.bench_function("mul_affine_ed_on_bls12_381_optimized", |b| {
+		b.iter(|| {
+			let _ = do_mul_affine_ed_on_bls12_381_optimized();
 		});
 	});
 	group.finish();
@@ -94,15 +94,15 @@ fn do_mul_affine_ed_on_bls12_381() -> Result<(), Error> {
 }
 
 pub fn bench_mul_projective_ed_on_bls12_381(c: &mut Criterion) {
-	let mut group = c.benchmark_group("pairing_arkworks_bls12_381");
-	group.bench_function("mul_projective_ed_on_bls12_381_optimized", |b| {
-		b.iter(|| {
-			let _ = do_mul_projective_ed_on_bls12_381_optimized();
-		});
-	});
+	let mut group = c.benchmark_group("mul_projective_ed_on_bls12_381");
 	group.bench_function("mul_projective_ed_on_bls12_381", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_ed_on_bls12_381();
+		});
+	});
+	group.bench_function("mul_projective_ed_on_bls12_381_optimized", |b| {
+		b.iter(|| {
+			let _ = do_mul_projective_ed_on_bls12_381_optimized();
 		});
 	});
 	group.finish();
