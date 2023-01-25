@@ -118,22 +118,29 @@ jobs:
         with:
           tool: protoc
 
-      - name: Install cargo-criterion
-        run: cargo install cargo-criterion
-
-      - name: Install criterion-table
-        run: cargo install criterion-table
-
-      - name: mkdir bench-results
-        run: mkdir bench-results
+      - name: mkdir benchmark-results
+        run: mkdir benchmark-results
       
       - name: Run benchmark
-        run: cargo criterion --bench arkworks --message-format json | criterion-table > bench-results/BENCHMARKS.md
+        run: cargo +nightly build --profile release --features runtime-benchmarks
+
+      - name: Run benchmarks
+        run: |
+          ./target/release/substrate benchmark \
+          --chain dev \ 
+          --execution=wasm \ 
+          --wasm-execution=compiled \ 
+          --pallet balances \ 
+          --extrinsic transfer \ 
+          --steps 50 \ 
+          --repeat 20 \ 
+          --json \ 
+          > benchmark-results/results.json
 
       - name: Publish Benchmark results on GitHub Pages
         uses: ftnext/action-push-ghpages@v1.0.0
         with:
-          build_dir: bench-results
+          build_dir: benchmark-results
           github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
      
