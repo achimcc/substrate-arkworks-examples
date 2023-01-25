@@ -127,15 +127,14 @@ jobs:
       - name: Run benchmarks
         run: |
           ./target/release/node-template benchmark pallet \
-          --chain dev \ 
-          --execution=wasm \ 
-          --wasm-execution=compiled \ 
-          --pallet balances \ 
-          --extrinsic transfer \ 
-          --steps 50 \ 
-          --repeat 20 \ 
-          --json \ 
-          > results.json
+              --chain dev \
+              --execution=wasm \
+              --wasm-execution=compiled \
+              --pallet pallet-template \
+              --extrinsic "*" \
+              --steps 50 \
+              --repeat 20 \
+              > results.json
 
       - name: install jq
         run: sudo apt-get install jq 
@@ -145,7 +144,7 @@ jobs:
           jq '.[] | select(.time_results>=0) | \
           [ .benchmark, ([.time_results[0].extrinsic_time] \
           | add / length | tonumber) ]  \
-          | @csv' \ results.json \
+          | @csv' results.json \
           >  results.csv
 
       - name: mkdir benchmark-results
