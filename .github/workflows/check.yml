@@ -141,10 +141,10 @@ jobs:
 
       - name: Generate csv file
         run: |
-          jq '.[] | select(.time_results>=0) | \
+          jq ".[] | select(.time_results>=0) | \
           [ .benchmark, ([.time_results[0].extrinsic_time] \
           | add / length | tonumber) ]  \
-          | @csv' results.json \
+          | @csv" results.json \
           >  results.csv
 
       - name: mkdir benchmark-results
