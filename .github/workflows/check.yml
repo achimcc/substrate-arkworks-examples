@@ -116,10 +116,7 @@ jobs:
       - name: Install protoc
         uses: taiki-e/install-action@v1
         with:
-          tool: protoc
-
-      - name: mkdir benchmark-results
-        run: mkdir benchmark-results  
+          tool: protoc  
       
       - name: Build benchmarks
         run: |
@@ -129,7 +126,7 @@ jobs:
 
       - name: Run benchmarks
         run: |
-          ./target/release/node-template benchmark \
+          ./target/release/node-template benchmark pallet \
           --chain dev \ 
           --execution=wasm \ 
           --wasm-execution=compiled \ 
@@ -150,6 +147,9 @@ jobs:
           | add / length | tonumber) ]  \
           | @csv' \ results.json \
           >  results.csv
+
+      - name: mkdir benchmark-results
+        run: mkdir benchmark-results
 
       - name: Set Node.js 16.x
         uses: actions/setup-node@v3
