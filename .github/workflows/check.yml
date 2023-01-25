@@ -140,7 +140,7 @@ jobs:
       - name: install jq
         run: sudo apt-get install jq 
 
-      -name: Generate markdown table
+      - name: Generate markdown table
         run: |
           jq '.[] | select(.time_results>=0) | \
           [ .benchmark, ([.time_results[0].extrinsic_time] \
