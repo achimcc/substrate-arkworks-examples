@@ -69,7 +69,7 @@ fn msm_g2_bls12_377_optimized() {
 fn mul_affine_g1_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::bls12_377mul_affine_g1(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::bls12_377_mul_affine_g1(RuntimeOrigin::signed(1)));
 	});
 }
 #[test]
@@ -153,7 +153,7 @@ fn msm_ed_on_bls12_377_optimized() {
 fn mul_affine_ed_on_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::ed_on_bls12_377mul_affine(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::ed_on_bls12_377_mul_affine(RuntimeOrigin::signed(1)));
 	});
 }
 #[test]
@@ -223,7 +223,7 @@ fn msm_g2_bls12_381() {
 fn mul_affine_g1_bls12_381() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
-		assert_ok!(TemplateModule::_bls12_381_mul_affine_g(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::bls12_381_mul_affine_g(RuntimeOrigin::signed(1)));
 	});
 }
 
