@@ -129,7 +129,7 @@ jobs:
 
       - name: Run benchmarks
         run: |
-          ./target/release/substrate benchmark \
+          ./target/release/node-template benchmark \
           --chain dev \ 
           --execution=wasm \ 
           --wasm-execution=compiled \ 

@@ -270,7 +270,7 @@ pub mod pallet {
 	impl<T: Config> Pallet<T> {
 		#[pallet::call_index(0)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn verify_groth16(origin: OriginFor<T>) -> DispatchResult {
+		pub fn groth16_verify(origin: OriginFor<T>) -> DispatchResult {
 			let who = ensure_signed(origin).unwrap();
 
 			let vk = <Groth16<Bls12_381> as SNARK<BlsFr>>::VerifyingKey::deserialize_with_mode(
@@ -299,7 +299,7 @@ pub mod pallet {
 
 		#[pallet::call_index(1)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn verify_groth16_optimized(origin: OriginFor<T>) -> DispatchResult {
+		pub fn groth16_verify_optimized(origin: OriginFor<T>) -> DispatchResult {
 			let who = ensure_signed(origin).unwrap();
 
 			let vk = <Groth16<Bls12_381Optimized> as SNARK<BlsFrOptimized>>::VerifyingKey::deserialize_with_mode(
@@ -328,7 +328,7 @@ pub mod pallet {
 
 		#[pallet::call_index(2)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn pairing_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_381_pairing(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = ark_bls12_381::Bls12_381::multi_pairing(
 				[ark_bls12_381::G1Affine::generator()],
 				[ark_bls12_381::G2Affine::generator()],
@@ -338,7 +338,7 @@ pub mod pallet {
 
 		#[pallet::call_index(3)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn pairing_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_381_pairing_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = Bls12_381Optimized::multi_pairing(
 				[G1AffineBls12_381::generator()],
 				[G2AffineBls12_381::generator()],
@@ -348,7 +348,7 @@ pub mod pallet {
 
 		#[pallet::call_index(4)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_g1_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_381_msm_g1(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
 			let scalar = ark_bls12_381::Fr::rand(&mut rng);
 			let _out = <ark_bls12_381::g1::Config as SWCurveConfig>::msm(
@@ -360,7 +360,7 @@ pub mod pallet {
 
 		#[pallet::call_index(5)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_g1_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_381_msm_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
 			let scalar = sp_ark_bls12_381::Fr::rand(&mut rng);
 			let _out = <sp_ark_bls12_381::g1::Config<HostBls12_381> as SWCurveConfig>::msm(
@@ -372,7 +372,7 @@ pub mod pallet {
 
 		#[pallet::call_index(6)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_g2_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_381_msm_g2(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
 			let scalar = ark_bls12_381::Fr::rand(&mut rng);
 			let _out = <ark_bls12_381::g2::Config as SWCurveConfig>::msm(
@@ -384,7 +384,7 @@ pub mod pallet {
 
 		#[pallet::call_index(7)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_g2_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_381_msm_g2_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
 			let scalar = sp_ark_bls12_381::Fr::rand(&mut rng);
 			let _out = <sp_ark_bls12_381::g2::Config<HostBls12_381> as SWCurveConfig>::msm(
@@ -396,7 +396,7 @@ pub mod pallet {
 
 		#[pallet::call_index(8)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_g1_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_381_mul_projective_g1(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_381::g1::Config as SWCurveConfig>::mul_projective(
 				&ark_bls12_381::G1Projective::generator(),
 				&[2u64],
@@ -406,7 +406,7 @@ pub mod pallet {
 
 		#[pallet::call_index(9)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_g1_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_381_mul_projective_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out =
 				<sp_ark_bls12_381::g1::Config<HostBls12_381> as SWCurveConfig>::mul_projective(
 					&G1ProjectiveBls12_381::generator(),
@@ -417,7 +417,7 @@ pub mod pallet {
 
 		#[pallet::call_index(10)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_g1_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_381_mul_affine_g1(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_381::g1::Config as SWCurveConfig>::mul_affine(
 				&ark_bls12_381::G1Affine::generator(),
 				&[2u64],
@@ -427,7 +427,7 @@ pub mod pallet {
 
 		#[pallet::call_index(11)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_g1_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_381_mul_affine_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <sp_ark_bls12_381::g1::Config<HostBls12_381> as SWCurveConfig>::mul_affine(
 				&G1AffineBls12_381::generator(),
 				&[2u64],
@@ -437,7 +437,7 @@ pub mod pallet {
 
 		#[pallet::call_index(12)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_g2_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_381_mul_projective_g2(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_381::g2::Config as SWCurveConfig>::mul_projective(
 				&ark_bls12_381::G2Projective::generator(),
 				&[2u64],
@@ -447,7 +447,7 @@ pub mod pallet {
 
 		#[pallet::call_index(13)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_g2_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_381_mul_projective_g2_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out =
 				<sp_ark_bls12_381::g2::Config<HostBls12_381> as SWCurveConfig>::mul_projective(
 					&G2ProjectiveBls12_381::generator(),
@@ -458,7 +458,7 @@ pub mod pallet {
 
 		#[pallet::call_index(14)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_g2_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_381_mul_affine_g2(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_381::g2::Config as SWCurveConfig>::mul_affine(
 				&ark_bls12_381::G2Affine::generator(),
 				&[2u64],
@@ -468,7 +468,7 @@ pub mod pallet {
 
 		#[pallet::call_index(15)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_g2_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_381_mul_affine_g2_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <sp_ark_bls12_381::g2::Config<HostBls12_381> as SWCurveConfig>::mul_affine(
 				&G2AffineBls12_381::generator(),
 				&[2u64],
@@ -478,7 +478,7 @@ pub mod pallet {
 
 		#[pallet::call_index(16)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn pairing_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_377_pairing(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = ark_bls12_377::Bls12_377::multi_pairing(
 				[ark_bls12_377::G1Affine::generator()],
 				[ark_bls12_377::G2Affine::generator()],
@@ -488,7 +488,7 @@ pub mod pallet {
 
 		#[pallet::call_index(17)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn pairing_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_377_pairing_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = Bls12_377Optimized::multi_pairing(
 				[G1AffineBls12_377::generator()],
 				[G2AffineBls12_377::generator()],
@@ -498,7 +498,7 @@ pub mod pallet {
 
 		#[pallet::call_index(18)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_g1_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_377_msm_g1(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
 			let scalar = ark_bls12_377::Fr::rand(&mut rng);
 			let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::msm(
@@ -510,7 +510,7 @@ pub mod pallet {
 
 		#[pallet::call_index(19)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_g1_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_377_msm_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
 			let scalar = sp_ark_bls12_377::Fr::rand(&mut rng);
 			let _out = <sp_ark_bls12_377::g1::Config<HostBls12_377> as SWCurveConfig>::msm(
@@ -522,7 +522,7 @@ pub mod pallet {
 
 		#[pallet::call_index(20)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_g2_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_377_msm_g2(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_377::g2::Config as SWCurveConfig>::msm(
 				&[ark_bls12_377::G2Affine::generator()],
 				&[2u64.into()],
@@ -532,7 +532,7 @@ pub mod pallet {
 
 		#[pallet::call_index(21)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_g2_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_377_msm_g2_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <sp_ark_bw6_761::g2::Config<HostBW6_761> as SWCurveConfig>::msm(
 				&[G2AffineBW6_761::generator()],
 				&[2u64.into()],
@@ -542,7 +542,7 @@ pub mod pallet {
 
 		#[pallet::call_index(22)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_g1_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_377_mul_projective_g1(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::mul_projective(
 				&ark_bls12_377::G1Projective::generator(),
 				&[2u64],
@@ -552,7 +552,7 @@ pub mod pallet {
 
 		#[pallet::call_index(23)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_g1_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_377_mul_projective_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out =
 				<sp_ark_bls12_377::g1::Config<HostBls12_377> as SWCurveConfig>::mul_projective(
 					&G1ProjectiveBls12_377::generator(),
@@ -563,7 +563,7 @@ pub mod pallet {
 
 		#[pallet::call_index(24)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_g1_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_377_mul_affine_g1(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::mul_affine(
 				&ark_bls12_377::G1Affine::generator(),
 				&[2u64],
@@ -573,7 +573,7 @@ pub mod pallet {
 
 		#[pallet::call_index(25)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_g1_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_377_mul_affine_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <sp_ark_bls12_377::g1::Config<HostBls12_377> as SWCurveConfig>::mul_affine(
 				&G1AffineBls12_377::generator(),
 				&[2u64],
@@ -583,7 +583,7 @@ pub mod pallet {
 
 		#[pallet::call_index(26)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_g2_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_377_mul_projective_g2(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_377::g2::Config as SWCurveConfig>::mul_projective(
 				&ark_bls12_377::G2Projective::generator(),
 				&[2u64],
@@ -593,7 +593,7 @@ pub mod pallet {
 
 		#[pallet::call_index(27)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_g2_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_377_mul_projective_g2_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out =
 				<sp_ark_bls12_377::g2::Config<HostBls12_377> as SWCurveConfig>::mul_projective(
 					&G2ProjectiveBls12_377::generator(),
@@ -604,7 +604,7 @@ pub mod pallet {
 
 		#[pallet::call_index(28)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_g2_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_377mul_affine_g2(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bls12_377::g2::Config as SWCurveConfig>::mul_affine(
 				&ark_bls12_377::G2Affine::generator(),
 				&[2u64],
@@ -614,7 +614,7 @@ pub mod pallet {
 
 		#[pallet::call_index(29)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_g2_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bls12_377_mul_affine_g2_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <sp_ark_bls12_377::g2::Config<HostBls12_377> as SWCurveConfig>::mul_affine(
 				&G2AffineBls12_377::generator(),
 				&[2u64],
@@ -624,7 +624,7 @@ pub mod pallet {
 
 		#[pallet::call_index(30)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn pairing_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bw6_761_pairing(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = ark_bw6_761::BW6_761::multi_pairing(
 				[ark_bw6_761::G1Affine::generator()],
 				[ark_bw6_761::G2Affine::generator()],
@@ -634,7 +634,7 @@ pub mod pallet {
 
 		#[pallet::call_index(31)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn pairing_bw6_761_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bw6_761_pairing_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = BW6_761Optimized::multi_pairing(
 				[G1AffineBW6_761::generator()],
 				[G2AffineBW6_761::generator()],
@@ -644,7 +644,7 @@ pub mod pallet {
 
 		#[pallet::call_index(32)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_g1_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bw6_761_msm_g1(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bw6_761::g1::Config as SWCurveConfig>::msm(
 				&[ark_bw6_761::G1Affine::generator()],
 				&[2u64.into()],
@@ -655,7 +655,7 @@ pub mod pallet {
 
 		#[pallet::call_index(33)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_g1_bw6_761_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bw6_761_msm_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <sp_ark_bw6_761::g1::Config<HostBW6_761> as SWCurveConfig>::msm(
 				&[G1AffineBW6_761::generator()],
 				&[2u64.into()],
@@ -665,7 +665,7 @@ pub mod pallet {
 
 		#[pallet::call_index(34)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_g2_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bw6_761_msm_g2(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bw6_761::g2::Config as SWCurveConfig>::msm(
 				&[ark_bw6_761::G2Affine::generator()],
 				&[2u64.into()],
@@ -676,7 +676,7 @@ pub mod pallet {
 
 		#[pallet::call_index(35)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_g2_bw6_761_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bw6_761_msm_g2_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <sp_ark_bw6_761::g2::Config<HostBW6_761> as SWCurveConfig>::msm(
 				&[G2AffineBW6_761::generator()],
 				&[2u64.into()],
@@ -687,7 +687,7 @@ pub mod pallet {
 
 		#[pallet::call_index(36)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_g1_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bw6_761_mul_projective_g1(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bw6_761::g1::Config as SWCurveConfig>::mul_projective(
 				&ark_bw6_761::G1Projective::generator(),
 				&[2u64],
@@ -697,7 +697,7 @@ pub mod pallet {
 
 		#[pallet::call_index(37)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_g1_bw6_761_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bw6_761mul_projective_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <sp_ark_bw6_761::g1::Config<HostBW6_761> as SWCurveConfig>::mul_projective(
 				&G1ProjectiveBW6_761::generator(),
 				&[2u64],
@@ -707,7 +707,7 @@ pub mod pallet {
 
 		#[pallet::call_index(38)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_g1_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bw6_761mul_affine_g1(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bw6_761::g1::Config as SWCurveConfig>::mul_affine(
 				&ark_bw6_761::G1Affine::generator(),
 				&[2u64],
@@ -717,7 +717,7 @@ pub mod pallet {
 
 		#[pallet::call_index(39)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_g1_bw6_761_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bw6_761_mul_affine_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <sp_ark_bw6_761::g1::Config<HostBW6_761> as SWCurveConfig>::mul_affine(
 				&G1AffineBW6_761::generator(),
 				&[2u64],
@@ -727,7 +727,7 @@ pub mod pallet {
 
 		#[pallet::call_index(40)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_g2_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bw6_761_mul_projective_g2(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bw6_761::g2::Config as SWCurveConfig>::mul_projective(
 				&ark_bw6_761::G2Projective::generator(),
 				&[2u64],
@@ -737,7 +737,7 @@ pub mod pallet {
 
 		#[pallet::call_index(41)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_g2_bw6_761_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bw6_761_mul_projective_g2_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <sp_ark_bw6_761::g2::Config<HostBW6_761> as SWCurveConfig>::mul_projective(
 				&G2ProjectiveBW6_761::generator(),
 				&[2u64],
@@ -747,7 +747,7 @@ pub mod pallet {
 
 		#[pallet::call_index(42)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_g2_bw6_761(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bw6_761_mul_affine_g2(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_bw6_761::g2::Config as SWCurveConfig>::mul_affine(
 				&ark_bw6_761::G2Affine::generator(),
 				&[2u64],
@@ -757,7 +757,7 @@ pub mod pallet {
 
 		#[pallet::call_index(43)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_g2_bw6_761_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn bw6_761_mul_affine_g2_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <sp_ark_bw6_761::g2::Config<HostBW6_761> as SWCurveConfig>::mul_affine(
 				&G2AffineBW6_761::generator(),
 				&[2u64],
@@ -767,7 +767,7 @@ pub mod pallet {
 
 		#[pallet::call_index(44)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_ed_on_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn on_bls12_381_msm_ed(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
 			let scalar = ark_ed_on_bls12_381::Fr::rand(&mut rng);
 			let _out = <ark_ed_on_bls12_381::EdwardsConfig as SWCurveConfig>::msm(
@@ -779,7 +779,7 @@ pub mod pallet {
 
 		#[pallet::call_index(45)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_ed_on_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn ed_on_bls12_381_msm_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
 			let scalar = sp_ark_ed_on_bls12_381::Fr::rand(&mut rng);
 			let _out =
@@ -792,7 +792,7 @@ pub mod pallet {
 
 		#[pallet::call_index(46)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_ed_on_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn ed_on_bls12_381_mul_projective(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_ed_on_bls12_381::EdwardsConfig as SWCurveConfig>::mul_projective(
 				&ark_ed_on_bls12_381::SWProjective::generator(),
 				&[2u64],
@@ -802,7 +802,7 @@ pub mod pallet {
 
 		#[pallet::call_index(47)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_ed_on_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn ed_on_bls12_381_mul_projective_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out =
 				<sp_ark_ed_on_bls12_381::EdwardsConfig::<HostEdOnBls12_381> as SWCurveConfig>::mul_projective(
 					&sp_ark_ed_on_bls12_381::SWProjective::<HostEdOnBls12_381>::generator(),
@@ -813,7 +813,7 @@ pub mod pallet {
 
 		#[pallet::call_index(48)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_ed_on_bls12_381(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn ed_on_bls12_381_mul_affine(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_ed_on_bls12_381::EdwardsConfig as SWCurveConfig>::mul_affine(
 				&ark_ed_on_bls12_381::SWAffine::generator(),
 				&[2u64],
@@ -823,7 +823,7 @@ pub mod pallet {
 
 		#[pallet::call_index(49)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_ed_on_bls12_381_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn ed_on_bls12_381_mul_affine_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out =
 				<sp_ark_ed_on_bls12_381::EdwardsConfig::<HostEdOnBls12_381> as SWCurveConfig>::mul_affine(
 					&sp_ark_ed_on_bls12_381::SWAffine::<HostEdOnBls12_381>::generator(),
@@ -834,7 +834,7 @@ pub mod pallet {
 
 		#[pallet::call_index(50)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_ed_on_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn ed_on_bls12_377_msm(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
 			let scalar = ark_ed_on_bls12_377::Fr::rand(&mut rng);
 			let _out = <ark_ed_on_bls12_377::EdwardsConfig as ark_ec::models::twisted_edwards::TECurveConfig>::msm(
@@ -846,7 +846,7 @@ pub mod pallet {
 
 		#[pallet::call_index(51)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn msm_ed_on_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn ed_on_bls12_377_msm_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let mut rng = test_rng();
 			let scalar = sp_ark_ed_on_bls12_377::Fr::rand(&mut rng);
 			let _out =
@@ -859,7 +859,7 @@ pub mod pallet {
 
 		#[pallet::call_index(52)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_ed_on_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn ed_on_bls12_377_mul_projective(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_ed_on_bls12_377::EdwardsConfig as TECurveConfig>::mul_projective(
 				&ark_ed_on_bls12_377::EdwardsProjective::generator(),
 				&[2u64],
@@ -869,7 +869,7 @@ pub mod pallet {
 
 		#[pallet::call_index(53)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_projective_ed_on_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn ed_on_bls12_377_mul_projective_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out =
 				<sp_ark_ed_on_bls12_377::EdwardsConfig::<HostEdOnBls12_377> as TECurveConfig>::mul_projective(
 					&sp_ark_ed_on_bls12_377::EdwardsProjective::<HostEdOnBls12_377>::generator(),
@@ -880,7 +880,7 @@ pub mod pallet {
 
 		#[pallet::call_index(54)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_ed_on_bls12_377(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn ed_on_bls12_377_mul_affine(_origin: OriginFor<T>) -> DispatchResult {
 			let _out = <ark_ed_on_bls12_377::EdwardsConfig as TECurveConfig>::mul_affine(
 				&ark_ed_on_bls12_377::EdwardsAffine::generator(),
 				&[2u64],
@@ -890,7 +890,7 @@ pub mod pallet {
 
 		#[pallet::call_index(55)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn mul_affine_ed_on_bls12_377_optimized(_origin: OriginFor<T>) -> DispatchResult {
+		pub fn ed_on_bls12_377_mul_affine_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _out =
 				<sp_ark_ed_on_bls12_377::EdwardsConfig::<HostEdOnBls12_377> as TECurveConfig>::mul_affine(
 					&sp_ark_ed_on_bls12_377::EdwardsAffine::<HostEdOnBls12_377>::generator(),
