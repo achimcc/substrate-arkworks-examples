@@ -20,7 +20,7 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	bls12_381_pairing__optimized {
+	bls12_381_pairing_optimized {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
@@ -28,11 +28,11 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	bls12_381_msm_g1_boptimized {
+	bls12_381_msm_g1_optimized {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	bls12_381_msm_g2_ {
+	bls12_381_msm_g2 {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
@@ -52,7 +52,7 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	bls12_381_optimized_mul_affine_g1 {
+	bls12_381_mul_affine_g1_optimized {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
@@ -93,10 +93,6 @@ benchmarks! {
 	}: _(RawOrigin::Signed(caller))
 
 	bls12_377_msm_g2_optimized {
-		let caller: T::AccountId = whitelisted_caller();
-	}: _(RawOrigin::Signed(caller))
-
-	g1_bls12_377_mul_projective {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
@@ -188,15 +184,15 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	bls12_381_msm_ed_on {
+	ed_on_bls12_381_msm {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	bls12_381_msm_ed_on_optimized {
+	ed_on_bls12_381_msm_optimized {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	ed_on_bls12_381_mul_projective_ {
+	ed_on_bls12_381_mul_projective {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
@@ -204,7 +200,7 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	on_bls12_381_mul_affine_ed {
+	ed_on_bls12_381_mul_affine {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
@@ -228,7 +224,7 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	ed_on_bls12_377_mul_affine_ {
+	ed_on_bls12_377_mul_affine {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
