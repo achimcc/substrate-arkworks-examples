@@ -141,9 +141,8 @@ jobs:
 
       - name: Generate csv file
         run: |
-          jq -r "["benchmark","time"] (.[] | select(.time_results>=0) \
-          | [ .benchmark, ([.time_results[0].extrinsic_time] | add / length | tonumber) ]) \
-           | @csv" results.json  > results.csv
+          jq -r "[\"time\", \"benchmark\"], (.[] | [ .benchmark, ([.time_results[]?.extrinsic_time] | add / length | tonumber) ]) | @csv" results.json  \
+          > results.csv
       - name: mkdir benchmark-results
         run: mkdir benchmark-results
 
@@ -151,6 +150,10 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
+
+      - name: Install csv-to-markdown
+        run: |
+          sudo npm install --global csv-to-markdown
 
       - name: Convert csv file to Markdown 
         run: |
