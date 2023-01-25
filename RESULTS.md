@@ -1,0 +1,65 @@
+➤ YN0000: ┌ Resolution step
+➤ YN0000: └ Completed in 3s 204ms
+➤ YN0000: ┌ Fetch step
+➤ YN0000: └ Completed
+➤ YN0000: ┌ Link step
+➤ YN0000: └ Completed
+➤ YN0000: Done in 3s 427ms
+
+| verify_groth16                           | 46251926 |
+| ---------------------------------------- | -------- |
+| verify_groth16_optimized                 | 12807028 |
+| pairing_bls12_381                        | 13219547 |
+| pairing_bls12_381_optimized              | 2885414  |
+| msm_g1_bls12_381                         | 3716107  |
+| msm_g1_bls12_381_optimized               | 904449   |
+| msm_g2_bls12_381                         | 9423486  |
+| msm_g2_bls12_381_optimized               | 3036569  |
+| mul_projective_g1_bls12_381              | 21556    |
+| mul_projective_g1_bls12_381_optimized    | 450763   |
+| mul_affine_g1_bls12_381                  | 21591    |
+| mul_affine_g1_bls12_381_optimized        | 530003   |
+| mul_projective_g2_bls12_381              | 35556    |
+| mul_projective_g2_bls12_381_optimized    | 1832562  |
+| mul_affine_g2_bls12_381                  | 38002    |
+| mul_affine_g2_bls12_381_optimized        | 1464269  |
+| pairing_bls12_377                        | 14405556 |
+| pairing_bls12_377_optimized              | 2995676  |
+| msm_g1_bls12_377                         | 3847962  |
+| msm_g1_bls12_377_optimized               | 1218219  |
+| msm_g2_bls12_377                         | 761019   |
+| msm_g2_bls12_377_optimized               | 3833148  |
+| mul_projective_g1_bls12_377              | 24351    |
+| mul_projective_g1_bls12_377_optimized    | 824859   |
+| mul_affine_g1_bls12_377                  | 24170    |
+| mul_affine_g1_bls12_377_optimized        | 882050   |
+| mul_projective_g2_bls12_377              | 33669    |
+| mul_projective_g2_bls12_377_optimized    | 2399869  |
+| mul_affine_g2_bls12_377                  | 32786    |
+| mul_affine_g2_bls12_377_optimized        | 2384311  |
+| pairing_bw6_761                          | 67373538 |
+| pairing_bw6_761_optimized                | 11632467 |
+| msm_g1_bw6_761                           | 978494   |
+| msm_g1_bw6_761_optimized                 | 3639485  |
+| msm_g2_bw6_761                           | 995357   |
+| msm_g2_bw6_761_optimized                 | 3391775  |
+| mul_projective_g1_bw6_761_optimized      | 3362400  |
+| mul_projective_g1_bw6_761                | 39868    |
+| mul_affine_g1_bw6_761                    | 42210    |
+| mul_affine_g1_bw6_761_optimized          | 3552913  |
+| mul_projective_g2_bw6_761                | 46125    |
+| mul_projective_g2_bw6_761_optimized      | 3488518  |
+| mul_affine_g2_bw6_761                    | 79788    |
+| mul_affine_g2_bw6_761_optimized          | 3502107  |
+| msm_ed_on_bls12_381                      | 1900359  |
+| msm_ed_on_bls12_381_optimized            | 524757   |
+| mul_projective_ed_on_bls12_381           | 19531    |
+| mul_projective_ed_on_bls12_381_optimized | 273686   |
+| mul_affine_ed_on_bls12_381               | 22939    |
+| mul_affine_ed_on_bls12_381_optimized     | 242693   |
+| msm_ed_on_bls12_377                      | 6265232  |
+| msm_ed_on_bls12_377_optimized            | 1004785  |
+| mul_projective_ed_on_bls12_377           | 26655    |
+| mul_projective_ed_on_bls12_377_optimized | 316343   |
+| mul_affine_ed_on_bls12_377               | 24918    |
+| mul_affine_ed_on_bls12_377_optimized     | 318293   |

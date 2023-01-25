@@ -141,8 +141,8 @@ jobs:
 
       - name: Generate csv file
         run: |
-          jq -r ".[] | select(.time_results>=0) \
-          | [ .benchmark, ([.time_results[0].extrinsic_time] | add / length | tonumber) ] \
+          jq -r "["benchmark","time"] (.[] | select(.time_results>=0) \
+          | [ .benchmark, ([.time_results[0].extrinsic_time] | add / length | tonumber) ]) \
            | @csv" results.json  > results.csv
       - name: mkdir benchmark-results
         run: mkdir benchmark-results
