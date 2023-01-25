@@ -212,7 +212,7 @@ fn mul_affine_g2_bls12_377_optimized() {
 	});
 }
 #[test]
-fn pairing_bw6_761_optimized() {
+fn pairing_bw6_761() {
 	new_test_ext().execute_with(|| {
 		// Dispatch a signed extrinsic.
 		assert_ok!(TemplateModule::bw6_761_pairing(RuntimeOrigin::signed(1)));
