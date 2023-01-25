@@ -140,7 +140,7 @@ jobs:
       - name: install jq
         run: sudo apt-get install jq 
 
-      - name: Generate markdown table
+      - name: Generate csv file
         run: |
           jq '.[] | select(.time_results>=0) | \
           [ .benchmark, ([.time_results[0].extrinsic_time] \
@@ -156,7 +156,7 @@ jobs:
         with:
           node-version: 16.x
 
-      - name: Convert to Markdown 
+      - name: Convert csv file to Markdown 
         run: |
           yarn dlx csv-to-markdown results.csv  \
           > benchmark-results/BENCHMARK.MD
