@@ -119,9 +119,9 @@ jobs:
           tool: protoc
 
       - name: mkdir benchmark-results
-        run: mkdir benchmark-results
+        run: mkdir benchmark-results  
       
-      - name: Run benchmark
+      - name: Build benchmarks
         run: cargo +nightly build --profile release --features runtime-benchmarks
 
       - name: Run benchmarks
@@ -135,7 +135,18 @@ jobs:
           --steps 50 \ 
           --repeat 20 \ 
           --json \ 
-          > benchmark-results/results.json
+          > results.json
+
+      - name: install jq
+        run: sudo apt-get install jq 
+
+      -name: Generate markdown table
+        run: |
+          jq '.[] | select(.time_results>=0) \
+           | [.benchmark, [[.time_results[0].extrinsic_time] \
+           | add /length ] ]'' \
+           results.json \
+           >  benchmark-results/BENCHMARK.MD  
 
       - name: Publish Benchmark results on GitHub Pages
         uses: ftnext/action-push-ghpages@v1.0.0
