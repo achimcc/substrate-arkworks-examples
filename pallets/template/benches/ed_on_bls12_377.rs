@@ -1,4 +1,4 @@
-use ark_std::{io::Error};
+use ark_std::io::Error;
 use criterion::Criterion;
 use sp_ark_ed_on_bls12_377::HostFunctions as EdwardBls12_377HostFunctions;
 use sp_ark_models::{AffineRepr, Group, TECurveConfig};

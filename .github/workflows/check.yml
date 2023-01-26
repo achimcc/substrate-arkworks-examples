@@ -208,11 +208,11 @@ criterion:
           | criterion-table \
           > bench-results/BENCHMARKS.md
 
-      - name: Publish Benchmark results on GitHub Pages
-        uses: ftnext/action-push-ghpages@v1.0.0
-        with:
-          build_dir: bench-results
-          github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
+      # - name: Publish Benchmark results on GitHub Pages
+      #   uses: ftnext/action-push-ghpages@v1.0.0
+      #   with:
+      #     build_dir: bench-results
+      #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
 
      
