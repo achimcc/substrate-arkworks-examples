@@ -203,10 +203,10 @@ jobs:
       
       - name: Run benchmark
         run: |
-          cargo criteion \
+          cargo criterion \
           --bench arkworks --message-format json \
           | criterion-table \
-          > criterion-results/BENCHMARKS.md
+          > criterion-results/BENCHMARKS-CRITERION.md
 
       - name: Publish Benchmark results on GitHub Pages
         uses: ftnext/action-push-ghpages@v1.0.0
