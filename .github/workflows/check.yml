@@ -175,7 +175,7 @@ jobs:
           build_dir: benchmark-results
           github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
-criterion:
+  criterion:
     runs-on: ubuntu-22.04
 
     steps:
