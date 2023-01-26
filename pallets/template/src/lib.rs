@@ -22,7 +22,7 @@ pub mod pallet {
 	use ark_groth16::Groth16;
 	use ark_serialize::{CanonicalDeserialize, Compress, Validate};
 	use ark_snark::SNARK;
-	use ark_std::{test_rng, vec, vec::Vec, UniformRand};
+	use ark_std::{vec, vec::Vec};
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
 	use sp_ark_bls12_377::{
@@ -349,11 +349,9 @@ pub mod pallet {
 		#[pallet::call_index(4)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g1(_origin: OriginFor<T>) -> DispatchResult {
-			let mut rng = test_rng();
-			let scalar = ark_bls12_381::Fr::rand(&mut rng);
 			let _out = <ark_bls12_381::g1::Config as SWCurveConfig>::msm(
 				&[ark_bls12_381::G1Affine::generator()],
-				&[scalar],
+				&[2u64.into()],
 			);
 			Ok(())
 		}
@@ -361,11 +359,9 @@ pub mod pallet {
 		#[pallet::call_index(5)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let mut rng = test_rng();
-			let scalar = sp_ark_bls12_381::Fr::rand(&mut rng);
 			let _out = <sp_ark_bls12_381::g1::Config<HostBls12_381> as SWCurveConfig>::msm(
 				&[G1AffineBls12_381::generator()],
-				&[scalar],
+				&[2u64.into()],
 			);
 			Ok(())
 		}
@@ -373,11 +369,9 @@ pub mod pallet {
 		#[pallet::call_index(6)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g2(_origin: OriginFor<T>) -> DispatchResult {
-			let mut rng = test_rng();
-			let scalar = ark_bls12_381::Fr::rand(&mut rng);
 			let _out = <ark_bls12_381::g2::Config as SWCurveConfig>::msm(
 				&[ark_bls12_381::G2Affine::generator()],
-				&[scalar],
+				&[2u64.into()],
 			);
 			Ok(())
 		}
@@ -385,11 +379,9 @@ pub mod pallet {
 		#[pallet::call_index(7)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g2_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let mut rng = test_rng();
-			let scalar = sp_ark_bls12_381::Fr::rand(&mut rng);
 			let _out = <sp_ark_bls12_381::g2::Config<HostBls12_381> as SWCurveConfig>::msm(
 				&[G2AffineBls12_381::generator()],
-				&[scalar],
+				&[2u64.into()],
 			);
 			Ok(())
 		}
@@ -499,11 +491,9 @@ pub mod pallet {
 		#[pallet::call_index(18)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g1(_origin: OriginFor<T>) -> DispatchResult {
-			let mut rng = test_rng();
-			let scalar = ark_bls12_377::Fr::rand(&mut rng);
 			let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::msm(
 				&[ark_bls12_377::G1Affine::generator()],
-				&[scalar],
+				&[2u64.into()],
 			);
 			Ok(())
 		}
@@ -511,11 +501,9 @@ pub mod pallet {
 		#[pallet::call_index(19)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let mut rng = test_rng();
-			let scalar = sp_ark_bls12_377::Fr::rand(&mut rng);
 			let _out = <sp_ark_bls12_377::g1::Config<HostBls12_377> as SWCurveConfig>::msm(
 				&[G1AffineBls12_377::generator()],
-				&[scalar],
+				&[2u64.into()],
 			);
 			Ok(())
 		}
@@ -768,11 +756,9 @@ pub mod pallet {
 		#[pallet::call_index(44)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_msm(_origin: OriginFor<T>) -> DispatchResult {
-			let mut rng = test_rng();
-			let scalar = ark_ed_on_bls12_381::Fr::rand(&mut rng);
 			let _out = <ark_ed_on_bls12_381::EdwardsConfig as SWCurveConfig>::msm(
 				&[ark_ed_on_bls12_381::SWAffine::generator()],
-				&[scalar],
+				&[2u64.into()],
 			);
 			Ok(())
 		}
@@ -780,12 +766,10 @@ pub mod pallet {
 		#[pallet::call_index(45)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_msm_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let mut rng = test_rng();
-			let scalar = sp_ark_ed_on_bls12_381::Fr::rand(&mut rng);
 			let _out =
 				<sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381> as SWCurveConfig>::msm(
 					&[sp_ark_ed_on_bls12_381::SWAffine::<HostEdOnBls12_381>::generator()],
-					&[scalar],
+					&[2u64.into()],
 				);
 			Ok(())
 		}
@@ -835,11 +819,9 @@ pub mod pallet {
 		#[pallet::call_index(50)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_msm(_origin: OriginFor<T>) -> DispatchResult {
-			let mut rng = test_rng();
-			let scalar = ark_ed_on_bls12_377::Fr::rand(&mut rng);
 			let _out = <ark_ed_on_bls12_377::EdwardsConfig as ark_ec::models::twisted_edwards::TECurveConfig>::msm(
 				&[ark_ed_on_bls12_377::EdwardsAffine::generator()],
-				&[scalar],
+				&[2u64.into()],
 			);
 			Ok(())
 		}
@@ -847,12 +829,10 @@ pub mod pallet {
 		#[pallet::call_index(51)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_msm_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let mut rng = test_rng();
-			let scalar = sp_ark_ed_on_bls12_377::Fr::rand(&mut rng);
 			let _out =
 				<sp_ark_ed_on_bls12_377::EdwardsConfig<HostEdOnBls12_377> as TECurveConfig>::msm(
 					&[sp_ark_ed_on_bls12_377::EdwardsAffine::<HostEdOnBls12_377>::generator()],
-					&[scalar],
+					&[2u64.into()],
 				);
 			Ok(())
 		}

@@ -1,0 +1,1456 @@
+Pallet: "pallet_template", Extrinsic: "groth16_verification", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    53240
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    53240
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "groth16_verification_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    16040
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    16040
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_381_pairing", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    13770
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    13770
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_381_pairing_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     2514
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     2514
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_381_msm_g1", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3585
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3585
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_381_msm_g1_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    928.2
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    928.2
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_381_msm_g2", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    10750
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    10750
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_381_msm_g2_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     2791
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     2791
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_381_mul_projective_g1", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    15.59
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    15.59
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_381_mul_projective_g1_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    443.8
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    443.8
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_381_mul_affine_g1", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    14.29
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    14.29
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_381_mul_affine_g1_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=      499
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=      499
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_381_mul_projective_g2", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    27.27
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    27.27
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_381_mul_projective_g2_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     1618
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     1618
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_381_mul_affine_g2", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    27.32
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    27.32
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_381_mul_affine_g2_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     1534
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     1534
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_377_pairing", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    17750
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    17750
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_377_pairing_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3174
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3174
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_377_msm_g1", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3925
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3925
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_377_msm_g1_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     1323
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     1323
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_377_msm_g2", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    861.9
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    861.9
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_377_msm_g2_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3662
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3662
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_377_mul_projective_g1", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    15.03
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    15.03
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_377_mul_projective_g1_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    862.8
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    862.8
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_377_mul_affine_g1", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    16.33
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    16.33
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_377_mul_affine_g1_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    845.2
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    845.2
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_377_mul_projective_g2", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    27.55
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    27.55
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_377_mul_projective_g2_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     2216
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     2216
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_377_mul_affine_g2", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    27.63
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    27.63
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bls12_377_mul_affine_g2_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     2243
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     2243
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bw6_761_pairing", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    71860
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    71860
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bw6_761_pairing_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     9321
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     9321
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bw6_761_msm_g1", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     1231
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     1231
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bw6_761_msm_g1_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3273
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3273
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bw6_761_msm_g2", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     1207
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     1207
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bw6_761_msm_g2_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3368
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3368
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bw6_761_mul_projective_g1", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     33.1
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     33.1
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bw6_761_mul_projective_g1_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3455
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3455
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bw6_761_mul_affine_g1", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     33.9
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     33.9
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bw6_761_mul_affine_g1_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3967
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3967
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bw6_761_mul_projective_g2", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    32.85
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    32.85
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bw6_761_mul_projective_g2_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3471
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3471
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bw6_761_mul_affine_g2", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    31.57
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    31.57
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "bw6_761_mul_affine_g2_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3235
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     3235
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "ed_on_bls12_381_msm", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     2034
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     2034
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "ed_on_bls12_381_msm_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    494.2
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    494.2
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "ed_on_bls12_381_mul_projective", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    16.16
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    16.16
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "ed_on_bls12_381_mul_projective_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    239.9
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    239.9
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "ed_on_bls12_381_mul_affine", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    13.34
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    13.34
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "ed_on_bls12_381_mul_affine_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    241.6
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    241.6
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "ed_on_bls12_377_msm", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     5362
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=     5362
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "ed_on_bls12_377_msm_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    922.6
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    922.6
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "ed_on_bls12_377_mul_projective", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    19.51
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    19.51
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "ed_on_bls12_377_mul_projective_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    280.7
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    280.7
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "ed_on_bls12_377_mul_affine", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    19.73
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    19.73
+              µs
+
+Reads = 0
+Writes = 0
+
+Pallet: "pallet_template", Extrinsic: "ed_on_bls12_377_mul_affine_optimized", Lowest values: [], Highest values: [], Steps: 50, Repeat: 20
+Raw Storage Info
+========
+
+Median Slopes Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    299.4
+              µs
+
+Reads = 0
+Writes = 0
+
+Min Squares Analysis
+========
+-- Extrinsic Time --
+
+Model:
+Time ~=    299.4
+              µs
+
+Reads = 0
+Writes = 0
+
