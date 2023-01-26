@@ -134,6 +134,7 @@ jobs:
               --extrinsic "*" \
               --steps 50 \
               --repeat 20 \
+              --json \
               > results.json
 
       - name: install jq
