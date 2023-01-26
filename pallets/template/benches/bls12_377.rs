@@ -1,4 +1,4 @@
-use ark_std::{io::Error, test_rng, UniformRand};
+use ark_std::io::Error;
 use criterion::Criterion;
 use sp_ark_bls12_377::{
 	Bls12_377 as Bls12_377_Host, G1Affine as G1AffineBls12_377_Host,
@@ -44,12 +44,12 @@ type G2ProjectiveBls12_377 = G2ProjectiveBls12_377_Host<HostBls12_377>;
 
 pub fn bench_pairing_bls12_377(c: &mut Criterion) {
 	let mut group = c.benchmark_group("pairing_bls12_377");
-	group.bench_function("pairing_bls12_377", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_pairing_bls12_377();
 		});
 	});
-	group.bench_function("pairing_=bls12_377_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_pairing_bls12_377_optimized();
 		});
@@ -75,12 +75,12 @@ pub fn do_pairing_bls12_377_optimized() -> Result<(), Error> {
 
 pub fn bench_msm_g1_bls12_377(c: &mut Criterion) {
 	let mut group = c.benchmark_group("pairing_msm_g1_bls12_377");
-	group.bench_function("pairing_msm_g1_bls12_377", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_msm_g1_bls12_377();
 		});
 	});
-	group.bench_function("pairing_msm_g1_bls12_377_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_msm_g1_bls12_377_optimized();
 		});
@@ -89,33 +89,29 @@ pub fn bench_msm_g1_bls12_377(c: &mut Criterion) {
 }
 
 pub fn do_msm_g1_bls12_377() -> Result<(), Error> {
-	let mut rng = test_rng();
-	let scalar = ark_bls12_377::Fr::rand(&mut rng);
 	let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::msm(
 		&[ark_bls12_377::G1Affine::generator()],
-		&[scalar],
+		&[2u64.into()],
 	);
 	Ok(())
 }
 
 pub fn do_msm_g1_bls12_377_optimized() -> Result<(), Error> {
-	let mut rng = test_rng();
-	let scalar = sp_ark_bls12_377::Fr::rand(&mut rng);
 	let _out = <sp_ark_bls12_377::g1::Config<HostBls12_377> as SWCurveConfig>::msm(
 		&[G1AffineBls12_377::generator()],
-		&[scalar],
+		&[2u64.into()],
 	);
 	Ok(())
 }
 
 pub fn bench_msm_g2_bls12_377(c: &mut Criterion) {
 	let mut group = c.benchmark_group("pairing_msm_g2_bls12_377");
-	group.bench_function("pairing_msm_g2_bls12_377", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_msm_g2_bls12_377();
 		});
 	});
-	group.bench_function("pairing_msm_g2_bls12_377_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_msm_g2_bls12_377_optimized();
 		});
@@ -141,12 +137,12 @@ pub fn do_msm_g2_bls12_377_optimized() -> Result<(), Error> {
 
 pub fn bench_mul_projective_g1_bls12_377(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_projective_g1_bls12_377");
-	group.bench_function("mul_projective_g1_bls12_377", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_g1_bls12_377();
 		});
 	});
-	group.bench_function("mul_projective_g1_bls12_377_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_g1_bls12_377_optimized();
 		})
@@ -172,12 +168,12 @@ pub fn do_mul_projective_g1_bls12_377_optimized() -> Result<(), Error> {
 
 pub fn bench_mul_affine_g1_bls12_377(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_affine_g1_bls12_377");
-	group.bench_function("mul_affine_g1_bls12_377", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_g1_bls12_377();
 		});
 	});
-	group.bench_function("mul_affine_g1_bls12_377_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_g1_bls12_377_optimized();
 		});
@@ -203,12 +199,12 @@ pub fn do_mul_affine_g1_bls12_377_optimized() -> Result<(), Error> {
 
 pub fn bench_mul_projective_g2_bls12_377(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_projective_g2_bls12_377");
-	group.bench_function("mul_projective_g2_bls12_377", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_g2_bls12_377();
 		});
 	});
-	group.bench_function("mul_projective_g2_bls12_377_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_g2_bls12_377_optimized();
 		});
@@ -234,12 +230,12 @@ pub fn do_mul_projective_g2_bls12_377_optimized() -> Result<(), Error> {
 
 pub fn bench_mul_affine_g2_bls12_377(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_affine_g2_bls12_377");
-	group.bench_function("mul_affine_g2_bls12_377", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_g2_bls12_377();
 		});
 	});
-	group.bench_function("mul_affine_g2_bls12_377_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_g2_bls12_377_optimized();
 		});

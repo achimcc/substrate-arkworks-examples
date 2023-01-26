@@ -1,4 +1,4 @@
-use ark_std::{io::Error, test_rng, UniformRand};
+use ark_std::io::Error;
 use criterion::Criterion;
 use sp_ark_ed_on_bls12_381::HostFunctions as EdwardBls12_381HostFunctions;
 use sp_ark_models::{short_weierstrass::SWCurveConfig, AffineRepr, Group};
@@ -28,12 +28,12 @@ impl EdwardBls12_381HostFunctions for HostEdOnBls12_381 {
 
 pub fn bench_msm_ed_on_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("msm_ed_on_bls12_381");
-	group.bench_function("msm_ed_on_bls12_381", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_msm_ed_on_bls12_381();
 		});
 	});
-	group.bench_function("msm_ed_on_bls12_381_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_msm_ed_on_bls12_381_optimized();
 		});
@@ -42,33 +42,29 @@ pub fn bench_msm_ed_on_bls12_381(c: &mut Criterion) {
 }
 
 fn do_msm_ed_on_bls12_381() -> Result<(), Error> {
-	let mut rng = test_rng();
-	let scalar = ark_ed_on_bls12_381::Fr::rand(&mut rng);
 	let _out = <ark_ed_on_bls12_381::EdwardsConfig as SWCurveConfig>::msm(
 		&[ark_ed_on_bls12_381::SWAffine::generator()],
-		&[scalar],
+		&[2u64.into()],
 	);
 	Ok(())
 }
 
 fn do_msm_ed_on_bls12_381_optimized() -> Result<(), Error> {
-	let mut rng = test_rng();
-	let scalar = sp_ark_ed_on_bls12_381::Fr::rand(&mut rng);
 	let _out = <sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381> as SWCurveConfig>::msm(
 		&[sp_ark_ed_on_bls12_381::SWAffine::<HostEdOnBls12_381>::generator()],
-		&[scalar],
+		&[2u64.into()],
 	);
 	Ok(())
 }
 
 pub fn bench_mul_affine_ed_on_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_affine_ed_on_bls12_381");
-	group.bench_function("mul_affine_ed_on_bls12_381", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_ed_on_bls12_381();
 		});
 	});
-	group.bench_function("mul_affine_ed_on_bls12_381_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_ed_on_bls12_381_optimized();
 		});
@@ -95,12 +91,12 @@ fn do_mul_affine_ed_on_bls12_381_optimized() -> Result<(), Error> {
 
 pub fn bench_mul_projective_ed_on_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_projective_ed_on_bls12_381");
-	group.bench_function("mul_projective_ed_on_bls12_381", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_ed_on_bls12_381();
 		});
 	});
-	group.bench_function("mul_projective_ed_on_bls12_381_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_ed_on_bls12_381_optimized();
 		});

@@ -166,7 +166,7 @@ jobs:
 
       - name: Convert csv file to Markdown 
         run: |
-          yarn dlx csv-to-markdown results.csv  \
+          csv-to-markdown results.csv  \
           > benchmark-results/BENCHMARK.MD
 
       - name: Publish Benchmark results on GitHub Pages
