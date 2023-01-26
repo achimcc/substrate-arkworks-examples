@@ -50,12 +50,12 @@ type G2ProjectiveBls12_381 = G2ProjectiveBls12_381_Host<HostBls12_381>;
 
 pub fn bench_pairing_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("pairing_bls12_381");
-	group.bench_function("pairing_bls12_381", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_pairing_bls12_381();
 		});
 	});
-	group.bench_function("pairing_bls12_381_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_pairing_bls12_381_optimized();
 		});
@@ -81,12 +81,12 @@ fn do_pairing_bls12_381() -> Result<(), Error> {
 
 pub fn bench_msm_g1_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("msm_g1_bls12_381");
-	group.bench_function("msm_g1_bls12_381", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_msm_g1_bls12_381();
 		});
 	});
-	group.bench_function("msm_g1_bls12_381_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_msm_g1_bls12_381_optimized();
 		});
@@ -112,12 +112,12 @@ fn do_msm_g1_bls12_381() -> Result<(), Error> {
 
 pub fn bench_msm_g2_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("msm_g2_bls12_381");
-	group.bench_function("msm_g2_bls12_381", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_msm_g2_bls12_381();
 		});
 	});
-	group.bench_function("msm_g2_bls12_381_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_msm_g2_bls12_381_optimized();
 		});
@@ -143,12 +143,12 @@ fn do_msm_g2_bls12_381_optimized() -> Result<(), Error> {
 
 pub fn bench_mul_affine_g1_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_affine_g1_bls12_381");
-	group.bench_function("mul_affine_g1_bls12_381", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_g1_bls12_381();
 		});
 	});
-	group.bench_function("mul_affine_g1_bls12_381_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_g1_bls12_381_optimized();
 		});
@@ -174,12 +174,12 @@ fn do_mul_affine_g1_bls12_381_optimized() -> Result<(), Error> {
 
 pub fn bench_mul_projective_g1_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_projective_g1_bls12_381");
-	group.bench_function("mul_projective_g1_bls12_381", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_g1_bls12_381();
 		});
 	});
-	group.bench_function("mul_projective_g1_bls12_381_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_g1_bls12_381_optimized();
 		});
@@ -205,12 +205,12 @@ fn do_mul_projective_g1_bls12_381_optimized() -> Result<(), Error> {
 
 pub fn bench_mul_affine_g2_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_affine_g2_bls12_381");
-	group.bench_function("mul_affine_g2_bls12_381", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_g2_bls12_381();
 		});
 	});
-	group.bench_function("mul_affine_g2_bls12_381_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_affine_g2_bls12_381_optimized();
 		});
@@ -236,12 +236,12 @@ fn do_mul_affine_g2_bls12_381_optimized() -> Result<(), Error> {
 
 pub fn bench_mul_projective_g2_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("mul_projective_g2_bls12_381");
-	group.bench_function("mul_projective_g2_bls12_381", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_g2_bls12_381();
 		});
 	});
-	group.bench_function("mul_projective_g2_bls12_381_optimized", |b| {
+	group.bench_function("optimized", |b| {
 		b.iter(|| {
 			let _ = do_mul_projective_g2_bls12_381_optimized();
 		});
@@ -309,14 +309,14 @@ const C_SERIALIZED: &[u8] = &[
 
 pub fn bench_groth16(c: &mut Criterion) {
 	let mut group = c.benchmark_group("groth16");
-	group.bench_function("verify_groth16_optimized", |b| {
-		b.iter(|| {
-			let _ = do_verify_groth16_optimized();
-		});
-	});
-	group.bench_function("verify_groth16", |b| {
+	group.bench_function("normal", |b| {
 		b.iter(|| {
 			let _ = do_verify_groth16();
+		});
+	});
+	group.bench_function("optimized", |b| {
+		b.iter(|| {
+			let _ = do_verify_groth16_optimized();
 		});
 	});
 	group.finish();

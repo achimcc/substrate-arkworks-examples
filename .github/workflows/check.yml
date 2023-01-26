@@ -175,5 +175,44 @@ jobs:
           build_dir: benchmark-results
           github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
+criterion:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: nightly
+          target: wasm32-unknown-unknown   
+
+      - name: Install protoc
+        uses: taiki-e/install-action@v1
+        with:
+          tool: protoc
+
+      - name: Install cargo-criterion
+        run: cargo install cargo-criterion
+
+      - name: Install criterion-table
+        run: cargo install criterion-table
+
+      - name: mkdir bench-results
+        run: mkdir bench-results
+      
+      - name: Run benchmark
+        run: |
+          cargo +nightly bench \
+          --bench arkworks -message-format json \
+          | criterion-table \
+          > bench-results/BENCHMARKS.md
+
+      - name: Publish Benchmark results on GitHub Pages
+        uses: ftnext/action-push-ghpages@v1.0.0
+        with:
+          build_dir: bench-results
+          github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
+
 
      
