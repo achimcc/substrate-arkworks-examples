@@ -203,8 +203,8 @@ jobs:
       
       - name: Run benchmark
         run: |
-          cargo +nightly bench \
-          --bench arkworks -message-format json \
+          cargo criteion \
+          --bench arkworks --message-format json \
           | criterion-table \
           > criterion-results/BENCHMARKS.md
 
