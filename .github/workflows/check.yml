@@ -140,7 +140,7 @@ jobs:
         run: sudo apt-get install jq 
 
       - name: Generate csv file
-        run: jq -r '["time", "benchmark"], (.[] | [ .benchmark, ([.time_results[]?.extrinsic_time] | add / length ) ]) | @csv' results.json > results.csv
+        run: jq -r '.[] | select(has("time_results")) | ["time", "benchmark"], ([ .benchmark, ([.time_results[].extrinsic_time] | add / length ) ]) | @csv' results.json > results.csv
      
       - name: mkdir benchmark-results
         run: mkdir benchmark-results
