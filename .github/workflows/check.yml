@@ -150,7 +150,7 @@ jobs:
         run: jq ".[]" results.json
 
       - name: Generate csv file
-        run: cat results.json | jq -r '.[] | ([ .benchmark, ([.time_results[]?.extrinsic_time] | add / length ) ]) | @csv' > results.csv
+        run: cat results.json | jq -r '.[] | ["time", "extrinsic"], ([ .benchmark, ([.time_results[]?.extrinsic_time] | add / length ) ]) | @csv' > results.csv
      
       - name: mkdir benchmark-results
         run: mkdir benchmark-results
@@ -198,8 +198,8 @@ jobs:
       - name: Install criterion-table
         run: cargo install criterion-table
 
-      - name: mkdir bench-results
-        run: mkdir bench-results
+      - name: mkdir criterion-results
+        run: mkdir criterion-results
       
       - name: Run benchmark
         run: |
@@ -208,11 +208,11 @@ jobs:
           | criterion-table \
           > bench-results/BENCHMARKS.md
 
-      # - name: Publish Benchmark results on GitHub Pages
-      #   uses: ftnext/action-push-ghpages@v1.0.0
-      #   with:
-      #     build_dir: bench-results
-      #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
+      - name: Publish Benchmark results on GitHub Pages
+        uses: ftnext/action-push-ghpages@v1.0.0
+        with:
+          build_dir: criterion-results
+          github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
 
      
