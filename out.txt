@@ -7,7 +7,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    53240
+Time ~=    49640
               µs
 
 Reads = 0
@@ -18,7 +18,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    53240
+Time ~=    49640
               µs
 
 Reads = 0
@@ -33,7 +33,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    16040
+Time ~=    16050
               µs
 
 Reads = 0
@@ -44,7 +44,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    16040
+Time ~=    16050
               µs
 
 Reads = 0
@@ -59,7 +59,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    13770
+Time ~=    15500
               µs
 
 Reads = 0
@@ -70,7 +70,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    13770
+Time ~=    15500
               µs
 
 Reads = 0
@@ -85,7 +85,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     2514
+Time ~=     2491
               µs
 
 Reads = 0
@@ -96,7 +96,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     2514
+Time ~=     2491
               µs
 
 Reads = 0
@@ -111,7 +111,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3585
+Time ~=    383.6
               µs
 
 Reads = 0
@@ -122,7 +122,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3585
+Time ~=    383.6
               µs
 
 Reads = 0
@@ -137,7 +137,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    928.2
+Time ~=      577
               µs
 
 Reads = 0
@@ -148,7 +148,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    928.2
+Time ~=      577
               µs
 
 Reads = 0
@@ -163,7 +163,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    10750
+Time ~=    835.5
               µs
 
 Reads = 0
@@ -174,7 +174,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    10750
+Time ~=    835.5
               µs
 
 Reads = 0
@@ -189,7 +189,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     2791
+Time ~=     1635
               µs
 
 Reads = 0
@@ -200,7 +200,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     2791
+Time ~=     1635
               µs
 
 Reads = 0
@@ -215,7 +215,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    15.59
+Time ~=    16.68
               µs
 
 Reads = 0
@@ -226,7 +226,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    15.59
+Time ~=    16.68
               µs
 
 Reads = 0
@@ -241,7 +241,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    443.8
+Time ~=    499.8
               µs
 
 Reads = 0
@@ -252,7 +252,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    443.8
+Time ~=    499.8
               µs
 
 Reads = 0
@@ -267,7 +267,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    14.29
+Time ~=    18.47
               µs
 
 Reads = 0
@@ -278,7 +278,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    14.29
+Time ~=    18.47
               µs
 
 Reads = 0
@@ -293,7 +293,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=      499
+Time ~=    505.8
               µs
 
 Reads = 0
@@ -304,7 +304,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=      499
+Time ~=    505.8
               µs
 
 Reads = 0
@@ -319,7 +319,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    27.27
+Time ~=    27.45
               µs
 
 Reads = 0
@@ -330,7 +330,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    27.27
+Time ~=    27.45
               µs
 
 Reads = 0
@@ -345,7 +345,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     1618
+Time ~=     1530
               µs
 
 Reads = 0
@@ -356,7 +356,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     1618
+Time ~=     1530
               µs
 
 Reads = 0
@@ -371,7 +371,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    27.32
+Time ~=     27.3
               µs
 
 Reads = 0
@@ -382,7 +382,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    27.32
+Time ~=     27.3
               µs
 
 Reads = 0
@@ -397,7 +397,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     1534
+Time ~=     1551
               µs
 
 Reads = 0
@@ -408,7 +408,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     1534
+Time ~=     1551
               µs
 
 Reads = 0
@@ -423,7 +423,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    17750
+Time ~=    13850
               µs
 
 Reads = 0
@@ -434,7 +434,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    17750
+Time ~=    13850
               µs
 
 Reads = 0
@@ -449,7 +449,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3174
+Time ~=     2643
               µs
 
 Reads = 0
@@ -460,7 +460,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3174
+Time ~=     2643
               µs
 
 Reads = 0
@@ -475,7 +475,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3925
+Time ~=    417.5
               µs
 
 Reads = 0
@@ -486,7 +486,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3925
+Time ~=    417.5
               µs
 
 Reads = 0
@@ -501,7 +501,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     1323
+Time ~=    917.7
               µs
 
 Reads = 0
@@ -512,7 +512,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     1323
+Time ~=    917.7
               µs
 
 Reads = 0
@@ -527,7 +527,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    861.9
+Time ~=    776.7
               µs
 
 Reads = 0
@@ -538,7 +538,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    861.9
+Time ~=    776.7
               µs
 
 Reads = 0
@@ -553,7 +553,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3662
+Time ~=     3329
               µs
 
 Reads = 0
@@ -564,7 +564,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3662
+Time ~=     3329
               µs
 
 Reads = 0
@@ -579,7 +579,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    15.03
+Time ~=    15.34
               µs
 
 Reads = 0
@@ -590,7 +590,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    15.03
+Time ~=    15.34
               µs
 
 Reads = 0
@@ -605,7 +605,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    862.8
+Time ~=    772.1
               µs
 
 Reads = 0
@@ -616,7 +616,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    862.8
+Time ~=    772.1
               µs
 
 Reads = 0
@@ -631,7 +631,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    16.33
+Time ~=    14.86
               µs
 
 Reads = 0
@@ -642,7 +642,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    16.33
+Time ~=    14.86
               µs
 
 Reads = 0
@@ -657,7 +657,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    845.2
+Time ~=    881.6
               µs
 
 Reads = 0
@@ -668,7 +668,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    845.2
+Time ~=    881.6
               µs
 
 Reads = 0
@@ -683,7 +683,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    27.55
+Time ~=    28.48
               µs
 
 Reads = 0
@@ -694,7 +694,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    27.55
+Time ~=    28.48
               µs
 
 Reads = 0
@@ -709,7 +709,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     2216
+Time ~=     2153
               µs
 
 Reads = 0
@@ -720,7 +720,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     2216
+Time ~=     2153
               µs
 
 Reads = 0
@@ -735,7 +735,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    27.63
+Time ~=    27.01
               µs
 
 Reads = 0
@@ -746,7 +746,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    27.63
+Time ~=    27.01
               µs
 
 Reads = 0
@@ -761,7 +761,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     2243
+Time ~=     2071
               µs
 
 Reads = 0
@@ -772,7 +772,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     2243
+Time ~=     2071
               µs
 
 Reads = 0
@@ -787,7 +787,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    71860
+Time ~=    77380
               µs
 
 Reads = 0
@@ -798,7 +798,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    71860
+Time ~=    77380
               µs
 
 Reads = 0
@@ -813,7 +813,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     9321
+Time ~=     9478
               µs
 
 Reads = 0
@@ -824,7 +824,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     9321
+Time ~=     9478
               µs
 
 Reads = 0
@@ -839,7 +839,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     1231
+Time ~=     1340
               µs
 
 Reads = 0
@@ -850,7 +850,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     1231
+Time ~=     1340
               µs
 
 Reads = 0
@@ -865,7 +865,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3273
+Time ~=     3735
               µs
 
 Reads = 0
@@ -876,7 +876,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3273
+Time ~=     3735
               µs
 
 Reads = 0
@@ -891,7 +891,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     1207
+Time ~=     1212
               µs
 
 Reads = 0
@@ -902,7 +902,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     1207
+Time ~=     1212
               µs
 
 Reads = 0
@@ -917,7 +917,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3368
+Time ~=     3432
               µs
 
 Reads = 0
@@ -928,7 +928,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3368
+Time ~=     3432
               µs
 
 Reads = 0
@@ -943,7 +943,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     33.1
+Time ~=    32.73
               µs
 
 Reads = 0
@@ -954,7 +954,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     33.1
+Time ~=    32.73
               µs
 
 Reads = 0
@@ -969,7 +969,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3455
+Time ~=     3451
               µs
 
 Reads = 0
@@ -980,7 +980,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3455
+Time ~=     3451
               µs
 
 Reads = 0
@@ -995,7 +995,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     33.9
+Time ~=    32.18
               µs
 
 Reads = 0
@@ -1006,7 +1006,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     33.9
+Time ~=    32.18
               µs
 
 Reads = 0
@@ -1021,7 +1021,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3967
+Time ~=     3239
               µs
 
 Reads = 0
@@ -1032,7 +1032,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3967
+Time ~=     3239
               µs
 
 Reads = 0
@@ -1047,7 +1047,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    32.85
+Time ~=    35.74
               µs
 
 Reads = 0
@@ -1058,7 +1058,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    32.85
+Time ~=    35.74
               µs
 
 Reads = 0
@@ -1073,7 +1073,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3471
+Time ~=     4153
               µs
 
 Reads = 0
@@ -1084,7 +1084,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3471
+Time ~=     4153
               µs
 
 Reads = 0
@@ -1099,7 +1099,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    31.57
+Time ~=    62.82
               µs
 
 Reads = 0
@@ -1110,7 +1110,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    31.57
+Time ~=    62.82
               µs
 
 Reads = 0
@@ -1125,7 +1125,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3235
+Time ~=     3201
               µs
 
 Reads = 0
@@ -1136,7 +1136,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     3235
+Time ~=     3201
               µs
 
 Reads = 0
@@ -1151,7 +1151,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     2034
+Time ~=    237.7
               µs
 
 Reads = 0
@@ -1162,7 +1162,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     2034
+Time ~=    237.7
               µs
 
 Reads = 0
@@ -1177,7 +1177,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    494.2
+Time ~=    237.3
               µs
 
 Reads = 0
@@ -1188,7 +1188,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    494.2
+Time ~=    237.3
               µs
 
 Reads = 0
@@ -1203,7 +1203,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    16.16
+Time ~=    14.43
               µs
 
 Reads = 0
@@ -1214,7 +1214,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    16.16
+Time ~=    14.43
               µs
 
 Reads = 0
@@ -1229,7 +1229,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    239.9
+Time ~=    234.4
               µs
 
 Reads = 0
@@ -1240,7 +1240,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    239.9
+Time ~=    234.4
               µs
 
 Reads = 0
@@ -1255,7 +1255,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    13.34
+Time ~=     14.4
               µs
 
 Reads = 0
@@ -1266,7 +1266,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    13.34
+Time ~=     14.4
               µs
 
 Reads = 0
@@ -1281,7 +1281,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    241.6
+Time ~=      231
               µs
 
 Reads = 0
@@ -1292,7 +1292,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    241.6
+Time ~=      231
               µs
 
 Reads = 0
@@ -1307,7 +1307,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     5362
+Time ~=     5184
               µs
 
 Reads = 0
@@ -1318,7 +1318,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=     5362
+Time ~=     5184
               µs
 
 Reads = 0
@@ -1333,7 +1333,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    922.6
+Time ~=     1662
               µs
 
 Reads = 0
@@ -1344,7 +1344,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    922.6
+Time ~=     1662
               µs
 
 Reads = 0
@@ -1359,7 +1359,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    19.51
+Time ~=    21.32
               µs
 
 Reads = 0
@@ -1370,7 +1370,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    19.51
+Time ~=    21.32
               µs
 
 Reads = 0
@@ -1385,7 +1385,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    280.7
+Time ~=    382.4
               µs
 
 Reads = 0
@@ -1396,7 +1396,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    280.7
+Time ~=    382.4
               µs
 
 Reads = 0
@@ -1411,7 +1411,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    19.73
+Time ~=    20.48
               µs
 
 Reads = 0
@@ -1422,7 +1422,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    19.73
+Time ~=    20.48
               µs
 
 Reads = 0
@@ -1437,7 +1437,7 @@ Median Slopes Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    299.4
+Time ~=    304.7
               µs
 
 Reads = 0
@@ -1448,7 +1448,7 @@ Min Squares Analysis
 -- Extrinsic Time --
 
 Model:
-Time ~=    299.4
+Time ~=    304.7
               µs
 
 Reads = 0
