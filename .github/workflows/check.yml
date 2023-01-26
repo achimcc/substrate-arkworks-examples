@@ -170,9 +170,10 @@ jobs:
           > benchmark-results/BENCHMARK.MD
 
       - name: Publish Benchmark results on GitHub Pages
-        uses: ftnext/action-push-ghpages@v1.0.0
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          build_dir: benchmark-results
+          publish_dir: ./benchmark-results
+          keep_files: true
           github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
   criterion:
@@ -208,11 +209,11 @@ jobs:
           | criterion-table \
           > criterion-results/BENCHMARKS-CRITERION.md
 
-      - name: Publish Benchmark results on GitHub Pages
-        uses: ftnext/action-push-ghpages@v1.0.0
+      - name: Publish criterion results on GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          build_dir: criterion-results
+          publish_dir: ./criterion-results
+          keep_files: true
           github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
-
 
      
