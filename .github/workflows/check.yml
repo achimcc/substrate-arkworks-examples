@@ -147,7 +147,7 @@ jobs:
         run: jq '.[]' results.json
       
       - name: jq
-        run: jq ".[]"" results.json
+        run: jq ".[]" results.json
 
       - name: Generate csv file
         run: cat results.json | jq -r '.[] | ([ .benchmark, ([.time_results[]?.extrinsic_time] | add / length ) ]) | @csv' > results.csv
