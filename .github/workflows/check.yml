@@ -150,7 +150,12 @@ jobs:
         run: jq ".[]" results.json
 
       - name: Generate csv file
-        run: cat results.json | jq -r '["extrinsic", "time"],  (.[] | [ .benchmark, ([.time_results[]?.extrinsic_time] | add / length ) ]) | @csv' > results.csv
+        run: |
+          cat results.json \
+          | jq -r '["extrinsic", "time (micro sec)"], \
+          (.[] | [ .benchmark, ([.time_results[]?.extrinsic_time] \
+          | (add / length) | round /1000 ) ]) | @csv' \
+          > results.csv
      
       - name: mkdir benchmark-results
         run: mkdir benchmark-results
