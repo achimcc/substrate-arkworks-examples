@@ -1,5 +1,3 @@
-#![feature(custom_test_frameworks)]
-#![test_runner(criterion::runner)]
 use criterion::{criterion_group, criterion_main, Criterion};
 mod bls12_381;
 use bls12_381::{
