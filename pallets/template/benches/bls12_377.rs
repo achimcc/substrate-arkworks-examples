@@ -1,4 +1,4 @@
-use ark_std::io::Error;
+use ark_std::{io::Error, test_rng, UniformRand};
 use criterion::Criterion;
 use sp_ark_bls12_377::{
 	Bls12_377 as Bls12_377_Host, G1Affine as G1AffineBls12_377_Host,
@@ -89,18 +89,27 @@ pub fn bench_msm_g1_bls12_377(c: &mut Criterion) {
 }
 
 pub fn do_msm_g1_bls12_377() -> Result<(), Error> {
-	let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::msm(
-		&[ark_bls12_377::G1Affine::generator()],
-		&[2u64.into()],
-	);
+	const SAMPLES: usize = 131072;
+	let mut rng = ark_std::test_rng();
+	let g = ark_ec::bls12::G1Affine::<ark_bls12_377::g1::Config>::rand(&mut rng).into_affine();
+	let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
+	let scalars: Vec<_> = (0..SAMPLES)
+		.map(|_| ark_bls12_377::g1::CurveConfig::ScalarField::rand(&mut rng).into_bigint())
+		.collect();
+
+	let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::msm(&v, &scalars);
 	Ok(())
 }
 
 pub fn do_msm_g1_bls12_377_optimized() -> Result<(), Error> {
-	let _out = <sp_ark_bls12_377::g1::Config<HostBls12_377> as SWCurveConfig>::msm(
-		&[G1AffineBls12_377::generator()],
-		&[2u64.into()],
-	);
+	const SAMPLES: usize = 131072;
+	let mut rng = ark_std::test_rng();
+	let g =
+		ark_models::bls12::G1Affine::<sp_ark_bls12_377::g1::Config<HostBls12_377>>::rand(&mut rng)
+			.into_affine();
+	let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
+
+	let _out = <sp_ark_bls12_377::g1::Config<HostBls12_377> as SWCurveConfig>::msm(&v, &scalars);
 	Ok(())
 }
 

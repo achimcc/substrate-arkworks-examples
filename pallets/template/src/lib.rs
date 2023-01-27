@@ -22,7 +22,7 @@ pub mod pallet {
 	use ark_groth16::Groth16;
 	use ark_serialize::{CanonicalDeserialize, Compress, Validate};
 	use ark_snark::SNARK;
-	use ark_std::{vec, vec::Vec};
+	use ark_std::{test_rng, vec, vec::Vec, UniformRand};
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
 	use sp_ark_bls12_377::{
@@ -491,20 +491,51 @@ pub mod pallet {
 		#[pallet::call_index(18)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g1(_origin: OriginFor<T>) -> DispatchResult {
-			let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::msm(
-				&[ark_bls12_377::G1Affine::generator()],
-				&[2u64.into()],
-			);
+			const SAMPLES: usize = 131072;
+			let mut rng = test_rng();
+			let g = ark_bls12_377::g1::G1Affine::rand(&mut rng);
+			let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
+			let scalars: Vec<_> =
+				(0..SAMPLES)
+					.map(|_| {
+						<ark_bls12_377::g1::Config as ark_ec::models::CurveConfig>::ScalarField::rand(&mut rng)
+					})
+					.collect();
+
+			let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::msm(&v[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(19)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
+			const SAMPLES: usize = 131072;
+			let mut rng = test_rng();
+			let g = G1AffineBls12_377::rand(&mut rng);
+			let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
+			let scalars: Vec<_> = (0..SAMPLES)
+				.map(|_| <sp_ark_bls12_377::g1::Config::<HostBls12_377> as sp_ark_models::models::CurveConfig>::ScalarField::rand(&mut rng))
+				.collect();
+
 			let _out = <sp_ark_bls12_377::g1::Config<HostBls12_377> as SWCurveConfig>::msm(
-				&[G1AffineBls12_377::generator()],
-				&[2u64.into()],
+				&v[..],
+				&scalars[..],
 			);
+
+			// const SAMPLES: usize = 131072;
+			// let mut rng = ark_std::test_rng();
+			// let g =
+			// 	ark_models::bls12::G1Affine::<sp_ark_bls12_377::g1::Config<HostBls12_377>>::rand(
+			// 		&mut rng,
+			// 	)
+			// 	.into_affine();
+			// let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
+			// let scalars: Vec<_> = (0..SAMPLES)
+			// 	.map(|_| <sp_ark_bls12_377::g1::Config::<HostBls12_377> as
+			// CurveConfig>::ScalarField::ScalarField::rand(&mut rng).into_bigint()) 	.collect();
+
+			// let _out =
+			// 	<sp_ark_bls12_377::g1::Config<HostBls12_377> as SWCurveConfig>::msm(&v, &scalars);
 			Ok(())
 		}
 
