@@ -104,9 +104,10 @@ pub fn do_msm_g1_bls12_377() -> Result<(), Error> {
 pub fn do_msm_g1_bls12_377_optimized() -> Result<(), Error> {
 	const SAMPLES: usize = 131072;
 	let mut rng = ark_std::test_rng();
-	let g =
-		ark_models::bls12::G1Affine::<sp_ark_bls12_377::g1::Config<HostBls12_377>>::rand(&mut rng)
-			.into_affine();
+	let g = sp_ark_models::bls12::G1Affine::<sp_ark_bls12_377::g1::Config<HostBls12_377>>::rand(
+		&mut rng,
+	)
+	.into_affine();
 	let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
 
 	let _out = <sp_ark_bls12_377::g1::Config<HostBls12_377> as SWCurveConfig>::msm(&v, &scalars);
