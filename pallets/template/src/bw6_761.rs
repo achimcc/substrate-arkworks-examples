@@ -1,12 +1,12 @@
 use ark_std::{io::Error, vec::Vec};
-use sp_ark_bw6_761::{
+pub use sp_ark_bw6_761::{
 	G1Affine as G1AffineBW6_761_Host, G1Projective as G1ProjectiveBW6_761_Host,
 	G2Affine as G2AffineBW6_761_Host, G2Projective as G2ProjectiveBW6_761_Host,
 	HostFunctions as BW6_761HostFunctions, BW6_761 as BW6_761_Host,
 };
-use sp_ark_models::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group};
+pub use sp_ark_models::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group};
 
-struct HostBW6_761 {}
+pub struct HostBW6_761 {}
 
 impl BW6_761HostFunctions for HostBW6_761 {
 	fn bw6_761_multi_miller_loop(a: Vec<Vec<u8>>, b: Vec<Vec<u8>>) -> Vec<u8> {
@@ -35,11 +35,11 @@ impl BW6_761HostFunctions for HostBW6_761 {
 	}
 }
 
-type BW6_761Optimized = BW6_761_Host<HostBW6_761>;
-type G1AffineBW6_761 = G1AffineBW6_761_Host<HostBW6_761>;
-type G2AffineBW6_761 = G2AffineBW6_761_Host<HostBW6_761>;
-type G1ProjectiveBW6_761 = G1ProjectiveBW6_761_Host<HostBW6_761>;
-type G2ProjectiveBW6_761 = G2ProjectiveBW6_761_Host<HostBW6_761>;
+pub type BW6_761Optimized = BW6_761_Host<HostBW6_761>;
+pub type G1AffineBW6_761 = G1AffineBW6_761_Host<HostBW6_761>;
+pub type G2AffineBW6_761 = G2AffineBW6_761_Host<HostBW6_761>;
+pub type G1ProjectiveBW6_761 = G1ProjectiveBW6_761_Host<HostBW6_761>;
+pub type G2ProjectiveBW6_761 = G2ProjectiveBW6_761_Host<HostBW6_761>;
 
 pub fn do_msm_g1() -> Result<(), Error> {
 	let _out = <ark_bw6_761::g1::Config as SWCurveConfig>::msm(

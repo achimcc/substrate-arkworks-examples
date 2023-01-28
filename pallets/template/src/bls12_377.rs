@@ -1,10 +1,10 @@
 use ark_std::{io::Error, test_rng, vec::Vec, UniformRand};
-use sp_ark_bls12_377::{
+pub use sp_ark_bls12_377::{
 	Bls12_377 as Bls12_377_Host, G1Affine as G1AffineBls12_377_Host,
 	G1Projective as G1ProjectiveBls12_377_Host, G2Affine as G2AffineBls12_377_Host,
 	G2Projective as G2ProjectiveBls12_377_Host, HostFunctions as Bls12_377HostFunctions,
 };
-use sp_ark_models::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group};
+pub use sp_ark_models::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group};
 
 pub struct HostBls12_377 {}
 
@@ -35,11 +35,11 @@ impl Bls12_377HostFunctions for HostBls12_377 {
 	}
 }
 
-type Bls12_377Optimized = Bls12_377_Host<HostBls12_377>;
-type G1AffineBls12_377 = G1AffineBls12_377_Host<HostBls12_377>;
-type G2AffineBls12_377 = G2AffineBls12_377_Host<HostBls12_377>;
-type G1ProjectiveBls12_377 = G1ProjectiveBls12_377_Host<HostBls12_377>;
-type G2ProjectiveBls12_377 = G2ProjectiveBls12_377_Host<HostBls12_377>;
+pub type Bls12_377Optimized = Bls12_377_Host<HostBls12_377>;
+pub type G1AffineBls12_377 = G1AffineBls12_377_Host<HostBls12_377>;
+pub type G2AffineBls12_377 = G2AffineBls12_377_Host<HostBls12_377>;
+pub type G1ProjectiveBls12_377 = G1ProjectiveBls12_377_Host<HostBls12_377>;
+pub type G2ProjectiveBls12_377 = G2ProjectiveBls12_377_Host<HostBls12_377>;
 
 pub fn do_pairing() -> Result<(), Error> {
 	let _out = ark_bls12_377::Bls12_377::multi_pairing(

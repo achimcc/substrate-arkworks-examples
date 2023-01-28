@@ -1,26 +1,32 @@
 use ark_algebra_bench_templates::*;
+use ark_bw6_761::{fq::Fq, fq3::Fq3, fq6::Fq6, Fr, G1Projective, G2Projective, BW6_761};
 use criterion::Criterion;
+use pallet_template::bw6_761::{BW6_761Optimized, G1ProjectiveBW6_761, G2ProjectiveBW6_761};
+use sp_ark_bw6_761::{
+	fq::Fq as Fq_optimized, fq3::Fq3 as Fq3_optimized, fq6::Fq6 as Fq6_optimized,
+	fr::Fr as Fr_optimized,
+};
 
 bench!(
 	Name = "BW6_761",
-	Pairing = ark_bw6_761::bw6_761,
-	G1 = ark_bw6_761::g1::G1Projective,
-	G2 = ark_bw6_761::g2::G2Projective,
-	ScalarField = ark_bw6_761::fr::Fr,
-	G1BaseField = ark_bw6_761::bw6_761::fq::Fq,
-	G2BaseField = ark_bw6_761::bw6_761::fq3::Fq3,
-	TargetField = ark_bw6_761::bw6_761::fq6::Fq6,
+	Pairing = BW6_761,
+	G1 = G1Projective,
+	G2 = G2Projective,
+	ScalarField = Fr,
+	G1BaseField = Fq,
+	G2BaseField = Fq3,
+	TargetField = Fq6,
 );
 
 bench!(
-	Name = "Bls12_381_optimied",
-	Pairing = pallet_template::bw6_761::BW6_761Optimized,
-	G1 = pallet_template::bw6_761::G1Projective_BW6_761_Host,
-	G2 = pallet_template::bw6_761::G2Projective_BW6_761_Host,
-	ScalarField = sp_ark_bw6_761::fr::Fr,
-	G1BaseField = sp_ark_bw6_761::bw6_761::fq::Fq,
-	G2BaseField = sp_ark_bw6_761::bw6_761::fq3::Fq3,
-	TargetField = sp_ark_bw6_761::bw6_761::fq6::Fq6,
+	Name = "BW6_761_optimied",
+	Pairing = BW6_761Optimized,
+	G1 = G1ProjectiveBW6_761,
+	G2 = G2ProjectiveBW6_761,
+	ScalarField = Fr_optimized,
+	G1BaseField = Fq_optimized,
+	G2BaseField = Fq3_optimized,
+	TargetField = Fq6_optimized,
 );
 
 pub fn bench_msm_g1_bw6_761(c: &mut Criterion) {
