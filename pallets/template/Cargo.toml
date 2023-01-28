@@ -39,7 +39,7 @@ sp-io = { version = "7.0.0", default-features = false }
 ark-crypto-primitives = { version = "0.4.0", default-features = false, features = [ "r1cs", "snark" ] } 
 
 [dev-dependencies]
-ark_algebra_bench_templates = { version = "0.4.0", default-features = false }
+ark-algebra-bench-templates = { version = "0.4.0", default-features = false }
 sp-core = { version = "7.0.0", default-features = false }
 sp-runtime = { version = "7.0.0", default-features = false }
 criterion = { version = "0.4", default-features = false }
@@ -76,7 +76,6 @@ std = [
 	"ark-groth16/std",
 	"sp-io/std",
 	"ark-crypto-primitives/std",
-	"ark_algebra_bench_templates/std",
 	"sp-core/std",
 	"sp-runtime/std",
 	"tracing-subscriber/std",

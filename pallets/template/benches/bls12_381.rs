@@ -4,8 +4,8 @@ use criterion::Criterion;
 bench!(
 	Name = "Bls12_381",
 	Pairing = ark_bls12_381::Bls12_381,
-	G1 = ark_bls12_381::G1Projective,
-	G2 = ark_bls12_381::G2Projective,
+	G1 = ark_bls12_381::g1::G1Projective,
+	G2 = ark_bls12_381::g2::G2Projective,
 	ScalarField = ark_bls12_381::fr::Fr,
 	G1BaseField = ark_bls12_381::fq::Fq,
 	G2BaseField = ark_bls12_381::fq2::Fq2,
