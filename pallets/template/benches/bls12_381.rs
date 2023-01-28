@@ -7,8 +7,7 @@ use pallet_template::bls12_381::{
 	Bls12_381Optimized, G1ProjectiveBls12_381_Host, G2ProjectiveBls12_381_Host,
 };
 use sp_ark_bls12_381::{
-	fq::Fq as Fq_optimized, fq2::Fq2 as Fq2_optimized, fr::Fr as Fr_optimized,
-	Fq12 as Fq12_optimized,
+	fq2::Fq2 as Fq2_optimized, fqFq as Fq_optimized, Fq12 as Fq12_optimized, Fr as Fr_optimized,
 };
 
 bench!(
