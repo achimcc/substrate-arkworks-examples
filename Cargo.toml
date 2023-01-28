@@ -23,5 +23,4 @@ sp-ark-bw6-761 = { git = "https://github.com/paritytech/ark-substrate" }
 sp-ark-ed-on-bls12-377 = { git = "https://github.com/paritytech/ark-substrate" }
 sp-ark-ed-on-bls12-381 = { git = "https://github.com/paritytech/ark-substrate" }
 sp-ark-models = { git = "https://github.com/paritytech/ark-substrate" }
-ark-groth16 = { git = "https://github.com/achimcc/groth16", branch = "master" }
 
