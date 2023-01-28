@@ -1,3 +1,4 @@
+use ark_algebra_bench_templates::*;
 use criterion::Criterion;
 
 pub fn bench_msm_g1_bw6_761(c: &mut Criterion) {

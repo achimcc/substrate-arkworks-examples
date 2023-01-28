@@ -1,4 +1,27 @@
+use ark_algebra_bench_templates::*;
 use criterion::Criterion;
+
+bench!(
+	Name = "Bls12_381",
+	Pairing = ark_bls12_381::Bls12_381,
+	G1 = ark_bls12_381::G1Projective,
+	G2 = ark_bls12_381::G2Projective,
+	ScalarField = ark_bls12_381::fr::Fr,
+	G1BaseField = ark_bls12_381::fq::Fq,
+	G2BaseField = ark_bls12_381::fq2::Fq2,
+	TargetField = ark_bls12_381::Fq12,
+);
+
+bench!(
+	Name = "Bls12_381_optimied",
+	Pairing = pallet_template::bls12_381::Bls12_381_optimied,
+	G1 = pallet_template::bls12_381::G1ProjectiveBls12_381_Host
+	G2 = pallet_template::bls12_381::G2ProjectiveBls12_381_Host,
+	ScalarField = sp_ark_bls12_381::fr::Fr,
+	G1BaseField = sp_ark_bls12_381::bls12_381::fq::Fq,
+	G2BaseField = sp_ark_bls12_381::bls12_381::fq2::Fq2,
+	TargetField = sp_ark_bls12_381::bls12_381::Fq12,
+);
 
 pub fn bench_pairing_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("pairing_bls12_381");

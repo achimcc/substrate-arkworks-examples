@@ -41,11 +41,11 @@ impl Bls12_381HostFunctions for HostBls12_381 {
 	}
 }
 
-type Bls12_381Optimized = Bls12_381_Host<HostBls12_381>;
-type G1AffineBls12_381 = G1AffineBls12_381_Host<HostBls12_381>;
-type G2AffineBls12_381 = G2AffineBls12_381_Host<HostBls12_381>;
-type G1ProjectiveBls12_381 = G1ProjectiveBls12_381_Host<HostBls12_381>;
-type G2ProjectiveBls12_381 = G2ProjectiveBls12_381_Host<HostBls12_381>;
+pub type Bls12_381Optimized = Bls12_381_Host<HostBls12_381>;
+pub type G1AffineBls12_381 = G1AffineBls12_381_Host<HostBls12_381>;
+pub type G2AffineBls12_381 = G2AffineBls12_381_Host<HostBls12_381>;
+pub type G1ProjectiveBls12_381 = G1ProjectiveBls12_381_Host<HostBls12_381>;
+pub type G2ProjectiveBls12_381 = G2ProjectiveBls12_381_Host<HostBls12_381>;
 
 pub fn do_pairing_optimized() -> Result<(), Error> {
 	let _ = Bls12_381Optimized::multi_pairing(
