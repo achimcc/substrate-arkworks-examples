@@ -14,9 +14,9 @@ bench!(
 
 bench!(
 	Name = "Bls12_381_optimied",
-	Pairing = pallet_template::bw6_761::Bls12_381_optimied,
-	G1 = pallet_template::bw6_761::G1ProjectiveBls12_377_Host
-	G2 = pallet_template::bw6_761::G2ProjectiveBls12_377_Host,
+	Pairing = pallet_template::BW6_761::BW6_761Optimized,
+	G1 = pallet_template::bw6_761::G1Projective_BW6_761_Host,
+	G2 = pallet_template::bw6_761::G2Projective_BW6_761_Host,
 	ScalarField = sp_ark_bw6_761::fr::Fr,
 	G1BaseField = sp_ark_bw6_761::bw6_761::fq::Fq,
 	G2BaseField = sp_ark_bw6_761::bw6_761::fq3::Fq3,
