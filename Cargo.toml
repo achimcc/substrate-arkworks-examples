@@ -5,14 +5,8 @@ members = [
     "runtime",
 ]
 
-[profile.production]
-codegen-units = 1
-inherits = 'release'
-lto = 'fat'
-
 [profile.release]
-lto = 'thin'
-panic = 'abort'
+panic = 'unwind'
 
 [patch.crates-io]
 sp-core = { git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
