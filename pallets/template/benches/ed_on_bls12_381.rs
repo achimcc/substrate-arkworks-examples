@@ -1,21 +1,21 @@
-use ark_algebra_bench_templates::*;
-use ark_ed_on_bls12_381::{fq::Fq, fr::Fr, EdwardsProjective as G};
+// use ark_algebra_bench_templates::*;
+// use ark_ed_on_bls12_381::{fq::Fq, fr::Fr, EdwardsProjective as G};
 use criterion::Criterion;
-use pallet_template::ed_on_bls12_381::HostEdOnBls12_381;
-use sp_ark_ed_on_bls12_381::{
-	fq::Fq as Fq_optimized, EdwardsProjective as EdwardsProjective_optimized, Fr as Fr_optimized,
-};
+// use pallet_template::ed_on_bls12_381::HostEdOnBls12_381;
+// use sp_ark_ed_on_bls12_381::{
+// 	fq::Fq as Fq_optimized, EdwardsProjective as EdwardsProjective_optimized, Fr as Fr_optimized,
+// };
 
-bench!(Name = "EdOnBls12_381", Group = G, ScalarField = Fr, PrimeBaseField = Fq,);
+// bench!(Name = "EdOnBls12_381", Group = G, ScalarField = Fr, PrimeBaseField = Fq,);
 
-type G_optimized = EdwardsProjective_optimized<HostEdOnBls12_381>;
+// type G_optimized = EdwardsProjective_optimized<HostEdOnBls12_381>;
 
-bench!(
-	Name = "EdOnBls12_381_optimized",
-	Group = G_optimized,
-	ScalarField = Fr_optimized,
-	PrimeBaseField = Fq_optimized,
-);
+// bench!(
+// 	Name = "EdOnBls12_381_optimized",
+// 	Group = G_optimized,
+// 	ScalarField = Fr_optimized,
+// 	PrimeBaseField = Fq_optimized,
+// );
 
 pub fn bench_msm_ed_on_bls12_381(c: &mut Criterion) {
 	let mut group = c.benchmark_group("msm_ed_on_bls12_381");

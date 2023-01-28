@@ -2,7 +2,7 @@ use ark_std::{io::Error, vec::Vec};
 use sp_ark_ed_on_bls12_377::HostFunctions as EdwardBls12_377HostFunctions;
 use sp_ark_models::{AffineRepr, Group, TECurveConfig};
 
-struct HostEdOnBls12_377 {}
+pub struct HostEdOnBls12_377 {}
 
 impl EdwardBls12_377HostFunctions for HostEdOnBls12_377 {
 	fn ed_on_bls12_377_mul_affine(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {

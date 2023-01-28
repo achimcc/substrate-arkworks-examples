@@ -6,7 +6,7 @@ use ark_snark::SNARK;
 use ark_std::{io::Error, test_rng, vec::Vec, UniformRand};
 use frame_support::assert_ok;
 pub use sp_ark_bls12_381::{
-	Bls12_381 as Bls12_381_Host, Fr as BlsFrOptimized, G1Affine as G1AffineBls12_381_Host,
+	fr::Fr as BlsFrOptimized, Bls12_381 as Bls12_381_Host, G1Affine as G1AffineBls12_381_Host,
 	G1Projective as G1ProjectiveBls12_381_Host, G2Affine as G2AffineBls12_381_Host,
 	G2Projective as G2ProjectiveBls12_381_Host, HostFunctions as Bls12_381HostFunctions,
 };
