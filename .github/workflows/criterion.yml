@@ -159,7 +159,7 @@ jobs:
           keep_files: true
           github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
-  criterion-bls12-377-template:
+  criterion-bls12-377-template-optmized:
     runs-on: ubuntu-22.04
 
     steps:
