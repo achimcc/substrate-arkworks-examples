@@ -1,4 +1,4 @@
-name: Check Set-Up & Build
+name: Benchmark criterion
 
 # Controls when the action will run.
 on:
