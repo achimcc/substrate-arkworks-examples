@@ -186,14 +186,11 @@ jobs:
 
       - name: Install criterion-table
         run: cargo install criterion-table
-
-      - name: mkdir criterion-results
-        run: mkdir criterion-results
       
       - name: Run benchmark
         run: |
           cargo criterion \
-          --benches --message-format json \
+          --bench arkworks --message-format json \
           | criterion-table \
           > criterion-results/BENCHMARKS-CRITERION.md
 
