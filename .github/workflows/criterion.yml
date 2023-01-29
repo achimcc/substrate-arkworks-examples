@@ -48,7 +48,7 @@ jobs:
           keep_files: true
           github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
-  criterion-templates:
+  criterion-bls12-381-template:
     runs-on: ubuntu-22.04
 
     steps:
@@ -85,6 +85,10 @@ jobs:
           keep_files: true
           github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
+  criterion-bls12-381-template-optimized:
+    runs-on: ubuntu-22.04
+
+    steps:
       - uses: actions/checkout@v3
 
       - name: Install Rust toolchain
@@ -118,6 +122,10 @@ jobs:
           keep_files: true
           github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
+  criterion-bls12-377-template:
+    runs-on: ubuntu-22.04
+
+    steps:
       - uses: actions/checkout@v3
 
       - name: Install Rust toolchain
@@ -150,6 +158,11 @@ jobs:
           publish_dir: ./criterion-results
           keep_files: true
           github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
+
+  criterion-bls12-377-template-optimized:
+    runs-on: ubuntu-22.04
+
+    steps:
 
       - uses: actions/checkout@v3
 
@@ -184,6 +197,10 @@ jobs:
           keep_files: true
           github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
+  criterion-bls12-377-template-optimized:
+    runs-on: ubuntu-22.04
+
+    steps:
       - uses: actions/checkout@v3
 
       - name: Install Rust toolchain
@@ -250,6 +267,10 @@ jobs:
           keep_files: true
           github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
+  criterion-ed-on-bls12-377-template:
+    runs-on: ubuntu-22.04
+
+    steps:
       - uses: actions/checkout@v3
 
       - name: Install Rust toolchain
@@ -283,6 +304,10 @@ jobs:
           keep_files: true
           github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
+  criterion-ed-on-bls12-377-template-optimized:
+    runs-on: ubuntu-22.04
+
+    steps:
       - uses: actions/checkout@v3
 
       - name: Install Rust toolchain
