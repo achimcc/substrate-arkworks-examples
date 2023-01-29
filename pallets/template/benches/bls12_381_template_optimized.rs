@@ -15,5 +15,5 @@ bench!(
 	ScalarField = FrOptimized,
 	G1BaseField = FqOptimized,
 	G2BaseField = Fq2Optimized,
-	TargetField = Fq12Otimized,
+	TargetField = Fq12Optimized,
 );
