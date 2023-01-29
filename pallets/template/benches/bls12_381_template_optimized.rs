@@ -4,7 +4,7 @@ use pallet_template::bls12_381::{
 };
 use sp_ark_bls12_381::{
 	fq::Fq as FqOptimized, fq12::Fq12 as Fq12Optimized, fq2::Fq2 as Fq2Optimized,
-	fr::Fr as Fr_optimized,
+	fr::Fr as FrOptimized,
 };
 
 bench!(
