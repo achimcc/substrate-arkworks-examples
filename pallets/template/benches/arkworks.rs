@@ -70,7 +70,7 @@ criterion_group! {
 	config = Criterion::default();
 	targets =
 		bench_msm_ed_on_bls12_377, bench_mul_affine_ed_on_bls12_377,
-		bench_mul_projective_ed_on_bls12_377, bench_msm_ed_on_bls12_377
+		bench_mul_projective_ed_on_bls12_377,
 }
 
 criterion_group! {
