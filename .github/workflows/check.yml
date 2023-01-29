@@ -142,9 +142,6 @@ jobs:
 
       - name: Generate csv file
         run: cat results.json | jq -r '["extrinsic", "time (µs)"], (.[] | [ .benchmark, ([.time_results[]?.extrinsic_time] | (add / length) | round /1000 ) ]) | @csv' > results.csv
-     
-      - name: mkdir benchmark-results
-        run: mkdir benchmark-results
 
       - name: Set Node.js 16.x
         uses: actions/setup-node@v3
