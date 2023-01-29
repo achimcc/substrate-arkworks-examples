@@ -1,5 +1,4 @@
 use ark_algebra_bench_templates::*;
-use criterion::Criterion;
 use pallet_template::bls12_381::{
 	Bls12_381Optimized, G1ProjectiveBls12_381_Host, G2ProjectiveBls12_381_Host,
 };

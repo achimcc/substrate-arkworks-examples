@@ -2,7 +2,6 @@ use ark_algebra_bench_templates::*;
 use ark_bls12_381::{
 	fq12::Fq12, fq2::Fq2, fr::Fr, g1::G1Projective, g2::G2Projective, Bls12_381, Fq,
 };
-use criterion::Criterion;
 
 bench!(
 	Name = "Bls12_381",

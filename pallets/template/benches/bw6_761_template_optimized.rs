@@ -1,5 +1,4 @@
 use ark_algebra_bench_templates::*;
-use criterion::Criterion;
 use pallet_template::bw6_761::{BW6_761Optimized, G1ProjectiveBW6_761, G2ProjectiveBW6_761};
 use sp_ark_bw6_761::{
 	fq::Fq as Fq_optimized, fq3::Fq3 as Fq3_optimized, fq6::Fq6 as Fq6_optimized,
