@@ -8,7 +8,7 @@ type GOptimized = EdwardsProjectiveOptimized<HostEdOnBls12_377>;
 
 bench!(
 	Name = "EdOnBls12_381_optimized",
-	Group = G_optimized,
-	ScalarField = Fr_optimized,
-	PrimeBaseField = Fq_optimized,
+	Group = GOptimized,
+	ScalarField = FrOptimized,
+	PrimeBaseField = FqOptimized,
 );
