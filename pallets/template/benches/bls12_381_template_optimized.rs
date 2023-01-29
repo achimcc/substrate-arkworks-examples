@@ -10,7 +10,7 @@ use sp_ark_bls12_381::{
 bench!(
 	Name = "Bls12_381_optimized",
 	Pairing = Bls12_381_optimied,
-	G1 = G1ProjectiveBls12_381_Host
+	G1 = G1ProjectiveBls12_381_Host,
 	G2 = G2ProjectiveBls12_381_Host,
 	ScalarField = Fr_optimized,
 	G1BaseField = Fq_optimized,
