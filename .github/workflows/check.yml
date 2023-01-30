@@ -152,6 +152,9 @@ jobs:
         run: |
           sudo npm install --global csv-to-markdown
 
+      - name: mkdir
+        run: mkdir benchmark-results
+
       - name: Convert csv file to Markdown 
         run: |
           csv-to-markdown results.csv  \
