@@ -11,7 +11,7 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
 
-  criterion:
+  criterion-templates:
     runs-on: ubuntu-22.04
 
     steps:
@@ -33,20 +33,9 @@ jobs:
 
       - name: Install criterion-table
         run: cargo install criterion-table
-      
-      - name: Run benchmark
-        run: |
-          cargo criterion \
-          --bench arkworks --message-format json \
-          | criterion-table \
-          > criterion-results/BENCHMARKS-CRITERION.md
 
-      - name: Publish criterion results on GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          publish_dir: ./criterion-results
-          keep_files: true
-          github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
+      - name: mkdir
+        run: mkdir criterion-template-results
 
   # criterion-bls12-381-template:
   #   runs-on: ubuntu-22.04
@@ -76,14 +65,14 @@ jobs:
           cargo criterion \
           --bench bls12_381 --message-format json \
           | criterion-table \
-          > criterion-results/BENCHMARKS-CRITERION-bls12_381.md
+          > criterion-template-results/BENCHMARKS-CRITERION-bls12_381.md
 
-      - name: Publish criterion results on GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          publish_dir: ./criterion-results
-          keep_files: true
-          github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
+      # - name: Publish criterion results on GitHub Pages
+      #   uses: peaceiris/actions-gh-pages@v3
+      #   with:
+      #     publish_dir: ./criterion-template-results
+      #     keep_files: true
+      #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
   # criterion-bls12-381-template-optimized:
   #   runs-on: ubuntu-22.04
@@ -113,12 +102,12 @@ jobs:
           cargo criterion \
           --bench bls12_381_optmized --message-format json \
           | criterion-table \
-          > criterion-results/BENCHMARKS-CRITERION-bls12_381_optimized.md
+          > criterion-template-results/BENCHMARKS-CRITERION-bls12_381_optimized.md
 
       # - name: Publish criterion results on GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
       #   with:
-      #     publish_dir: ./criterion-results
+      #     publish_dir: ./criterion-template-results
       #     keep_files: true
       #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
@@ -150,12 +139,12 @@ jobs:
           cargo criterion \
           --bench bls12_377 --message-format json \
           | criterion-table \
-          > criterion-results/BENCHMARKS-CRITERION-bls12_377.md
+          > criterion-template-results/BENCHMARKS-CRITERION-bls12_377.md
 
       # - name: Publish criterion results on GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
       #   with:
-      #     publish_dir: ./criterion-results
+      #     publish_dir: ./criterion-template-results
       #     keep_files: true
       #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
@@ -188,12 +177,12 @@ jobs:
           cargo criterion \
           --bench bls12_377_optimized --message-format json \
           | criterion-table \
-          > criterion-results/BENCHMARKS-CRITERION-bls12_377_optimized.md
+          > criterion-template-results/BENCHMARKS-CRITERION-bls12_377_optimized.md
 
       # - name: Publish criterion results on GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
       #   with:
-      #     publish_dir: ./criterion-results
+      #     publish_dir: ./criterion-template-results
       #     keep_files: true
       #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
@@ -225,12 +214,12 @@ jobs:
           cargo criterion \
           --bench bw6_761 --message-format json \
           | criterion-table \
-          > criterion-results/BENCHMARKS-CRITERION-bw6_761.md
+          > criterion-template-results/BENCHMARKS-CRITERION-bw6_761.md
 
       # - name: Publish criterion results on GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
       #   with:
-      #     publish_dir: ./criterion-results
+      #     publish_dir: ./criterion-template-results
       #     keep_files: true
       #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
@@ -258,12 +247,12 @@ jobs:
           cargo criterion \
           --bench bw6_761_optimized --message-format json \
           | criterion-table \
-          > criterion-results/BENCHMARKS-CRITERION-bw6_761_optimized.md
+          > criterion-template-results/BENCHMARKS-CRITERION-bw6_761_optimized.md
 
       # - name: Publish criterion results on GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
       #   with:
-      #     publish_dir: ./criterion-results
+      #     publish_dir: ./criterion-template-results
       #     keep_files: true
       #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
@@ -295,12 +284,12 @@ jobs:
           cargo criterion \
           --bench ed_on_bls12_377 --message-format json \
           | criterion-table \
-          > criterion-results/BENCHMARKS-CRITERION-ed_on_bls12_377.md
+          > criterion-template-results/BENCHMARKS-CRITERION-ed_on_bls12_377.md
 
       # - name: Publish criterion results on GitHub Pages
       #   uses: peaceiris/actions-gh-pages@v3
       #   with:
-      #     publish_dir: ./criterion-results
+      #     publish_dir: ./criterion-template-results
       #     keep_files: true
       #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
 
@@ -332,12 +321,12 @@ jobs:
           cargo criterion \
           --bench ed_on_bls12_377_optimized --message-format json \
           | criterion-table \
-          > criterion-results/BENCHMARKS-CRITERION-ed_on_bls12_377_optimized.md
+          > criterion-template-results/BENCHMARKS-CRITERION-ed_on_bls12_377_optimized.md
 
       - name: Publish criterion results on GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          publish_dir: ./criterion-results
+          publish_dir: ./criterion-template-results
           keep_files: true
           github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
           
