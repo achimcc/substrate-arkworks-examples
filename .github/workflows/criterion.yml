@@ -172,7 +172,7 @@ jobs:
   #     - name: Install criterion-table
   #       run: cargo install criterion-table
       
-      - name: Run benchmark
+      - name: Run benchmark bls12_377_optimized
         run: |
           cargo criterion \
           --bench bls12_377_optimized --message-format json \
@@ -279,7 +279,7 @@ jobs:
   #     - name: Install criterion-table
   #       run: cargo install criterion-table
       
-      - name: Run benchmark
+      - name: Run benchmark ed_on_bls12_377
         run: |
           cargo criterion \
           --bench ed_on_bls12_377 --message-format json \
