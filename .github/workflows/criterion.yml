@@ -1,14 +1,13 @@
 name: Benchmark criterion
 
-# Controls when the action will run.
 on:
-  # Triggers the workflow on push or pull request events but only for the master branch
   push:
     branches: [main]
   pull_request:
     branches: [main]
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+  workflow_dispatch:
+
 jobs:
 
   criterion-templates:
@@ -27,7 +26,7 @@ jobs:
         uses: taiki-e/install-action@v1
         with:
           tool: protoc
-          
+
       - name: install jq
         run: sudo apt-get install jq   
 
@@ -40,29 +39,6 @@ jobs:
       - name: mkdir
         run: mkdir criterion-template-results
 
-  # criterion-bls12-381-template:
-  #   runs-on: ubuntu-22.04
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-
-  #     - name: Install Rust toolchain
-  #       uses: actions-rs/toolchain@v1
-  #       with:
-  #         toolchain: nightly
-  #         target: wasm32-unknown-unknown   
-
-  #     - name: Install protoc
-  #       uses: taiki-e/install-action@v1
-  #       with:
-  #         tool: protoc
-
-  #     - name: Install cargo-criterion
-  #       run: cargo install cargo-criterion
-
-  #     - name: Install criterion-table
-  #       run: cargo install criterion-table
-      
       - name: Run benchmark bls12_381
         run: |
           cargo criterion \
@@ -71,74 +47,14 @@ jobs:
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bls12_381.md
 
-      # - name: Publish criterion results on GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     publish_dir: ./criterion-template-results
-      #     keep_files: true
-      #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
-
-  # criterion-bls12-381-template-optimized:
-  #   runs-on: ubuntu-22.04
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-
-  #     - name: Install Rust toolchain
-  #       uses: actions-rs/toolchain@v1
-  #       with:
-  #         toolchain: nightly
-  #         target: wasm32-unknown-unknown   
-
-  #     - name: Install protoc
-  #       uses: taiki-e/install-action@v1
-  #       with:
-  #         tool: protoc
-
-  #     - name: Install cargo-criterion
-  #       run: cargo install cargo-criterion
-
-  #     - name: Install criterion-table
-  #       run: cargo install criterion-table
-      
-      - name: Run benchmark bls12_381_optmized
+      - name: Run benchmark bls12_381_optimized
         run: |
           cargo criterion \
-          --bench bls12_381_optmized --message-format json \
+          --bench bls12_381_optimized --message-format json \
           | jq -r 'select(has("id"))| .id|=(sub(" ";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bls12_381_optimized.md
 
-      # - name: Publish criterion results on GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     publish_dir: ./criterion-template-results
-      #     keep_files: true
-      #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
-
-  # criterion-bls12-377-template:
-  #   runs-on: ubuntu-22.04
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-
-  #     - name: Install Rust toolchain
-  #       uses: actions-rs/toolchain@v1
-  #       with:
-  #         toolchain: nightly
-  #         target: wasm32-unknown-unknown   
-
-  #     - name: Install protoc
-  #       uses: taiki-e/install-action@v1
-  #       with:
-  #         tool: protoc
-
-  #     - name: Install cargo-criterion
-  #       run: cargo install cargo-criterion
-
-  #     - name: Install criterion-table
-  #       run: cargo install criterion-table
-      
       - name: Run benchmark bls12_377
         run: |
           cargo criterion \
@@ -147,37 +63,6 @@ jobs:
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bls12_377.md
 
-      # - name: Publish criterion results on GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     publish_dir: ./criterion-template-results
-      #     keep_files: true
-      #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
-
-  # criterion-bls12-377-template-optmized:
-  #   runs-on: ubuntu-22.04
-
-  #   steps:
-
-  #     - uses: actions/checkout@v3
-
-  #     - name: Install Rust toolchain
-  #       uses: actions-rs/toolchain@v1
-  #       with:
-  #         toolchain: nightly
-  #         target: wasm32-unknown-unknown   
-
-  #     - name: Install protoc
-  #       uses: taiki-e/install-action@v1
-  #       with:
-  #         tool: protoc
-
-  #     - name: Install cargo-criterion
-  #       run: cargo install cargo-criterion
-
-  #     - name: Install criterion-table
-  #       run: cargo install criterion-table
-      
       - name: Run benchmark bls12_377_optimized
         run: |
           cargo criterion \
@@ -186,36 +71,6 @@ jobs:
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bls12_377_optimized.md
 
-      # - name: Publish criterion results on GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     publish_dir: ./criterion-template-results
-      #     keep_files: true
-      #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
-
-  # criterion-bls12-377-template-optimized:
-  #   runs-on: ubuntu-22.04
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-
-  #     - name: Install Rust toolchain
-  #       uses: actions-rs/toolchain@v1
-  #       with:
-  #         toolchain: nightly
-  #         target: wasm32-unknown-unknown   
-
-  #     - name: Install protoc
-  #       uses: taiki-e/install-action@v1
-  #       with:
-  #         tool: protoc
-
-  #     - name: Install cargo-criterion
-  #       run: cargo install cargo-criterion
-
-  #     - name: Install criterion-table
-  #       run: cargo install criterion-table
-      
       - name: Run benchmark bw6_761
         run: |
           cargo criterion \
@@ -224,32 +79,6 @@ jobs:
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bw6_761.md
 
-      # - name: Publish criterion results on GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     publish_dir: ./criterion-template-results
-      #     keep_files: true
-      #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
-
-      # - uses: actions/checkout@v3
-
-      # - name: Install Rust toolchain
-      #   uses: actions-rs/toolchain@v1
-      #   with:
-      #     toolchain: nightly
-      #     target: wasm32-unknown-unknown   
-
-      # - name: Install protoc
-      #   uses: taiki-e/install-action@v1
-      #   with:
-      #     tool: protoc
-
-      # - name: Install cargo-criterion
-      #   run: cargo install cargo-criterion
-
-      # - name: Install criterion-table
-      #   run: cargo install criterion-table
-      
       - name: Run benchmark bw6_761_optimized
         run: |
           cargo criterion \
@@ -258,36 +87,6 @@ jobs:
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bw6_761_optimized.md
 
-      # - name: Publish criterion results on GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     publish_dir: ./criterion-template-results
-      #     keep_files: true
-      #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
-
-  # criterion-ed-on-bls12-377-template:
-  #   runs-on: ubuntu-22.04
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-
-  #     - name: Install Rust toolchain
-  #       uses: actions-rs/toolchain@v1
-  #       with:
-  #         toolchain: nightly
-  #         target: wasm32-unknown-unknown   
-
-  #     - name: Install protoc
-  #       uses: taiki-e/install-action@v1
-  #       with:
-  #         tool: protoc
-
-  #     - name: Install cargo-criterion
-  #       run: cargo install cargo-criterion
-
-  #     - name: Install criterion-table
-  #       run: cargo install criterion-table
-      
       - name: Run benchmark ed_on_bls12_377
         run: |
           cargo criterion \
@@ -295,36 +94,6 @@ jobs:
           | jq -r 'select(has("id"))| .id|=(sub(" ";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-ed_on_bls12_377.md
-
-      # - name: Publish criterion results on GitHub Pages
-      #   uses: peaceiris/actions-gh-pages@v3
-      #   with:
-      #     publish_dir: ./criterion-template-results
-      #     keep_files: true
-      #     github_token: ${{ secrets.BENCH_RESULTS_ACCESS_TOKEN }}
-
-  # criterion-ed-on-bls12-377-template-optimized:
-  #   runs-on: ubuntu-22.04
-
-  #   steps:
-  #     - uses: actions/checkout@v3
-
-  #     - name: Install Rust toolchain
-  #       uses: actions-rs/toolchain@v1
-  #       with:
-  #         toolchain: nightly
-  #         target: wasm32-unknown-unknown   
-
-  #     - name: Install protoc
-  #       uses: taiki-e/install-action@v1
-  #       with:
-  #         tool: protoc
-
-  #     - name: Install cargo-criterion
-  #       run: cargo install cargo-criterion
-
-  #     - name: Install criterion-table
-  #       run: cargo install criterion-table
       
       - name: Run benchmark ed_on_bls12_377_optimized
         run: |
