@@ -55,7 +55,7 @@ debug-assertions = false
 
 [[bench]]
 name = "bls12_381"
-path = "benches/bls12_381_template.rs"\
+path = "benches/bls12_381_template.rs"
 lto = true
 harness = false
 incremental = true
