@@ -48,42 +48,66 @@ sc-tracing = { version = "12.0.0", default-features = false }
 
 [[bench]]
 name = "arkworks"
+lto = true
 harness = false
+incremental = true
+debug-assertions = false
 
 [[bench]]
 name = "bls12_381"
-path = "benches/bls12_381_template.rs"
+path = "benches/bls12_381_template.rs"\
+lto = true
 harness = false
+incremental = true
+debug-assertions = false
 
 [[bench]]
 name = "bls12_381_optimized"
 path = "benches/bls12_381_template_optimized.rs"
+lto = true
 harness = false
+incremental = true
+debug-assertions = false
 
 [[bench]]
 name = "bls12_377"
 path = "benches/bls12_377_template.rs"
+lto = true
 harness = false
+incremental = true
+debug-assertions = false
 
 [[bench]]
 name = "bls12_377_optimized"
 path = "benches/bls12_377_template_optimized.rs"
+lto = true
 harness = false
+incremental = true
+debug-assertions = false
 
 [[bench]]
 name = "bw6_761_381"
 path = "benches/bls12_377_template.rs"
+lto = true
 harness = false
+incremental = true
+debug-assertions = false
 
 [[bench]]
 name = "ed_on_bls12_377"
 path = "benches/ed_on_bls12_377_template.rs"
+lto = true
 harness = false
+incremental = true
+debug-assertions = false
 
 [[bench]]
 name = "ed_on_bls12_377_optimized"
 path = "benches/ed_on_bls12_377_template_optimized.rs"
+lto = true
 harness = false
+incremental = true
+debug-assertions = false
 
 [features]
 default = [ "std" ]

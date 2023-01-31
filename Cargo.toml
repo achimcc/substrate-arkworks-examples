@@ -7,6 +7,7 @@ members = [
 
 [profile.release]
 panic = 'unwind'
+lto = true
 
 [patch.crates-io]
 sp-core = { git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
