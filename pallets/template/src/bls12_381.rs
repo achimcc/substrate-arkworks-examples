@@ -63,19 +63,6 @@ pub fn do_pairing() -> Result<(), Error> {
 	Ok(())
 }
 
-pub fn do_msm_g1_optimized() -> Result<(), Error> {
-	const SAMPLES: usize = 131072;
-	let mut rng = test_rng();
-	let g = G1AffineBls12_381::rand(&mut rng);
-	let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
-	let scalars: Vec<_> = (0..SAMPLES)
-		.map(|_| <sp_ark_bls12_381::g1::Config::<HostBls12_381> as sp_ark_models::models::CurveConfig>::ScalarField::rand(&mut rng))
-		.collect();
-	let _out =
-		<sp_ark_bls12_381::g1::Config<HostBls12_381> as SWCurveConfig>::msm(&v[..], &scalars[..]);
-	Ok(())
-}
-
 pub fn do_msm_g1() -> Result<(), Error> {
 	const SAMPLES: usize = 131072;
 	let mut rng = test_rng();
@@ -87,6 +74,19 @@ pub fn do_msm_g1() -> Result<(), Error> {
 		})
 		.collect();
 	let _out = <ark_bls12_381::g1::Config as SWCurveConfig>::msm(&v[..], &scalars[..]);
+	Ok(())
+}
+
+pub fn do_msm_g1_optimized() -> Result<(), Error> {
+	const SAMPLES: usize = 131072;
+	let mut rng = test_rng();
+	let g = G1AffineBls12_381::rand(&mut rng);
+	let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
+	let scalars: Vec<_> = (0..SAMPLES)
+		.map(|_| <sp_ark_bls12_381::g1::Config::<HostBls12_381> as sp_ark_models::models::CurveConfig>::ScalarField::rand(&mut rng))
+		.collect();
+	let _out =
+		<sp_ark_bls12_381::g1::Config<HostBls12_381> as SWCurveConfig>::msm(&v[..], &scalars[..]);
 	Ok(())
 }
 

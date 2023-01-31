@@ -108,9 +108,10 @@ pub fn do_mul_projective_g1_optimized() -> Result<(), Error> {
 	Ok(())
 }
 
+
 pub fn do_mul_affine_g2() -> Result<(), Error> {
-	let _out = <sp_ark_bw6_761::g1::Config<HostBW6_761> as SWCurveConfig>::mul_projective(
-		&G1ProjectiveBW6_761::generator(),
+	let _out = <ark_bw6_761::g2::Config as SWCurveConfig>::mul_affine(
+		&ark_bw6_761::G2Affine::generator(),
 		&[2u64],
 	);
 	Ok(())
