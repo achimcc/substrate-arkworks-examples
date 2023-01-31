@@ -43,7 +43,7 @@ jobs:
         run: |
           cargo criterion \
           --bench bls12_381 --message-format json \
-          | jq -r 'select(has("id"))| .id|=(split("::") | .[1]| sub(" ";"/") | ascii_downcase)' \
+          | jq -r 'select(has("id"))| .id|=(sub("::";"/")| sub(" ";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bls12_381.md
 
@@ -51,7 +51,7 @@ jobs:
         run: |
           cargo criterion \
           --bench bls12_381_optimized --message-format json \
-          | jq -r 'select(has("id"))| .id|=(split("::") | .[1]| sub(" ";"/") | ascii_downcase)' \
+          | jq -r 'select(has("id"))| .id|=(sub("::";"/")| sub(" ";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bls12_381_optimized.md
 
@@ -59,7 +59,7 @@ jobs:
         run: |
           cargo criterion \
           --bench bls12_377 --message-format json \
-          | jq -r 'select(has("id"))| .id|=(split("::") | .[1]| sub(" ";"/") | ascii_downcase)' \
+          | jq -r 'select(has("id"))| .id|=(sub("::";"/")| sub(" ";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bls12_377.md
 
@@ -67,7 +67,7 @@ jobs:
         run: |
           cargo criterion \
           --bench bls12_377_optimized --message-format json \
-          | jq -r 'select(has("id"))| .id|=(split("::") | .[1]| sub(" ";"/") | ascii_downcase)' \
+          | jq -r 'select(has("id"))| .id|=(sub("::";"/")| sub(" ";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bls12_377_optimized.md
 
@@ -75,7 +75,7 @@ jobs:
         run: |
           cargo criterion \
           --bench bw6_761 --message-format json \
-          | jq -r 'select(has("id"))| .id|=(split("::") | .[1]| sub(" ";"/") | ascii_downcase)' \
+          | jq -r 'select(has("id"))| .id|=(sub("::";"/")| sub(" ";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bw6_761.md
 
@@ -83,7 +83,7 @@ jobs:
         run: |
           cargo criterion \
           --bench bw6_761_optimized --message-format json \
-          | jq -r 'select(has("id"))| .id|=(split("::") | .[1]| sub(" ";"/") | ascii_downcase)' \
+          | jq -r 'select(has("id"))| .id|=(sub("::";"/")| sub(" ";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bw6_761_optimized.md
 
@@ -91,7 +91,7 @@ jobs:
         run: |
           cargo criterion \
           --bench ed_on_bls12_377 --message-format json \
-          | jq -r 'select(has("id"))| .id|=(split("::") | .[1]| sub(" ";"/") | ascii_downcase)' \
+          | jq -r 'select(has("id"))| .id|=(sub("::";"/")| sub(" ";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-ed_on_bls12_377.md
       
@@ -99,7 +99,7 @@ jobs:
         run: |
           cargo criterion \
           --bench ed_on_bls12_377_optimized --message-format json \
-          | jq -r 'select(has("id"))| .id|=(split("::") | .[1]| sub(" ";"/") | ascii_downcase)' \
+          | jq -r 'select(has("id"))| .id|=(sub("::";"/")| sub(" ";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-ed_on_bls12_377_optimized.md
 
