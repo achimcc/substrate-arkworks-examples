@@ -196,7 +196,7 @@ jobs:
       - name: Run benchmark
         run: |
           cargo criterion \
-          --bench arkworks --message-format json \
+          --bench arkworks --features runtime-benchmarks --message-format json \
           | criterion-table \
           > criterion-results/BENCHMARKS-CRITERION.md
 

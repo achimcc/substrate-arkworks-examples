@@ -42,7 +42,7 @@ jobs:
       - name: Run benchmark bls12_381
         run: |
           cargo criterion \
-          --bench bls12_381 --message-format json \
+          --bench bls12_381 --features runtime-benchmarks --message-format json \
           | jq -r 'select(has("id"))| .id|=(gsub("\\s";"_")| sub("::";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bls12_381.md
@@ -50,7 +50,7 @@ jobs:
       - name: Run benchmark bls12_381_optimized
         run: |
           cargo criterion \
-          --bench bls12_381_optimized --message-format json \
+          --bench bls12_381_optimized --features runtime-benchmarks --message-format json \
           | jq -r 'select(has("id"))| .id|=(gsub("\\s";"_")| sub("::";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bls12_381_optimized.md
@@ -58,7 +58,7 @@ jobs:
       - name: Run benchmark bls12_377
         run: |
           cargo criterion \
-          --bench bls12_377 --message-format json \
+          --bench bls12_377 --features runtime-benchmarks --message-format json \
           | jq -r 'select(has("id"))| .id|=(gsub("\\s";"_")| sub("::";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bls12_377.md
@@ -66,7 +66,7 @@ jobs:
       - name: Run benchmark bls12_377_optimized
         run: |
           cargo criterion \
-          --bench bls12_377_optimized --message-format json \
+          --bench bls12_377_optimized --features runtime-benchmarks --message-format json \
           | jq -r 'select(has("id"))| .id|=(gsub("\\s";"_")| sub("::";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bls12_377_optimized.md
@@ -74,7 +74,7 @@ jobs:
       - name: Run benchmark bw6_761
         run: |
           cargo criterion \
-          --bench bw6_761 --message-format json \
+          --bench bw6_761 --features runtime-benchmarks --message-format json \
           | jq -r 'select(has("id"))| .id|=(gsub("\\s";"_")| sub("::";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bw6_761.md
@@ -82,7 +82,7 @@ jobs:
       - name: Run benchmark bw6_761_optimized
         run: |
           cargo criterion \
-          --bench bw6_761_optimized --message-format json \
+          --bench bw6_761_optimized --features runtime-benchmarks --message-format json \
           | jq -r 'select(has("id"))| .id|=(gsub("\\s";"_")| sub("::";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-bw6_761_optimized.md
@@ -90,7 +90,7 @@ jobs:
       - name: Run benchmark ed_on_bls12_377
         run: |
           cargo criterion \
-          --bench ed_on_bls12_377 --message-format json \
+          --bench ed_on_bls12_377 --features runtime-benchmarks --message-format json \
           | jq -r 'select(has("id"))| .id|=(gsub("\\s";"_")| sub("::";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-ed_on_bls12_377.md
@@ -98,7 +98,7 @@ jobs:
       - name: Run benchmark ed_on_bls12_377_optimized
         run: |
           cargo criterion \
-          --bench ed_on_bls12_377_optimized --message-format json \
+          --bench ed_on_bls12_377_optimized --features runtime-benchmarks --message-format json \
           | jq -r 'select(has("id"))| .id|=(gsub("\\s";"_")| sub("::";"/") | ascii_downcase)' \
           | criterion-table \
           > criterion-template-results/BENCHMARKS-CRITERION-ed_on_bls12_377_optimized.md
