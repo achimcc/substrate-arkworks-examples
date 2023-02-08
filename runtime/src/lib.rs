@@ -203,6 +203,9 @@ impl frame_system::Config for Runtime {
 	/// The set code logic, just the default since we're not a parachain.
 	type OnSetCode = ();
 	type MaxConsumers = frame_support::traits::ConstU32<16>;
+
+	type SessionsPerEra = SessionsPerEra;
+	type BondingDuration = BondingDuration;
 }
 
 impl pallet_randomness_collective_flip::Config for Runtime {}
@@ -216,7 +219,7 @@ impl pallet_aura::Config for Runtime {
 impl pallet_grandpa::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
 
-	type MaxSetIdSessionEntries = ConstU32<32>;
+	type MaxSetIdSessionEntries: u32 = BondingDuration::get() * SessionsPerEra::get();
 
 	type KeyOwnerProofSystem = ();
 
@@ -261,6 +264,8 @@ impl pallet_balances::Config for Runtime {
 
 parameter_types! {
 	pub FeeMultiplier: Multiplier = Multiplier::one();
+	pub const SessionsPerEra: sp_staking::SessionIndex = 6;
+	pub const BondingDuration: sp_staking::EraIndex = 24 * 28;
 }
 
 impl pallet_transaction_payment::Config for Runtime {
