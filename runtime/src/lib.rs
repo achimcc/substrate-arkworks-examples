@@ -203,9 +203,6 @@ impl frame_system::Config for Runtime {
 	/// The set code logic, just the default since we're not a parachain.
 	type OnSetCode = ();
 	type MaxConsumers = frame_support::traits::ConstU32<16>;
-
-	type SessionsPerEra = SessionsPerEra;
-	type BondingDuration = BondingDuration;
 }
 
 impl pallet_randomness_collective_flip::Config for Runtime {}
@@ -217,8 +214,6 @@ impl pallet_aura::Config for Runtime {
 }
 
 impl pallet_grandpa::Config for Runtime {
-	type SessionsPerEra = SessionsPerEra;
-	type BondingDuration = BondingDuration;
 	type RuntimeEvent = RuntimeEvent;
 
 	type MaxSetIdSessionEntries = MaxSetIdSessionEntries;
