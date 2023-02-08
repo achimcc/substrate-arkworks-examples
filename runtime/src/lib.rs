@@ -216,6 +216,8 @@ impl pallet_aura::Config for Runtime {
 impl pallet_grandpa::Config for Runtime {
 	type RuntimeEvent = RuntimeEvent;
 
+	type MaxSetIdSessionEntries = ConstU32<32>;
+
 	type KeyOwnerProofSystem = ();
 
 	type KeyOwnerProof =
