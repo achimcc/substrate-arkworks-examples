@@ -226,16 +226,16 @@ const C_SERIALIZED: &[u8] = &[
 pub fn do_verify_groth16() -> Result<(), Error> {
 	let vk = <Groth16<Bls12_381> as SNARK<BlsFr>>::VerifyingKey::deserialize_with_mode(
 		VK_SERIALIZED,
-		Compress::No,
+		Compress::Yes,
 		Validate::No,
 	)
 	.unwrap();
 
-	let c = Fp::deserialize_with_mode(C_SERIALIZED, Compress::No, Validate::No).unwrap();
+	let c = Fp::deserialize_with_mode(C_SERIALIZED, Compress::Yes, Validate::No).unwrap();
 
 	let proof = <Groth16<Bls12_381> as SNARK<BlsFr>>::Proof::deserialize_with_mode(
 		PROOF_SERIALIZED,
-		Compress::No,
+		Compress::Yes,
 		Validate::No,
 	)
 	.unwrap();
@@ -248,17 +248,17 @@ pub fn do_verify_groth16() -> Result<(), Error> {
 pub fn do_verify_groth16_optimized() -> Result<(), Error> {
 	let vk = <Groth16<Bls12_381Optimized> as SNARK<BlsFrOptimized>>::VerifyingKey::deserialize_with_mode(
 					VK_SERIALIZED,
-					Compress::No,
+					Compress::Yes,
 					Validate::No,
 				)
 				.unwrap();
 
-	let c = Fp::deserialize_with_mode(C_SERIALIZED, Compress::No, Validate::No).unwrap();
+	let c = Fp::deserialize_with_mode(C_SERIALIZED, Compress::Yes, Validate::No).unwrap();
 
 	let proof =
 		<Groth16<Bls12_381Optimized> as SNARK<BlsFrOptimized>>::Proof::deserialize_with_mode(
 			PROOF_SERIALIZED,
-			Compress::No,
+			Compress::Yes,
 			Validate::No,
 		)
 		.unwrap();
