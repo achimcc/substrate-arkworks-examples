@@ -221,7 +221,7 @@ impl pallet_grandpa::Config for Runtime {
 	type BondingDuration = BondingDuration;
 	type RuntimeEvent = RuntimeEvent;
 
-	type MaxSetIdSessionEntries: u32 = BondingDuration::get() * SessionsPerEra::get();
+	type MaxSetIdSessionEntries = MaxSetIdSessionEntries;
 
 	type KeyOwnerProofSystem = ();
 
@@ -268,6 +268,7 @@ parameter_types! {
 	pub FeeMultiplier: Multiplier = Multiplier::one();
 	pub const SessionsPerEra: sp_staking::SessionIndex = 6;
 	pub const BondingDuration: sp_staking::EraIndex = 24 * 28;
+	pub const MaxSetIdSessionEntries: u32 = BondingDuration::get() * SessionsPerEra::get();
 }
 
 impl pallet_transaction_payment::Config for Runtime {
