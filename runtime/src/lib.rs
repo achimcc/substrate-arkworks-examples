@@ -217,6 +217,8 @@ impl pallet_aura::Config for Runtime {
 }
 
 impl pallet_grandpa::Config for Runtime {
+	type SessionsPerEra = SessionsPerEra;
+	type BondingDuration = BondingDuration;
 	type RuntimeEvent = RuntimeEvent;
 
 	type MaxSetIdSessionEntries: u32 = BondingDuration::get() * SessionsPerEra::get();
