@@ -11,7 +11,7 @@
 
 |        | `normal`                 |
 |:-------|:------------------------ |
-|        | `5.37 ms` (✅ **1.00x**)  |
+|        | `6.38 ms` (✅ **1.00x**)  |
 
 ---
 Made with [criterion-table](https://github.com/nu11ptr/criterion-table)
