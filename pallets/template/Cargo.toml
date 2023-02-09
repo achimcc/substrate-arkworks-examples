@@ -71,8 +71,13 @@ path = "benches/bls12_377_template_optimized.rs"
 harness = false
 
 [[bench]]
-name = "bw6_761_381"
-path = "benches/bls12_377_template.rs"
+name = "bw6_761"
+path = "benches/bw6_761_template.rs"
+harness = false
+
+[[bench]]
+name = "bw6_761_optimized"
+path = "benches/bw6_761_template_optimized.rs"
 harness = false
 
 [[bench]]
