@@ -37,6 +37,7 @@ sp-session = { version = "4.0.0-dev", default-features = false, git = "https://g
 sp-std = { version = "5.0.0", default-features = false, git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
 sp-transaction-pool = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
 sp-version = { version = "5.0.0", default-features = false, git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
+pallet-insecure-randomness-collective-flip = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
 
 # Used for the node template's RPCs
 frame-system-rpc-runtime-api = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
@@ -72,6 +73,7 @@ std = [
 	"pallet-template/std",
 	"pallet-timestamp/std",
 	"pallet-transaction-payment-rpc-runtime-api/std",
+	"pallet-insecure-randomness-collective-flip/std",
 	"pallet-transaction-payment/std",
 	"sp-api/std",
 	"sp-block-builder/std",
@@ -102,6 +104,7 @@ try-runtime = [
 	"frame-executive/try-runtime",
 	"frame-system/try-runtime",
 	"frame-support/try-runtime",
+	"pallet-insecure-randomness-collective-flip/try-runtime",
 	"pallet-aura/try-runtime",
 	"pallet-balances/try-runtime",
 	"pallet-grandpa/try-runtime",
