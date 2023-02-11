@@ -64,7 +64,7 @@ pub fn do_pairing() -> Result<(), Error> {
 }
 
 pub fn do_msm_g1() -> Result<(), Error> {
-	const SAMPLES: usize = 131072;
+	const SAMPLES: usize = 65536;
 	let mut rng = test_rng();
 	let g = ark_bls12_381::g1::G1Affine::rand(&mut rng);
 	let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
@@ -78,7 +78,7 @@ pub fn do_msm_g1() -> Result<(), Error> {
 }
 
 pub fn do_msm_g1_optimized() -> Result<(), Error> {
-	const SAMPLES: usize = 131072;
+	const SAMPLES: usize = 65536;
 	let mut rng = test_rng();
 	let g = G1AffineBls12_381::rand(&mut rng);
 	let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
@@ -91,7 +91,7 @@ pub fn do_msm_g1_optimized() -> Result<(), Error> {
 }
 
 pub fn do_msm_g2() -> Result<(), Error> {
-	const SAMPLES: usize = 131072;
+	const SAMPLES: usize = 65536;
 	let mut rng = test_rng();
 	let g = ark_bls12_381::g2::G2Affine::rand(&mut rng);
 	let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
@@ -105,7 +105,7 @@ pub fn do_msm_g2() -> Result<(), Error> {
 }
 
 pub fn do_msm_g2_optimized() -> Result<(), Error> {
-	const SAMPLES: usize = 131072;
+	const SAMPLES: usize = 65536;
 	let mut rng = test_rng();
 	let g = G2AffineBls12_381::rand(&mut rng);
 	let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
