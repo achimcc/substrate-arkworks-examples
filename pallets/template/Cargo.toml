@@ -44,7 +44,6 @@ sp-core = { version = "7.0.0", default-features = false }
 sp-runtime = { version = "7.0.0", default-features = false }
 criterion = { version = "0.4", default-features = false }
 tracing-subscriber = { version = "0.3.16", default-features = false, features = ["parking_lot"] }
-sc-tracing = { version = "4.0.0-dev", default-features = false }
 
 [[bench]]
 name = "arkworks"
