@@ -20,52 +20,52 @@ name = "node-template"
 clap = { version = "4.0.9", features = ["derive"] }
 futures = { version = "0.3.21", features = ["thread-pool"]}
 
-sc-cli = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sp-core = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sc-executor = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sc-service = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sc-telemetry = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sc-keystore = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sc-transaction-pool = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sc-transaction-pool-api = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sc-consensus-aura = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sp-consensus-aura = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sp-consensus = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sc-consensus = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sc-finality-grandpa = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sp-finality-grandpa = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sc-client-api = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sp-runtime = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sp-io = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sp-timestamp = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sp-inherents = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sp-keyring = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-frame-system = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-pallet-transaction-payment = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
+sc-cli = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sp-core = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sc-executor = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sc-service = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sc-telemetry = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sc-keystore = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sc-transaction-pool = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sc-transaction-pool-api = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sc-consensus-aura = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sp-consensus-aura = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sp-consensus = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sc-consensus = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sc-finality-grandpa = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sp-finality-grandpa = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sc-client-api = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sp-runtime = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sp-io = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sp-timestamp = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sp-inherents = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sp-keyring = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+frame-system = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+pallet-transaction-payment = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
 
 # These dependencies are used for the node template's RPCs
 jsonrpsee = { version = "0.16.2", features = ["server"] }
-sc-rpc = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sp-api = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sc-rpc-api = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sp-blockchain = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sp-block-builder = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-sc-basic-authorship = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-substrate-frame-rpc-system = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-pallet-transaction-payment-rpc = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
+sc-rpc = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sp-api = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sc-rpc-api = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sp-blockchain = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sp-block-builder = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+sc-basic-authorship = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+substrate-frame-rpc-system = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+pallet-transaction-payment-rpc = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
 
 # These dependencies are used for runtime benchmarking
-frame-benchmarking = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
-frame-benchmarking-cli = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
+frame-benchmarking = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
+frame-benchmarking-cli = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
 
 # Local Dependencies
 node-template-runtime = { version = "4.0.0-dev", path = "../runtime" }
 
 # CLI-specific dependencies
-try-runtime-cli = { version = "0.10.0-dev", optional = true, git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
+try-runtime-cli = { version = "0.10.0-dev", optional = true, git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
 
 [build-dependencies]
-substrate-build-script-utils = { version = "3.0.0", git = "https://github.com/paritytech/substrate.git", "branch" = "no-compression" }
+substrate-build-script-utils = { version = "3.0.0", git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
 
 [features]
 default = []
