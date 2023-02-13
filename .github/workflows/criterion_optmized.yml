@@ -1,4 +1,4 @@
-name: Benchmark criterion optimized versions
+name: Benchmark criterion
 
 on:
   push:
@@ -39,38 +39,38 @@ jobs:
       - name: mkdir
         run: mkdir criterion-template-results
 
-      - name: Run benchmark bls12_381
+      - name: Run benchmark bls12_381_optimized
         run: |
           cargo criterion \
-          --bench bls12_381 --features runtime-benchmarks --message-format json \
+          --bench bls12_381_optimized --features runtime-benchmarks --message-format json \
           | jq -r 'select(has("id"))| .id|=(gsub("\\s";"_")| sub("::";"/") | ascii_downcase)' \
           | criterion-table \
-          > criterion-template-results/BENCHMARKS-CRITERION-bls12_381.md
+          > criterion-template-results/BENCHMARKS-CRITERION-bls12_381_optimized.md
 
-      - name: Run benchmark bls12_377
+      - name: Run benchmark bls12_377_optimized
         run: |
           cargo criterion \
-          --bench bls12_377 --features runtime-benchmarks --message-format json \
+          --bench bls12_377_optimized --features runtime-benchmarks --message-format json \
           | jq -r 'select(has("id"))| .id|=(gsub("\\s";"_")| sub("::";"/") | ascii_downcase)' \
           | criterion-table \
-          > criterion-template-results/BENCHMARKS-CRITERION-bls12_377.md
+          > criterion-template-results/BENCHMARKS-CRITERION-bls12_377_optimized.md
 
-      - name: Run benchmark bw6_761
+      - name: Run benchmark bw6_761_optimized
         run: |
           cargo criterion \
-          --bench bw6_761 --features runtime-benchmarks --message-format json \
+          --bench bw6_761_optimized --features runtime-benchmarks --message-format json \
           | jq -r 'select(has("id"))| .id|=(gsub("\\s";"_")| sub("::";"/") | ascii_downcase)' \
           | criterion-table \
-          > criterion-template-results/BENCHMARKS-CRITERION-bw6_761.md
-
-      - name: Run benchmark ed_on_bls12_377
-        run: |
-          cargo criterion \
-          --bench ed_on_bls12_377 --features runtime-benchmarks --message-format json \
-          | jq -r 'select(has("id"))| .id|=(gsub("\\s";"_")| sub("::";"/") | ascii_downcase)' \
-          | criterion-table \
-          > criterion-template-results/BENCHMARKS-CRITERION-ed_on_bls12_377.md
+          > criterion-template-results/BENCHMARKS-CRITERION-bw6_761_optimized.md
       
+      - name: Run benchmark ed_on_bls12_377_optimized
+        run: |
+          cargo criterion \
+          --bench ed_on_bls12_377_optimized --features runtime-benchmarks --message-format json \
+          | jq -r 'select(has("id"))| .id|=(gsub("\\s";"_")| sub("::";"/") | ascii_downcase)' \
+          | criterion-table \
+          > criterion-template-results/BENCHMARKS-CRITERION-ed_on_bls12_377_optimized.md
+
       - name: Publish criterion results on GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:

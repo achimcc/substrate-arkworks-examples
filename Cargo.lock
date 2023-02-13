@@ -7378,21 +7378,21 @@ dependencies = [
 [[package]]
 name = "sp-ark-bls12-377"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#7b476e7b9455a589f8ddedf7bc1b7feaf1fe7ebd"
+source = "git+https://github.com/paritytech/ark-substrate?branch=test-upstream#3b7ae451847d710700d5d7be6b91fa648e161332"
 dependencies = [
  "ark-bls12-377",
+ "ark-ec",
  "ark-ff",
  "ark-r1cs-std",
  "ark-serialize",
  "ark-std",
- "sp-ark-models",
  "sp-ark-utils",
 ]
 
 [[package]]
 name = "sp-ark-bls12-381"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#7b476e7b9455a589f8ddedf7bc1b7feaf1fe7ebd"
+source = "git+https://github.com/paritytech/ark-substrate?branch=test-upstream#3b7ae451847d710700d5d7be6b91fa648e161332"
 dependencies = [
  "ark-bls12-381",
  "ark-ec",
@@ -7406,7 +7406,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-bw6-761"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#7b476e7b9455a589f8ddedf7bc1b7feaf1fe7ebd"
+source = "git+https://github.com/paritytech/ark-substrate?branch=test-upstream#3b7ae451847d710700d5d7be6b91fa648e161332"
 dependencies = [
  "ark-bw6-761",
  "ark-ff",
@@ -7419,21 +7419,21 @@ dependencies = [
 [[package]]
 name = "sp-ark-ed-on-bls12-377"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#7b476e7b9455a589f8ddedf7bc1b7feaf1fe7ebd"
+source = "git+https://github.com/paritytech/ark-substrate?branch=test-upstream#3b7ae451847d710700d5d7be6b91fa648e161332"
 dependencies = [
+ "ark-ec",
  "ark-ed-on-bls12-377",
  "ark-ff",
  "ark-r1cs-std",
  "ark-serialize",
  "ark-std",
- "sp-ark-models",
  "sp-ark-utils",
 ]
 
 [[package]]
 name = "sp-ark-ed-on-bls12-381"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#7b476e7b9455a589f8ddedf7bc1b7feaf1fe7ebd"
+source = "git+https://github.com/paritytech/ark-substrate?branch=test-upstream#3b7ae451847d710700d5d7be6b91fa648e161332"
 dependencies = [
  "ark-ed-on-bls12-381",
  "ark-ff",
@@ -7447,7 +7447,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-models"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#7b476e7b9455a589f8ddedf7bc1b7feaf1fe7ebd"
+source = "git+https://github.com/paritytech/ark-substrate?branch=test-upstream#3b7ae451847d710700d5d7be6b91fa648e161332"
 dependencies = [
  "ark-ec",
  "ark-ff",
@@ -7463,7 +7463,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-utils"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate#7b476e7b9455a589f8ddedf7bc1b7feaf1fe7ebd"
+source = "git+https://github.com/paritytech/ark-substrate?branch=test-upstream#3b7ae451847d710700d5d7be6b91fa648e161332"
 dependencies = [
  "ark-serialize",
  "ark-std",
