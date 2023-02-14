@@ -24,7 +24,7 @@ install-csv-to-markdown:
 	sudo npm install --global csv-to-markdown
 
 install: install-jq
-instal: install-csv-to-markdown
+install: install-csv-to-markdown
 
 
 ################################################################################
