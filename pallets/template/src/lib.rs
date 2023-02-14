@@ -401,52 +401,103 @@ pub mod pallet {
 
 		#[pallet::call_index(44)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_msm(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+		pub fn ed_on_bls12_381_msm_sw(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
 			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::ed_on_bls12_381::do_msm(samples);
+			let _ = crate::ed_on_bls12_381::do_msm_sw(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(45)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_msm_optimized(
+		pub fn ed_on_bls12_381_msm_sw_optimized(
 			_origin: OriginFor<T>,
 			samples: u32,
 		) -> DispatchResult {
 			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::ed_on_bls12_381::do_msm_optimized(samples);
+			let _ = crate::ed_on_bls12_381::do_msm_sw_optimized(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(46)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_mul_projective(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::ed_on_bls12_381::do_mul_projective();
+		pub fn ed_on_bls12_381_msm_te(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::ed_on_bls12_381::do_msm_te(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(47)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_mul_projective_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::ed_on_bls12_381::do_mul_projective_optimized();
+		pub fn ed_on_bls12_381_msm_te_optimized(
+			_origin: OriginFor<T>,
+			samples: u32,
+		) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::ed_on_bls12_381::do_msm_te_optimized(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(48)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_mul_affine(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::ed_on_bls12_381::do_mul_affine();
+		pub fn ed_on_bls12_381_mul_projective_sw(_origin: OriginFor<T>) -> DispatchResult {
+			let _ = crate::ed_on_bls12_381::do_mul_projective_sw();
 			Ok(())
 		}
 
 		#[pallet::call_index(49)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_mul_affine_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::ed_on_bls12_381::do_mul_affine_optimized();
+		pub fn ed_on_bls12_381_mul_projective_sw_optimized(
+			_origin: OriginFor<T>,
+		) -> DispatchResult {
+			let _ = crate::ed_on_bls12_381::do_mul_projective_sw_optimized();
 			Ok(())
 		}
 
 		#[pallet::call_index(50)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_mul_projective_te(_origin: OriginFor<T>) -> DispatchResult {
+			let _ = crate::ed_on_bls12_381::do_mul_projective_te();
+			Ok(())
+		}
+
+		#[pallet::call_index(51)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_mul_projective_te_optimized(
+			_origin: OriginFor<T>,
+		) -> DispatchResult {
+			let _ = crate::ed_on_bls12_381::do_mul_projective_te_optimized();
+			Ok(())
+		}
+
+		#[pallet::call_index(52)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_mul_affine_sw(_origin: OriginFor<T>) -> DispatchResult {
+			let _ = crate::ed_on_bls12_381::do_mul_affine_sw();
+			Ok(())
+		}
+
+		#[pallet::call_index(53)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_mul_affine_sw_optimized(_origin: OriginFor<T>) -> DispatchResult {
+			let _ = crate::ed_on_bls12_381::do_mul_affine_sw_optimized();
+			Ok(())
+		}
+
+		#[pallet::call_index(54)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_mul_affine_te(_origin: OriginFor<T>) -> DispatchResult {
+			let _ = crate::ed_on_bls12_381::do_mul_affine_te();
+			Ok(())
+		}
+
+		#[pallet::call_index(55)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_mul_affine_te_optimized(_origin: OriginFor<T>) -> DispatchResult {
+			let _ = crate::ed_on_bls12_381::do_mul_affine_te_optimized();
+			Ok(())
+		}
+
+		#[pallet::call_index(56)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_msm(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
 			let samples: u32 = samples.try_into().unwrap();
@@ -454,7 +505,7 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(51)]
+		#[pallet::call_index(57)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_msm_optimized(
 			_origin: OriginFor<T>,
@@ -465,28 +516,28 @@ pub mod pallet {
 			Ok(())
 		}
 
-		#[pallet::call_index(52)]
+		#[pallet::call_index(58)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_mul_projective(_origin: OriginFor<T>) -> DispatchResult {
 			let _ = crate::ed_on_bls12_377::do_mul_projective();
 			Ok(())
 		}
 
-		#[pallet::call_index(53)]
+		#[pallet::call_index(59)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_mul_projective_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _ = crate::ed_on_bls12_377::do_mul_projective_optimized();
 			Ok(())
 		}
 
-		#[pallet::call_index(54)]
+		#[pallet::call_index(60)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_mul_affine(_origin: OriginFor<T>) -> DispatchResult {
 			let _ = crate::ed_on_bls12_377::do_mul_affine();
 			Ok(())
 		}
 
-		#[pallet::call_index(55)]
+		#[pallet::call_index(61)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_mul_affine_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _ = crate::ed_on_bls12_377::do_mul_affine_optimized();

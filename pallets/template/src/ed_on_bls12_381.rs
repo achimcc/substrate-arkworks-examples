@@ -26,7 +26,7 @@ impl EdwardBls12_381HostFunctions for HostEdOnBls12_381 {
 	}
 }
 
-pub fn do_msm(samples: u32) -> Result<(), Error> {
+pub fn do_msm_sw(samples: u32) -> Result<(), Error> {
 	let mut rng = test_rng();
 	let g = ark_ed_on_bls12_381::SWAffine::rand(&mut rng);
 	let v: Vec<_> = (0..samples).map(|_| g).collect();
@@ -37,7 +37,7 @@ pub fn do_msm(samples: u32) -> Result<(), Error> {
 	Ok(())
 }
 
-pub fn do_msm_optimized(samples: u32) -> Result<(), Error> {
+pub fn do_msm_sw_optimized(samples: u32) -> Result<(), Error> {
 	let mut rng = test_rng();
 	let g = ark_ec::short_weierstrass::Affine::<
 		sp_ark_ed_on_bls12_381::JubjubConfig<HostEdOnBls12_381>,
@@ -55,7 +55,37 @@ pub fn do_msm_optimized(samples: u32) -> Result<(), Error> {
 	Ok(())
 }
 
-pub fn do_mul_affine() -> Result<(), Error> {
+pub fn do_msm_te(samples: u32) -> Result<(), Error> {
+	let mut rng = test_rng();
+	let g = ark_ed_on_bls12_381::EdwardsAffine::rand(&mut rng);
+	let v: Vec<_> = (0..samples).map(|_| g).collect();
+	let scalars: Vec<_> = (0..samples)
+		.map(|_| <ark_ed_on_bls12_381::EdwardsConfig as CurveConfig>::ScalarField::rand(&mut rng))
+		.collect();
+	let _out = <ark_ed_on_bls12_381::JubjubConfig as ark_ec::twisted_edwards::TECurveConfig>::msm(
+		&v[..],
+		&scalars[..],
+	);
+	Ok(())
+}
+
+pub fn do_msm_te_optimized(samples: u32) -> Result<(), Error> {
+	let mut rng = test_rng();
+	let g = sp_ark_ed_on_bls12_381::EdwardsAffine::<HostEdOnBls12_381>::rand(&mut rng);
+	let v: Vec<_> = (0..samples).map(|_| g).collect();
+	let scalars: Vec<_> = (0..samples)
+		.map(|_| {
+			<sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381> as CurveConfig>::ScalarField::rand(&mut rng)
+		})
+		.collect();
+	let _out = <sp_ark_ed_on_bls12_381::JubjubConfig<HostEdOnBls12_381> as sp_ark_models::twisted_edwards::TECurveConfig>::msm(
+		&v[..],
+		&scalars[..],
+	);
+	Ok(())
+}
+
+pub fn do_mul_affine_sw() -> Result<(), Error> {
 	let _out = <ark_ed_on_bls12_381::EdwardsConfig as SWCurveConfig>::mul_affine(
 		&ark_ed_on_bls12_381::SWAffine::generator(),
 		&[2u64],
@@ -63,7 +93,16 @@ pub fn do_mul_affine() -> Result<(), Error> {
 	Ok(())
 }
 
-pub fn do_mul_affine_optimized() -> Result<(), Error> {
+pub fn do_mul_affine_te() -> Result<(), Error> {
+	let _out =
+		<ark_ed_on_bls12_381::EdwardsConfig as sp_ark_models::short_weierstrass::SWCurveConfig>::mul_affine(
+			&ark_ed_on_bls12_381::SWAffine::generator(),
+			&[2u64],
+		);
+	Ok(())
+}
+
+pub fn do_mul_affine_sw_optimized() -> Result<(), Error> {
 	let _out =
 		<sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381> as SWCurveConfig>::mul_affine(
 			&sp_ark_ed_on_bls12_381::SWAffine::<HostEdOnBls12_381>::generator(),
@@ -72,18 +111,45 @@ pub fn do_mul_affine_optimized() -> Result<(), Error> {
 	Ok(())
 }
 
-pub fn do_mul_projective() -> Result<(), Error> {
-	let _out = <ark_ed_on_bls12_381::EdwardsConfig as SWCurveConfig>::mul_projective(
-		&ark_ed_on_bls12_381::SWProjective::generator(),
+pub fn do_mul_affine_te_optimized() -> Result<(), Error> {
+	let _out =
+		<sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381> as sp_ark_models::short_weierstrass::SWCurveConfig>::mul_affine(
+			&sp_ark_ed_on_bls12_381::SWAffine::<HostEdOnBls12_381>::generator(),
+			&[2u64],
+		);
+	Ok(())
+}
+
+pub fn do_mul_projective_sw() -> Result<(), Error> {
+	let _out =
+		<ark_ed_on_bls12_381::EdwardsConfig as sp_ark_models::short_weierstrass::SWCurveConfig>::mul_projective(
+			&ark_ed_on_bls12_381::SWProjective::generator(),
+			&[2u64],
+		);
+	Ok(())
+}
+
+pub fn do_mul_projective_sw_optimized() -> Result<(), Error> {
+	let _out =
+		<sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381> as SWCurveConfig>::mul_projective(
+			&sp_ark_ed_on_bls12_381::SWProjective::<HostEdOnBls12_381>::generator(),
+			&[2u64],
+		);
+	Ok(())
+}
+
+pub fn do_mul_projective_te() -> Result<(), Error> {
+	let _out = <ark_ed_on_bls12_381::EdwardsConfig as ark_ec::twisted_edwards::TECurveConfig>::mul_projective(
+		&ark_ed_on_bls12_381::EdwardsProjective::generator(),
 		&[2u64],
 	);
 	Ok(())
 }
 
-pub fn do_mul_projective_optimized() -> Result<(), Error> {
+pub fn do_mul_projective_te_optimized() -> Result<(), Error> {
 	let _out =
-		<sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381> as SWCurveConfig>::mul_projective(
-			&sp_ark_ed_on_bls12_381::SWProjective::<HostEdOnBls12_381>::generator(),
+	<sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381>  as sp_ark_models::twisted_edwards::TECurveConfig>::mul_projective(
+			&sp_ark_ed_on_bls12_381::EdwardsProjective::<HostEdOnBls12_381>::generator(),
 			&[2u64],
 		);
 	Ok(())
