@@ -17,7 +17,7 @@ else ifeq ($(shell lsb_release -si), ArchLinux)
 else ifeq ($(shell uname),Linux)
 	sudo apt-get install jq -y
 else 
-	brew install jq
+	brew install jq --quiet --force
 endif
 
 install-csv-to-markdown:
