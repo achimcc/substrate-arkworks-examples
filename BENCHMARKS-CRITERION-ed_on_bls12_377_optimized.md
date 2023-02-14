@@ -17,70 +17,70 @@
 
 |        | `goptimized_elements`           |
 |:-------|:------------------------------- |
-|        | `66.53 us` (✅ **1.00x**)        |
+|        | `59.07 us` (✅ **1.00x**)        |
 
 ### arithmetic_for_edonbls12_381_optimized
 
 |                                       | `froptimized::bigint`          | `fqoptimized::bigint`          | `goptimized`              | `fqoptimized`                   | `froptimized`                    |
 |:--------------------------------------|:-------------------------------|:-------------------------------|:--------------------------|:--------------------------------|:-------------------------------- |
-| **`addition`**                        | `N/A`                          | `N/A`                          | `388.54 ns` (✅ **1.00x**) | `8.72 ns` (🚀 **44.57x faster**) | `8.64 ns` (🚀 **44.99x faster**)  |
-| **`subtraction`**                     | `N/A`                          | `N/A`                          | `407.73 ns` (✅ **1.00x**) | `8.81 ns` (🚀 **46.27x faster**) | `8.80 ns` (🚀 **46.33x faster**)  |
-| **`mixed_addition`**                  | `N/A`                          | `N/A`                          | `399.98 ns` (✅ **1.00x**) | `N/A`                           | `N/A`                            |
-| **`mixed_subtraction`**               | `N/A`                          | `N/A`                          | `409.29 ns` (✅ **1.00x**) | `N/A`                           | `N/A`                            |
-| **`double`**                          | `N/A`                          | `N/A`                          | `295.04 ns` (✅ **1.00x**) | `5.86 ns` (🚀 **50.32x faster**) | `5.87 ns` (🚀 **50.30x faster**)  |
-| **`scalar_multiplication`**           | `N/A`                          | `N/A`                          | `146.19 us` (✅ **1.00x**) | `N/A`                           | `N/A`                            |
-| **`negation`**                        | `N/A`                          | `N/A`                          | `N/A`                     | `6.13 ns` (✅ **1.01x faster**)  | `6.17 ns` (✅ **1.00x**)          |
-| **`multiplication`**                  | `N/A`                          | `N/A`                          | `N/A`                     | `42.85 ns` (✅ **1.00x slower**) | `42.80 ns` (✅ **1.00x**)         |
-| **`square`**                          | `N/A`                          | `N/A`                          | `N/A`                     | `35.40 ns` (✅ **1.01x slower**) | `34.99 ns` (✅ **1.00x**)         |
-| **`inverse`**                         | `N/A`                          | `N/A`                          | `N/A`                     | `6.89 us` (✅ **1.02x faster**)  | `7.00 us` (✅ **1.00x**)          |
-| **`sum_of_products_of_size_2`**       | `N/A`                          | `N/A`                          | `N/A`                     | `61.57 ns` (✅ **1.00x faster**) | `61.63 ns` (✅ **1.00x**)         |
-| **`naive_sum_of_products_of_size_2`** | `N/A`                          | `N/A`                          | `N/A`                     | `89.02 ns` (✅ **1.01x faster**) | `89.86 ns` (✅ **1.00x**)         |
-| **`addition_with_carry`**             | `7.61 ns` (✅ **1.00x**)        | `7.64 ns` (✅ **1.00x slower**) | `N/A`                     | `N/A`                           | `N/A`                            |
-| **`subtraction_with_borrow`**         | `8.74 ns` (✅ **1.00x**)        | `8.74 ns` (✅ **1.00x faster**) | `N/A`                     | `N/A`                           | `N/A`                            |
-| **`multiplication_by_2`**             | `4.69 ns` (✅ **1.00x**)        | `4.69 ns` (✅ **1.00x slower**) | `N/A`                     | `N/A`                           | `N/A`                            |
-| **`division_by_2`**                   | `4.54 ns` (✅ **1.00x**)        | `4.53 ns` (✅ **1.00x faster**) | `N/A`                     | `N/A`                           | `N/A`                            |
+| **`addition`**                        | `N/A`                          | `N/A`                          | `376.69 ns` (✅ **1.00x**) | `8.28 ns` (🚀 **45.47x faster**) | `8.14 ns` (🚀 **46.26x faster**)  |
+| **`subtraction`**                     | `N/A`                          | `N/A`                          | `398.07 ns` (✅ **1.00x**) | `8.78 ns` (🚀 **45.32x faster**) | `8.79 ns` (🚀 **45.28x faster**)  |
+| **`mixed_addition`**                  | `N/A`                          | `N/A`                          | `389.10 ns` (✅ **1.00x**) | `N/A`                           | `N/A`                            |
+| **`mixed_subtraction`**               | `N/A`                          | `N/A`                          | `392.22 ns` (✅ **1.00x**) | `N/A`                           | `N/A`                            |
+| **`double`**                          | `N/A`                          | `N/A`                          | `292.75 ns` (✅ **1.00x**) | `9.09 ns` (🚀 **32.21x faster**) | `5.29 ns` (🚀 **55.31x faster**)  |
+| **`scalar_multiplication`**           | `N/A`                          | `N/A`                          | `131.10 us` (✅ **1.00x**) | `N/A`                           | `N/A`                            |
+| **`negation`**                        | `N/A`                          | `N/A`                          | `N/A`                     | `5.96 ns` (✅ **1.00x faster**)  | `5.96 ns` (✅ **1.00x**)          |
+| **`multiplication`**                  | `N/A`                          | `N/A`                          | `N/A`                     | `37.30 ns` (✅ **1.00x slower**) | `37.27 ns` (✅ **1.00x**)         |
+| **`square`**                          | `N/A`                          | `N/A`                          | `N/A`                     | `31.78 ns` (✅ **1.00x slower**) | `31.63 ns` (✅ **1.00x**)         |
+| **`inverse`**                         | `N/A`                          | `N/A`                          | `N/A`                     | `6.19 us` (✅ **1.02x faster**)  | `6.34 us` (✅ **1.00x**)          |
+| **`sum_of_products_of_size_2`**       | `N/A`                          | `N/A`                          | `N/A`                     | `53.06 ns` (✅ **1.00x faster**) | `53.19 ns` (✅ **1.00x**)         |
+| **`naive_sum_of_products_of_size_2`** | `N/A`                          | `N/A`                          | `N/A`                     | `79.75 ns` (✅ **1.01x faster**) | `80.72 ns` (✅ **1.00x**)         |
+| **`addition_with_carry`**             | `6.53 ns` (✅ **1.00x**)        | `6.53 ns` (✅ **1.00x slower**) | `N/A`                     | `N/A`                           | `N/A`                            |
+| **`subtraction_with_borrow`**         | `7.85 ns` (✅ **1.00x**)        | `7.85 ns` (✅ **1.00x faster**) | `N/A`                     | `N/A`                           | `N/A`                            |
+| **`multiplication_by_2`**             | `3.89 ns` (✅ **1.00x**)        | `3.89 ns` (✅ **1.00x faster**) | `N/A`                     | `N/A`                           | `N/A`                            |
+| **`division_by_2`**                   | `3.74 ns` (✅ **1.00x**)        | `3.74 ns` (✅ **1.00x faster**) | `N/A`                     | `N/A`                           | `N/A`                            |
 
 ### serialization_for_edonbls12_381_optimized
 
 |                                          | `goptimized`              | `froptimized`                      | `fqoptimized`                       |
 |:-----------------------------------------|:--------------------------|:-----------------------------------|:----------------------------------- |
-| **`serialize_compressed`**               | `68.24 ns` (✅ **1.00x**)  | `33.06 ns` (🚀 **2.06x faster**)    | `30.76 ns` (🚀 **2.22x faster**)     |
-| **`serialize_uncompressed`**             | `62.00 ns` (✅ **1.00x**)  | `33.13 ns` (🚀 **1.87x faster**)    | `30.95 ns` (🚀 **2.00x faster**)     |
-| **`deserialize_compressed`**             | `181.77 us` (✅ **1.00x**) | `49.65 ns` (🚀 **3660.88x faster**) | `52.03 ns` (🚀 **3493.54x faster**)  |
-| **`deserialize_compressed_unchecked`**   | `38.46 us` (✅ **1.00x**)  | `49.65 ns` (🚀 **774.61x faster**)  | `51.96 ns` (🚀 **740.06x faster**)   |
-| **`deserialize_uncompressed`**           | `144.23 us` (✅ **1.00x**) | `49.58 ns` (🚀 **2909.24x faster**) | `51.95 ns` (🚀 **2776.39x faster**)  |
-| **`deserialize_uncompressed_unchecked`** | `165.08 ns` (✅ **1.00x**) | `49.53 ns` (🚀 **3.33x faster**)    | `51.95 ns` (🚀 **3.18x faster**)     |
+| **`serialize_compressed`**               | `64.00 ns` (✅ **1.00x**)  | `28.07 ns` (🚀 **2.28x faster**)    | `28.08 ns` (🚀 **2.28x faster**)     |
+| **`serialize_uncompressed`**             | `54.27 ns` (✅ **1.00x**)  | `27.96 ns` (🚀 **1.94x faster**)    | `28.04 ns` (🚀 **1.94x faster**)     |
+| **`deserialize_compressed`**             | `164.14 us` (✅ **1.00x**) | `46.58 ns` (🚀 **3523.68x faster**) | `44.69 ns` (🚀 **3672.68x faster**)  |
+| **`deserialize_compressed_unchecked`**   | `34.21 us` (✅ **1.00x**)  | `46.57 ns` (🚀 **734.57x faster**)  | `44.46 ns` (🚀 **769.41x faster**)   |
+| **`deserialize_uncompressed`**           | `129.83 us` (✅ **1.00x**) | `46.52 ns` (🚀 **2790.65x faster**) | `45.53 ns` (🚀 **2851.60x faster**)  |
+| **`deserialize_uncompressed_unchecked`** | `143.63 ns` (✅ **1.00x**) | `46.53 ns` (🚀 **3.09x faster**)    | `45.56 ns` (🚀 **3.15x faster**)     |
 
 ### msm_for_edonbls12_381_optimized
 
 |        | `goptimized`            |
 |:-------|:----------------------- |
-|        | `1.31 s` (✅ **1.00x**)  |
+|        | `1.36 s` (✅ **1.00x**)  |
 
 ### squareroot_for_edonbls12_381_optimized
 
 |                          | `froptimized`            | `fqoptimized`                    |
 |:-------------------------|:-------------------------|:-------------------------------- |
-| **`square_root_for_qr`** | `12.12 us` (✅ **1.00x**) | `31.20 us` (❌ *2.57x slower*)    |
-| **`legendre_for_qr`**    | `12.28 us` (✅ **1.00x**) | `10.90 us` (✅ **1.13x faster**)  |
+| **`square_root_for_qr`** | `10.40 us` (✅ **1.00x**) | `27.60 us` (❌ *2.65x slower*)    |
+| **`legendre_for_qr`**    | `10.59 us` (✅ **1.00x**) | `9.52 us` (✅ **1.11x faster**)   |
 
 ### bitwise_operations_for_edonbls12_381_optimized
 
 |                               | `froptimized::bigint`          | `fqoptimized::bigint`            |
 |:------------------------------|:-------------------------------|:-------------------------------- |
-| **`number_of_bits`**          | `4.85 ns` (✅ **1.00x**)        | `4.85 ns` (✅ **1.00x slower**)   |
-| **`from_little-endian_bits`** | `48.77 ns` (✅ **1.00x**)       | `48.63 ns` (✅ **1.00x faster**)  |
-| **`from_big-endian_bits`**    | `48.63 ns` (✅ **1.00x**)       | `48.59 ns` (✅ **1.00x faster**)  |
-| **`comparison`**              | `4.89 ns` (✅ **1.00x**)        | `4.89 ns` (✅ **1.00x faster**)   |
-| **`equality`**                | `5.42 ns` (✅ **1.00x**)        | `5.42 ns` (✅ **1.00x faster**)   |
-| **`is_zero`**                 | `4.90 ns` (✅ **1.00x**)        | `4.90 ns` (✅ **1.00x faster**)   |
+| **`number_of_bits`**          | `3.98 ns` (✅ **1.00x**)        | `3.98 ns` (✅ **1.00x faster**)   |
+| **`from_little-endian_bits`** | `62.15 ns` (✅ **1.00x**)       | `62.16 ns` (✅ **1.00x slower**)  |
+| **`from_big-endian_bits`**    | `62.16 ns` (✅ **1.00x**)       | `62.14 ns` (✅ **1.00x faster**)  |
+| **`comparison`**              | `4.07 ns` (✅ **1.00x**)        | `4.07 ns` (✅ **1.00x faster**)   |
+| **`equality`**                | `4.50 ns` (✅ **1.00x**)        | `4.50 ns` (✅ **1.00x slower**)   |
+| **`is_zero`**                 | `3.91 ns` (✅ **1.00x**)        | `3.91 ns` (✅ **1.00x faster**)   |
 
 ### conversions_for_edonbls12_381_optimized
 
 |                   | `froptimized`            | `fqoptimized`                    |
 |:------------------|:-------------------------|:-------------------------------- |
-| **`from_bigint`** | `40.91 ns` (✅ **1.00x**) | `40.79 ns` (✅ **1.00x faster**)  |
-| **`into_bigint`** | `23.75 ns` (✅ **1.00x**) | `22.49 ns` (✅ **1.06x faster**)  |
+| **`from_bigint`** | `36.05 ns` (✅ **1.00x**) | `35.90 ns` (✅ **1.00x faster**)  |
+| **`into_bigint`** | `21.65 ns` (✅ **1.00x**) | `21.73 ns` (✅ **1.00x slower**)  |
 
 ---
 Made with [criterion-table](https://github.com/nu11ptr/criterion-table)
