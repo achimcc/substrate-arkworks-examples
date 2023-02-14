@@ -22,8 +22,9 @@ use bw6_761::{
 
 mod ed_on_bls12_381;
 use ed_on_bls12_381::{
-	bench_msm_ed_on_bls12_381, bench_mul_affine_ed_on_bls12_381,
-	bench_mul_projective_ed_on_bls12_381,
+	bench_msm_sw_ed_on_bls12_381, bench_msm_te_ed_on_bls12_381,
+	bench_mul_affine_sw_ed_on_bls12_381, bench_mul_affine_te_ed_on_bls12_381,
+	bench_mul_projective_sw_ed_on_bls12_381, bench_mul_projective_te_ed_on_bls12_381,
 };
 
 mod ed_on_bls12_377;
@@ -77,7 +78,8 @@ criterion_group! {
 	name = ed_on_bls12_381;
 	config = Criterion::default();
 	targets =
-		bench_msm_ed_on_bls12_381, bench_mul_affine_ed_on_bls12_381, bench_mul_projective_ed_on_bls12_381
+		bench_msm_sw_ed_on_bls12_381, bench_mul_affine_sw_ed_on_bls12_381, bench_mul_projective_sw_ed_on_bls12_381,
+		bench_msm_te_ed_on_bls12_381, bench_mul_affine_te_ed_on_bls12_381, bench_mul_projective_te_ed_on_bls12_381
 }
 
 criterion_main!(groth16, bls12_381, bls12_377, blw6_761, ed_on_bls12_377, ed_on_bls12_381);

@@ -17,14 +17,24 @@ pub fn bench_pairing_bls12_377(c: &mut Criterion) {
 
 pub fn bench_msm_g1_bls12_377(c: &mut Criterion) {
 	let mut group = c.benchmark_group("pairing_msm_g1_bls12_377");
-	group.bench_function("normal", |b| {
+	group.bench_function("normal, 10 arguments", |b| {
 		b.iter(|| {
-			let _ = pallet_template::bls12_377::do_msm_g1();
+			let _ = pallet_template::bls12_377::do_msm_g1(10);
 		});
 	});
-	group.bench_function("optimized", |b| {
+	group.bench_function("optimized, 10 arguments", |b| {
 		b.iter(|| {
-			let _ = pallet_template::bls12_377::do_msm_g1_optimized();
+			let _ = pallet_template::bls12_377::do_msm_g1_optimized(10);
+		});
+	});
+	group.bench_function("normal, 1000 arguments", |b| {
+		b.iter(|| {
+			let _ = pallet_template::bls12_377::do_msm_g1(1000);
+		});
+	});
+	group.bench_function("optimized, 1000 arguments", |b| {
+		b.iter(|| {
+			let _ = pallet_template::bls12_377::do_msm_g1_optimized(1000);
 		});
 	});
 	group.finish();
@@ -32,14 +42,24 @@ pub fn bench_msm_g1_bls12_377(c: &mut Criterion) {
 
 pub fn bench_msm_g2_bls12_377(c: &mut Criterion) {
 	let mut group = c.benchmark_group("pairing_msm_g2_bls12_377");
-	group.bench_function("normal", |b| {
+	group.bench_function("normal, 10 arguments", |b| {
 		b.iter(|| {
-			let _ = pallet_template::bls12_377::do_msm_g2();
+			let _ = pallet_template::bls12_377::do_msm_g2(10);
 		});
 	});
-	group.bench_function("optimized", |b| {
+	group.bench_function("optimized, 10 arguments", |b| {
 		b.iter(|| {
-			let _ = pallet_template::bls12_377::do_msm_g2_optimized();
+			let _ = pallet_template::bls12_377::do_msm_g2_optimized(10);
+		});
+	});
+	group.bench_function("normal, 1000 arguments", |b| {
+		b.iter(|| {
+			let _ = pallet_template::bls12_377::do_msm_g2(1000);
+		});
+	});
+	group.bench_function("optimized, 1000 arguments", |b| {
+		b.iter(|| {
+			let _ = pallet_template::bls12_377::do_msm_g2_optimized(1000);
 		});
 	});
 	group.finish();

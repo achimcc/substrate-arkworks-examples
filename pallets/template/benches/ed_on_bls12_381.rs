@@ -17,46 +17,111 @@ use criterion::Criterion;
 // 	PrimeBaseField = Fq_optimized,
 // );
 
-pub fn bench_msm_ed_on_bls12_381(c: &mut Criterion) {
-	let mut group = c.benchmark_group("msm_ed_on_bls12_381");
-	group.bench_function("normal", |b| {
+pub fn bench_msm_sw_ed_on_bls12_381(c: &mut Criterion) {
+	let mut group = c.benchmark_group("msm_sw_ed_on_bls12_381");
+	group.bench_function("normal, 10 arguments", |b| {
 		b.iter(|| {
-			let _ = pallet_template::ed_on_bls12_381::do_msm();
+			let _ = pallet_template::ed_on_bls12_381::do_msm_sw(10);
 		});
 	});
-	group.bench_function("optimized", |b| {
+	group.bench_function("optimized, 10 arguments", |b| {
 		b.iter(|| {
-			let _ = pallet_template::ed_on_bls12_381::do_msm_optimized();
+			let _ = pallet_template::ed_on_bls12_381::do_msm_sw_optimized(10);
 		});
 	});
-	group.finish();
-}
-
-pub fn bench_mul_affine_ed_on_bls12_381(c: &mut Criterion) {
-	let mut group = c.benchmark_group("mul_affine_ed_on_bls12_381");
-	group.bench_function("normal", |b| {
+	group.bench_function("normal, 1000 arguments", |b| {
 		b.iter(|| {
-			let _ = pallet_template::ed_on_bls12_381::do_mul_affine();
+			let _ = pallet_template::ed_on_bls12_381::do_msm_sw(1000);
 		});
 	});
-	group.bench_function("optimized", |b| {
+	group.bench_function("optimized, 1000 arguments", |b| {
 		b.iter(|| {
-			let _ = pallet_template::ed_on_bls12_381::do_mul_affine_optimized();
+			let _ = pallet_template::ed_on_bls12_381::do_msm_sw_optimized(1000);
 		});
 	});
 	group.finish();
 }
 
-pub fn bench_mul_projective_ed_on_bls12_381(c: &mut Criterion) {
-	let mut group = c.benchmark_group("mul_projective_ed_on_bls12_381");
+pub fn bench_mul_affine_sw_ed_on_bls12_381(c: &mut Criterion) {
+	let mut group = c.benchmark_group("mul_affine_sw_ed_on_bls12_381");
 	group.bench_function("normal", |b| {
 		b.iter(|| {
-			let _ = pallet_template::ed_on_bls12_381::do_mul_projective();
+			let _ = pallet_template::ed_on_bls12_381::do_mul_affine_sw();
 		});
 	});
 	group.bench_function("optimized", |b| {
 		b.iter(|| {
-			let _ = pallet_template::ed_on_bls12_381::do_mul_projective_optimized();
+			let _ = pallet_template::ed_on_bls12_381::do_mul_affine_sw_optimized();
+		});
+	});
+	group.finish();
+}
+
+pub fn bench_mul_projective_sw_ed_on_bls12_381(c: &mut Criterion) {
+	let mut group = c.benchmark_group("mul_projective_sw_ed_on_bls12_381");
+	group.bench_function("normal", |b| {
+		b.iter(|| {
+			let _ = pallet_template::ed_on_bls12_381::do_mul_projective_sw();
+		});
+	});
+	group.bench_function("optimized", |b| {
+		b.iter(|| {
+			let _ = pallet_template::ed_on_bls12_381::do_mul_projective_sw_optimized();
+		});
+	});
+	group.finish();
+}
+
+pub fn bench_msm_te_ed_on_bls12_381(c: &mut Criterion) {
+	let mut group = c.benchmark_group("msm_te_10_ed_on_bls12_381");
+	group.bench_function("normal, 10 arguments", |b| {
+		b.iter(|| {
+			let _ = pallet_template::ed_on_bls12_381::do_msm_sw(10);
+		});
+	});
+	group.bench_function("optimized, 10 arguments", |b| {
+		b.iter(|| {
+			let _ = pallet_template::ed_on_bls12_381::do_msm_sw_optimized(10);
+		});
+	});
+	group.bench_function("normal, 1000 arguments", |b| {
+		b.iter(|| {
+			let _ = pallet_template::ed_on_bls12_381::do_msm_te(1000);
+		});
+	});
+	group.bench_function("optimized, 1000 arguments", |b| {
+		b.iter(|| {
+			let _ = pallet_template::ed_on_bls12_381::do_msm_te_optimized(1000);
+		});
+	});
+	group.finish();
+}
+
+pub fn bench_mul_affine_te_ed_on_bls12_381(c: &mut Criterion) {
+	let mut group = c.benchmark_group("mul_affine_te_ed_on_bls12_381");
+	group.bench_function("normal", |b| {
+		b.iter(|| {
+			let _ = pallet_template::ed_on_bls12_381::do_mul_affine_te();
+		});
+	});
+	group.bench_function("optimized", |b| {
+		b.iter(|| {
+			let _ = pallet_template::ed_on_bls12_381::do_mul_affine_te_optimized();
+		});
+	});
+	group.finish();
+}
+
+pub fn bench_mul_projective_te_ed_on_bls12_381(c: &mut Criterion) {
+	let mut group = c.benchmark_group("mul_projective_te_ed_on_bls12_381");
+	group.bench_function("normal", |b| {
+		b.iter(|| {
+			let _ = pallet_template::ed_on_bls12_381::do_mul_projective_te();
+		});
+	});
+	group.bench_function("optimized", |b| {
+		b.iter(|| {
+			let _ = pallet_template::ed_on_bls12_381::do_mul_projective_te_optimized();
 		});
 	});
 	group.finish();
