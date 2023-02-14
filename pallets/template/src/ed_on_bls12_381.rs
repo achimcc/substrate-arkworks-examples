@@ -1,4 +1,5 @@
-use ark_std::{io::Error, vec::Vec};
+use ark_ec::CurveConfig;
+use ark_std::{io::Error, test_rng, vec::Vec, UniformRand};
 use sp_ark_ed_on_bls12_381::HostFunctions as EdwardBls12_381HostFunctions;
 use sp_ark_models::{short_weierstrass::SWCurveConfig, AffineRepr, Group};
 
@@ -25,18 +26,31 @@ impl EdwardBls12_381HostFunctions for HostEdOnBls12_381 {
 	}
 }
 
-pub fn do_msm() -> Result<(), Error> {
-	let _out = <ark_ed_on_bls12_381::EdwardsConfig as SWCurveConfig>::msm(
-		&[ark_ed_on_bls12_381::SWAffine::generator()],
-		&[2u64.into()],
-	);
+pub fn do_msm(samples: u32) -> Result<(), Error> {
+	let mut rng = test_rng();
+	let g = ark_ed_on_bls12_381::SWAffine::rand(&mut rng);
+	let v: Vec<_> = (0..samples).map(|_| g).collect();
+	let scalars: Vec<_> = (0..samples)
+		.map(|_| <ark_ed_on_bls12_381::EdwardsConfig as CurveConfig>::ScalarField::rand(&mut rng))
+		.collect();
+	let _out = <ark_ed_on_bls12_381::EdwardsConfig as SWCurveConfig>::msm(&v[..], &scalars[..]);
 	Ok(())
 }
 
-pub fn do_msm_optimized() -> Result<(), Error> {
+pub fn do_msm_optimized(samples: u32) -> Result<(), Error> {
+	let mut rng = test_rng();
+	let g = ark_ec::short_weierstrass::Affine::<
+		sp_ark_ed_on_bls12_381::JubjubConfig<HostEdOnBls12_381>,
+	>::rand(&mut rng);
+	let v: Vec<_> = (0..samples).map(|_| g).collect();
+	let scalars: Vec<_> = (0..samples)
+		.map(|_| {
+			<sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381> as CurveConfig>::ScalarField::rand(&mut rng)
+		})
+		.collect();
 	let _out = <sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381> as SWCurveConfig>::msm(
-		&[sp_ark_ed_on_bls12_381::SWAffine::<HostEdOnBls12_381>::generator()],
-		&[2u64.into()],
+		&v[..],
+		&scalars[..],
 	);
 	Ok(())
 }

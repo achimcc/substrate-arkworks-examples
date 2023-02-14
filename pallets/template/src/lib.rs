@@ -109,29 +109,33 @@ pub mod pallet {
 
 		#[pallet::call_index(4)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_381_msm_g1(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bls12_381::do_msm_g1();
+		pub fn bls12_381_msm_g1(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::bls12_381::do_msm_g1(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(5)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_381_msm_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bls12_381::do_msm_g1_optimized();
+		pub fn bls12_381_msm_g1_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::bls12_381::do_msm_g1_optimized(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(6)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_381_msm_g2(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bls12_381::do_msm_g2();
+		pub fn bls12_381_msm_g2(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::bls12_381::do_msm_g2(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(7)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_381_msm_g2_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bls12_381::do_msm_g2_optimized();
+		pub fn bls12_381_msm_g2_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::bls12_381::do_msm_g2_optimized(samples);
 			Ok(())
 		}
 
@@ -207,29 +211,33 @@ pub mod pallet {
 
 		#[pallet::call_index(18)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_377_msm_g1(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bls12_377::do_msm_g1();
+		pub fn bls12_377_msm_g1(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::bls12_377::do_msm_g1(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(19)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_377_msm_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bls12_377::do_msm_g1_optimized();
+		pub fn bls12_377_msm_g1_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::bls12_377::do_msm_g1_optimized(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(20)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_377_msm_g2(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bls12_377::do_msm_g2();
+		pub fn bls12_377_msm_g2(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::bls12_377::do_msm_g2(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(21)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_377_msm_g2_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bls12_377::do_msm_g2_optimized();
+		pub fn bls12_377_msm_g2_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::bls12_377::do_msm_g2_optimized(samples);
 			Ok(())
 		}
 
@@ -305,29 +313,33 @@ pub mod pallet {
 
 		#[pallet::call_index(32)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bw6_761_msm_g1(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bw6_761::do_msm_g1();
+		pub fn bw6_761_msm_g1(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::bw6_761::do_msm_g1(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(33)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bw6_761_msm_g1_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bw6_761::do_msm_g1_optimized();
+		pub fn bw6_761_msm_g1_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::bw6_761::do_msm_g1_optimized(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(34)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bw6_761_msm_g2(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bw6_761::do_msm_g2();
+		pub fn bw6_761_msm_g2(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::bw6_761::do_msm_g2(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(35)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bw6_761_msm_g2_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bw6_761::do_msm_g2_optimized();
+		pub fn bw6_761_msm_g2_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::bw6_761::do_msm_g2_optimized(samples);
 			Ok(())
 		}
 
@@ -389,15 +401,20 @@ pub mod pallet {
 
 		#[pallet::call_index(44)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_msm(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::ed_on_bls12_381::do_msm();
+		pub fn ed_on_bls12_381_msm(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::ed_on_bls12_381::do_msm(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(45)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_msm_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::ed_on_bls12_381::do_msm_optimized();
+		pub fn ed_on_bls12_381_msm_optimized(
+			_origin: OriginFor<T>,
+			samples: u32,
+		) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::ed_on_bls12_381::do_msm_optimized(samples);
 			Ok(())
 		}
 
@@ -431,15 +448,20 @@ pub mod pallet {
 
 		#[pallet::call_index(50)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_377_msm(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::ed_on_bls12_377::do_msm();
+		pub fn ed_on_bls12_377_msm(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::ed_on_bls12_377::do_msm(samples);
 			Ok(())
 		}
 
 		#[pallet::call_index(51)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_377_msm_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::ed_on_bls12_377::do_msm_optimized();
+		pub fn ed_on_bls12_377_msm_optimized(
+			_origin: OriginFor<T>,
+			samples: u32,
+		) -> DispatchResult {
+			let samples: u32 = samples.try_into().unwrap();
+			let _ = crate::ed_on_bls12_377::do_msm_optimized(samples);
 			Ok(())
 		}
 

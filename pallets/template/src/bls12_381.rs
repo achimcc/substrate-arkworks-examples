@@ -63,12 +63,11 @@ pub fn do_pairing() -> Result<(), Error> {
 	Ok(())
 }
 
-pub fn do_msm_g1() -> Result<(), Error> {
-	const SAMPLES: usize = 65536;
+pub fn do_msm_g1(samples: u32) -> Result<(), Error> {
 	let mut rng = test_rng();
 	let g = ark_bls12_381::g1::G1Affine::rand(&mut rng);
-	let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
-	let scalars: Vec<_> = (0..SAMPLES)
+	let v: Vec<_> = (0..samples).map(|_| g).collect();
+	let scalars: Vec<_> = (0..samples)
 		.map(|_| {
 			<ark_bls12_381::g1::Config as ark_ec::models::CurveConfig>::ScalarField::rand(&mut rng)
 		})
@@ -77,12 +76,11 @@ pub fn do_msm_g1() -> Result<(), Error> {
 	Ok(())
 }
 
-pub fn do_msm_g1_optimized() -> Result<(), Error> {
-	const SAMPLES: usize = 65536;
+pub fn do_msm_g1_optimized(samples: u32) -> Result<(), Error> {
 	let mut rng = test_rng();
 	let g = G1AffineBls12_381::rand(&mut rng);
-	let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
-	let scalars: Vec<_> = (0..SAMPLES)
+	let v: Vec<_> = (0..samples).map(|_| g).collect();
+	let scalars: Vec<_> = (0..samples)
 		.map(|_| <sp_ark_bls12_381::g1::Config::<HostBls12_381> as sp_ark_models::models::CurveConfig>::ScalarField::rand(&mut rng))
 		.collect();
 	let _out =
@@ -90,12 +88,11 @@ pub fn do_msm_g1_optimized() -> Result<(), Error> {
 	Ok(())
 }
 
-pub fn do_msm_g2() -> Result<(), Error> {
-	const SAMPLES: usize = 65536;
+pub fn do_msm_g2(samples: u32) -> Result<(), Error> {
 	let mut rng = test_rng();
 	let g = ark_bls12_381::g2::G2Affine::rand(&mut rng);
-	let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
-	let scalars: Vec<_> = (0..SAMPLES)
+	let v: Vec<_> = (0..samples).map(|_| g).collect();
+	let scalars: Vec<_> = (0..samples)
 		.map(|_| {
 			<ark_bls12_381::g2::Config as ark_ec::models::CurveConfig>::ScalarField::rand(&mut rng)
 		})
@@ -104,12 +101,11 @@ pub fn do_msm_g2() -> Result<(), Error> {
 	Ok(())
 }
 
-pub fn do_msm_g2_optimized() -> Result<(), Error> {
-	const SAMPLES: usize = 65536;
+pub fn do_msm_g2_optimized(samples: u32) -> Result<(), Error> {
 	let mut rng = test_rng();
 	let g = G2AffineBls12_381::rand(&mut rng);
-	let v: Vec<_> = (0..SAMPLES).map(|_| g).collect();
-	let scalars: Vec<_> = (0..SAMPLES)
+	let v: Vec<_> = (0..samples).map(|_| g).collect();
+	let scalars: Vec<_> = (0..samples)
 				.map(|_| <sp_ark_bls12_381::g2::Config::<HostBls12_381> as sp_ark_models::models::CurveConfig>::ScalarField::rand(&mut rng))
 				.collect();
 	let _out =
