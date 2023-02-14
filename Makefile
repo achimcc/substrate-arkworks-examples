@@ -23,8 +23,12 @@ endif
 install-csv-to-markdown:
 	sudo npm install --global csv-to-markdown
 
+install mpdf:
+	sudo npm install mdpdf -g
+
 install: install-jq
 install: install-csv-to-markdown
+install: install-mpdf
 
 
 ################################################################################
@@ -60,12 +64,23 @@ benchmark-to-csv:
 	cat results.json | jq -r '["extrinsic", "time (µs)"], (.[] | [ .benchmark, ([.time_results[]?.extrinsic_time] | (add / length) | round /1000 ) ]) | @csv' > results.csv
 
 benchmark-csv-to-markdown:
-	csv-to-markdown results.csv > BENCHMARK.MD
+	csv-to-markdown results.csv > benchmark.md
+
+benchmark-to-pdf:
+	mpdf benchmark.md
+
+benchmark-cleanup:
+	rm results.json
+    rm results.csv
+	rm benchmark.md
+
 
 benchmark: benchmark-build
 benchmark: benchmark-compute
 benchmark: benchmark-to-csv
 benchmark: benchmark-csv-to-markdown
+benchmark: benchmark-to-pdf
+benchmark: benchmark-cleanup
 
     
 
