@@ -28,25 +28,25 @@ fn pairing_bls12_381_optimized() {
 #[test]
 fn msm_g1_bls12_381() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_381_msm_g1(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::bls12_381_msm_g1(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
 fn msm_g1_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_381_msm_g1_optimized(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::bls12_381_msm_g1_optimized(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
 fn msm_g2_bls12_381() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_381_msm_g2(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::bls12_381_msm_g2(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
 fn msm_g2_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_381_msm_g2_optimized(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::bls12_381_msm_g2_optimized(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
@@ -112,25 +112,25 @@ fn pairing_bls12_377_optimized() {
 #[test]
 fn msm_g1_bls12_377() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_377_msm_g1(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::bls12_377_msm_g1(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
 fn msm_g1_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_377_msm_g1_optimized(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::bls12_377_msm_g1_optimized(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
 fn msm_g2_bls12_377() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_377_msm_g2(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::bls12_377_msm_g2(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
 fn msm_g2_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_377_msm_g2_optimized(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::bls12_377_msm_g2_optimized(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
@@ -196,25 +196,25 @@ fn pairing_bw6_761_optimized() {
 #[test]
 fn msm_g1_bw6_761() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bw6_761_msm_g1(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::bw6_761_msm_g1(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
 fn msm_g1_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bw6_761_msm_g1_optimized(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::bw6_761_msm_g1_optimized(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
 fn msm_g2_bw6_761() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bw6_761_msm_g2(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::bw6_761_msm_g2(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
 fn msm_g2_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bw6_761_msm_g2_optimized(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::bw6_761_msm_g2_optimized(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
@@ -268,13 +268,13 @@ fn mul_affine_g2_bw6_761_optimized() {
 #[test]
 fn msm_ed_on_bls12_377() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_377_msm(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::ed_on_bls12_377_msm(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
 fn msm_ed_on_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_377_msm_optimized(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::ed_on_bls12_377_msm_optimized(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
@@ -304,40 +304,82 @@ fn mul_affine_ed_on_bls12_377_optimized() {
 	});
 }
 #[test]
-fn msm_ed_on_bls12_381() {
+fn msm_sw_ed_on_bls12_381() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_381_msm(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::ed_on_bls12_381_msm_sw(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
-fn msm_ed_on_bls12_381_optimized() {
+fn msm_sw_ed_on_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_381_msm_optimized(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::ed_on_bls12_381_msm_sw_optimized(RuntimeOrigin::signed(1), 10));
 	});
 }
 #[test]
-fn mul_projective_ed_on_bls12_381() {
+fn mul_projective_sw_ed_on_bls12_381() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_sw(RuntimeOrigin::signed(1)));
 	});
 }
 #[test]
-fn mul_projective_ed_on_bls12_381_optimized() {
+fn mul_projective_sw_ed_on_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_optimized(
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_sw_optimized(
 			RuntimeOrigin::signed(1)
 		));
 	});
 }
 #[test]
-fn mul_affine_ed_on_bls12_381() {
+fn mul_affine_sw_ed_on_bls12_381() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine_sw(RuntimeOrigin::signed(1)));
 	});
 }
 #[test]
-fn mul_affine_ed_on_bls12_381_optimized() {
+fn mul_affine_sw_ed_on_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine_optimized(RuntimeOrigin::signed(1)));
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine_sw_optimized(RuntimeOrigin::signed(
+			1
+		)));
+	});
+}
+#[test]
+fn msm_te_ed_on_bls12_381() {
+	new_test_ext().execute_with(|| {
+		assert_ok!(TemplateModule::ed_on_bls12_381_msm_te(RuntimeOrigin::signed(1), 10));
+	});
+}
+#[test]
+fn msm_te_ed_on_bls12_381_optimized() {
+	new_test_ext().execute_with(|| {
+		assert_ok!(TemplateModule::ed_on_bls12_381_msm_te_optimized(RuntimeOrigin::signed(1), 10));
+	});
+}
+#[test]
+fn mul_projective_te_ed_on_bls12_381() {
+	new_test_ext().execute_with(|| {
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_te(RuntimeOrigin::signed(1)));
+	});
+}
+#[test]
+fn mul_projective_te_ed_on_bls12_381_optimized() {
+	new_test_ext().execute_with(|| {
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_te_optimized(
+			RuntimeOrigin::signed(1)
+		));
+	});
+}
+#[test]
+fn mul_affine_te_ed_on_bls12_381() {
+	new_test_ext().execute_with(|| {
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine_te(RuntimeOrigin::signed(1)));
+	});
+}
+#[test]
+fn mul_affine_te_ed_on_bls12_381_optimized() {
+	new_test_ext().execute_with(|| {
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine_te_optimized(RuntimeOrigin::signed(
+			1
+		)));
 	});
 }
