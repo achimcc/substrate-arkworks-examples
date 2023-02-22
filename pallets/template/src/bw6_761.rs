@@ -1,4 +1,4 @@
-use ark_std::{io::Error, test_rng, vec::Vec, UniformRand};
+use ark_std::{io::Error, vec::Vec};
 pub use sp_ark_bw6_761::{
 	G1Affine as G1AffineBW6_761_Host, G1Projective as G1ProjectiveBW6_761_Host,
 	G2Affine as G2AffineBW6_761_Host, G2Projective as G2ProjectiveBW6_761_Host,
@@ -42,51 +42,35 @@ pub type G1ProjectiveBW6_761 = G1ProjectiveBW6_761_Host<HostBW6_761>;
 pub type G2ProjectiveBW6_761 = G2ProjectiveBW6_761_Host<HostBW6_761>;
 
 pub fn do_msm_g1(samples: u32) -> Result<(), Error> {
-	let mut rng = test_rng();
-	let g = ark_bw6_761::G1Affine::rand(&mut rng);
+	let g = ark_bw6_761::G1Affine::generator();
 	let v: Vec<_> = (0..samples).map(|_| g).collect();
-	let scalars: Vec<_> = (0..samples)
-		.map(|_| <ark_bw6_761::g1::Config as ark_ec::CurveConfig>::ScalarField::rand(&mut rng))
-		.collect();
+	let scalars: Vec<_> = (0..samples).map(|_| ark_ff::Fp::from(2u64)).collect();
 	let _out = <ark_bw6_761::g1::Config as SWCurveConfig>::msm(&v[..], &scalars[..]);
 
 	Ok(())
 }
 
 pub fn do_msm_g1_optimized(samples: u32) -> Result<(), Error> {
-	let mut rng = test_rng();
-	let g = G1AffineBW6_761_Host::rand(&mut rng);
+	let g = G1AffineBW6_761_Host::generator();
 	let v: Vec<_> = (0..samples).map(|_| g).collect();
-	let scalars: Vec<_> = (0..samples)
-		.map(|_| {
-			<sp_ark_bw6_761::g1::Config<HostBW6_761> as sp_ark_models::CurveConfig>::ScalarField::rand(&mut rng)
-		})
-		.collect();
+	let scalars: Vec<_> = (0..samples).map(|_| ark_ff::Fp::from(2u64)).collect();
 	let _out =
 		<sp_ark_bw6_761::g1::Config<HostBW6_761> as SWCurveConfig>::msm(&v[..], &scalars[..]);
 	Ok(())
 }
 
 pub fn do_msm_g2(samples: u32) -> Result<(), Error> {
-	let mut rng = test_rng();
-	let g = ark_bw6_761::G2Affine::rand(&mut rng);
+	let g = ark_bw6_761::G2Affine::generator();
 	let v: Vec<_> = (0..samples).map(|_| g).collect();
-	let scalars: Vec<_> = (0..samples)
-		.map(|_| <ark_bw6_761::g1::Config as ark_ec::CurveConfig>::ScalarField::rand(&mut rng))
-		.collect();
+	let scalars: Vec<_> = (0..samples).map(|_| ark_ff::Fp::from(2u64)).collect();
 	let _out = <ark_bw6_761::g2::Config as SWCurveConfig>::msm(&v[..], &scalars[..]);
 	Ok(())
 }
 
 pub fn do_msm_g2_optimized(samples: u32) -> Result<(), Error> {
-	let mut rng = test_rng();
-	let g = G2AffineBW6_761_Host::rand(&mut rng);
+	let g = G2AffineBW6_761_Host::generator();
 	let v: Vec<_> = (0..samples).map(|_| g).collect();
-	let scalars: Vec<_> = (0..samples)
-		.map(|_| {
-			<sp_ark_bw6_761::g1::Config<HostBW6_761> as sp_ark_models::CurveConfig>::ScalarField::rand(&mut rng)
-		})
-		.collect();
+	let scalars: Vec<_> = (0..samples).map(|_| ark_ff::Fp::from(2u64)).collect();
 	let _out =
 		<sp_ark_bw6_761::g2::Config<HostBW6_761> as SWCurveConfig>::msm(&v[..], &scalars[..]);
 	Ok(())
