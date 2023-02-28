@@ -1,3 +1,10 @@
+# Bechmark results comparison table
+
+normal: implemented in a Substrate pallet with arkworks library
+optimized: implemented in a Substrate pallet with ark-substrate library, executed through host-function call
+wasm: executed through wasmtime
+native: native execution 
+
 | extrinsic                                   |   normal(µs)  | optimized(µs) |   wasm(µs)    |   native(µs)  |
 | ------------------------------------------- | ------------- | ------------- | ------------- | ------------- |
 | groth16_verification                        |   28790.226   |   8583.25     |    56980      |     4320      | 
@@ -40,3 +47,4 @@
 | ed_on_bls12_377_msm, 1000 arguments         |   37079.82    |   6150.74     |    65890      |     2850      |
 | ed_on_bls12_377_mul_projective              |   8.88        |   11.29       |    27.30      |     0.72      |
 | ed_on_bls12_377_mul_affine                  |   3585.92     |   437.80      |    6040       |     280.58    |
+
