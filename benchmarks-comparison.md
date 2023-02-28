@@ -1,4 +1,4 @@
-| extrinsic                                   |   normal(us)  | optimized(us) |   wasm(us)    |   native(us)  |
+| extrinsic                                   |   normal(µs)  | optimized(µs) |   wasm(µs)    |   native(µs)  |
 | ------------------------------------------- | ------------- | ------------- | ------------- | ------------- |
 | groth16_verification                        |   28790.226   |   8583.25     |    56980      |     4320      | 
 | bls12_381_pairing                           |   8727.14     |   1786.77     |    19040      |     1470      |
