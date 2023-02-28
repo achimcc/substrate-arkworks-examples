@@ -43,7 +43,7 @@
 | ed_on_bls12_377_mul_projective              |    8.88          |    11.29        |     27.30       |      0.72       |
 | ed_on_bls12_377_mul_affine                  |    3585.92       |    437.80       |     6040        |      280.58    d |
 
-[^1]: implemented in a Substrate pallet with arkworks library
-[^2]: implemented in a Substrate pallet with ark-substrate library, executed through host-function call
-[^3]: executed through wasmtime
-[^4]: native execution 
+[^1]: implemented in a Substrate pallet with [arkworks](https://github.com/arkworks-rs/) library by this repo: https://github.com/achimcc/substrate-arkworks-examples
+[^2]: implemented in a Substrate pallet with [ark-substrate](https://github.com/paritytech/ark-substrate) library, executed through host-function call, computed by this repo: https://github.com/achimcc/substrate-arkworks-examples
+[^3]: executed through wasmtime by this repo: https://github.com/achimcc/native-bench-arkworks
+[^4]: native execution, computed by this repo: https://github.com/achimcc/native-bench-arkworks
