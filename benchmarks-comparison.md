@@ -36,7 +36,7 @@
 | ed_on_bls12_381_mul_affine_sw               |    6.00          |    13.00        |     36.63       |      0.30       |
 | ed_on_bls12_381_msm_te, 10 arguments        |    3516.00       |    465.38       |     6540        |      406.76     |
 | ed_on_bls12_381_msm_te, 1000 arguments      |    37165.91      |    5952.35      |     72860       |      3070       |
-| ed_on_bls12_381_mul_projective_te           |    8.84          |    9.72         |     27.47       |      742.17     |  
+| ed_on_bls12_381_mul_projective_te           |    8.84          |    9.72         |     27.47       |      0.74       |  
 | ed_on_bls12_381_mul_affine_te               |    5.25          |    9.64         |     30.05       |      0.29       |
 | ed_on_bls12_377_msm, 10 arguments           |    3504.85       |    446.56       |     6070        |      405.37     | 
 | ed_on_bls12_377_msm, 1000 arguments         |    37079.82      |    6150.74      |     65890       |      2850       |
