@@ -41,7 +41,7 @@
 | ed_on_bls12_377_msm, 10 arguments           |    3504.85       |    446.56       |     6070        |      405.37     | 
 | ed_on_bls12_377_msm, 1000 arguments         |    37079.82      |    6150.74      |     65890       |      2850       |
 | ed_on_bls12_377_mul_projective              |    8.88          |    11.29        |     27.30       |      0.72       |
-| ed_on_bls12_377_mul_affine                  |    3585.92       |    437.80       |     6040        |      280.58    d |
+| ed_on_bls12_377_mul_affine                  |    3585.92       |    437.80       |     6040        |      280.58     |
 
 [^1]: implemented in a Substrate pallet with [arkworks](https://github.com/arkworks-rs/) library by this repo: https://github.com/achimcc/substrate-arkworks-examples
 [^2]: implemented in a Substrate pallet with [ark-substrate](https://github.com/paritytech/ark-substrate) library, executed through host-function call, computed by this repo: https://github.com/achimcc/substrate-arkworks-examples
