@@ -61,7 +61,7 @@ benchmark-compute:
               > results.json
 
 benchmark-to-csv:
-	cat results.json | jq -r '["extrinsic", "time (µs)"], (.[] | [ .benchmark, ([.time_results[]?.extrinsic_time] | (add / (if length == 0 then 1 else length)) | round /1000 ) ]) | @csv' > results.csv
+	cat results.json | jq -r '["extrinsic", "time (µs)"], (.[] | [ .benchmark, ([.time_results[]?.extrinsic_time] | (add / (if length == 0 then 1 else length end)) | round /1000 ) ]) | @csv' > results.csv
 
 benchmark-csv-to-markdown:
 	csv-to-markdown results.csv > benchmark.md
