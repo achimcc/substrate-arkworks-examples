@@ -13,4 +13,6 @@ make install
 make benchmark
 ```
 
-The results are then written into a benchmark.pdf file. 
+The results are then written into a benchmark.pdf file.
+
+An overview and comparison of all benchmark results can be found [here](https://github.com/achimcc/substrate-arkworks-examples/blob/main/benchmarks-comparison.md).
