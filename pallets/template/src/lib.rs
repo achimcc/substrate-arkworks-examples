@@ -20,9 +20,14 @@ pub mod bls12_381;
 pub mod bw6_761;
 pub mod ed_on_bls12_377;
 pub mod ed_on_bls12_381;
+pub mod msm_arguments;
 
 #[frame_support::pallet]
 pub mod pallet {
+	use crate::{
+		bls12_377, bls12_381, bw6_761, ed_on_bls12_377, ed_on_bls12_381,
+		msm_arguments::{generate_arguments_sw, generate_arguments_te},
+	};
 	use ark_std::vec;
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
@@ -110,32 +115,36 @@ pub mod pallet {
 		#[pallet::call_index(4)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g1(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::bls12_381::do_msm_g1(samples);
+			let (bases, scalars) = generate_arguments_sw::<ark_bls12_381::g1::Config>(samples);
+			let _ = crate::bls12_381::do_msm_g1(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(5)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g1_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::bls12_381::do_msm_g1_optimized(samples);
+			let (bases, scalars) = generate_arguments_sw::<
+				sp_ark_bls12_381::g1::Config<bls12_381::HostBls12_381>,
+			>(samples);
+			let _ = crate::bls12_381::do_msm_g1_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(6)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g2(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::bls12_381::do_msm_g2(samples);
+			let (bases, scalars) = generate_arguments_sw::<ark_bls12_381::g2::Config>(samples);
+			let _ = crate::bls12_381::do_msm_g2(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(7)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g2_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::bls12_381::do_msm_g2_optimized(samples);
+			let (bases, scalars) = generate_arguments_sw::<
+				sp_ark_bls12_381::g2::Config<bls12_381::HostBls12_381>,
+			>(samples);
+			let _ = crate::bls12_381::do_msm_g2_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
@@ -212,32 +221,36 @@ pub mod pallet {
 		#[pallet::call_index(18)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g1(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::bls12_377::do_msm_g1(samples);
+			let (bases, scalars) = generate_arguments_sw::<ark_bls12_377::g1::Config>(samples);
+			let _ = crate::bls12_377::do_msm_g1(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(19)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g1_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::bls12_377::do_msm_g1_optimized(samples);
+			let (bases, scalars) = generate_arguments_sw::<
+				sp_ark_bls12_377::g1::Config<bls12_377::HostBls12_377>,
+			>(samples);
+			let _ = crate::bls12_377::do_msm_g1_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(20)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g2(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::bls12_377::do_msm_g2(samples);
+			let (bases, scalars) = generate_arguments_sw::<ark_bls12_377::g2::Config>(samples);
+			let _ = crate::bls12_377::do_msm_g2(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(21)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g2_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::bls12_377::do_msm_g2_optimized(samples);
+			let (bases, scalars) = generate_arguments_sw::<
+				sp_ark_bls12_377::g2::Config<bls12_377::HostBls12_377>,
+			>(samples);
+			let _ = crate::bls12_377::do_msm_g2_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
@@ -314,32 +327,34 @@ pub mod pallet {
 		#[pallet::call_index(32)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g1(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::bw6_761::do_msm_g1(samples);
+			let (bases, scalars) = generate_arguments_sw::<ark_bw6_761::g1::Config>(samples);
+			let _ = crate::bw6_761::do_msm_g1(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(33)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g1_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::bw6_761::do_msm_g1_optimized(samples);
+			let (bases, scalars) =
+				generate_arguments_sw::<sp_ark_bw6_761::g1::Config<bw6_761::HostBW6_761>>(samples);
+			let _ = crate::bw6_761::do_msm_g1_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(34)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g2(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::bw6_761::do_msm_g2(samples);
+			let (bases, scalars) = generate_arguments_sw::<ark_bw6_761::g2::Config>(samples);
+			let _ = crate::bw6_761::do_msm_g2(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(35)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g2_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::bw6_761::do_msm_g2_optimized(samples);
+			let (bases, scalars) =
+				generate_arguments_sw::<sp_ark_bw6_761::g2::Config<bw6_761::HostBW6_761>>(samples);
+			let _ = crate::bw6_761::do_msm_g2_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
@@ -402,8 +417,8 @@ pub mod pallet {
 		#[pallet::call_index(44)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_msm_sw(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::ed_on_bls12_381::do_msm_sw(samples);
+			let (bases, scalars) = generate_arguments_sw::<ark_ed_on_bls12_381::SWConfig>(samples);
+			let _ = crate::ed_on_bls12_381::do_msm_sw(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
@@ -413,16 +428,20 @@ pub mod pallet {
 			_origin: OriginFor<T>,
 			samples: u32,
 		) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::ed_on_bls12_381::do_msm_sw_optimized(samples);
+			let (bases, scalars) = generate_arguments_sw::<
+				sp_ark_ed_on_bls12_381::SWConfig<ed_on_bls12_381::HostEdOnBls12_381>,
+			>(samples);
+			let _ = crate::ed_on_bls12_381::do_msm_sw_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(46)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_msm_te(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::ed_on_bls12_381::do_msm_te(samples);
+			// let Test = sp_ark_models::Affine<sp_ark_ed_on_bls12_381::JubjubConfig>;
+			let (bases, scalars) =
+				generate_arguments_te::<ark_ed_on_bls12_381::EdwardsConfig>(samples);
+			let _ = crate::ed_on_bls12_381::do_msm_te(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
@@ -432,8 +451,10 @@ pub mod pallet {
 			_origin: OriginFor<T>,
 			samples: u32,
 		) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::ed_on_bls12_381::do_msm_te_optimized(samples);
+			let (bases, scalars) = generate_arguments_te::<
+				sp_ark_ed_on_bls12_381::EdwardsConfig<ed_on_bls12_381::HostEdOnBls12_381>,
+			>(samples);
+			let _ = crate::ed_on_bls12_381::do_msm_te_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
@@ -500,8 +521,9 @@ pub mod pallet {
 		#[pallet::call_index(56)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_msm(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::ed_on_bls12_377::do_msm(samples);
+			let (bases, scalars) =
+				generate_arguments_te::<ark_ed_on_bls12_377::EdwardsConfig>(samples);
+			let _ = crate::ed_on_bls12_377::do_msm(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
@@ -511,8 +533,10 @@ pub mod pallet {
 			_origin: OriginFor<T>,
 			samples: u32,
 		) -> DispatchResult {
-			let samples: u32 = samples.try_into().unwrap();
-			let _ = crate::ed_on_bls12_377::do_msm_optimized(samples);
+			let (bases, scalars) = generate_arguments_te::<
+				sp_ark_ed_on_bls12_377::EdwardsConfig<ed_on_bls12_377::HostEdOnBls12_377>,
+			>(samples);
+			let _ = crate::ed_on_bls12_377::do_msm_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
