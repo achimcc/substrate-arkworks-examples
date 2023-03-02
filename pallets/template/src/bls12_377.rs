@@ -57,37 +57,42 @@ pub fn do_pairing_optimized() -> Result<(), Error> {
 	Ok(())
 }
 
-pub fn do_msm_g1(samples: u32) -> Result<(), Error> {
-	let g = ark_bls12_377::g1::G1Affine::generator();
-	let v: Vec<_> = (0..samples).map(|_| g).collect();
-	let scalars: Vec<_> = (0..samples).map(|_| ark_ff::Fp::from(2u64)).collect();
-	let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::msm(&v[..], &scalars[..]);
+pub fn do_msm_g1(
+	bases: &[ark_ec::short_weierstrass::Affine<ark_bls12_377::g1::Config>],
+	scalars: &[<ark_bls12_377::g1::Config as ark_ec::CurveConfig>::ScalarField],
+) -> Result<(), Error> {
+	let _out = <ark_bls12_377::g1::Config as SWCurveConfig>::msm(bases, scalars);
 	Ok(())
 }
 
-pub fn do_msm_g1_optimized(samples: u32) -> Result<(), Error> {
-	let g = G1AffineBls12_377::generator();
-	let v: Vec<_> = (0..samples).map(|_| g).collect();
-	let scalars: Vec<_> = (0..samples).map(|_| ark_ff::Fp::from(2u64)).collect();
-	let _out =
-		<sp_ark_bls12_377::g1::Config<HostBls12_377> as SWCurveConfig>::msm(&v[..], &scalars[..]);
+pub fn do_msm_g1_optimized(
+	bases: &[sp_ark_models::short_weierstrass::Affine<
+		sp_ark_bls12_377::g1::Config<HostBls12_377>,
+	>],
+	scalars: &[<sp_ark_bls12_377::g1::Config<HostBls12_377> as sp_ark_models::CurveConfig>::ScalarField],
+) -> Result<(), Error> {
+	let _out = <sp_ark_bls12_377::g1::Config<HostBls12_377> as sp_ark_models::short_weierstrass::SWCurveConfig>::msm(
+		bases,
+		scalars,
+	);
 	Ok(())
 }
 
-pub fn do_msm_g2(samples: u32) -> Result<(), Error> {
-	let g = ark_bls12_377::g2::G2Affine::generator();
-	let v: Vec<_> = (0..samples).map(|_| g).collect();
-	let scalars: Vec<_> = (0..samples).map(|_| ark_ff::Fp::from(2u64)).collect();
-	let _out = <ark_bls12_377::g2::Config as SWCurveConfig>::msm(&v[..], &scalars[..]);
+pub fn do_msm_g2(
+	bases: &[ark_ec::short_weierstrass::Affine<ark_bls12_377::g2::Config>],
+	scalars: &[<ark_bls12_377::g2::Config as ark_ec::CurveConfig>::ScalarField],
+) -> Result<(), Error> {
+	let _out = <ark_bls12_377::g2::Config as SWCurveConfig>::msm(bases, scalars);
 	Ok(())
 }
 
-pub fn do_msm_g2_optimized(samples: u32) -> Result<(), Error> {
-	let g = G2AffineBls12_377::generator();
-	let v: Vec<_> = (0..samples).map(|_| g).collect();
-	let scalars: Vec<_> = (0..samples).map(|_| ark_ff::Fp::from(2u64)).collect();
-	let _out =
-		<sp_ark_bls12_377::g2::Config<HostBls12_377> as SWCurveConfig>::msm(&v[..], &scalars[..]);
+pub fn do_msm_g2_optimized(
+	bases: &[sp_ark_models::short_weierstrass::Affine<
+		sp_ark_bls12_377::g2::Config<HostBls12_377>,
+	>],
+	scalars: &[<sp_ark_bls12_377::g2::Config<HostBls12_377> as ark_ec::CurveConfig>::ScalarField],
+) -> Result<(), Error> {
+	let _out = <sp_ark_bls12_377::g2::Config<HostBls12_377> as SWCurveConfig>::msm(bases, scalars);
 	Ok(())
 }
 
