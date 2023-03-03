@@ -125,7 +125,7 @@ pub mod pallet {
 				.iter()
 				.map(|a| {
 					let cursor = Cursor::new(a);
-					<ark_bls12_381::Bls12_381 as ark_ec::pairing::Pairing>::G1Affine::deserialize_with_mode(
+					<ark_bls12_381::Bls12_381 as ark_ec::VariableBaseMSM>::deserialize_with_mode(
 						cursor,
 						Compress::No,
 						Validate::No,
