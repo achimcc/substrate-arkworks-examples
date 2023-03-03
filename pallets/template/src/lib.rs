@@ -25,10 +25,7 @@ pub mod utils;
 
 #[frame_support::pallet]
 pub mod pallet {
-	use crate::{
-		bls12_377, bls12_381, bw6_761, ed_on_bls12_377, ed_on_bls12_381,
-		msm_arguments::{generate_arguments_sw, generate_arguments_te},
-	};
+	use crate::{bls12_377, bls12_381, bw6_761, ed_on_bls12_377, ed_on_bls12_381};
 	use ark_serialize::{CanonicalDeserialize, Compress, Validate};
 	use ark_std::{io::Cursor, vec, vec::Vec};
 	use frame_support::pallet_prelude::*;
@@ -125,7 +122,7 @@ pub mod pallet {
 				.iter()
 				.map(|a| {
 					let cursor = Cursor::new(a);
-					<ark_bls12_381::Bls12_381 as ark_ec::VariableBaseMSM>::deserialize_with_mode(
+					ark_bls12_381::G1Affine::deserialize_with_mode(
 						cursor,
 						Compress::No,
 						Validate::No,
@@ -326,36 +323,140 @@ pub mod pallet {
 
 		#[pallet::call_index(18)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_377_msm_g1(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let (bases, scalars) = generate_arguments_sw::<ark_bls12_377::g1::Config>(samples);
+		pub fn bls12_377_msm_g1(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_bls12_377::Bls12_377 as ark_ec::pairing::Pairing>::G1Affine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_bls12_377::g1::Config as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::bls12_377::do_msm_g1(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(19)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_377_msm_g1_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let (bases, scalars) = generate_arguments_sw::<
-				sp_ark_bls12_377::g1::Config<bls12_377::HostBls12_377>,
-			>(samples);
+		pub fn bls12_377_msm_g1_optimized(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<bls12_377::Bls12_377Optimized as sp_ark_models::pairing::Pairing>::G1Affine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<bls12_377::Bls12_377Optimized as sp_ark_models::pairing::Pairing>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::bls12_377::do_msm_g1_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(20)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_377_msm_g2(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let (bases, scalars) = generate_arguments_sw::<ark_bls12_377::g2::Config>(samples);
+		pub fn bls12_377_msm_g2(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_bls12_377::Bls12_377 as ark_ec::pairing::Pairing>::G2Affine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_bls12_377::g2::Config as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::bls12_377::do_msm_g2(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(21)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_377_msm_g2_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let (bases, scalars) = generate_arguments_sw::<
-				sp_ark_bls12_377::g2::Config<bls12_377::HostBls12_377>,
-			>(samples);
+		pub fn bls12_377_msm_g2_optimized(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<bls12_377::Bls12_377Optimized as sp_ark_models::pairing::Pairing>::G2Affine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<bls12_377::Bls12_377Optimized as sp_ark_models::pairing::Pairing>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::bls12_377::do_msm_g2_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -432,34 +533,140 @@ pub mod pallet {
 
 		#[pallet::call_index(32)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bw6_761_msm_g1(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let (bases, scalars) = generate_arguments_sw::<ark_bw6_761::g1::Config>(samples);
+		pub fn bw6_761_msm_g1(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_bw6_761::BW6_761 as ark_ec::pairing::Pairing>::G1Affine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_bw6_761::g2::Config as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::bw6_761::do_msm_g1(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(33)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bw6_761_msm_g1_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let (bases, scalars) =
-				generate_arguments_sw::<sp_ark_bw6_761::g1::Config<bw6_761::HostBW6_761>>(samples);
+		pub fn bw6_761_msm_g1_optimized(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<bw6_761::BW6_761Optimized as sp_ark_models::pairing::Pairing>::G1Affine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<bw6_761::BW6_761Optimized as sp_ark_models::pairing::Pairing>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::bw6_761::do_msm_g1_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(34)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bw6_761_msm_g2(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let (bases, scalars) = generate_arguments_sw::<ark_bw6_761::g2::Config>(samples);
+		pub fn bw6_761_msm_g2(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_bw6_761::BW6_761 as sp_ark_models::pairing::Pairing>::G2Affine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_bw6_761::g2::Config as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::bw6_761::do_msm_g2(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(35)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bw6_761_msm_g2_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let (bases, scalars) =
-				generate_arguments_sw::<sp_ark_bw6_761::g2::Config<bw6_761::HostBW6_761>>(samples);
+		pub fn bw6_761_msm_g2_optimized(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<bw6_761::BW6_761Optimized as sp_ark_models::pairing::Pairing>::G2Affine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<sp_ark_bw6_761::g2::Config<bw6_761::HostBW6_761> as sp_ark_models::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::bw6_761::do_msm_g2_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -522,8 +729,35 @@ pub mod pallet {
 
 		#[pallet::call_index(44)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_msm_sw(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let (bases, scalars) = generate_arguments_sw::<ark_ed_on_bls12_381::SWConfig>(samples);
+		pub fn ed_on_bls12_381_msm_sw(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					ark_ed_on_bls12_381::SWAffine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_ed_on_bls12_381::SWConfig as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::ed_on_bls12_381::do_msm_sw(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -532,21 +766,68 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_msm_sw_optimized(
 			_origin: OriginFor<T>,
-			samples: u32,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
 		) -> DispatchResult {
-			let (bases, scalars) = generate_arguments_sw::<
-				sp_ark_ed_on_bls12_381::SWConfig<ed_on_bls12_381::HostEdOnBls12_381>,
-			>(samples);
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					sp_ark_ed_on_bls12_381::SWAffine::<ed_on_bls12_381::HostEdOnBls12_381>::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<sp_ark_ed_on_bls12_381::SWConfig<ed_on_bls12_381::HostEdOnBls12_381> as sp_ark_models::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::ed_on_bls12_381::do_msm_sw_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(46)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_msm_te(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			// let Test = sp_ark_models::Affine<sp_ark_ed_on_bls12_381::JubjubConfig>;
-			let (bases, scalars) =
-				generate_arguments_te::<ark_ed_on_bls12_381::EdwardsConfig>(samples);
+		pub fn ed_on_bls12_381_msm_te(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					ark_ed_on_bls12_381::EdwardsAffine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_ed_on_bls12_381::EdwardsConfig as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::ed_on_bls12_381::do_msm_te(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -555,11 +836,33 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_msm_te_optimized(
 			_origin: OriginFor<T>,
-			samples: u32,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
 		) -> DispatchResult {
-			let (bases, scalars) = generate_arguments_te::<
-				sp_ark_ed_on_bls12_381::EdwardsConfig<ed_on_bls12_381::HostEdOnBls12_381>,
-			>(samples);
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					sp_ark_ed_on_bls12_381::EdwardsAffine::<ed_on_bls12_381::HostEdOnBls12_381>::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<sp_ark_ed_on_bls12_381::EdwardsConfig::<ed_on_bls12_381::HostEdOnBls12_381> as sp_ark_models::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::ed_on_bls12_381::do_msm_te_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -626,9 +929,35 @@ pub mod pallet {
 
 		#[pallet::call_index(56)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_377_msm(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let (bases, scalars) =
-				generate_arguments_te::<ark_ed_on_bls12_377::EdwardsConfig>(samples);
+		pub fn ed_on_bls12_377_msm(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					ark_ed_on_bls12_377::EdwardsAffine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_ed_on_bls12_377::EdwardsConfig as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::ed_on_bls12_377::do_msm(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -637,11 +966,33 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_msm_optimized(
 			_origin: OriginFor<T>,
-			samples: u32,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
 		) -> DispatchResult {
-			let (bases, scalars) = generate_arguments_te::<
-				sp_ark_ed_on_bls12_377::EdwardsConfig<ed_on_bls12_377::HostEdOnBls12_377>,
-			>(samples);
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					sp_ark_ed_on_bls12_377::EdwardsAffine::<ed_on_bls12_377::HostEdOnBls12_377>::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<sp_ark_ed_on_bls12_377::EdwardsConfig<ed_on_bls12_377::HostEdOnBls12_377> as sp_ark_models::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::ed_on_bls12_377::do_msm_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}

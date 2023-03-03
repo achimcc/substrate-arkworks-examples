@@ -5,9 +5,7 @@ pub fn generate_arguments_sw<Group: ark_ec::VariableBaseMSM>(
 ) -> (Vec<Group>, Vec<Group::ScalarField>) {
 	let rng = &mut test_rng();
 	let scalars = (0..size).map(|_| Group::ScalarField::rand(rng)).collect::<Vec<_>>();
-	let bases = (0..size)
-		.map(|_| Group::rand(rng))
-		.collect::<Vec<_>>();
+	let bases = (0..size).map(|_| Group::rand(rng)).collect::<Vec<_>>();
 	(bases, scalars)
 }
 
