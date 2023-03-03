@@ -6,8 +6,6 @@ use super::*;
 use crate::Pallet as Template;
 use frame_benchmarking::{benchmarks, whitelisted_caller};
 use frame_system::RawOrigin;
-mod msm_arguments;
-use msm_arguments::generate_arguments;
 
 benchmarks! {
 	groth16_verification {
@@ -28,7 +26,6 @@ benchmarks! {
 
 	bls12_381_msm_g1_10 {
 		let caller: T::AccountId = whitelisted_caller();
-		let (scalars, bases) = generate_arguments(10);
 	}: bls12_381_msm_g1(RawOrigin::Signed(caller), 10)
 
 	bls12_381_msm_g1_10_optimized {
