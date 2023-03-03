@@ -160,7 +160,7 @@ pub mod pallet {
 				.iter()
 				.map(|a| {
 					let cursor = Cursor::new(a);
-					<bls12_381::HostBls12_381 as asp_ark_models::pairing::Pairing>::G1Affine::deserialize_with_mode(
+					bls12_381::G1Affine_Host::deserialize_with_mode(
 						cursor,
 						Compress::No,
 						Validate::No,
@@ -230,7 +230,7 @@ pub mod pallet {
 				.iter()
 				.map(|a| {
 					let cursor = Cursor::new(a);
-					<bls12_381::HostBls12_381 as sp_ark_models::pairing::Pairing>::G2Affine::deserialize_with_mode(
+					bls12_381::G2AffineOptimized::deserialize_with_mode(
 						cursor,
 						Compress::No,
 						Validate::No,
