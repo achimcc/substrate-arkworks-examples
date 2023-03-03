@@ -4,8 +4,12 @@ use super::*;
 
 #[allow(unused)]
 use crate::Pallet as Template;
+use ark_serialize::CanonicalSerialize;
+use ark_std::vec::Vec;
 use frame_benchmarking::{benchmarks, whitelisted_caller};
 use frame_system::RawOrigin;
+use msm_arguments::{generate_arguments_sw, generate_arguments_te};
+use utils::serialize_argument;
 
 benchmarks! {
 	groth16_verification {
@@ -26,35 +30,59 @@ benchmarks! {
 
 	bls12_381_msm_g1_10 {
 		let caller: T::AccountId = whitelisted_caller();
-	}: bls12_381_msm_g1(RawOrigin::Signed(caller), 10)
+		let (bases, scalars) = generate_arguments_sw::<ark_bls12_381::g1::Config>(10);
+		let bases = bases.iter().map(|base| serialize_argument(bases)).collect::<Vec<_>>();
+		let scalars = scalars.iter().map(|scalar| serialize_argument(scalar)).collect::<Vec<_>>();
+	}: bls12_381_msm_g1(RawOrigin::Signed(caller), bases, scalars)
 
 	bls12_381_msm_g1_10_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-	}: bls12_381_msm_g1_optimized(RawOrigin::Signed(caller), 10)
+		let (bases, scalars) = generate_arguments_sw::<ark_bls12_381::g1::Config>(10);
+		let bases = bases.iter().map(|base| serialize_argument(bases)).collect::<Vec<_>>();
+		let scalars = scalars.iter().map(|scalar| serialize_argument(scalar)).collect::<Vec<_>>();
+	}: bls12_381_msm_g1_optimized(RawOrigin::Signed(caller), bases, scalars)
 
 	bls12_381_msm_g1_1000 {
 		let caller: T::AccountId = whitelisted_caller();
-	}: bls12_381_msm_g1(RawOrigin::Signed(caller), 1000)
+		let (bases, scalars) = generate_arguments_sw::<ark_bls12_381::g1::Config>(1000);
+		let bases = bases.iter().map(|base| serialize_argument(bases)).collect::<Vec<_>>();
+		let scalars = scalars.iter().map(|scalar| serialize_argument(scalar)).collect::<Vec<_>>();
+	}: bls12_381_msm_g1(RawOrigin::Signed(caller), bases, scalars)
 
 	bls12_381_msm_g1_1000_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-	}: bls12_381_msm_g1_optimized(RawOrigin::Signed(caller), 1000)
+		let (bases, scalars) = generate_arguments_sw::<sp_ark_bls12_381::g1::Config<bls12_381::HostBls12_381>>(1000);
+		let bases = bases.iter().map(|base| serialize_argument(bases)).collect::<Vec<_>>();
+		let scalars = scalars.iter().map(|scalar| serialize_argument(scalar)).collect::<Vec<_>>();
+	}: bls12_381_msm_g1_optimized(RawOrigin::Signed(caller), bases, scalars)
 
 	bls12_381_msm_g2_10 {
 		let caller: T::AccountId = whitelisted_caller();
-	}: bls12_381_msm_g2(RawOrigin::Signed(caller), 10)
+		let (bases, scalars) = generate_arguments_sw::<ark_bls12_381::g2::Config>(10);
+		let bases = bases.iter().map(|base| serialize_argument(bases)).collect::<Vec<_>>();
+		let scalars = scalars.iter().map(|scalar| serialize_argument(scalar)).collect::<Vec<_>>();
+	}: bls12_381_msm_g2(RawOrigin::Signed(caller), bases, scalars)
 
 	bls12_381_msm_g2_10_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-	}: bls12_381_msm_g2_optimized(RawOrigin::Signed(caller), 10)
+		let (bases, scalars) = generate_arguments_sw::<sp_ark_bls12_381::g2::Config<bls12_381::HostBls12_381>>(1000);
+		let bases = bases.iter().map(|base| serialize_argument(bases)).collect::<Vec<_>>();
+		let scalars = scalars.iter().map(|scalar| serialize_argument(scalar)).collect::<Vec<_>>();
+	}: bls12_381_msm_g2_optimized(RawOrigin::Signed(caller), bases, scalars)
 
 	bls12_381_msm_g2_1000 {
 		let caller: T::AccountId = whitelisted_caller();
-	}: bls12_381_msm_g2(RawOrigin::Signed(caller), 1000)
+		let (bases, scalars) = generate_arguments_sw::<ark_bls12_381::g2::Config>(1000);
+		let bases = bases.iter().map(|base| serialize_argument(bases)).collect::<Vec<_>>();
+		let scalars = scalars.iter().map(|scalar| serialize_argument(scalar)).collect::<Vec<_>>();
+	}: bls12_381_msm_g2(RawOrigin::Signed(caller), bases, scalars)
 
 	bls12_381_msm_g2_1000_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-	}: bls12_381_msm_g2_optimized(RawOrigin::Signed(caller), 1000)
+		let (bases, scalars) = generate_arguments_sw::<sp_ark_bls12_381::g2::Config<bls12_381::Host_Bls12_381>>(1000);
+		let bases = bases.iter().map(|base| serialize_argument(bases)).collect::<Vec<_>>();
+		let scalars = scalars.iter().map(|scalar| serialize_argument(scalar)).collect::<Vec<_>>();
+	}: bls12_381_msm_g2_optimized(RawOrigin::Signed(caller), , bases, scalars)
 
 	bls12_381_mul_projective_g1 {
 		let caller: T::AccountId = whitelisted_caller();

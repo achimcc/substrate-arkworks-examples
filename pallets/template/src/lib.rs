@@ -21,6 +21,7 @@ pub mod bw6_761;
 pub mod ed_on_bls12_377;
 pub mod ed_on_bls12_381;
 pub mod msm_arguments;
+pub mod utils;
 
 #[frame_support::pallet]
 pub mod pallet {
@@ -28,7 +29,8 @@ pub mod pallet {
 		bls12_377, bls12_381, bw6_761, ed_on_bls12_377, ed_on_bls12_381,
 		msm_arguments::{generate_arguments_sw, generate_arguments_te},
 	};
-	use ark_std::vec;
+	use ark_serialize::{CanonicalDeserialize, Compress, Validate};
+	use ark_std::{io::Cursor, vec, vec::Vec};
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
 
@@ -114,36 +116,140 @@ pub mod pallet {
 
 		#[pallet::call_index(4)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_381_msm_g1(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let (bases, scalars) = generate_arguments_sw::<ark_bls12_381::g1::Config>(samples);
+		pub fn bls12_381_msm_g1(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_bls12_381::Bls12_381 as ark_ec::pairing::Pairing>::G1Affine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_bls12_381::g1::Config as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::bls12_381::do_msm_g1(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(5)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_381_msm_g1_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let (bases, scalars) = generate_arguments_sw::<
-				sp_ark_bls12_381::g1::Config<bls12_381::HostBls12_381>,
-			>(samples);
+		pub fn bls12_381_msm_g1_optimized(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<bls12_381::HostBls12_381 as asp_ark_models::pairing::Pairing>::G1Affine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<sp_ark_bls12_381::g1::Config<bls12_381::HostBls12_381> as sp_ark_models::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::bls12_381::do_msm_g1_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(6)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_381_msm_g2(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let (bases, scalars) = generate_arguments_sw::<ark_bls12_381::g2::Config>(samples);
+		pub fn bls12_381_msm_g2(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_bls12_381::Bls12_381 as ark_ec::pairing::Pairing>::G2Affine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<ark_bls12_381::g2::Config as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::bls12_381::do_msm_g2(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(7)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_381_msm_g2_optimized(_origin: OriginFor<T>, samples: u32) -> DispatchResult {
-			let (bases, scalars) = generate_arguments_sw::<
-				sp_ark_bls12_381::g2::Config<bls12_381::HostBls12_381>,
-			>(samples);
+		pub fn bls12_381_msm_g2_optimized(
+			_origin: OriginFor<T>,
+			bases: Vec<Vec<u8>>,
+			scalars: Vec<Vec<u8>>,
+		) -> DispatchResult {
+			let bases: Vec<_> = bases
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<bls12_381::HostBls12_381 as sp_ark_models::pairing::Pairing>::G2Affine::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
+			let scalars: Vec<_> = scalars
+				.iter()
+				.map(|a| {
+					let cursor = Cursor::new(a);
+					<sp_ark_bls12_381::g1::Config<bls12_381::HostBls12_381> as sp_ark_models::CurveConfig>::ScalarField::deserialize_with_mode(
+						cursor,
+						Compress::No,
+						Validate::No,
+					)
+					.unwrap()
+				})
+				.collect();
 			let _ = crate::bls12_381::do_msm_g2_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
