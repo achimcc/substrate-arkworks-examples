@@ -53,7 +53,7 @@ benchmark-compute:
               --chain dev \
               --execution=wasm \
               --wasm-execution=compiled \
-              --pallet pallet-template \
+              --pallet "*" \
               --extrinsic "*" \
               --steps 50 \
               --repeat 20 \
