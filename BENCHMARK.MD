@@ -1,3 +1,24 @@
-| extrinsic    | time (µs) |
-| ------------ | --------- |
-| do_something | 13.174    |
+| extrinsic            | time (µs) |
+| -------------------- | --------- |
+| addition             | 0.362     |
+| subtraction          | 0.377     |
+| multiplication       | 0.35      |
+| division             | 0.354     |
+| hashing              | 41400.255 |
+| sr25519_verification | 3490.434  |
+| remark               | 1075.192  |
+| remark_with_event    | 4397.358  |
+| set_heap_pages       | 7.615     |
+| set_storage          | 595.02    |
+| kill_storage         | 438.402   |
+| kill_prefix          | 886.355   |
+| transfer             | 60.2      |
+| transfer_keep_alive  | 44.295    |
+| set_balance_creating | 25.97     |
+| set_balance_killing  | 31.41     |
+| force_transfer       | 61.251    |
+| transfer_all         | 59.971    |
+| force_unreserve      | 24.37     |
+| set                  | 14.055    |
+| on_finalize          | 5.93      |
+| do_something         | 13.435    |
