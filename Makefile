@@ -37,13 +37,13 @@ install: install-mpdf
 
 benchmark-build:
 ifeq ($(shell uname),Linux)
-	cargo build --package node-template  \
+	cargo build \
 		--profile release \
 		--features runtime-benchmarks
 else 
 	AR=/usr/local/opt/llvm/bin/llvm-ar \
 	CC=/usr/local/opt/llvm/bin/clang \
-	cargo build --package node-template \
+	cargo build \
 	--release \
 	--features runtime-benchmarks
 endif
