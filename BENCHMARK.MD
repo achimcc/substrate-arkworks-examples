@@ -1,3 +1,3 @@
 | extrinsic    | time (µs) |
 | ------------ | --------- |
-| do_something | 13.338    |
+| do_something | 13.174    |
