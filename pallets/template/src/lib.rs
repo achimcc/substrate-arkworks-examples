@@ -20,7 +20,6 @@ pub mod bls12_381;
 pub mod bw6_761;
 pub mod ed_on_bls12_377;
 pub mod ed_on_bls12_381;
-pub mod msm_arguments;
 pub mod utils;
 
 #[frame_support::pallet]

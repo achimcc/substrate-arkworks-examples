@@ -33,7 +33,7 @@ jobs:
       
       - name: Build benchmarks
         run: |
-          cargo build --package node-template  \
+          cargo build \
           --profile release \
           --features runtime-benchmarks
 

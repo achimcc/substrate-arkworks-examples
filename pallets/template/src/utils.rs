@@ -8,22 +8,29 @@ pub fn serialize_argument(argument: impl CanonicalSerialize) -> Vec<u8> {
 	serialized_argument
 }
 
-pub fn generate_arguments_sw<Group: ark_ec::VariableBaseMSM>(
+pub fn generate_arguments<Group: ark_ec::VariableBaseMSM>(
 	size: u32,
-) -> (Vec<Group>, Vec<Group::ScalarField>) {
+) -> (Vec<Vec<u8>>, Vec<Vec<u8>>) {
 	let rng = &mut test_rng();
 	let scalars = (0..size).map(|_| Group::ScalarField::rand(rng)).collect::<Vec<_>>();
 	let bases = (0..size).map(|_| Group::rand(rng)).collect::<Vec<_>>();
-	(bases, scalars)
-}
-
-pub fn generate_arguments_te<Field: ark_ec::models::twisted_edwards::TECurveConfig>(
-	size: u32,
-) -> (Vec<ark_ec::twisted_edwards::Affine<Field>>, Vec<Field::ScalarField>) {
-	let rng = &mut test_rng();
-	let scalars = (0..size).map(|_| Field::ScalarField::rand(rng)).collect::<Vec<_>>();
-	let bases = (0..size)
-		.map(|_| ark_ec::twisted_edwards::Affine::<Field>::rand(rng))
+	let bases = bases
+		.iter()
+		.map(|base| {
+			let mut serialized_base = vec![0u8; base.serialized_size(Compress::No)];
+			let mut cursor = Cursor::new(&mut serialized_base[..]);
+			base.serialize_uncompressed(&mut cursor).unwrap();
+			serialized_base
+		})
+		.collect::<Vec<_>>();
+	let scalars = scalars
+		.iter()
+		.map(|scalar| {
+			let mut serialized_scalar = vec![0u8; scalar.serialized_size(Compress::No)];
+			let mut cursor = Cursor::new(&mut serialized_scalar[..]);
+			scalar.serialize_uncompressed(&mut cursor).unwrap();
+			serialized_scalar
+		})
 		.collect::<Vec<_>>();
 	(bases, scalars)
 }
