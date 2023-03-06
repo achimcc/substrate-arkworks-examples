@@ -34,7 +34,7 @@ jobs:
       - name: Build benchmarks
         run: |
           cargo build \
-          --package pallet-template \
+          --package node-template \
           --profile release \
           --features runtime-benchmarks
 
