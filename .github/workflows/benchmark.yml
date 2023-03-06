@@ -44,7 +44,7 @@ jobs:
               --chain dev \
               --execution=wasm \
               --wasm-execution=compiled \
-              --pallet "*" \
+              --pallet pallet-template \
               --extrinsic "*" \
               --steps 50 \
               --repeat 20 \
