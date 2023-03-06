@@ -379,8 +379,9 @@ dependencies = [
 
 [[package]]
 name = "ark-groth16"
-version = "0.3.0"
-source = "git+https://github.com/achimcc/groth16?branch=master#7cf952d6fe18ef995207214cdff71b787ae8655b"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "20ceafa83848c3e390f1cbf124bc3193b3e639b3f02009e0e290809a501b95fc"
 dependencies = [
  "ark-crypto-primitives",
  "ark-ec",

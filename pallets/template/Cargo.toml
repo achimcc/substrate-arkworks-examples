@@ -34,7 +34,7 @@ ark-ff = { version = "0.4.0", default-features = false }
 ark-ec = { version = "0.4.0", default-features = false }
 ark-std = { version = "0.4.0", default-features = false }
 ark-snark = { version = "0.4.0", default-features = false }
-ark-groth16 = { version = "0.3.0", default-features = false, features = [ "r1cs" ] }
+ark-groth16 = { version = "0.4.0", default-features = false, features = [ "r1cs" ] }
 sp-io = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
 ark-crypto-primitives = { version = "0.4.0", default-features = false, features = [ "r1cs", "snark" ] } 
 

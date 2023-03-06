@@ -13,7 +13,6 @@ lto = true
 lto = true
 
 [patch.crates-io]
-ark-groth16 = { git = "https://github.com/achimcc/groth16", "branch" = "master" }
 sp-ark-bls12-381 = { git = "https://github.com/paritytech/ark-substrate.git" }
 sp-ark-bls12-377 = { git = "https://github.com/paritytech/ark-substrate.git" }
 sp-ark-ed-on-bls12-381 = { git = "https://github.com/paritytech/ark-substrate.git" }
