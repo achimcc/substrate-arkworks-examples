@@ -13,7 +13,7 @@ edition = "2021"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-codec = { package = "parity-scale-codec", version = "3.0.0", features = [ "derive" ], default-features = false }
+codec = { package = "parity-scale-codec", version = "3.2.2", features = [ "derive" ], default-features = false }
 scale-info = { version = "2.1.1", features = ["derive"], default-features = false }
 frame-benchmarking = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", version = "4.0.0-dev", optional = true, default-features = false }
 frame-support = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", version = "4.0.0-dev",  default-features = false }
