@@ -32,8 +32,7 @@ sc-consensus-aura = { version = "0.10.0-dev", git = "https://github.com/parityte
 sp-consensus-aura = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
 sp-consensus = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
 sc-consensus = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sc-finality-grandpa = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.37" }
-sp-finality-grandpa = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "polkadot-v0.9.37" }
+finality-grandpa = { version = "0.16.1" }
 sc-client-api = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
 sp-runtime = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
 sp-io = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
