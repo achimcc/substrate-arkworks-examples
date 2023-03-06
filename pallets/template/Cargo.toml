@@ -29,65 +29,19 @@ ark-bls12-377 = { version = "0.4.0", features = ["curve"], default-features = fa
 ark-bw6-761 = { version = "0.4.0", default-features = false }
 ark-ed-on-bls12-381 = { version = "0.4.0", default-features = false }
 ark-ed-on-bls12-377 = { version = "0.4.0", default-features = false }
-ark-serialize = { version = "0.4.0", default-features = false, features = [ "derive" ] }
+ark-serialize = { version = "0.4.0", features = [ "derive" ], default-features = false }
 ark-ff = { version = "0.4.0", default-features = false }
 ark-ec = { version = "0.4.0", default-features = false }
 ark-std = { version = "0.4.0", default-features = false }
 ark-snark = { version = "0.4.0", default-features = false }
-ark-groth16 = { version = "0.4.0", default-features = false, features = [ "r1cs" ] }
-sp-io = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration" }
-ark-crypto-primitives = { version = "0.4.0", default-features = false, features = [ "r1cs", "snark" ] } 
+ark-groth16 = { version = "0.4.0", features = [ "r1cs" ], default-features = false }
+sp-io = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", default-features = false }
+ark-crypto-primitives = { version = "0.4.0", features = [ "r1cs", "snark" ], default-features = false } 
 
 [dev-dependencies]
 ark-algebra-bench-templates = { version = "0.4.0", default-features = false }
 sp-core = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", version = "7.0.0", default-features = false }
 sp-runtime = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", version = "7.0.0", default-features = false }
-criterion = { version = "0.4", default-features = false }
-tracing-subscriber = { version = "0.3.16", default-features = false, features = ["parking_lot"] }
-
-[[bench]]
-name = "arkworks"
-harness = false
-
-[[bench]]
-name = "bls12_381"
-path = "benches/bls12_381_template.rs"
-harness = false
-
-[[bench]]
-name = "bls12_381_optimized"
-path = "benches/bls12_381_template_optimized.rs"
-harness = false
-
-[[bench]]
-name = "bls12_377"
-path = "benches/bls12_377_template.rs"
-harness = false
-
-[[bench]]
-name = "bls12_377_optimized"
-path = "benches/bls12_377_template_optimized.rs"
-harness = false
-
-[[bench]]
-name = "bw6_761"
-path = "benches/bw6_761_template.rs"
-harness = false
-
-[[bench]]
-name = "bw6_761_optimized"
-path = "benches/bw6_761_template_optimized.rs"
-harness = false
-
-[[bench]]
-name = "ed_on_bls12_377"
-path = "benches/ed_on_bls12_377_template.rs"
-harness = false
-
-[[bench]]
-name = "ed_on_bls12_377_optimized"
-path = "benches/ed_on_bls12_377_template_optimized.rs"
-harness = false
 
 [features]
 default = [ "std" ]
@@ -117,7 +71,6 @@ std = [
 	"ark-crypto-primitives/std",
 	"sp-core/std",
 	"sp-runtime/std",
-	"tracing-subscriber/std",
 ]
 runtime-benchmarks = ["frame-benchmarking/runtime-benchmarks"]
 try-runtime = ["frame-support/try-runtime"]

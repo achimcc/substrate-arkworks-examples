@@ -434,7 +434,7 @@ dependencies = [
  "ark-ff",
  "ark-std",
  "tracing",
- "tracing-subscriber 0.2.25",
+ "tracing-subscriber",
 ]
 
 [[package]]
@@ -4886,7 +4886,6 @@ dependencies = [
  "ark-serialize",
  "ark-snark",
  "ark-std",
- "criterion",
  "frame-benchmarking",
  "frame-support",
  "frame-system",
@@ -4901,7 +4900,6 @@ dependencies = [
  "sp-core",
  "sp-io",
  "sp-runtime",
- "tracing-subscriber 0.3.16",
 ]
 
 [[package]]
@@ -6959,7 +6957,7 @@ dependencies = [
  "thiserror",
  "tracing",
  "tracing-log",
- "tracing-subscriber 0.2.25",
+ "tracing-subscriber",
 ]
 
 [[package]]
@@ -8101,7 +8099,7 @@ dependencies = [
  "sp-std",
  "tracing",
  "tracing-core",
- "tracing-subscriber 0.2.25",
+ "tracing-subscriber",
 ]
 
 [[package]]
@@ -8856,16 +8854,6 @@ dependencies = [
  "tracing-core",
  "tracing-log",
  "tracing-serde",
-]
-
-[[package]]
-name = "tracing-subscriber"
-version = "0.3.16"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a6176eae26dd70d0c919749377897b54a9276bd7061339665dd68777926b5a70"
-dependencies = [
- "parking_lot 0.12.1",
- "tracing-core",
 ]
 
 [[package]]
