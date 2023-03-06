@@ -57,7 +57,7 @@ benchmarks! {
 
 	bls12_381_msm_g2_1000 {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_arguments::<ark_ec::short_weierstrass::Projective<ark_bls12_381::g1::Config>>(1000);
+		let (bases, scalars) = generate_arguments::<ark_ec::short_weierstrass::Projective<ark_bls12_381::g2::Config>>(1000);
 			}: bls12_381_msm_g2(RawOrigin::Signed(caller), bases, scalars)
 
 	bls12_381_msm_g2_1000_optimized {
@@ -137,12 +137,12 @@ benchmarks! {
 
 	bls12_377_msm_g2_1000 {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_arguments::<ark_ec::short_weierstrass::Projective<ark_bls12_377::g1::Config>>(1000);
+		let (bases, scalars) = generate_arguments::<ark_ec::short_weierstrass::Projective<ark_bls12_377::g2::Config>>(1000);
 			}: bls12_377_msm_g2(RawOrigin::Signed(caller), bases, scalars)
 
 	bls12_377_msm_g2_1000_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_arguments::<sp_ark_models::short_weierstrass::Projective<sp_ark_bls12_377::g1::Config<bls12_377::HostBls12_377>>>(1000);
+		let (bases, scalars) = generate_arguments::<sp_ark_models::short_weierstrass::Projective<sp_ark_bls12_377::g2::Config<bls12_377::HostBls12_377>>>(1000);
 			}: bls12_377_msm_g2_optimized(RawOrigin::Signed(caller), bases, scalars)
 
 	bls12_377_mul_projective_g1 {
@@ -207,12 +207,12 @@ benchmarks! {
 
 	bw6_761_msm_g2_10 {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_arguments::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g1::Config>>(10);
+		let (bases, scalars) = generate_arguments::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g2::Config>>(10);
 			}: bw6_761_msm_g2(RawOrigin::Signed(caller), bases, scalars)
 
 	bw6_761_msm_g2_10_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_arguments::<ark_ec::short_weierstrass::Projective<sp_ark_bw6_761::g1::Config<bw6_761::HostBW6_761>>>(10);
+		let (bases, scalars) = generate_arguments::<ark_ec::short_weierstrass::Projective<sp_ark_bw6_761::g2::Config<bw6_761::HostBW6_761>>>(10);
 			}: bw6_761_msm_g2_optimized(RawOrigin::Signed(caller), bases, scalars)
 
 	bw6_761_msm_g2_1000 {
