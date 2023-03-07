@@ -246,7 +246,7 @@ fn pairing_bw6_761_optimized() {
 fn msm_g1_bw6_761() {
 	new_test_ext().execute_with(|| {
 		let (bases, scalars) = generate_arguments::<
-			ark_ec::short_weierstrass::Projective<ark_bls12_377::g1::Config>,
+			ark_ec::short_weierstrass::Projective<ark_bw6_761::g1::Config>,
 		>(10);
 		assert_ok!(TemplateModule::bw6_761_msm_g1(RuntimeOrigin::signed(1), bases, scalars));
 	});
@@ -255,7 +255,7 @@ fn msm_g1_bw6_761() {
 fn msm_g1_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
 		let (bases, scalars) = generate_arguments::<
-			ark_ec::short_weierstrass::Projective<ark_bw6_761::g1::Config>,
+			ark_ec::short_weierstrass::Projective<sp_ark_bw6_761::g1::Config<bw6_761::HostBW6_761>>,
 		>(10);
 		assert_ok!(TemplateModule::bw6_761_msm_g1_optimized(
 			RuntimeOrigin::signed(1),
