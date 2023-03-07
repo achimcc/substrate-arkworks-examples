@@ -127,12 +127,12 @@ benchmarks! {
 
 	bls12_377_msm_g2_10 {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_arguments::<ark_ec::short_weierstrass::Projective<ark_bls12_377::g1::Config>>(10);
+		let (bases, scalars) = generate_arguments::<ark_ec::short_weierstrass::Projective<ark_bls12_377::g2::Config>>(10);
 			}: bls12_377_msm_g2(RawOrigin::Signed(caller), bases, scalars)
 
 	bls12_377_msm_g2_10_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_arguments::<sp_ark_models::short_weierstrass::Projective<sp_ark_bls12_377::g1::Config<bls12_377::HostBls12_377>>>(10);
+		let (bases, scalars) = generate_arguments::<sp_ark_models::short_weierstrass::Projective<sp_ark_bls12_377::g2::Config<bls12_377::HostBls12_377>>>(10);
 	}: bls12_377_msm_g2_optimized(RawOrigin::Signed(caller), bases, scalars)
 
 	bls12_377_msm_g2_1000 {
