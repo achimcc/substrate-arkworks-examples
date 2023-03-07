@@ -253,13 +253,9 @@ fn msm_g1_bw6_761() {
 }
 #[test]
 fn msm_g1_bw6_761_optimized() {
-	let (bases, scalars) =
-		generate_arguments::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g1::Config>>(10);
 	new_test_ext().execute_with(|| {
 		let (bases, scalars) = generate_arguments::<
-			ark_ec::short_weierstrass::Projective<
-				sp_ark_bls12_377::g1::Config<bls12_377::HostBls12_377>,
-			>,
+			ark_ec::short_weierstrass::Projective<ark_bw6_761::g1::Config>,
 		>(10);
 		assert_ok!(TemplateModule::bw6_761_msm_g1_optimized(
 			RuntimeOrigin::signed(1),
@@ -270,21 +266,19 @@ fn msm_g1_bw6_761_optimized() {
 }
 #[test]
 fn msm_g2_bw6_761() {
-	let (bases, scalars) =
-		generate_arguments::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g2::Config>>(10);
 	new_test_ext().execute_with(|| {
 		let (bases, scalars) = generate_arguments::<
-			ark_ec::short_weierstrass::Projective<ark_bls12_377::g2::Config>,
+			ark_ec::short_weierstrass::Projective<ark_bw6_761::g2::Config>,
 		>(10);
 		assert_ok!(TemplateModule::bw6_761_msm_g2(RuntimeOrigin::signed(1), bases, scalars));
 	});
 }
 #[test]
 fn msm_g2_bw6_761_optimized() {
-	let (bases, scalars) = generate_arguments::<
-		ark_ec::short_weierstrass::Projective<sp_ark_bw6_761::g2::Config<bw6_761::HostBW6_761>>,
-	>(10);
 	new_test_ext().execute_with(|| {
+		let (bases, scalars) = generate_arguments::<
+			ark_ec::short_weierstrass::Projective<sp_ark_bw6_761::g2::Config<bw6_761::HostBW6_761>>,
+		>(10);
 		assert_ok!(TemplateModule::ed_on_bls12_381_msm_sw_optimized(
 			RuntimeOrigin::signed(1),
 			bases,
