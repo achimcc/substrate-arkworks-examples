@@ -1,4 +1,7 @@
-use crate::{bls12_377, bls12_381, bw6_761, ed_on_bls12_377, ed_on_bls12_381, mock::*};
+use crate::{
+	bls12_377, bls12_381, bw6_761, ed_on_bls12_377, ed_on_bls12_381, mock::*,
+	utils::generate_arguments,
+};
 use frame_support::assert_ok;
 
 #[test]
