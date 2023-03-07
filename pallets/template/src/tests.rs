@@ -279,7 +279,7 @@ fn msm_g2_bw6_761_optimized() {
 		let (bases, scalars) = generate_arguments::<
 			ark_ec::short_weierstrass::Projective<sp_ark_bw6_761::g2::Config<bw6_761::HostBW6_761>>,
 		>(10);
-		assert_ok!(TemplateModule::ed_on_bls12_381_msm_sw_optimized(
+		assert_ok!(TemplateModule::bw6_761_msm_g2_optimized(
 			RuntimeOrigin::signed(1),
 			bases,
 			scalars
