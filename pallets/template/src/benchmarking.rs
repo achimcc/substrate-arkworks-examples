@@ -259,7 +259,7 @@ benchmarks! {
 
 	ed_on_bls12_377_msm_10 {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_arguments::<sark_ed_on_bls12_377::EdwardsProjective>(10);
+		let (bases, scalars) = generate_arguments::<ark_ed_on_bls12_377::EdwardsProjective>(10);
 			}: ed_on_bls12_377_msm(RawOrigin::Signed(caller), bases, scalars)
 
 	ed_on_bls12_377_msm_10_optimized {
@@ -317,18 +317,6 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 	}: _(RawOrigin::Signed(caller))
 
-	ed_on_bls12_381_mul_projective_sw_optimized {
-		let caller: T::AccountId = whitelisted_caller();
-	}: _(RawOrigin::Signed(caller))
-
-	ed_on_bls12_381_mul_affine_sw {
-		let caller: T::AccountId = whitelisted_caller();
-	}: _(RawOrigin::Signed(caller))
-
-	ed_on_bls12_381_mul_affine_sw_optimized {
-		let caller: T::AccountId = whitelisted_caller();
-	}: _(RawOrigin::Signed(caller))
-
 	ed_on_bls12_381_msm_te_10 {
 		let caller: T::AccountId = whitelisted_caller();
 		let (bases, scalars) = generate_arguments::<ark_ed_on_bls12_381::EdwardsProjective>(10);
@@ -348,6 +336,18 @@ benchmarks! {
 		let caller: T::AccountId = whitelisted_caller();
 		let (bases, scalars) = generate_arguments::<sp_ark_ed_on_bls12_381::EdwardsProjective<ed_on_bls12_381::HostEdOnBls12_381>>(1000);
 			}: ed_on_bls12_381_msm_te_optimized(RawOrigin::Signed(caller), bases, scalars)
+
+	ed_on_bls12_381_mul_projective_sw_optimized {
+		let caller: T::AccountId = whitelisted_caller();
+	}: _(RawOrigin::Signed(caller))
+
+	ed_on_bls12_381_mul_affine_sw {
+		let caller: T::AccountId = whitelisted_caller();
+	}: _(RawOrigin::Signed(caller))
+
+	ed_on_bls12_381_mul_affine_sw_optimized {
+		let caller: T::AccountId = whitelisted_caller();
+	}: _(RawOrigin::Signed(caller))
 
 	ed_on_bls12_381_mul_projective_te {
 		let caller: T::AccountId = whitelisted_caller();
