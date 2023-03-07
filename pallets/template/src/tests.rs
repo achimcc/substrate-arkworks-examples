@@ -138,12 +138,19 @@ fn pairing_bls12_377_optimized() {
 }
 #[test]
 fn msm_g1_bls12_377() {
+	let (bases, scalars) =
+		generate_arguments::<ark_ec::short_weierstrass::Projective<ark_bls12_377::g1::Config>>(10);
 	new_test_ext().execute_with(|| {
 		assert_ok!(TemplateModule::bls12_377_msm_g1(RuntimeOrigin::signed(1), bases, scalars));
 	});
 }
 #[test]
 fn msm_g1_bls12_377_optimized() {
+	let (bases, scalars) = generate_arguments::<
+		ark_ec::short_weierstrass::Projective<
+			sp_ark_bls12_377::g1::Config<bls12_377::HostBls12_377>,
+		>,
+	>(10);
 	new_test_ext().execute_with(|| {
 		assert_ok!(TemplateModule::bls12_377_msm_g1_optimized(
 			RuntimeOrigin::signed(1),
@@ -154,12 +161,19 @@ fn msm_g1_bls12_377_optimized() {
 }
 #[test]
 fn msm_g2_bls12_377() {
+	let (bases, scalars) =
+		generate_arguments::<ark_ec::short_weierstrass::Projective<ark_bls12_377::g2::Config>>(10);
 	new_test_ext().execute_with(|| {
 		assert_ok!(TemplateModule::bls12_377_msm_g2(RuntimeOrigin::signed(1), bases, scalars));
 	});
 }
 #[test]
 fn msm_g2_bls12_377_optimized() {
+	let (bases, scalars) = generate_arguments::<
+		ark_ec::short_weierstrass::Projective<
+			sp_ark_bls12_377::g2::Config<bls12_377::HostBls12_377>,
+		>,
+	>(10);
 	new_test_ext().execute_with(|| {
 		assert_ok!(TemplateModule::bls12_377_msm_g2_optimized(
 			RuntimeOrigin::signed(1),
@@ -239,6 +253,8 @@ fn msm_g1_bw6_761() {
 }
 #[test]
 fn msm_g1_bw6_761_optimized() {
+	let (bases, scalars) =
+		generate_arguments::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g1::Config>>(10);
 	new_test_ext().execute_with(|| {
 		let (bases, scalars) = generate_arguments::<
 			ark_ec::short_weierstrass::Projective<
@@ -254,6 +270,8 @@ fn msm_g1_bw6_761_optimized() {
 }
 #[test]
 fn msm_g2_bw6_761() {
+	let (bases, scalars) =
+		generate_arguments::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g2::Config>>(10);
 	new_test_ext().execute_with(|| {
 		let (bases, scalars) = generate_arguments::<
 			ark_ec::short_weierstrass::Projective<ark_bls12_377::g2::Config>,
@@ -263,17 +281,21 @@ fn msm_g2_bw6_761() {
 }
 #[test]
 fn msm_g2_bw6_761_optimized() {
+	let (bases, scalars) = generate_arguments::<
+		ark_ec::short_weierstrass::Projective<sp_ark_bw6_761::g2::Config<bw6_761::HostBW6_761>>,
+	>(10);
 	new_test_ext().execute_with(|| {
-		let (bases, scalars) = generate_arguments::<
-			sp_ark_models::short_weierstrass::Projective<
-				sp_ark_bls12_377::g2::Config<bls12_377::HostBls12_377>,
-			>,
-		>(10);
-		assert_ok!(TemplateModule::bw6_761_msm_g2_optimized(
+		assert_ok!(TemplateModule::ed_on_bls12_381_msm_sw_optimized(
 			RuntimeOrigin::signed(1),
 			bases,
 			scalars
 		));
+	});
+}
+#[test]
+fn mul_projective_sw_ed_on_bls12_381() {
+	new_test_ext().execute_with(|| {
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_sw(RuntimeOrigin::signed(1),));
 	});
 }
 #[test]
@@ -387,21 +409,11 @@ fn msm_sw_ed_on_bls12_381() {
 }
 #[test]
 fn msm_sw_ed_on_bls12_381_optimized() {
-	new_test_ext().execute_with(|| {
-		let (bases, scalars) = generate_arguments::<
-			sp_ark_models::short_weierstrass::Projective<
-				sp_ark_ed_on_bls12_381::EdwardsConfig<ed_on_bls12_381::HostEdOnBls12_381>,
-			>,
-		>(10);
-		assert_ok!(TemplateModule::ed_on_bls12_381_msm_sw_optimized(
-			RuntimeOrigin::signed(1),
-			bases,
-			scalars
-		));
-	});
-}
-#[test]
-fn mul_projective_sw_ed_on_bls12_381() {
+	let (bases, scalars) = generate_arguments::<
+		sp_ark_models::short_weierstrass::Projective<
+			sp_ark_ed_on_bls12_381::EdwardsConfig<ed_on_bls12_381::HostEdOnBls12_381>,
+		>,
+	>(10);
 	new_test_ext().execute_with(|| {
 		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_sw(RuntimeOrigin::signed(1)));
 	});
