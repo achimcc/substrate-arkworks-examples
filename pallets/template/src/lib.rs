@@ -20,6 +20,7 @@ pub mod bls12_381;
 pub mod bw6_761;
 pub mod ed_on_bls12_377;
 pub mod ed_on_bls12_381;
+pub mod do_nothing;
 pub mod utils;
 
 #[frame_support::pallet]
@@ -1021,6 +1022,13 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_mul_affine_optimized(_origin: OriginFor<T>) -> DispatchResult {
 			let _ = crate::ed_on_bls12_377::do_mul_affine_optimized();
+			Ok(())
+		}
+
+		#[pallet::call_index(62)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn do_nothing(_origin: OriginFor<T>) -> DispatchResult {
+			let _ = crate::do_nothing::do_nothing_call();
 			Ok(())
 		}
 	}

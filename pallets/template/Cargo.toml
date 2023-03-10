@@ -15,9 +15,9 @@ targets = ["x86_64-unknown-linux-gnu"]
 [dependencies]
 codec = { package = "parity-scale-codec", version = "3.2.2", features = [ "derive" ], default-features = false }
 scale-info = { version = "2.1.1", features = ["derive"], default-features = false }
-frame-benchmarking = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", version = "4.0.0-dev", optional = true, default-features = false }
-frame-support = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", version = "4.0.0-dev",  default-features = false }
-frame-system = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", version = "4.0.0-dev", default-features = false }
+frame-benchmarking = { git = "https://github.com/achimcc/substrate", version = "4.0.0-dev", optional = true, default-features = false }
+frame-support = { git = "https://github.com/achimcc/substrate", version = "4.0.0-dev",  default-features = false }
+frame-system = { git = "https://github.com/achimcc/substrate", version = "4.0.0-dev", default-features = false }
 sp-ark-bls12-381 = { version = "0.4.0", features = ["curve"], default-features = false }
 sp-ark-bls12-377 = { version = "0.4.0", features = ["curve"], default-features = false }
 sp-ark-ed-on-bls12-381 = { version = "0.4.0", default-features = false }
@@ -35,13 +35,13 @@ ark-ec = { version = "0.4.0", default-features = false }
 ark-std = { version = "0.4.0", default-features = false }
 ark-snark = { version = "0.4.0", default-features = false }
 ark-groth16 = { version = "0.4.0", features = [ "r1cs" ], default-features = false }
-sp-io = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", default-features = false }
+sp-io = { git = "https://github.com/achimcc/substrate", default-features = false }
 ark-crypto-primitives = { version = "0.4.0", features = [ "r1cs", "snark" ], default-features = false } 
 
 [dev-dependencies]
 ark-algebra-bench-templates = { version = "0.4.0", default-features = false }
-sp-core = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", version = "7.0.0", default-features = false }
-sp-runtime = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", version = "7.0.0", default-features = false }
+sp-core = { git = "https://github.com/achimcc/substrate", version = "7.0.0", default-features = false }
+sp-runtime = { git = "https://github.com/achimcc/substrate", version = "7.0.0", default-features = false }
 
 [features]
 default = [ "std" ]
