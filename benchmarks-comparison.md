@@ -3,7 +3,7 @@
 
 | extrinsic                                 |  normal(µs)[^1]  |optimized(µs)[^2]|   speedup[^3]   |  dummy(µs)[^4]  |   wasm(µs)[^5]  |  native(µs)[^6] |
 | ----------------------------------------- |  --------------- | --------------- | --------------- | --------------- | --------------- | --------------- |
-| groth16_verification (bls12_381)          |    26535.30      |    8244.31      |${\color{green}\bf 3.22 \bm{\times}}$|    5800.99      |     45070       |      4040       | 
+| groth16_verification (bls12_381)          |    26535.30      |    8244.31      |${\color{green}\bf 3.22 \boldsymbol{\times}}$|    5800.99      |     45070       |      4040       | 
 | bls12_381_pairing                         |    8257.70       |    1448.53      |${\color{green}\bf 5.70 \times}$|    448.97       |     14140       |      1350       |
 | bls12_381_msm_g1, 10 arguments            |    16932.20      |    6869.28      |${\color{green}\bf 2.46 \times}$|    87.63        |     24650       |      600.44     |
 | bls12_381_msm_g1, 1000 arguments          |    1313899.30    |    653168.11    |${\color{green}\bf 2.01 \times}$|    6486.63      |     191000      |      11160      |
