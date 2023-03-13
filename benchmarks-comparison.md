@@ -29,7 +29,7 @@
 | bw6_761_msm_g2, 1000 arguments          |    12528071.10   |    4732393.47   |${\color{green}\bf 2.65 \boldsymbol{\times}}$|    13633.30     |     18020000    |      75330      |
 | bw6_761_mul_projective_g1[^*]           |    17.05         |    53.83        |           -           |    21.99        |     34.82       |      1.79       |
 | bw6_761_mul_affine_g1[^*]               |    18.47         |    55.10        |           -           |    21.35        |     35.64       |      1.77       |
-| bw6_761_mul_projective_g2[^*]           |    17.45         |    53.65        |           -           $|    21.64        |     35.42       |      1.78       |
+| bw6_761_mul_projective_g2[^*]           |    17.45         |    53.65        |           -           |    21.64        |     35.42       |      1.78       |
 | bw6_761_mul_affine_g2[^*]               |    17.55         |    54.28        |           -           |    21.57        |     34.68       |      1.78       |
 | ed_on_bls12_381_msm_sw, 10 arguments    |    6663.28       |    3686.07      |${\color{green}\bf 1.81 \boldsymbol{\times}}$|    36.30        |     8610        |      376.61     |
 | ed_on_bls12_381_msm_sw, 1000 arguments  |    296140.25     |    215932.66    |${\color{green}\bf 1.37 \boldsymbol{\times}}$|    2465.60      |     430700      |      6010       |
