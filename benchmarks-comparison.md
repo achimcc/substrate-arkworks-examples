@@ -1,14 +1,14 @@
 # Bechmark results comparison table
 
 
-| extrinsic                                 |  normal(µs)[^1]  |optimized(µs)[^2]|optimized(µs)[^2]|  dummy(µs)[^3]  |   wasm(µs)[^4]  |  native(µs)[^5] |
+| extrinsic                                 |  normal(µs)[^1]  |optimized(µs)[^2]|   speedup[^3]   |  dummy(µs)[^4]  |   wasm(µs)[^5]  |  native(µs)[^6] |
 | ----------------------------------------- |  --------------- | --------------- | --------------- | --------------- | --------------- | --------------- |
-| groth16_verification (bls12_381)          |    26535.30      |    8244.31      |${\color{green}\bf 3.22x}$|    5800.99      |     45070       |      4040       | 
-| bls12_381_pairing                         |    8257.70       |    1448.53      |${\color{green}\bf 5.70x}$|    448.97       |     14140       |      1350       |
-| bls12_381_msm_g1, 10 arguments            |    16932.20      |    6869.28      |${\color{green}\bf 3x}$|    87.63        |     24650       |      600.44     |
-| bls12_381_msm_g1, 1000 arguments          |    1313899.30    |    653168.11    |${\color{green}\bf 3x}$|    6486.63      |     191000      |      11160      |
-| bls12_381_msm_g2, 10 arguments            |    115465.19     |    23583.63     |${\color{green}\bf 3x}$|    10738.18     |     185240      |      1660       |
-| bls12_381_msm_g2, 1000 arguments          |    10668568.36   |    2458212.20   |${\color{green}\bf 3x}$|    9896.67      |     14850000    |      33420      |
+| groth16_verification (bls12_381)          |    26535.30      |    8244.31      |${\color{green}\bf 3.22 \mul}$|    5800.99      |     45070       |      4040       | 
+| bls12_381_pairing                         |    8257.70       |    1448.53      |${\color{green}\bf 5.70 \mul}$|    448.97       |     14140       |      1350       |
+| bls12_381_msm_g1, 10 arguments            |    16932.20      |    6869.28      |${\color{green}\bf 2.46 \mul}$|    87.63        |     24650       |      600.44     |
+| bls12_381_msm_g1, 1000 arguments          |    1313899.30    |    653168.11    |${\color{green}\bf 2.01 \mul}$|    6486.63      |     191000      |      11160      |
+| bls12_381_msm_g2, 10 arguments            |    115465.19     |    23583.63     |${\color{green}\bf 4.90 \mul}$|    10738.18     |     185240      |      1660       |
+| bls12_381_msm_g2, 1000 arguments          |    10668568.36   |    2458212.20   |${\color{green}\bf 4.34 \mul}$|    9896.67      |     14850000    |      33420      |
 | bls12_381_mul_projective_g1[^*]           |    8.00          |    21.96        |           -           |    12.13        |     19.85       |      0.45       |
 | bls12_381_mul_affine_g1[^*]               |    8.56          |    21.74        |           -           |    9.74         |     39.70       |      0.45       |
 | bls12_381_mul_projective_g2[^*]           |    16.88         |    27.87        |           -           |    18.22        |     37.74       |      1.18       |
@@ -46,7 +46,7 @@
 
 [^1]: implemented in a Substrate pallet with [arkworks](https://github.com/arkworks-rs/) library by this repo: https://github.com/achimcc/substrate-arkworks-examples
 [^2]: implemented in a Substrate pallet with [ark-substrate](https://github.com/paritytech/ark-substrate) library, executed through host-function call, computed by this repo: https://github.com/achimcc/substrate-arkworks-examples
-[^3]: These extrinsics just receive the arguemnts, deserialize them without using them and then take a generator or zero element of the expected return group, serizlize it and return it. **Calling a host call through a extrinsic which does nothing has been benchmarked with 3.98µs**. Implementation in: https://github.com/achimcc/substrate-arkworks-examples/tree/dummy-calls
-[^4]: executed through wasmtime by this repo: [https://github.com/achimcc/native-bench-arkworks](https://github.com/achimcc/wasm-bench-arkworks)
-[^5]: native execution, computed by this repo: https://github.com/achimcc/native-bench-arkworks
+[^4]: These extrinsics just receive the arguemnts, deserialize them without using them and then take a generator or zero element of the expected return group, serizlize it and return it. **Calling a host call through a extrinsic which does nothing has been benchmarked with 3.98µs**. Implementation in: https://github.com/achimcc/substrate-arkworks-examples/tree/dummy-calls
+[^5]: executed through wasmtime by this repo: [https://github.com/achimcc/native-bench-arkworks](https://github.com/achimcc/wasm-bench-arkworks)
+[^6]: native execution, computed by this repo: https://github.com/achimcc/native-bench-arkworks
 [^*]: we removed these host calls in the final ark-substrate implementation, since they didn't yield a performance improvement. Implementations can be found in the branches: https://github.com/paritytech/ark-substrate/tree/arkworks-host-function-mul and https://github.com/paritytech/substrate/tree/arkworks-host-function-mul
