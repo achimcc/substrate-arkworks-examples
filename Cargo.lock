@@ -1539,16 +1539,6 @@ dependencies = [
 
 [[package]]
 name = "crypto-mac"
-version = "0.8.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b584a330336237c1eecd3e94266efb216c56ed91225d634cb2991c5f3fd1aeab"
-dependencies = [
- "generic-array 0.14.6",
- "subtle",
-]
-
-[[package]]
-name = "crypto-mac"
 version = "0.11.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "b1d1a86f49236c215f271d40892d5fc950490551400b02ef360692c29815c714"
@@ -2230,7 +2220,7 @@ checksum = "3f9eec918d3f24069decb9af1554cad7c880e2da24a9afd88aca000531ab82c1"
 [[package]]
 name = "fork-tree"
 version = "3.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "parity-scale-codec",
 ]
@@ -2253,7 +2243,7 @@ checksum = "6c2141d6d6c8512188a7891b4b01590a45f6dac67afb4f255c4124dbb86d4eaa"
 [[package]]
 name = "frame-benchmarking"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-support",
  "frame-support-procedural",
@@ -2266,19 +2256,19 @@ dependencies = [
  "serde",
  "sp-api",
  "sp-application-crypto",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-io",
  "sp-runtime",
- "sp-runtime-interface 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-storage 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-runtime-interface",
+ "sp-std",
+ "sp-storage",
  "static_assertions",
 ]
 
 [[package]]
 name = "frame-benchmarking-cli"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "Inflector",
  "array-bytes",
@@ -2296,7 +2286,7 @@ dependencies = [
  "log",
  "parity-scale-codec",
  "rand 0.8.5",
- "rand_pcg 0.3.1",
+ "rand_pcg",
  "sc-block-builder",
  "sc-cli",
  "sc-client-api",
@@ -2308,16 +2298,16 @@ dependencies = [
  "serde_json",
  "sp-api",
  "sp-blockchain",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-database",
- "sp-externalities 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-externalities",
  "sp-inherents",
- "sp-keystore 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-keystore",
  "sp-runtime",
- "sp-state-machine 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-storage 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-trie 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-state-machine",
+ "sp-std",
+ "sp-storage",
+ "sp-trie",
  "thiserror",
  "thousands",
 ]
@@ -2325,18 +2315,18 @@ dependencies = [
 [[package]]
 name = "frame-executive"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-support",
  "frame-system",
  "frame-try-runtime",
  "parity-scale-codec",
  "scale-info",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-io",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-tracing 6.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
+ "sp-tracing",
 ]
 
 [[package]]
@@ -2354,14 +2344,14 @@ dependencies = [
 [[package]]
 name = "frame-remote-externalities"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "futures",
  "log",
  "parity-scale-codec",
  "serde",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-io",
  "sp-runtime",
  "substrate-rpc-client",
  "tokio",
@@ -2370,7 +2360,7 @@ dependencies = [
 [[package]]
 name = "frame-support"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "bitflags",
  "environmental",
@@ -2387,15 +2377,15 @@ dependencies = [
  "smallvec",
  "sp-api",
  "sp-arithmetic",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-core-hashing-proc-macro",
  "sp-inherents",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-io",
  "sp-runtime",
  "sp-staking",
- "sp-state-machine 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-tracing 6.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-state-machine",
+ "sp-std",
+ "sp-tracing",
  "sp-weights",
  "tt-call",
 ]
@@ -2403,7 +2393,7 @@ dependencies = [
 [[package]]
 name = "frame-support-procedural"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "Inflector",
  "cfg-expr",
@@ -2418,7 +2408,7 @@ dependencies = [
 [[package]]
 name = "frame-support-procedural-tools"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-support-procedural-tools-derive",
  "proc-macro-crate",
@@ -2430,7 +2420,7 @@ dependencies = [
 [[package]]
 name = "frame-support-procedural-tools-derive"
 version = "3.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -2440,17 +2430,17 @@ dependencies = [
 [[package]]
 name = "frame-system"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-support",
  "log",
  "parity-scale-codec",
  "scale-info",
  "serde",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-io",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
  "sp-version",
  "sp-weights",
 ]
@@ -2458,22 +2448,22 @@ dependencies = [
 [[package]]
 name = "frame-system-benchmarking"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
  "frame-system",
  "parity-scale-codec",
  "scale-info",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
 ]
 
 [[package]]
 name = "frame-system-rpc-runtime-api"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "parity-scale-codec",
  "sp-api",
@@ -2482,13 +2472,13 @@ dependencies = [
 [[package]]
 name = "frame-try-runtime"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-support",
  "parity-scale-codec",
  "sp-api",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
 ]
 
 [[package]]
@@ -2685,10 +2675,8 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8fc3cb4d91f53b50155bdcfd23f6a4c39ae1969c2ae85982b135750cccaf5fce"
 dependencies = [
  "cfg-if",
- "js-sys",
  "libc",
  "wasi 0.9.0+wasi-snapshot-preview1",
- "wasm-bindgen",
 ]
 
 [[package]]
@@ -2890,21 +2878,11 @@ dependencies = [
 
 [[package]]
 name = "hmac"
-version = "0.8.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "126888268dcc288495a26bf004b38c5fdbb31682f992c84ceb046a1f0fe38840"
-dependencies = [
- "crypto-mac 0.8.0",
- "digest 0.9.0",
-]
-
-[[package]]
-name = "hmac"
 version = "0.11.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "2a2a2320eb7ec0ebe8da8f744d7812d9fc4cb4d09344ac01898dbcb6a20ae69b"
 dependencies = [
- "crypto-mac 0.11.1",
+ "crypto-mac",
  "digest 0.9.0",
 ]
 
@@ -2915,17 +2893,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6c49c37c09c17a53d937dfbb742eb3a961d65a994e6bcdcf37e7399d0cc8ab5e"
 dependencies = [
  "digest 0.10.6",
-]
-
-[[package]]
-name = "hmac-drbg"
-version = "0.3.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "17ea0a1394df5b6574da6e0c1ade9e78868c9fb0a4e5ef4428e32da4676b85b1"
-dependencies = [
- "digest 0.9.0",
- "generic-array 0.14.6",
- "hmac 0.8.1",
 ]
 
 [[package]]
@@ -3971,14 +3938,12 @@ dependencies = [
  "arrayref",
  "base64 0.13.1",
  "digest 0.9.0",
- "hmac-drbg",
  "libsecp256k1-core",
  "libsecp256k1-gen-ecmult",
  "libsecp256k1-gen-genmult",
  "rand 0.8.5",
  "serde",
  "sha2 0.9.9",
- "typenum",
 ]
 
 [[package]]
@@ -4211,17 +4176,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d61c719bcfbcf5d62b3a09efa6088de8c54bc0bfcd3ea7ae39fcc186108b8de1"
 dependencies = [
  "autocfg",
-]
-
-[[package]]
-name = "memory-db"
-version = "0.30.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "34ac11bb793c28fa095b7554466f53b3a60a2cd002afdac01bcf135cbd73a269"
-dependencies = [
- "hash-db",
- "hashbrown 0.12.3",
- "parity-util-mem",
 ]
 
 [[package]]
@@ -4564,9 +4518,9 @@ dependencies = [
  "sp-consensus",
  "sp-consensus-aura",
  "sp-consensus-grandpa",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-inherents",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-io",
  "sp-keyring",
  "sp-runtime",
  "sp-timestamp",
@@ -4601,12 +4555,12 @@ dependencies = [
  "sp-block-builder",
  "sp-consensus-aura",
  "sp-consensus-grandpa",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-inherents",
  "sp-offchain",
  "sp-runtime",
  "sp-session",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
  "sp-transaction-pool",
  "sp-version",
  "substrate-wasm-builder",
@@ -4815,7 +4769,7 @@ dependencies = [
 [[package]]
 name = "pallet-aura"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-support",
  "frame-system",
@@ -4825,13 +4779,13 @@ dependencies = [
  "sp-application-crypto",
  "sp-consensus-aura",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
 ]
 
 [[package]]
 name = "pallet-authorship"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-support",
  "frame-system",
@@ -4839,13 +4793,13 @@ dependencies = [
  "parity-scale-codec",
  "scale-info",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
 ]
 
 [[package]]
 name = "pallet-balances"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
@@ -4854,13 +4808,13 @@ dependencies = [
  "parity-scale-codec",
  "scale-info",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
 ]
 
 [[package]]
 name = "pallet-grandpa"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
@@ -4872,18 +4826,18 @@ dependencies = [
  "scale-info",
  "sp-application-crypto",
  "sp-consensus-grandpa",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-io",
  "sp-runtime",
  "sp-session",
  "sp-staking",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
 ]
 
 [[package]]
 name = "pallet-insecure-randomness-collective-flip"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-support",
  "frame-system",
@@ -4891,13 +4845,13 @@ dependencies = [
  "safe-mix",
  "scale-info",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
 ]
 
 [[package]]
 name = "pallet-session"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-support",
  "frame-system",
@@ -4906,27 +4860,27 @@ dependencies = [
  "pallet-timestamp",
  "parity-scale-codec",
  "scale-info",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-io",
  "sp-runtime",
  "sp-session",
  "sp-staking",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-trie 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
+ "sp-trie",
 ]
 
 [[package]]
 name = "pallet-sudo"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-support",
  "frame-system",
  "parity-scale-codec",
  "scale-info",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-io",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
 ]
 
 [[package]]
@@ -4957,15 +4911,15 @@ dependencies = [
  "sp-ark-ed-on-bls12-377",
  "sp-ark-ed-on-bls12-381",
  "sp-ark-models",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-io",
  "sp-runtime",
 ]
 
 [[package]]
 name = "pallet-timestamp"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-benchmarking",
  "frame-support",
@@ -4974,39 +4928,39 @@ dependencies = [
  "parity-scale-codec",
  "scale-info",
  "sp-inherents",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-io",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
  "sp-timestamp",
 ]
 
 [[package]]
 name = "pallet-transaction-payment"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-support",
  "frame-system",
  "parity-scale-codec",
  "scale-info",
  "serde",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-io",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
 ]
 
 [[package]]
 name = "pallet-transaction-payment-rpc"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "jsonrpsee",
  "pallet-transaction-payment-rpc-runtime-api",
  "parity-scale-codec",
  "sp-api",
  "sp-blockchain",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-rpc",
  "sp-runtime",
  "sp-weights",
@@ -5015,7 +4969,7 @@ dependencies = [
 [[package]]
 name = "pallet-transaction-payment-rpc-runtime-api"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "pallet-transaction-payment",
  "parity-scale-codec",
@@ -5076,31 +5030,6 @@ name = "parity-send-wrapper"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "aa9777aa91b8ad9dd5aaa04a9b6bcb02c7f1deb952fca5a66034d5e63afc5c6f"
-
-[[package]]
-name = "parity-util-mem"
-version = "0.12.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0d32c34f4f5ca7f9196001c0aba5a1f9a5a12382c8944b8b0f90233282d1e8f8"
-dependencies = [
- "cfg-if",
- "hashbrown 0.12.3",
- "impl-trait-for-tuples",
- "parity-util-mem-derive",
- "parking_lot 0.12.1",
- "winapi",
-]
-
-[[package]]
-name = "parity-util-mem-derive"
-version = "0.1.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f557c32c6d268a07c921471619c0295f5efad3a0e76d4f97a05c091a51d110b2"
-dependencies = [
- "proc-macro2",
- "syn",
- "synstructure",
-]
 
 [[package]]
 name = "parity-wasm"
@@ -5170,20 +5099,11 @@ checksum = "9f746c4065a8fa3fe23974dd82f15431cc8d40779821001404d10d2e79ca7d79"
 
 [[package]]
 name = "pbkdf2"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "216eaa586a190f0a738f2f918511eecfa90f13295abec0e457cdebcceda80cbd"
-dependencies = [
- "crypto-mac 0.8.0",
-]
-
-[[package]]
-name = "pbkdf2"
 version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d95f5254224e617595d2cc3cc73ff0a5eaf2637519e25f03388154e9378b6ffa"
 dependencies = [
- "crypto-mac 0.11.1",
+ "crypto-mac",
 ]
 
 [[package]]
@@ -5452,9 +5372,9 @@ checksum = "b794032607612e7abeb4db69adb4e33590fa6cf1149e95fd7cb00e634b92f174"
 
 [[package]]
 name = "predicates-tree"
-version = "1.0.8"
+version = "1.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2cfd78a1cd6926a74e7f263eb466b765c79409b176be05c3676fac27df378e96"
+checksum = "368ba315fb8c5052ab692e68a0eefec6ec57b23a36959c14496f0b0df2c0cecf"
 dependencies = [
  "predicates-core",
  "termtree",
@@ -5709,7 +5629,6 @@ dependencies = [
  "rand_chacha 0.2.2",
  "rand_core 0.5.1",
  "rand_hc",
- "rand_pcg 0.2.1",
 ]
 
 [[package]]
@@ -5766,15 +5685,6 @@ name = "rand_hc"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "ca3129af7b92a17112d59ad498c6f81eaf463253766b90396d39ea7a39d6613c"
-dependencies = [
- "rand_core 0.5.1",
-]
-
-[[package]]
-name = "rand_pcg"
-version = "0.2.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "16abd0c1b639e9eb4d7c50c0b8100b0d0f849be2349829c740fe8e6eb4816429"
 dependencies = [
  "rand_core 0.5.1",
 ]
@@ -6210,18 +6120,18 @@ dependencies = [
 [[package]]
 name = "sc-allocator"
 version = "4.1.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "log",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-wasm-interface 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-wasm-interface",
  "thiserror",
 ]
 
 [[package]]
 name = "sc-basic-authorship"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "futures",
  "futures-timer",
@@ -6235,7 +6145,7 @@ dependencies = [
  "sp-api",
  "sp-blockchain",
  "sp-consensus",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-inherents",
  "sp-runtime",
  "substrate-prometheus-endpoint",
@@ -6244,14 +6154,14 @@ dependencies = [
 [[package]]
 name = "sc-block-builder"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "parity-scale-codec",
  "sc-client-api",
  "sp-api",
  "sp-block-builder",
  "sp-blockchain",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-inherents",
  "sp-runtime",
 ]
@@ -6259,7 +6169,7 @@ dependencies = [
 [[package]]
 name = "sc-chain-spec"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "memmap2",
  "sc-chain-spec-derive",
@@ -6270,15 +6180,15 @@ dependencies = [
  "serde",
  "serde_json",
  "sp-blockchain",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
- "sp-state-machine 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-state-machine",
 ]
 
 [[package]]
 name = "sc-chain-spec-derive"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "proc-macro-crate",
  "proc-macro2",
@@ -6289,7 +6199,7 @@ dependencies = [
 [[package]]
 name = "sc-cli"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "array-bytes",
  "chrono",
@@ -6315,21 +6225,21 @@ dependencies = [
  "serde",
  "serde_json",
  "sp-blockchain",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-keyring",
- "sp-keystore 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-panic-handler 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-keystore",
+ "sp-panic-handler",
  "sp-runtime",
  "sp-version",
  "thiserror",
- "tiny-bip39 1.0.0",
+ "tiny-bip39",
  "tokio",
 ]
 
 [[package]]
 name = "sc-client-api"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "fnv",
  "futures",
@@ -6342,20 +6252,20 @@ dependencies = [
  "sp-api",
  "sp-blockchain",
  "sp-consensus",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-database",
- "sp-externalities 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-keystore 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-externalities",
+ "sp-keystore",
  "sp-runtime",
- "sp-state-machine 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-storage 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-state-machine",
+ "sp-storage",
  "substrate-prometheus-endpoint",
 ]
 
 [[package]]
 name = "sc-client-db"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "hash-db",
  "kvdb",
@@ -6371,17 +6281,17 @@ dependencies = [
  "schnellru",
  "sp-arithmetic",
  "sp-blockchain",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-database",
  "sp-runtime",
- "sp-state-machine 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-trie 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-state-machine",
+ "sp-trie",
 ]
 
 [[package]]
 name = "sc-consensus"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "futures",
@@ -6396,9 +6306,9 @@ dependencies = [
  "sp-api",
  "sp-blockchain",
  "sp-consensus",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
- "sp-state-machine 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-state-machine",
  "substrate-prometheus-endpoint",
  "thiserror",
 ]
@@ -6406,7 +6316,7 @@ dependencies = [
 [[package]]
 name = "sc-consensus-aura"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "futures",
@@ -6424,9 +6334,9 @@ dependencies = [
  "sp-consensus",
  "sp-consensus-aura",
  "sp-consensus-slots",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-inherents",
- "sp-keystore 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-keystore",
  "sp-runtime",
  "substrate-prometheus-endpoint",
  "thiserror",
@@ -6435,7 +6345,7 @@ dependencies = [
 [[package]]
 name = "sc-consensus-grandpa"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "ahash 0.8.3",
  "array-bytes",
@@ -6465,8 +6375,8 @@ dependencies = [
  "sp-blockchain",
  "sp-consensus",
  "sp-consensus-grandpa",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-keystore 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-keystore",
  "sp-runtime",
  "substrate-prometheus-endpoint",
  "thiserror",
@@ -6475,7 +6385,7 @@ dependencies = [
 [[package]]
 name = "sc-consensus-slots"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "futures",
@@ -6489,16 +6399,16 @@ dependencies = [
  "sp-blockchain",
  "sp-consensus",
  "sp-consensus-slots",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-inherents",
  "sp-runtime",
- "sp-state-machine 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-state-machine",
 ]
 
 [[package]]
 name = "sc-executor"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "lru",
  "parity-scale-codec",
@@ -6507,14 +6417,14 @@ dependencies = [
  "sc-executor-wasmi",
  "sc-executor-wasmtime",
  "sp-api",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-externalities 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-panic-handler 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-runtime-interface 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-trie 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-externalities",
+ "sp-io",
+ "sp-panic-handler",
+ "sp-runtime-interface",
+ "sp-trie",
  "sp-version",
- "sp-wasm-interface 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-wasm-interface",
  "tracing",
  "wasmi",
 ]
@@ -6522,11 +6432,11 @@ dependencies = [
 [[package]]
 name = "sc-executor-common"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "sc-allocator",
  "sp-maybe-compressed-blob",
- "sp-wasm-interface 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-wasm-interface",
  "thiserror",
  "wasm-instrument",
  "wasmi",
@@ -6535,20 +6445,20 @@ dependencies = [
 [[package]]
 name = "sc-executor-wasmi"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "log",
  "sc-allocator",
  "sc-executor-common",
- "sp-runtime-interface 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-wasm-interface 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-runtime-interface",
+ "sp-wasm-interface",
  "wasmi",
 ]
 
 [[package]]
 name = "sc-executor-wasmtime"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "anyhow",
  "cfg-if",
@@ -6558,15 +6468,15 @@ dependencies = [
  "rustix 0.36.9",
  "sc-allocator",
  "sc-executor-common",
- "sp-runtime-interface 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-wasm-interface 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-runtime-interface",
+ "sp-wasm-interface",
  "wasmtime",
 ]
 
 [[package]]
 name = "sc-informant"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "ansi_term",
  "futures",
@@ -6581,22 +6491,22 @@ dependencies = [
 [[package]]
 name = "sc-keystore"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "array-bytes",
  "async-trait",
  "parking_lot 0.12.1",
  "serde_json",
  "sp-application-crypto",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-keystore 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-keystore",
  "thiserror",
 ]
 
 [[package]]
 name = "sc-network"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "array-bytes",
  "async-channel",
@@ -6628,7 +6538,7 @@ dependencies = [
  "sp-arithmetic",
  "sp-blockchain",
  "sp-consensus",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
  "substrate-prometheus-endpoint",
  "thiserror",
@@ -6639,7 +6549,7 @@ dependencies = [
 [[package]]
 name = "sc-network-bitswap"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "cid",
  "futures",
@@ -6658,7 +6568,7 @@ dependencies = [
 [[package]]
 name = "sc-network-common"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "array-bytes",
  "async-trait",
@@ -6687,7 +6597,7 @@ dependencies = [
 [[package]]
 name = "sc-network-gossip"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "ahash 0.8.3",
  "futures",
@@ -6705,7 +6615,7 @@ dependencies = [
 [[package]]
 name = "sc-network-light"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "array-bytes",
  "futures",
@@ -6718,7 +6628,7 @@ dependencies = [
  "sc-network-common",
  "sc-peerset",
  "sp-blockchain",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
  "thiserror",
 ]
@@ -6726,7 +6636,7 @@ dependencies = [
 [[package]]
 name = "sc-network-sync"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "array-bytes",
  "async-trait",
@@ -6750,7 +6660,7 @@ dependencies = [
  "sp-blockchain",
  "sp-consensus",
  "sp-consensus-grandpa",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
  "substrate-prometheus-endpoint",
  "thiserror",
@@ -6759,7 +6669,7 @@ dependencies = [
 [[package]]
 name = "sc-network-transactions"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "array-bytes",
  "futures",
@@ -6778,7 +6688,7 @@ dependencies = [
 [[package]]
 name = "sc-offchain"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "array-bytes",
  "bytes",
@@ -6798,7 +6708,7 @@ dependencies = [
  "sc-peerset",
  "sc-utils",
  "sp-api",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-offchain",
  "sp-runtime",
  "threadpool",
@@ -6808,7 +6718,7 @@ dependencies = [
 [[package]]
 name = "sc-peerset"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "futures",
  "libp2p",
@@ -6821,7 +6731,7 @@ dependencies = [
 [[package]]
 name = "sc-proposer-metrics"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "log",
  "substrate-prometheus-endpoint",
@@ -6830,7 +6740,7 @@ dependencies = [
 [[package]]
 name = "sc-rpc"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "futures",
  "jsonrpsee",
@@ -6847,8 +6757,8 @@ dependencies = [
  "serde_json",
  "sp-api",
  "sp-blockchain",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-keystore 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-keystore",
  "sp-offchain",
  "sp-rpc",
  "sp-runtime",
@@ -6860,7 +6770,7 @@ dependencies = [
 [[package]]
 name = "sc-rpc-api"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "jsonrpsee",
  "parity-scale-codec",
@@ -6869,7 +6779,7 @@ dependencies = [
  "scale-info",
  "serde",
  "serde_json",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-rpc",
  "sp-runtime",
  "sp-version",
@@ -6879,7 +6789,7 @@ dependencies = [
 [[package]]
 name = "sc-rpc-server"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "http",
  "jsonrpsee",
@@ -6894,7 +6804,7 @@ dependencies = [
 [[package]]
 name = "sc-rpc-spec-v2"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "array-bytes",
  "futures",
@@ -6910,7 +6820,7 @@ dependencies = [
  "serde",
  "sp-api",
  "sp-blockchain",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
  "sp-version",
  "thiserror",
@@ -6920,7 +6830,7 @@ dependencies = [
 [[package]]
 name = "sc-service"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "directories",
@@ -6963,16 +6873,16 @@ dependencies = [
  "sp-api",
  "sp-blockchain",
  "sp-consensus",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-externalities 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-keystore 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-externalities",
+ "sp-keystore",
  "sp-runtime",
  "sp-session",
- "sp-state-machine 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-storage 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-state-machine",
+ "sp-storage",
  "sp-transaction-pool",
  "sp-transaction-storage-proof",
- "sp-trie 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-trie",
  "sp-version",
  "static_init",
  "substrate-prometheus-endpoint",
@@ -6986,18 +6896,18 @@ dependencies = [
 [[package]]
 name = "sc-state-db"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "log",
  "parity-scale-codec",
  "parking_lot 0.12.1",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
 ]
 
 [[package]]
 name = "sc-storage-monitor"
 version = "0.1.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "clap 4.1.8",
  "fs4",
@@ -7005,7 +6915,7 @@ dependencies = [
  "log",
  "sc-client-db",
  "sc-utils",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "thiserror",
  "tokio",
 ]
@@ -7013,26 +6923,26 @@ dependencies = [
 [[package]]
 name = "sc-sysinfo"
 version = "6.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "futures",
  "libc",
  "log",
  "rand 0.8.5",
- "rand_pcg 0.3.1",
+ "rand_pcg",
  "regex",
  "sc-telemetry",
  "serde",
  "serde_json",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-io",
+ "sp-std",
 ]
 
 [[package]]
 name = "sc-telemetry"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "chrono",
  "futures",
@@ -7051,7 +6961,7 @@ dependencies = [
 [[package]]
 name = "sc-tracing"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "ansi_term",
  "atty",
@@ -7069,10 +6979,10 @@ dependencies = [
  "serde",
  "sp-api",
  "sp-blockchain",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-rpc",
  "sp-runtime",
- "sp-tracing 6.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-tracing",
  "thiserror",
  "tracing",
  "tracing-log",
@@ -7082,7 +6992,7 @@ dependencies = [
 [[package]]
 name = "sc-tracing-proc-macro"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "proc-macro-crate",
  "proc-macro2",
@@ -7093,7 +7003,7 @@ dependencies = [
 [[package]]
 name = "sc-transaction-pool"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "futures",
@@ -7109,9 +7019,9 @@ dependencies = [
  "serde",
  "sp-api",
  "sp-blockchain",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
- "sp-tracing 6.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-tracing",
  "sp-transaction-pool",
  "substrate-prometheus-endpoint",
  "thiserror",
@@ -7120,7 +7030,7 @@ dependencies = [
 [[package]]
 name = "sc-transaction-pool-api"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "futures",
@@ -7134,7 +7044,7 @@ dependencies = [
 [[package]]
 name = "sc-utils"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-channel",
  "futures",
@@ -7579,17 +7489,17 @@ dependencies = [
 [[package]]
 name = "sp-api"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "hash-db",
  "log",
  "parity-scale-codec",
  "sp-api-proc-macro",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
- "sp-state-machine 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-trie 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-state-machine",
+ "sp-std",
+ "sp-trie",
  "sp-version",
  "thiserror",
 ]
@@ -7597,7 +7507,7 @@ dependencies = [
 [[package]]
 name = "sp-api-proc-macro"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "blake2",
  "proc-macro-crate",
@@ -7609,34 +7519,34 @@ dependencies = [
 [[package]]
 name = "sp-application-crypto"
 version = "7.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "parity-scale-codec",
  "scale-info",
  "serde",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-io",
+ "sp-std",
 ]
 
 [[package]]
 name = "sp-arithmetic"
 version = "6.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "integer-sqrt",
  "num-traits",
  "parity-scale-codec",
  "scale-info",
  "serde",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
  "static_assertions",
 ]
 
 [[package]]
 name = "sp-ark-bls12-377"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate.git#d6ffba2d518b965200adf0803df0d8c1b7d7306c"
+source = "git+https://github.com/paritytech/ark-substrate.git#01b63cb365a9fdd9757013f4775f32ca523c9380"
 dependencies = [
  "ark-bls12-377",
  "ark-ff",
@@ -7645,13 +7555,12 @@ dependencies = [
  "ark-std",
  "sp-ark-models",
  "sp-ark-utils",
- "sp-io 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "sp-ark-bls12-381"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate.git#d6ffba2d518b965200adf0803df0d8c1b7d7306c"
+source = "git+https://github.com/paritytech/ark-substrate.git#01b63cb365a9fdd9757013f4775f32ca523c9380"
 dependencies = [
  "ark-bls12-381",
  "ark-ec",
@@ -7660,13 +7569,12 @@ dependencies = [
  "ark-std",
  "sp-ark-models",
  "sp-ark-utils",
- "sp-io 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "sp-ark-bw6-761"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate.git#d6ffba2d518b965200adf0803df0d8c1b7d7306c"
+source = "git+https://github.com/paritytech/ark-substrate.git#01b63cb365a9fdd9757013f4775f32ca523c9380"
 dependencies = [
  "ark-bw6-761",
  "ark-ff",
@@ -7674,13 +7582,12 @@ dependencies = [
  "ark-std",
  "sp-ark-models",
  "sp-ark-utils",
- "sp-io 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
 name = "sp-ark-ed-on-bls12-377"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate.git#d6ffba2d518b965200adf0803df0d8c1b7d7306c"
+source = "git+https://github.com/paritytech/ark-substrate.git#01b63cb365a9fdd9757013f4775f32ca523c9380"
 dependencies = [
  "ark-ed-on-bls12-377",
  "ark-ff",
@@ -7694,7 +7601,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-ed-on-bls12-381"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate.git#d6ffba2d518b965200adf0803df0d8c1b7d7306c"
+source = "git+https://github.com/paritytech/ark-substrate.git#01b63cb365a9fdd9757013f4775f32ca523c9380"
 dependencies = [
  "ark-ed-on-bls12-381",
  "ark-ff",
@@ -7708,7 +7615,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-models"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate.git#d6ffba2d518b965200adf0803df0d8c1b7d7306c"
+source = "git+https://github.com/paritytech/ark-substrate.git#01b63cb365a9fdd9757013f4775f32ca523c9380"
 dependencies = [
  "ark-ec",
  "ark-ff",
@@ -7724,7 +7631,7 @@ dependencies = [
 [[package]]
 name = "sp-ark-utils"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/ark-substrate.git#d6ffba2d518b965200adf0803df0d8c1b7d7306c"
+source = "git+https://github.com/paritytech/ark-substrate.git#01b63cb365a9fdd9757013f4775f32ca523c9380"
 dependencies = [
  "ark-serialize",
  "ark-std",
@@ -7733,7 +7640,7 @@ dependencies = [
 [[package]]
 name = "sp-arkworks"
 version = "0.4.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "ark-bls12-377",
  "ark-bls12-381",
@@ -7744,25 +7651,26 @@ dependencies = [
  "ark-ff",
  "ark-serialize",
  "ark-std",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "parity-scale-codec",
+ "sp-std",
 ]
 
 [[package]]
 name = "sp-block-builder"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "parity-scale-codec",
  "sp-api",
  "sp-inherents",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
 ]
 
 [[package]]
 name = "sp-blockchain"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "futures",
  "log",
@@ -7773,29 +7681,29 @@ dependencies = [
  "sp-consensus",
  "sp-database",
  "sp-runtime",
- "sp-state-machine 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-state-machine",
  "thiserror",
 ]
 
 [[package]]
 name = "sp-consensus"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "futures",
  "log",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-inherents",
  "sp-runtime",
- "sp-state-machine 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-state-machine",
  "thiserror",
 ]
 
 [[package]]
 name = "sp-consensus-aura"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "parity-scale-codec",
@@ -7806,14 +7714,14 @@ dependencies = [
  "sp-consensus-slots",
  "sp-inherents",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
  "sp-timestamp",
 ]
 
 [[package]]
 name = "sp-consensus-babe"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "merlin",
@@ -7825,18 +7733,18 @@ dependencies = [
  "sp-consensus",
  "sp-consensus-slots",
  "sp-consensus-vrf",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-inherents",
- "sp-keystore 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-keystore",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
  "sp-timestamp",
 ]
 
 [[package]]
 name = "sp-consensus-grandpa"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "finality-grandpa",
  "log",
@@ -7845,87 +7753,41 @@ dependencies = [
  "serde",
  "sp-api",
  "sp-application-crypto",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-keystore 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-keystore",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
 ]
 
 [[package]]
 name = "sp-consensus-slots"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "parity-scale-codec",
  "scale-info",
  "serde",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
  "sp-timestamp",
 ]
 
 [[package]]
 name = "sp-consensus-vrf"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "parity-scale-codec",
  "scale-info",
  "schnorrkel",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
 ]
 
 [[package]]
 name = "sp-core"
 version = "7.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "88c78530907dbf7949af928d0ce88b485067389201b6d9b468074b1924f209f0"
-dependencies = [
- "array-bytes",
- "base58",
- "bitflags",
- "blake2",
- "byteorder",
- "dyn-clonable",
- "ed25519-zebra",
- "futures",
- "hash-db",
- "hash256-std-hasher",
- "impl-serde",
- "lazy_static",
- "libsecp256k1",
- "log",
- "merlin",
- "num-traits",
- "parity-scale-codec",
- "parking_lot 0.12.1",
- "primitive-types",
- "rand 0.7.3",
- "regex",
- "scale-info",
- "schnorrkel",
- "secp256k1",
- "secrecy",
- "serde",
- "sp-core-hashing 5.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-debug-derive 5.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-externalities 0.13.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-runtime-interface 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-std 5.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-storage 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "ss58-registry",
- "substrate-bip39",
- "thiserror",
- "tiny-bip39 0.8.2",
- "wasmi",
- "zeroize",
-]
-
-[[package]]
-name = "sp-core"
-version = "7.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "array-bytes",
  "base58",
@@ -7952,63 +7814,48 @@ dependencies = [
  "secp256k1",
  "secrecy",
  "serde",
- "sp-core-hashing 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-debug-derive 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-externalities 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-runtime-interface 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-storage 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core-hashing",
+ "sp-debug-derive",
+ "sp-externalities",
+ "sp-runtime-interface",
+ "sp-std",
+ "sp-storage",
  "ss58-registry",
  "substrate-bip39",
  "thiserror",
- "tiny-bip39 1.0.0",
+ "tiny-bip39",
  "zeroize",
 ]
 
 [[package]]
 name = "sp-core-hashing"
 version = "5.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "49b9d1daa6aebfc144729b630885e91df92ff00560490ec065a56cb538e8895a"
-dependencies = [
- "blake2",
- "byteorder",
- "digest 0.10.6",
- "sha2 0.10.6",
- "sha3",
- "sp-std 5.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "twox-hash",
-]
-
-[[package]]
-name = "sp-core-hashing"
-version = "5.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "blake2b_simd",
  "byteorder",
  "digest 0.10.6",
  "sha2 0.10.6",
  "sha3",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
  "twox-hash",
 ]
 
 [[package]]
 name = "sp-core-hashing-proc-macro"
 version = "5.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "proc-macro2",
  "quote",
- "sp-core-hashing 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core-hashing",
  "syn",
 ]
 
 [[package]]
 name = "sp-database"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "kvdb",
  "parking_lot 0.12.1",
@@ -8017,18 +7864,7 @@ dependencies = [
 [[package]]
 name = "sp-debug-derive"
 version = "5.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a9e9ba7352773b96a4aa57e903447f841c6bc26e8c798377db6e7eb332346454"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "sp-debug-derive"
-version = "5.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -8038,72 +7874,33 @@ dependencies = [
 [[package]]
 name = "sp-externalities"
 version = "0.13.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ef739442230f49d88ece41259e5d886d6b8bc0f4197ef7f1585c39c762ce7ef2"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "environmental",
  "parity-scale-codec",
- "sp-std 5.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-storage 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "sp-externalities"
-version = "0.13.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
-dependencies = [
- "environmental",
- "parity-scale-codec",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-storage 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
+ "sp-storage",
 ]
 
 [[package]]
 name = "sp-inherents"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "impl-trait-for-tuples",
  "parity-scale-codec",
  "scale-info",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
  "thiserror",
 ]
 
 [[package]]
 name = "sp-io"
 version = "7.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6280bd3643354f7ff0b2abd36c687745455779231a7a86d90945608f0d4924c4"
-dependencies = [
- "bytes",
- "futures",
- "hash-db",
- "libsecp256k1",
- "log",
- "parity-scale-codec",
- "parking_lot 0.12.1",
- "secp256k1",
- "sp-core 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-externalities 0.13.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-keystore 0.13.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-runtime-interface 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-state-machine 0.13.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-std 5.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-tracing 6.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-trie 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-wasm-interface 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "tracing",
- "tracing-core",
-]
-
-[[package]]
-name = "sp-io"
-version = "7.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "bytes",
  "ed25519",
@@ -8114,14 +7911,14 @@ dependencies = [
  "parity-scale-codec",
  "secp256k1",
  "sp-arkworks",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-externalities 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-keystore 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-runtime-interface 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-state-machine 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-tracing 6.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-trie 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-externalities",
+ "sp-keystore",
+ "sp-runtime-interface",
+ "sp-state-machine",
+ "sp-std",
+ "sp-tracing",
+ "sp-trie",
  "tracing",
  "tracing-core",
 ]
@@ -8129,10 +7926,10 @@ dependencies = [
 [[package]]
 name = "sp-keyring"
 version = "7.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "lazy_static",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
  "strum",
 ]
@@ -8140,24 +7937,7 @@ dependencies = [
 [[package]]
 name = "sp-keystore"
 version = "0.13.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a44bec4f0d036b6993c14bbee4216781f21275e5c201e43e45fed4a434bf0e5a"
-dependencies = [
- "async-trait",
- "futures",
- "merlin",
- "parity-scale-codec",
- "parking_lot 0.12.1",
- "schnorrkel",
- "sp-core 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-externalities 0.13.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "thiserror",
-]
-
-[[package]]
-name = "sp-keystore"
-version = "0.13.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "futures",
@@ -8166,15 +7946,15 @@ dependencies = [
  "parking_lot 0.12.1",
  "schnorrkel",
  "serde",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-externalities 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-externalities",
  "thiserror",
 ]
 
 [[package]]
 name = "sp-maybe-compressed-blob"
 version = "4.1.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "thiserror",
  "zstd",
@@ -8183,28 +7963,17 @@ dependencies = [
 [[package]]
 name = "sp-offchain"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "sp-api",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
 ]
 
 [[package]]
 name = "sp-panic-handler"
 version = "5.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "97549ec99cb289db2a9f5c656b6880f7c90097135e1ca6c6ae4fe5694232e526"
-dependencies = [
- "backtrace",
- "lazy_static",
- "regex",
-]
-
-[[package]]
-name = "sp-panic-handler"
-version = "5.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "backtrace",
  "lazy_static",
@@ -8214,17 +7983,17 @@ dependencies = [
 [[package]]
 name = "sp-rpc"
 version = "6.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "rustc-hash",
  "serde",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
 ]
 
 [[package]]
 name = "sp-runtime"
 version = "7.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "either",
  "hash256-std-hasher",
@@ -8237,66 +8006,34 @@ dependencies = [
  "serde",
  "sp-application-crypto",
  "sp-arithmetic",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-io",
+ "sp-std",
  "sp-weights",
 ]
 
 [[package]]
 name = "sp-runtime-interface"
 version = "7.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b886a5d34400b0e0c12d389e3bb48b7a93d651cddf7e248124b81fe64c339251"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "bytes",
  "impl-trait-for-tuples",
  "parity-scale-codec",
  "primitive-types",
- "sp-externalities 0.13.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-runtime-interface-proc-macro 6.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-std 5.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-storage 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-tracing 6.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-wasm-interface 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "static_assertions",
-]
-
-[[package]]
-name = "sp-runtime-interface"
-version = "7.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
-dependencies = [
- "bytes",
- "impl-trait-for-tuples",
- "parity-scale-codec",
- "primitive-types",
- "sp-externalities 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-runtime-interface-proc-macro 6.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-storage 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-tracing 6.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-wasm-interface 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-externalities",
+ "sp-runtime-interface-proc-macro",
+ "sp-std",
+ "sp-storage",
+ "sp-tracing",
+ "sp-wasm-interface",
  "static_assertions",
 ]
 
 [[package]]
 name = "sp-runtime-interface-proc-macro"
 version = "6.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a157f1ce0108b9b87f87e826726049d9b6253318b74410c814be7fc2af416b51"
-dependencies = [
- "Inflector",
- "proc-macro-crate",
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "sp-runtime-interface-proc-macro"
-version = "6.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "Inflector",
  "proc-macro-crate",
@@ -8308,56 +8045,33 @@ dependencies = [
 [[package]]
 name = "sp-session"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "parity-scale-codec",
  "scale-info",
  "sp-api",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
  "sp-staking",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
 ]
 
 [[package]]
 name = "sp-staking"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "parity-scale-codec",
  "scale-info",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
 ]
 
 [[package]]
 name = "sp-state-machine"
 version = "0.13.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d5c2d97ad69011d34ca257f0383532b80096d53f889f5894ae2b24a211bec66f"
-dependencies = [
- "hash-db",
- "log",
- "num-traits",
- "parity-scale-codec",
- "parking_lot 0.12.1",
- "rand 0.7.3",
- "smallvec",
- "sp-core 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-externalities 0.13.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-panic-handler 5.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-std 5.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-trie 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "thiserror",
- "tracing",
- "trie-root",
-]
-
-[[package]]
-name = "sp-state-machine"
-version = "0.13.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "hash-db",
  "log",
@@ -8365,11 +8079,11 @@ dependencies = [
  "parking_lot 0.12.1",
  "rand 0.8.5",
  "smallvec",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-externalities 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-panic-handler 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-trie 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-externalities",
+ "sp-panic-handler",
+ "sp-std",
+ "sp-trie",
  "thiserror",
  "tracing",
 ]
@@ -8377,45 +8091,25 @@ dependencies = [
 [[package]]
 name = "sp-std"
 version = "5.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cf3fd4c1d304be101e6ebbafd3d4be9a37b320c970ef4e8df188b16873981c93"
-
-[[package]]
-name = "sp-std"
-version = "5.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 
 [[package]]
 name = "sp-storage"
 version = "7.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eb987ed2e4d7d870170a225083ea962f2a359d75cdf76935d5ed8d91bee912d9"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "impl-serde",
  "parity-scale-codec",
  "ref-cast",
  "serde",
- "sp-debug-derive 5.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-std 5.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "sp-storage"
-version = "7.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
-dependencies = [
- "impl-serde",
- "parity-scale-codec",
- "ref-cast",
- "serde",
- "sp-debug-derive 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-debug-derive",
+ "sp-std",
 ]
 
 [[package]]
 name = "sp-timestamp"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "futures-timer",
@@ -8423,30 +8117,17 @@ dependencies = [
  "parity-scale-codec",
  "sp-inherents",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
  "thiserror",
 ]
 
 [[package]]
 name = "sp-tracing"
 version = "6.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e761df87dc940d87720939de8f976d1fc0657e523886ae0d7bf3f7e2e2f0abb6"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "parity-scale-codec",
- "sp-std 5.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "tracing",
- "tracing-core",
- "tracing-subscriber",
-]
-
-[[package]]
-name = "sp-tracing"
-version = "6.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
-dependencies = [
- "parity-scale-codec",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
  "tracing",
  "tracing-core",
  "tracing-subscriber",
@@ -8455,7 +8136,7 @@ dependencies = [
 [[package]]
 name = "sp-transaction-pool"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "sp-api",
  "sp-runtime",
@@ -8464,70 +8145,46 @@ dependencies = [
 [[package]]
 name = "sp-transaction-storage-proof"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "log",
  "parity-scale-codec",
  "scale-info",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-inherents",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-trie 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
+ "sp-trie",
 ]
 
 [[package]]
 name = "sp-trie"
 version = "7.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2f4f48c887e90050537e399d2d8b6ee82787ebec0fe46e4880b42cab0c2d5ba6"
-dependencies = [
- "ahash 0.7.6",
- "hash-db",
- "hashbrown 0.12.3",
- "lazy_static",
- "lru",
- "memory-db 0.30.0",
- "nohash-hasher",
- "parity-scale-codec",
- "parking_lot 0.12.1",
- "scale-info",
- "sp-core 7.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "sp-std 5.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "thiserror",
- "tracing",
- "trie-db 0.24.0",
- "trie-root",
-]
-
-[[package]]
-name = "sp-trie"
-version = "7.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "ahash 0.8.3",
  "hash-db",
  "hashbrown 0.12.3",
  "lazy_static",
- "memory-db 0.31.0",
+ "memory-db",
  "nohash-hasher",
  "parity-scale-codec",
  "parking_lot 0.12.1",
  "scale-info",
  "schnellru",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-std",
  "thiserror",
  "tracing",
- "trie-db 0.26.0",
+ "trie-db",
  "trie-root",
 ]
 
 [[package]]
 name = "sp-version"
 version = "5.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "impl-serde",
  "parity-scale-codec",
@@ -8536,7 +8193,7 @@ dependencies = [
  "serde",
  "sp-core-hashing-proc-macro",
  "sp-runtime",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
  "sp-version-proc-macro",
  "thiserror",
 ]
@@ -8544,7 +8201,7 @@ dependencies = [
 [[package]]
 name = "sp-version-proc-macro"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "parity-scale-codec",
  "proc-macro2",
@@ -8555,26 +8212,13 @@ dependencies = [
 [[package]]
 name = "sp-wasm-interface"
 version = "7.0.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4f43c40afab6ecac20505907631c929957ed636b7af8795984649bbaa6ff38c3"
-dependencies = [
- "impl-trait-for-tuples",
- "log",
- "parity-scale-codec",
- "sp-std 5.0.0 (registry+https://github.com/rust-lang/crates.io-index)",
- "wasmi",
-]
-
-[[package]]
-name = "sp-wasm-interface"
-version = "7.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "anyhow",
  "impl-trait-for-tuples",
  "log",
  "parity-scale-codec",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-std",
  "wasmi",
  "wasmtime",
 ]
@@ -8582,16 +8226,16 @@ dependencies = [
 [[package]]
 name = "sp-weights"
 version = "4.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "parity-scale-codec",
  "scale-info",
  "serde",
  "smallvec",
  "sp-arithmetic",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-debug-derive 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-std 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-debug-derive",
+ "sp-std",
 ]
 
 [[package]]
@@ -8728,7 +8372,7 @@ dependencies = [
 [[package]]
 name = "substrate-build-script-utils"
 version = "3.0.0"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "platforms 2.0.0",
 ]
@@ -8736,7 +8380,7 @@ dependencies = [
 [[package]]
 name = "substrate-frame-rpc-system"
 version = "4.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "frame-system-rpc-runtime-api",
  "futures",
@@ -8748,14 +8392,14 @@ dependencies = [
  "sp-api",
  "sp-block-builder",
  "sp-blockchain",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
  "sp-runtime",
 ]
 
 [[package]]
 name = "substrate-prometheus-endpoint"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "hyper",
  "log",
@@ -8767,7 +8411,7 @@ dependencies = [
 [[package]]
 name = "substrate-rpc-client"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "jsonrpsee",
@@ -8780,7 +8424,7 @@ dependencies = [
 [[package]]
 name = "substrate-wasm-builder"
 version = "5.0.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "ansi_term",
  "build-helper",
@@ -8990,25 +8634,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "fd80a657e71da814b8e5d60d3374fc6d35045062245d80224748ae522dd76f36"
 dependencies = [
  "time-core",
-]
-
-[[package]]
-name = "tiny-bip39"
-version = "0.8.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ffc59cb9dfc85bb312c3a78fd6aa8a8582e310b0fa885d5bb877f6dcc601839d"
-dependencies = [
- "anyhow",
- "hmac 0.8.1",
- "once_cell",
- "pbkdf2 0.4.0",
- "rand 0.7.3",
- "rustc-hash",
- "sha2 0.9.9",
- "thiserror",
- "unicode-normalization",
- "wasm-bindgen",
- "zeroize",
 ]
 
 [[package]]
@@ -9264,19 +8889,6 @@ dependencies = [
 
 [[package]]
 name = "trie-db"
-version = "0.24.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "004e1e8f92535694b4cb1444dc5a8073ecf0815e3357f729638b9f8fc4062908"
-dependencies = [
- "hash-db",
- "hashbrown 0.12.3",
- "log",
- "rustc-hex",
- "smallvec",
-]
-
-[[package]]
-name = "trie-db"
 version = "0.26.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "879380c0061b165ba1f036325b7f3478bc1a947814d9fc36d22c5d8e960b11bd"
@@ -9352,7 +8964,7 @@ checksum = "3528ecfd12c466c6f163363caf2d02a71161dd5e1cc6ae7b34207ea2d42d81ed"
 [[package]]
 name = "try-runtime-cli"
 version = "0.10.0-dev"
-source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#4bb0653d0c0db870f7e8f9d66d05f26a85d7bb03"
+source = "git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration#c4b2f040dd82c9ef0e53a4f84313f31cb5034a1e"
 dependencies = [
  "async-trait",
  "clap 4.1.8",
@@ -9369,15 +8981,15 @@ dependencies = [
  "sp-api",
  "sp-consensus-aura",
  "sp-consensus-babe",
- "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-debug-derive 5.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-externalities 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-core",
+ "sp-debug-derive",
+ "sp-externalities",
  "sp-inherents",
- "sp-io 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
- "sp-keystore 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-io",
+ "sp-keystore",
  "sp-rpc",
  "sp-runtime",
- "sp-state-machine 0.13.0 (git+https://github.com/paritytech/substrate.git?branch=achimcc/arkworks-integration)",
+ "sp-state-machine",
  "sp-timestamp",
  "sp-transaction-storage-proof",
  "sp-version",
