@@ -5,12 +5,6 @@ use sp_ark_models::{AffineRepr, Group, TECurveConfig};
 pub struct HostEdOnBls12_377 {}
 
 impl EdwardBls12_377HostFunctions for HostEdOnBls12_377 {
-	fn ed_on_bls12_377_mul_affine(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
-		sp_io::elliptic_curves::ed_on_bls12_377_mul_affine(base, scalar)
-	}
-	fn ed_on_bls12_377_mul_projective(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
-		sp_io::elliptic_curves::ed_on_bls12_377_mul_projective(base, scalar)
-	}
 	fn ed_on_bls12_377_msm(bases: Vec<Vec<u8>>, scalars: Vec<Vec<u8>>) -> Vec<u8> {
 		sp_io::elliptic_curves::ed_on_bls12_377_msm(bases, scalars)
 	}

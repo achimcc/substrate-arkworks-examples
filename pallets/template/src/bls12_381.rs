@@ -24,20 +24,8 @@ impl Bls12_381HostFunctions for HostBls12_381 {
 	fn bls12_381_msm_g1(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
 		sp_io::elliptic_curves::bls12_381_msm_g1(bases, bigints)
 	}
-	fn bls12_381_mul_projective_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
-		sp_io::elliptic_curves::bls12_381_mul_projective_g1(base, scalar)
-	}
-	fn bls12_381_mul_affine_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
-		sp_io::elliptic_curves::bls12_381_mul_affine_g1(base, scalar)
-	}
 	fn bls12_381_msm_g2(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
 		sp_io::elliptic_curves::bls12_381_msm_g2(bases, bigints)
-	}
-	fn bls12_381_mul_projective_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
-		sp_io::elliptic_curves::bls12_381_mul_projective_g2(base, scalar)
-	}
-	fn bls12_381_mul_affine_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
-		sp_io::elliptic_curves::bls12_381_mul_affine_g2(base, scalar)
 	}
 }
 
