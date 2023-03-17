@@ -11,6 +11,7 @@ pub use sp_ark_bls12_381::{
 	G1Projective as G1ProjectiveOptimized_Host, G2Affine as G2Affine_Host,
 	G2Projective as G2ProjectiveOptimized_Host, HostFunctions as Bls12_381HostFunctions,
 };
+use sp_arkworks::PairingError;
 
 pub struct HostBls12_381 {}
 

@@ -5,6 +5,7 @@ pub use sp_ark_bw6_761::{
 	HostFunctions as BW6_761HostFunctions, BW6_761 as BW6_761_Host,
 };
 pub use sp_ark_models::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group};
+use sp_arkworks::PairingError;
 
 pub struct HostBW6_761 {}
 
