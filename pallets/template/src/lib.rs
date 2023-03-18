@@ -114,8 +114,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g1(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -149,8 +149,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g1_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -184,8 +184,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g2(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -219,8 +219,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g2_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -324,8 +324,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g1(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -359,8 +359,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g1_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -394,8 +394,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g2(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -429,8 +429,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g2_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -534,8 +534,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g1(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -569,8 +569,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g1_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -604,8 +604,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g2(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -639,8 +639,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g2_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -730,8 +730,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_msm_sw(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -765,8 +765,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_msm_sw_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -800,8 +800,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_msm_te(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -835,8 +835,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_msm_te_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -930,8 +930,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_msm(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()
@@ -965,8 +965,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_msm_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases: Vec<_> = bases
 				.iter()

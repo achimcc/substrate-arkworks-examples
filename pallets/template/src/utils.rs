@@ -10,7 +10,7 @@ pub fn serialize_argument(argument: impl CanonicalSerialize) -> Vec<u8> {
 
 pub fn generate_arguments<Group: ark_ec::VariableBaseMSM>(
 	size: u32,
-) -> (Vec<Vec<u8>>, Vec<Vec<u8>>) {
+) -> (Vec<u8>, Vec<u8>) {
 	let rng = &mut test_rng();
 	let scalars = (0..size).map(|_| Group::ScalarField::rand(rng)).collect::<Vec<_>>();
 	let bases = (0..size).map(|_| Group::rand(rng)).collect::<Vec<_>>();
