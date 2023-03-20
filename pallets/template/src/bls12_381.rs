@@ -1,5 +1,5 @@
 use ark_bls12_381::{Bls12_381, Fr as BlsFr};
-use ark_ec::{pairing::Pairing, AffineRepr, CurveConfig, Group};
+use ark_ec::{pairing::Pairing, AffineRepr, CurveConfig};
 use ark_ff::Fp;
 use ark_groth16::Groth16;
 use ark_serialize::{CanonicalDeserialize, Compress, Validate};
@@ -17,19 +17,31 @@ pub struct HostBls12_381 {}
 
 impl Bls12_381HostFunctions for HostBls12_381 {
 	fn bls12_381_multi_miller_loop(
-		a: Vec<u8>,
-		b: Vec<u8>,
+		a: Vec<Vec<u8>>,
+		b: Vec<Vec<u8>>,
 	) -> Result<Vec<u8>, PairingError> {
 		sp_io::elliptic_curves::bls12_381_multi_miller_loop(a, b)
 	}
 	fn bls12_381_final_exponentiation(f12: Vec<u8>) -> Result<Vec<u8>, PairingError> {
 		sp_io::elliptic_curves::bls12_381_final_exponentiation(f12)
 	}
-	fn bls12_381_msm_g1(bases: Vec<u8>, bigints: Vec<u8>) -> Vec<u8> {
+	fn bls12_381_msm_g1(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
 		sp_io::elliptic_curves::bls12_381_msm_g1(bases, bigints)
 	}
-	fn bls12_381_msm_g2(bases: Vec<u8>, bigints: Vec<u8>) -> Vec<u8> {
+	fn bls12_381_msm_g2(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
 		sp_io::elliptic_curves::bls12_381_msm_g2(bases, bigints)
+	}
+	fn bls12_381_mul_projective_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+		sp_io::elliptic_curves::bls12_381_mul_projective_g1(base, scalar)
+	}
+	fn bls12_381_mul_affine_g1(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+		sp_io::elliptic_curves::bls12_381_mul_affine_g1(base, scalar)
+	}
+	fn bls12_381_mul_projective_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+		sp_io::elliptic_curves::bls12_381_mul_projective_g2(base, scalar)
+	}
+	fn bls12_381_mul_affine_g2(base: Vec<u8>, scalar: Vec<u8>) -> Vec<u8> {
+		sp_io::elliptic_curves::bls12_381_mul_affine_g2(base, scalar)
 	}
 }
 
@@ -97,68 +109,92 @@ pub fn do_msm_g2_optimized(
 	Ok(())
 }
 
-pub fn do_mul_affine_g1() -> Result<(), Error> {
+pub fn do_mul_affine_g1(
+	base: &ark_ec::short_weierstrass::Affine<ark_bls12_381::g1::Config>,
+	scalar: &[u64],
+) -> Result<(), Error> {
 	let _out = <ark_bls12_381::g1::Config as ark_ec::short_weierstrass::SWCurveConfig>::mul_affine(
-		&ark_bls12_381::G1Affine::generator(),
-		&[2u64],
+		base, scalar,
 	);
 	Ok(())
 }
 
-pub fn do_mul_affine_g1_optimized() -> Result<(), Error> {
+pub fn do_mul_affine_g1_optimized(
+	base: &sp_ark_models::short_weierstrass::Affine<sp_ark_bls12_381::g1::Config<HostBls12_381>>,
+	scalar: &[u64],
+) -> Result<(), Error> {
 	let _out = <sp_ark_bls12_381::g1::Config<HostBls12_381> as sp_ark_models::short_weierstrass::SWCurveConfig>::mul_affine(
-		&G1AffineOptimized::generator(),
-		&[2u64],
+		base,
+		scalar,
 	);
 	Ok(())
 }
 
-pub fn do_mul_projective_g1() -> Result<(), Error> {
+pub fn do_mul_projective_g1(
+	base: &ark_ec::short_weierstrass::Projective<ark_bls12_381::g1::Config>,
+	scalar: &[u64],
+) -> Result<(), Error> {
 	let _out =
 		<ark_bls12_381::g1::Config as ark_ec::short_weierstrass::SWCurveConfig>::mul_projective(
-			&ark_bls12_381::G1Projective::generator(),
-			&[2u64],
+			base, scalar,
 		);
 	Ok(())
 }
 
-pub fn do_mul_projective_g1_optimized() -> Result<(), Error> {
+pub fn do_mul_projective_g1_optimized(
+	base: &sp_ark_models::short_weierstrass::Projective<
+		sp_ark_bls12_381::g1::Config<HostBls12_381>,
+	>,
+	scalar: &[u64],
+) -> Result<(), Error> {
 	let _out = <sp_ark_bls12_381::g1::Config<HostBls12_381> as sp_ark_models::short_weierstrass::SWCurveConfig>::mul_projective(
-		&G1ProjectiveOptimized::generator(),
-		&[2u64],
+		base,
+		scalar,
 	);
 	Ok(())
 }
 
-pub fn do_mul_affine_g2() -> Result<(), Error> {
+pub fn do_mul_affine_g2(
+	base: &ark_ec::short_weierstrass::Affine<ark_bls12_381::g2::Config>,
+	scalar: &[u64],
+) -> Result<(), Error> {
 	let _out = <ark_bls12_381::g2::Config as ark_ec::short_weierstrass::SWCurveConfig>::mul_affine(
-		&ark_bls12_381::G2Affine::generator(),
-		&[2u64],
+		base, scalar,
 	);
 	Ok(())
 }
 
-pub fn do_mul_affine_g2_optimized() -> Result<(), Error> {
+pub fn do_mul_affine_g2_optimized(
+	base: &sp_ark_models::short_weierstrass::Affine<sp_ark_bls12_381::g2::Config<HostBls12_381>>,
+	scalar: &[u64],
+) -> Result<(), Error> {
 	let _out = <sp_ark_bls12_381::g2::Config<HostBls12_381> as sp_ark_models::short_weierstrass::SWCurveConfig>::mul_affine(
-		&G2AffineOptimized::generator(),
-		&[2u64],
+		base,
+		scalar,
 	);
 	Ok(())
 }
 
-pub fn do_mul_projective_g2() -> Result<(), Error> {
+pub fn do_mul_projective_g2(
+	base: &ark_ec::short_weierstrass::Projective<ark_bls12_381::g2::Config>,
+	scalar: &[u64],
+) -> Result<(), Error> {
 	let _out =
 		<ark_bls12_381::g2::Config as ark_ec::short_weierstrass::SWCurveConfig>::mul_projective(
-			&ark_bls12_381::G2Projective::generator(),
-			&[2u64],
+			base, scalar,
 		);
 	Ok(())
 }
 
-pub fn do_mul_projective_g2_optimized() -> Result<(), Error> {
+pub fn do_mul_projective_g2_optimized(
+	base: &sp_ark_models::short_weierstrass::Projective<
+		sp_ark_bls12_381::g2::Config<HostBls12_381>,
+	>,
+	scalar: &[u64],
+) -> Result<(), Error> {
 	let _out = <sp_ark_bls12_381::g2::Config<HostBls12_381> as sp_ark_models::short_weierstrass::SWCurveConfig>::mul_projective(
-		&G2ProjectiveOptimized::generator(),
-		&[2u64],
+		base,
+		scalar,
 	);
 	Ok(())
 }

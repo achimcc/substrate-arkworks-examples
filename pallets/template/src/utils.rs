@@ -10,7 +10,7 @@ pub fn serialize_argument(argument: impl CanonicalSerialize) -> Vec<u8> {
 
 pub fn generate_arguments<Group: ark_ec::VariableBaseMSM>(
 	size: u32,
-) -> (Vec<u8>, Vec<u8>) {
+) -> (Vec<Vec<u8>>, Vec<Vec<u8>>) {
 	let rng = &mut test_rng();
 	let scalars = (0..size).map(|_| Group::ScalarField::rand(rng)).collect::<Vec<_>>();
 	let bases = (0..size).map(|_| Group::rand(rng)).collect::<Vec<_>>();
@@ -33,4 +33,17 @@ pub fn generate_arguments<Group: ark_ec::VariableBaseMSM>(
 		})
 		.collect::<Vec<_>>();
 	(bases, scalars)
+}
+
+pub fn generate_scalar_args<Group: ark_ec::VariableBaseMSM>() -> (Vec<u8>, Vec<u8>) {
+	let rng = &mut test_rng();
+	let mut serialized_scalar = vec![0u8; Group::generator().serialized_size(Compress::No)];
+	let scalar = Group::ScalarField::rand(rng);
+	let mut cursor = Cursor::new(&mut serialized_scalar[..]);
+	scalar.serialize_uncompressed(&mut cursor).unwrap();
+	let mut serialized_base = vec![0u8; 2u64.serialized_size(Compress::No)];
+	let base = u64::rand(rng);
+	let mut cursor = Cursor::new(&mut serialized_base[..]);
+	base.serialize_uncompressed(&mut cursor).unwrap();
+	(serialized_base, serialized_scalar)
 }
