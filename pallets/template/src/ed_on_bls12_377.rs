@@ -16,8 +16,9 @@ impl EdwardBls12_377HostFunctions for HostEdOnBls12_377 {
 	}
 }
 
-pub type EdwardsAffineOptimized =
-	ark_ec::twisted_edwards::Affine<ark_ed_on_bls12_377::EdwardsConfig>;
+pub type EdwardsAffineOptimized = sp_ark_models::twisted_edwards::Affine<
+	sp_ark_ed_on_bls12_377::EdwardsConfig<HostEdOnBls12_377>,
+>;
 pub type EdwardsProjectiveOptimized = sp_ark_ed_on_bls12_377::EdwardsProjective<HostEdOnBls12_377>;
 
 pub fn do_msm(

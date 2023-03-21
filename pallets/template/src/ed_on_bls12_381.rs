@@ -26,11 +26,12 @@ impl EdwardBls12_381HostFunctions for HostEdOnBls12_381 {
 }
 
 pub type SWAffineOptimized =
-	sp_ark_models::short_weierstrass::Affine<ark_ed_on_bls12_381::SWConfig>;
-pub type SWProjectiveOptimized =
-	sp_ark_models::short_weierstrass::Projective<ark_ed_on_bls12_381::SWConfig>;
+	sp_ark_models::short_weierstrass::Affine<sp_ark_ed_on_bls12_381::SWConfig<HostEdOnBls12_381>>;
+pub type SWProjectiveOptimized = sp_ark_models::short_weierstrass::Projective<
+	sp_ark_ed_on_bls12_381::SWConfig<HostEdOnBls12_381>,
+>;
 pub type EdwardsAffineOptimized =
-	ark_ec::twisted_edwards::Affine<ark_ed_on_bls12_381::EdwardsConfig>;
+	sp_ark_models::twisted_edwards::Affine<ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381>>;
 pub type EdwardsProjectiveOptimized = sp_ark_models::twisted_edwards::Projective<
 	sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381>,
 >;
