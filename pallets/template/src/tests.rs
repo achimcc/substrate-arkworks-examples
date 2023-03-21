@@ -21,8 +21,8 @@ fn groth16_verificaton_optimized() {
 fn pairing_bls12_381() {
 	new_test_ext().execute_with(|| {
 		let (a, b) = generate_pairing_args::<
-			ark_bls12_381::Bls12_381::G1Affine,
-			ark_bls12_381::Bls12_381::G2Affine,
+			<ark_ec::bls12::Bls12<ark_bls12_381::Config> as ark_ec::pairing::Pairing>::G1Affine,
+			<ark_ec::bls12::Bls12<ark_bls12_381::Config> as ark_ec::pairing::Pairing>::G2Affine,
 		>();
 		assert_ok!(TemplateModule::bls12_381_pairing(RuntimeOrigin::signed(1), a, b));
 	});
@@ -444,7 +444,7 @@ fn mul_affine_g2_bw6_761() {
 #[test]
 fn mul_affine_g2_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
-		let (base, scalar) = generate_scalar_args::<bw6_761::G12AffineOptimized>();
+		let (base, scalar) = generate_scalar_args::<bw6_761::G2AffineOptimized>();
 		assert_ok!(TemplateModule::bw6_761_mul_affine_g2_optimized(
 			RuntimeOrigin::signed(1),
 			base,
@@ -639,7 +639,7 @@ fn mul_affine_te_ed_on_bls12_381() {
 }
 #[test]
 fn mul_affine_te_ed_on_bls12_381_optimized() {
-	let (base, scalar) = generate_scalar_args::<ed_on_bls12_381::EdwardsAffineOPtimized>();
+	let (base, scalar) = generate_scalar_args::<ed_on_bls12_381::EdwardsAffineOptimized>();
 	new_test_ext().execute_with(|| {
 		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine_te_optimized(
 			RuntimeOrigin::signed(1),
