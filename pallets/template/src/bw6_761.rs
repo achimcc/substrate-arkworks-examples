@@ -144,18 +144,12 @@ pub fn do_mul_projective_g2_optimized(
 	Ok(())
 }
 
-pub fn do_pairing() -> Result<(), Error> {
-	let _out = ark_bw6_761::BW6_761::multi_pairing(
-		[ark_bw6_761::G1Affine::generator()],
-		[ark_bw6_761::G2Affine::generator()],
-	);
+pub fn do_pairing(a: ark_bw6_761::G1Affine, b: ark_bw6_761::G2Affine) -> Result<(), Error> {
+	let _out = ark_bw6_761::BW6_761::multi_pairing([a], [b]);
 	Ok(())
 }
 
-pub fn do_pairing_optimized() -> Result<(), Error> {
-	let _out = BW6_761Optimized::multi_pairing(
-		[G1AffineOptimized::generator()],
-		[G2AffineOptimized::generator()],
-	);
+pub fn do_pairing_optimized(a: G1AffineOptimized, b: G2AffineOptimized) -> Result<(), Error> {
+	let _out = BW6_761Optimized::multi_pairing([a], [b]);
 	Ok(())
 }

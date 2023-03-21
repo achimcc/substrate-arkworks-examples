@@ -25,6 +25,16 @@ impl EdwardBls12_381HostFunctions for HostEdOnBls12_381 {
 	}
 }
 
+pub type SWAffineOptimized =
+	sp_ark_models::short_weierstrass::Affine<ark_ed_on_bls12_381::SWConfig>;
+pub type SWProjectiveOptimized =
+	sp_ark_models::short_weierstrass::Projective<ark_ed_on_bls12_381::SWConfig>;
+pub type EdwardsAffineOptimized =
+	ark_ec::twisted_edwards::Affine<ark_ed_on_bls12_381::EdwardsConfig>;
+pub type EdwardsProjectiveOptimized = sp_ark_models::twisted_edwards::Projective<
+	sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381>,
+>;
+
 pub fn do_msm_sw(
 	bases: &[sp_ark_models::short_weierstrass::Affine<ark_ed_on_bls12_381::SWConfig>],
 	scalars: &[<ark_ed_on_bls12_381::SWConfig as ark_ec::CurveConfig>::ScalarField],
@@ -34,9 +44,7 @@ pub fn do_msm_sw(
 }
 
 pub fn do_msm_sw_optimized(
-	bases: &[sp_ark_models::short_weierstrass::Affine<
-		sp_ark_ed_on_bls12_381::SWConfig<HostEdOnBls12_381>,
-	>],
+	bases: &[SWAffineOptimized],
 	scalars: &[<sp_ark_ed_on_bls12_381::SWConfig<HostEdOnBls12_381> as sp_ark_models::CurveConfig>::ScalarField],
 ) -> Result<(), Error> {
 	let _out = <sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381> as SWCurveConfig>::msm(
@@ -46,7 +54,7 @@ pub fn do_msm_sw_optimized(
 }
 
 pub fn do_msm_te(
-	bases: &[ark_ec::twisted_edwards::Affine<ark_ed_on_bls12_381::JubjubConfig>],
+	bases: &[EdwardsAffineOptimized],
 	scalars: &[<ark_ed_on_bls12_381::EdwardsConfig as ark_ec::CurveConfig>::ScalarField],
 ) -> Result<(), Error> {
 	let _out = <ark_ed_on_bls12_381::JubjubConfig as ark_ec::twisted_edwards::TECurveConfig>::msm(
@@ -56,9 +64,7 @@ pub fn do_msm_te(
 }
 
 pub fn do_msm_te_optimized(
-	bases: &[sp_ark_models::twisted_edwards::Affine<
-		sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381>,
-	>],
+	bases: &[EdwardsAffineOptimized],
 	scalars: &[<sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381> as ark_ec::CurveConfig>::ScalarField],
 ) -> Result<(), Error> {
 	let _out = <sp_ark_ed_on_bls12_381::JubjubConfig<HostEdOnBls12_381> as sp_ark_models::twisted_edwards::TECurveConfig>::msm(
@@ -73,10 +79,7 @@ pub fn do_mul_affine_sw(base: &ark_ed_on_bls12_381::SWAffine, scalar: &[u64]) ->
 	Ok(())
 }
 
-pub fn do_mul_affine_te(
-	base: &ark_ec::twisted_edwards::Affine<ark_ed_on_bls12_381::EdwardsConfig>,
-	scalar: &[u64],
-) -> Result<(), Error> {
+pub fn do_mul_affine_te(base: &EdwardsAffineOptimized, scalar: &[u64]) -> Result<(), Error> {
 	let _out =
 		<ark_ed_on_bls12_381::EdwardsConfig as sp_ark_models::twisted_edwards::TECurveConfig>::mul_affine(
 			base,
@@ -85,12 +88,7 @@ pub fn do_mul_affine_te(
 	Ok(())
 }
 
-pub fn do_mul_affine_sw_optimized(
-	base: &sp_ark_models::short_weierstrass::Affine<
-		sp_ark_ed_on_bls12_381::SWConfig<HostEdOnBls12_381>,
-	>,
-	scalar: &[u64],
-) -> Result<(), Error> {
+pub fn do_mul_affine_sw_optimized(base: &SWAffineOptimized, scalar: &[u64]) -> Result<(), Error> {
 	let _out =
 		<sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381> as SWCurveConfig>::mul_affine(
 			base, scalar,
@@ -99,9 +97,7 @@ pub fn do_mul_affine_sw_optimized(
 }
 
 pub fn do_mul_affine_te_optimized(
-	base: &sp_ark_models::twisted_edwards::Affine<
-		sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381>,
-	>,
+	base: &EdwardsAffineOptimized,
 	scalar: &[u64],
 ) -> Result<(), Error> {
 	let _out =
@@ -113,7 +109,7 @@ pub fn do_mul_affine_te_optimized(
 }
 
 pub fn do_mul_projective_sw(
-	base: &sp_ark_models::short_weierstrass::Projective<ark_ed_on_bls12_381::SWConfig>,
+	base: &ark_ec::short_weierstrass::Projective<ark_ed_on_bls12_381::SWConfig>,
 	scalar: &[u64],
 ) -> Result<(), Error> {
 	let _out =
@@ -125,9 +121,7 @@ pub fn do_mul_projective_sw(
 }
 
 pub fn do_mul_projective_sw_optimized(
-	base: &sp_ark_models::short_weierstrass::Projective<
-		sp_ark_ed_on_bls12_381::SWConfig<HostEdOnBls12_381>,
-	>,
+	base: &SWProjectiveOptimized,
 	scalar: &[u64],
 ) -> Result<(), Error> {
 	let _out =
@@ -149,9 +143,7 @@ pub fn do_mul_projective_te(
 }
 
 pub fn do_mul_projective_te_optimized(
-	base: &sp_ark_models::twisted_edwards::Projective<
-		sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381>,
-	>,
+	base: &EdwardsProjectiveOptimized,
 	scalar: &[u64],
 ) -> Result<(), Error> {
 	let _out =

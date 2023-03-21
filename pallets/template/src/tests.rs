@@ -1,6 +1,7 @@
 use crate::{
-	bls12_377, bls12_381, bw6_761, ed_on_bls12_377, ed_on_bls12_381, mock::*,
-	utils::generate_arguments,
+	bls12_377, bls12_381, bw6_761, ed_on_bls12_377, ed_on_bls12_381,
+	mock::*,
+	utils::{generate_msm_args, generate_pairing_args, generate_scalar_args},
 };
 use frame_support::assert_ok;
 
@@ -19,13 +20,19 @@ fn groth16_verificaton_optimized() {
 #[test]
 fn pairing_bls12_381() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_381_pairing(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_pairing_args::<ark_bls12_381::Bls12_381>();
+		assert_ok!(TemplateModule::bls12_381_pairing(RuntimeOrigin::signed(1), base, scalar));
 	});
 }
 #[test]
 fn pairing_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_381_pairing_optimized(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_pairing_args::<bls12_381::Bls12_381Optimized>();
+		assert_ok!(TemplateModule::bls12_381_pairing_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
@@ -79,61 +86,96 @@ fn msm_g2_bls12_381_optimized() {
 #[test]
 fn mul_projective_g1_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_381_mul_projective_g1(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<bls12_381::G1ProjectiveOptimized>();
+		assert_ok!(TemplateModule::bls12_381_mul_projective_g1(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_projective_g1_bls12_381() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_381_mul_projective_g1_optimized(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_bls12_381::G1Projective>();
+		assert_ok!(TemplateModule::bls12_381_mul_projective_g1_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_affine_g1_bls12_381() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_381_mul_affine_g1(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_bls12_381::G1Affine>();
+		assert_ok!(TemplateModule::bls12_381_mul_affine_g1(RuntimeOrigin::signed(1), base, scalar));
 	});
 }
 #[test]
 fn mul_affine_g1_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_381_mul_affine_g1_optimized(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<bls12_381::G1AffineOptimized>();
+		assert_ok!(TemplateModule::bls12_381_mul_affine_g1_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_projective_g2_bls12_381() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_381_mul_projective_g2(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_bls12_381::G2Projective>();
+		assert_ok!(TemplateModule::bls12_381_mul_projective_g2(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_projective_g2_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_381_mul_projective_g2_optimized(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<bls12_381::G2ProjectiveOptimized>();
+		assert_ok!(TemplateModule::bls12_381_mul_projective_g2_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_affine_g2_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_381_mul_affine_g2(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<bls12_381::G2AffineOptimized>();
+		assert_ok!(TemplateModule::bls12_381_mul_affine_g2(RuntimeOrigin::signed(1), base, scalar));
 	});
 }
 #[test]
 fn mul_affine_g2_bls12_381() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_381_mul_affine_g2_optimized(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_bls12_381::G2Affine>();
+		assert_ok!(TemplateModule::bls12_381_mul_affine_g2_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn pairing_bls12_377() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_377_pairing(RuntimeOrigin::signed(1)));
+		let (a, b) = generate_pairing_args::<ark_bls12_377::G1Affine, ark_bls12_377::G2Affine>();
+		assert_ok!(TemplateModule::bls12_377_pairing(RuntimeOrigin::signed(1), a, b));
 	});
 }
 #[test]
 fn pairing_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_377_pairing_optimized(RuntimeOrigin::signed(1)));
+		let (a, b) =
+			generate_pairing_args::<bls12_377::G1AffineOptimized, bls12_377::G2AffineOptimized>();
+		assert_ok!(TemplateModule::bls12_377_pairing_optimized(RuntimeOrigin::signed(1), a, b));
 	});
 }
 #[test]
@@ -185,61 +227,96 @@ fn msm_g2_bls12_377_optimized() {
 #[test]
 fn mul_projective_g1_bls12_377() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_377_mul_projective_g1(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_bls12_377::G1Projective>();
+		assert_ok!(TemplateModule::bls12_377_mul_projective_g1(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_projective_g1_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_377_mul_projective_g1_optimized(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<bls12_377::G1ProjectiveOptimized>();
+		assert_ok!(TemplateModule::bls12_377_mul_projective_g1_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_affine_g1_bls12_377() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_377_mul_affine_g1(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_bls12_377::G1Affine>();
+		assert_ok!(TemplateModule::bls12_377_mul_affine_g1(RuntimeOrigin::signed(1), base, scalar));
 	});
 }
 #[test]
 fn mul_affine_g1_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_377_mul_affine_g1_optimized(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<bls12_377::G1AffineOptimized>();
+		assert_ok!(TemplateModule::bls12_377_mul_affine_g1_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_projective_g2_bls12_377() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_377_mul_projective_g2(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_bls12_377::G2Projective>();
+		assert_ok!(TemplateModule::bls12_377_mul_projective_g2(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_projective_g2_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_377_mul_projective_g2_optimized(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<bls12_377::G2ProjectiveOptimized>();
+		assert_ok!(TemplateModule::bls12_377_mul_projective_g2_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_affine_g2_bls12_377() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_377_mul_affine_g2(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_bls12_377::G2Affine>();
+		assert_ok!(TemplateModule::bls12_377_mul_affine_g2(RuntimeOrigin::signed(1), base, scalar));
 	});
 }
 #[test]
 fn mul_affine_g2_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bls12_377_mul_affine_g2_optimized(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<bls12_377::G2AffineOptimized>();
+		assert_ok!(TemplateModule::bls12_377_mul_affine_g2_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn pairing_bw6_761() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bw6_761_pairing(RuntimeOrigin::signed(1)));
+		let (a, b) = generate_pairing_args::<ark_bw6_761::G1Affine, ark_bw6_761::G2Affine>();
+		assert_ok!(TemplateModule::bw6_761_pairing(RuntimeOrigin::signed(1), a, b));
 	});
 }
 #[test]
 fn pairing_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bw6_761_pairing_optimized(RuntimeOrigin::signed(1)));
+		let (a, b) =
+			generate_pairing_args::<bw6_761::G1AffineOptimized, bw6_761::G2AffineOptimized>();
+		assert_ok!(TemplateModule::bw6_761_pairing_optimized(RuntimeOrigin::signed(1), a, b));
 	});
 }
 #[test]
@@ -289,55 +366,92 @@ fn msm_g2_bw6_761_optimized() {
 #[test]
 fn mul_projective_sw_ed_on_bls12_381() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_sw(RuntimeOrigin::signed(1),));
+		let (base, scalar) = generate_scalar_args::<ark_ed_on_bls12_381::EdwardsProjective>();
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_sw(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_projective_g1_bw6_761() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bw6_761_mul_projective_g1(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_bw6_761::G1Projective>();
+		assert_ok!(TemplateModule::bw6_761_mul_projective_g1(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_projective_g1_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bw6_761_mul_projective_g1_optimized(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<bw6_761::G1ProjectiveOptimized>();
+		assert_ok!(TemplateModule::bw6_761_mul_projective_g1_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_affine_g1_bw6_761() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bw6_761_mul_affine_g1(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_bw6_761::G1Affine>();
+		assert_ok!(TemplateModule::bw6_761_mul_affine_g1(RuntimeOrigin::signed(1), base, scalar));
 	});
 }
 #[test]
 fn mul_affine_g1_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bw6_761_mul_affine_g1_optimized(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<bw6_761::G1AffineOptimized>();
+		assert_ok!(TemplateModule::bw6_761_mul_affine_g1_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_projective_g2_bw6_761() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bw6_761_mul_projective_g2(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_bw6_761::G2Projective>();
+		assert_ok!(TemplateModule::bw6_761_mul_projective_g2(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_projective_g2_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bw6_761_mul_projective_g2_optimized(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<bw6_761::G2ProjectiveOptimized>();
+		assert_ok!(TemplateModule::bw6_761_mul_projective_g2_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_affine_g2_bw6_761() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bw6_761_mul_affine_g2(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_bw6_761::G2Affine>();
+		assert_ok!(TemplateModule::bw6_761_mul_affine_g2(RuntimeOrigin::signed(1), base, scalar));
 	});
 }
 #[test]
 fn mul_affine_g2_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::bw6_761_mul_affine_g2_optimized(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<bw6_761::G12AffineOptimized>();
+		assert_ok!(TemplateModule::bw6_761_mul_affine_g2_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
@@ -365,27 +479,45 @@ fn msm_ed_on_bls12_377_optimized() {
 #[test]
 fn mul_projective_ed_on_bls12_377() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_377_mul_projective(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_ed_on_bls12_377::EdwardsProjective>();
+		assert_ok!(TemplateModule::ed_on_bls12_377_mul_projective(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_projective_ed_on_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
+		let (base, scalar) = generate_scalar_args::<ed_on_bls12_377::EdwardsProjectiveOptimized>();
 		assert_ok!(TemplateModule::ed_on_bls12_377_mul_projective_optimized(
-			RuntimeOrigin::signed(1)
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
 		));
 	});
 }
 #[test]
 fn mul_affine_ed_on_bls12_377() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_377_mul_affine(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_ed_on_bls12_377::EdwardsAffine>();
+		assert_ok!(TemplateModule::ed_on_bls12_377_mul_affine(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_affine_ed_on_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_377_mul_affine_optimized(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ed_on_bls12_377::EdwardsAffineOptimized>();
+		assert_ok!(TemplateModule::ed_on_bls12_377_mul_affine_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
@@ -409,29 +541,45 @@ fn msm_sw_ed_on_bls12_381_optimized() {
 		>,
 	>(10);
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_sw(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_ed_on_bls12_381::SWProjective>();
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_sw(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_projective_sw_ed_on_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
+		let (base, scalar) = generate_scalar_args::<ed_on_bls12_381::SWProjectiveOptimized>();
 		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_sw_optimized(
-			RuntimeOrigin::signed(1)
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
 		));
 	});
 }
 #[test]
 fn mul_affine_sw_ed_on_bls12_381() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine_sw(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_ed_on_bls12_381::SWAffine>();
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine_sw(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_affine_sw_ed_on_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine_sw_optimized(RuntimeOrigin::signed(
-			1
-		)));
+		let (base, scalar) = generate_scalar_args::<ed_on_bls12_381::SWProjectiveOptimized>();
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine_sw_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
@@ -461,28 +609,44 @@ fn msm_te_ed_on_bls12_381_optimized() {
 #[test]
 fn mul_projective_te_ed_on_bls12_381() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_te(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_ed_on_bls12_381::EdwardsProjective>();
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_te(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_projective_te_ed_on_bls12_381_optimized() {
+	let (base, scalar) = generate_scalar_args::<ed_on_bls12_381::SWProjectiveOptimized>();
 	new_test_ext().execute_with(|| {
 		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_te_optimized(
-			RuntimeOrigin::signed(1)
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
 		));
 	});
 }
 #[test]
 fn mul_affine_te_ed_on_bls12_381() {
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine_te(RuntimeOrigin::signed(1)));
+		let (base, scalar) = generate_scalar_args::<ark_ed_on_bls12_381::EdwardsAffine>();
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine_te(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }
 #[test]
 fn mul_affine_te_ed_on_bls12_381_optimized() {
+	let (base, scalar) = generate_scalar_args::<ed_on_bls12_381::EdwardsAffineOPtimized>();
 	new_test_ext().execute_with(|| {
-		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine_te_optimized(RuntimeOrigin::signed(
-			1
-		)));
+		assert_ok!(TemplateModule::ed_on_bls12_381_mul_affine_te_optimized(
+			RuntimeOrigin::signed(1),
+			base,
+			scalar
+		));
 	});
 }

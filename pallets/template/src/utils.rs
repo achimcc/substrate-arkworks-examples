@@ -8,7 +8,7 @@ pub fn serialize_argument(argument: impl CanonicalSerialize) -> Vec<u8> {
 	serialized_argument
 }
 
-pub fn generate_arguments<Group: ark_ec::VariableBaseMSM>(
+pub fn generate_msm_args<Group: ark_ec::VariableBaseMSM>(
 	size: u32,
 ) -> (Vec<Vec<u8>>, Vec<Vec<u8>>) {
 	let rng = &mut test_rng();
@@ -35,15 +35,35 @@ pub fn generate_arguments<Group: ark_ec::VariableBaseMSM>(
 	(bases, scalars)
 }
 
-pub fn generate_scalar_args<Group: ark_ec::VariableBaseMSM>() -> (Vec<u8>, Vec<u8>) {
+fn generate_scalar() -> Vec<u8> {
 	let rng = &mut test_rng();
-	let mut serialized_scalar = vec![0u8; Group::generator().serialized_size(Compress::No)];
-	let scalar = Group::ScalarField::rand(rng);
+	let scalar = u64::rand(rng);
+	let mut serialized_scalar = vec![0u8; scalar.serialized_size(Compress::No)];
 	let mut cursor = Cursor::new(&mut serialized_scalar[..]);
 	scalar.serialize_uncompressed(&mut cursor).unwrap();
-	let mut serialized_base = vec![0u8; 2u64.serialized_size(Compress::No)];
-	let base = u64::rand(rng);
+	serialized_scalar
+}
+
+fn generate_base<Group: CanonicalSerialize + UniformRand>() -> Vec<u8> {
+	let rng = &mut test_rng();
+	let base = Group::rand(rng);
+	let mut serialized_base = vec![0u8; base.serialized_size(Compress::No)];
 	let mut cursor = Cursor::new(&mut serialized_base[..]);
 	base.serialize_uncompressed(&mut cursor).unwrap();
+	serialized_base
+}
+
+pub fn generate_scalar_args<Group: CanonicalSerialize + UniformRand>() -> (Vec<u8>, Vec<u8>) {
+	let serialized_scalar = generate_scalar();
+	let serialized_base = generate_base::<Group>();
 	(serialized_base, serialized_scalar)
+}
+
+pub fn generate_pairing_args<
+	GroupA: CanonicalSerialize + UniformRand,
+	GroupB: CanonicalSerialize + UniformRand,
+>() -> (Vec<u8>, Vec<u8>) {
+	let serialized_a = generate_base::<GroupA>();
+	let serialized_b = generate_base::<GroupB>();
+	(serialized_a, serialized_b)
 }

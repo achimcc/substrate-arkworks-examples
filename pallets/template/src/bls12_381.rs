@@ -1,5 +1,5 @@
 use ark_bls12_381::{Bls12_381, Fr as BlsFr};
-use ark_ec::{pairing::Pairing, AffineRepr, CurveConfig};
+use ark_ec::{pairing::Pairing, CurveConfig};
 use ark_ff::Fp;
 use ark_groth16::Groth16;
 use ark_serialize::{CanonicalDeserialize, Compress, Validate};
@@ -51,19 +51,13 @@ pub type G2AffineOptimized = G2Affine_Host<HostBls12_381>;
 pub type G1ProjectiveOptimized = G1ProjectiveOptimized_Host<HostBls12_381>;
 pub type G2ProjectiveOptimized = G2ProjectiveOptimized_Host<HostBls12_381>;
 
-pub fn do_pairing_optimized() -> Result<(), Error> {
-	let _ = Bls12_381Optimized::multi_pairing(
-		[G1AffineOptimized::generator()],
-		[G2AffineOptimized::generator()],
-	);
+pub fn do_pairing_optimized(a: G1AffineOptimized, b: G2AffineOptimized) -> Result<(), Error> {
+	let _ = Bls12_381Optimized::multi_pairing([a], [b]);
 	Ok(())
 }
 
-pub fn do_pairing() -> Result<(), Error> {
-	let _ = ark_bls12_381::Bls12_381::multi_pairing(
-		[ark_bls12_381::G1Affine::generator()],
-		[ark_bls12_381::G2Affine::generator()],
-	);
+pub fn do_pairing(a: ark_bls12_381::G1Affine, b: ark_bls12_381::G2Affine) -> Result<(), Error> {
+	let _ = ark_bls12_381::Bls12_381::multi_pairing([a], [b]);
 	Ok(())
 }
 

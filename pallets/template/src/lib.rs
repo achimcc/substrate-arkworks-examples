@@ -98,15 +98,41 @@ pub mod pallet {
 
 		#[pallet::call_index(2)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_381_pairing(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bls12_381::do_pairing();
+		pub fn bls12_381_pairing(_origin: OriginFor<T>, a: Vec<u8>, b: Vec<u8>) -> DispatchResult {
+			let cursor = Cursor::new(a);
+			let a =
+				ark_bls12_381::G1Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
+					.unwrap();
+			let cursor = Cursor::new(b);
+			let b =
+				ark_bls12_381::G2Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
+					.unwrap();
+			let _ = crate::bls12_381::do_pairing(a, b);
 			Ok(())
 		}
 
 		#[pallet::call_index(3)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_381_pairing_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bls12_381::do_pairing_optimized();
+		pub fn bls12_381_pairing_optimized(
+			_origin: OriginFor<T>,
+			a: Vec<u8>,
+			b: Vec<u8>,
+		) -> DispatchResult {
+			let cursor = Cursor::new(a);
+			let a = bls12_381::G1AffineOptimized::deserialize_with_mode(
+				cursor,
+				Compress::No,
+				Validate::No,
+			)
+			.unwrap();
+			let cursor = Cursor::new(b);
+			let b = bls12_381::G2AffineOptimized::deserialize_with_mode(
+				cursor,
+				Compress::No,
+				Validate::No,
+			)
+			.unwrap();
+			let _ = crate::bls12_381::do_pairing_optimized(a, b);
 			Ok(())
 		}
 
@@ -406,15 +432,42 @@ pub mod pallet {
 
 		#[pallet::call_index(16)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_377_pairing(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bls12_377::do_pairing();
+		pub fn bls12_377_pairing(_origin: OriginFor<T>, a: Vec<u8>, b: Vec<u8>) -> DispatchResult {
+			let cursor = Cursor::new(a);
+			let a =
+				ark_bls12_377::G1Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
+					.unwrap();
+			let cursor = Cursor::new(b);
+			let b =
+				ark_bls12_377::G2Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
+					.unwrap();
+
+			let _ = crate::bls12_377::do_pairing(a, b);
 			Ok(())
 		}
 
 		#[pallet::call_index(17)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_377_pairing_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bls12_377::do_pairing_optimized();
+		pub fn bls12_377_pairing_optimized(
+			_origin: OriginFor<T>,
+			a: Vec<u8>,
+			b: Vec<u8>,
+		) -> DispatchResult {
+			let cursor = Cursor::new(a);
+			let a = bls12_377::G1AffineOptimized::deserialize_with_mode(
+				cursor,
+				Compress::No,
+				Validate::No,
+			)
+			.unwrap();
+			let cursor = Cursor::new(b);
+			let b = bls12_377::G2AffineOptimized::deserialize_with_mode(
+				cursor,
+				Compress::No,
+				Validate::No,
+			)
+			.unwrap();
+			let _ = crate::bls12_377::do_pairing_optimized(a, b);
 			Ok(())
 		}
 
@@ -714,15 +767,41 @@ pub mod pallet {
 
 		#[pallet::call_index(30)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bw6_761_pairing(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bw6_761::do_pairing();
+		pub fn bw6_761_pairing(_origin: OriginFor<T>, a: Vec<u8>, b: Vec<u8>) -> DispatchResult {
+			let cursor = Cursor::new(a);
+			let a =
+				ark_bw6_761::G1Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
+					.unwrap();
+			let cursor = Cursor::new(b);
+			let b =
+				ark_bw6_761::G2Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
+					.unwrap();
+			let _ = crate::bw6_761::do_pairing(a, b);
 			Ok(())
 		}
 
 		#[pallet::call_index(31)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bw6_761_pairing_optimized(_origin: OriginFor<T>) -> DispatchResult {
-			let _ = crate::bw6_761::do_pairing_optimized();
+		pub fn bw6_761_pairing_optimized(
+			_origin: OriginFor<T>,
+			a: Vec<u8>,
+			b: Vec<u8>,
+		) -> DispatchResult {
+			let cursor = Cursor::new(a);
+			let a = bw6_761::G1AffineOptimized::deserialize_with_mode(
+				cursor,
+				Compress::No,
+				Validate::No,
+			)
+			.unwrap();
+			let cursor = Cursor::new(b);
+			let b = bw6_761::G2AffineOptimized::deserialize_with_mode(
+				cursor,
+				Compress::No,
+				Validate::No,
+			)
+			.unwrap();
+			let _ = crate::bw6_761::do_pairing_optimized(a, b);
 			Ok(())
 		}
 

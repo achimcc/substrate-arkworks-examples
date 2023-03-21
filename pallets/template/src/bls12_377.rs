@@ -45,19 +45,13 @@ pub type G2AffineOptimized = G2AffineOptimized_Host<HostBls12_377>;
 pub type G1ProjectiveOptimized = G1ProjectiveOptimized_Host<HostBls12_377>;
 pub type G2ProjectiveOptimized = G2ProjectiveOptimized_Host<HostBls12_377>;
 
-pub fn do_pairing() -> Result<(), Error> {
-	let _out = ark_bls12_377::Bls12_377::multi_pairing(
-		[ark_bls12_377::G1Affine::generator()],
-		[ark_bls12_377::G2Affine::generator()],
-	);
+pub fn do_pairing(a: ark_bls12_377::G1Affine, b: ark_bls12_377::G2Affine) -> Result<(), Error> {
+	let _out = ark_bls12_377::Bls12_377::multi_pairing([a], [b]);
 	Ok(())
 }
 
-pub fn do_pairing_optimized() -> Result<(), Error> {
-	let _out = Bls12_377Optimized::multi_pairing(
-		[G1AffineOptimized::generator()],
-		[G2AffineOptimized::generator()],
-	);
+pub fn do_pairing_optimized(a: G1AffineOptimized, b: G2AffineOptimized) -> Result<(), Error> {
+	let _out = Bls12_377Optimized::multi_pairing([a], [b]);
 	Ok(())
 }
 

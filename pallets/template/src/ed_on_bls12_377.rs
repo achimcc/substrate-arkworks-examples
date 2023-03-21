@@ -16,6 +16,10 @@ impl EdwardBls12_377HostFunctions for HostEdOnBls12_377 {
 	}
 }
 
+pub type EdwardsAffineOptimized =
+	ark_ec::twisted_edwards::Affine<ark_ed_on_bls12_377::EdwardsConfig>;
+pub type EdwardsProjectiveOptimized = sp_ark_ed_on_bls12_377::EdwardsProjective<HostEdOnBls12_377>;
+
 pub fn do_msm(
 	bases: &[ark_ec::twisted_edwards::Affine<ark_ed_on_bls12_377::EdwardsConfig>],
 	scalars: &[<ark_ed_on_bls12_377::EdwardsConfig as ark_ec::CurveConfig>::ScalarField],
@@ -28,9 +32,7 @@ pub fn do_msm(
 }
 
 pub fn do_msm_optimized(
-	bases: &[ark_ec::twisted_edwards::Affine<
-		sp_ark_ed_on_bls12_377::EdwardsConfig<HostEdOnBls12_377>,
-	>],
+	bases: &[EdwardsAffineOptimized],
 	scalars: &[<sp_ark_ed_on_bls12_377::EdwardsConfig<HostEdOnBls12_377> as ark_ec::CurveConfig>::ScalarField],
 ) -> Result<(), Error> {
 	let _out = <sp_ark_ed_on_bls12_377::EdwardsConfig<HostEdOnBls12_377> as TECurveConfig>::msm(
@@ -51,10 +53,7 @@ pub fn do_mul_affine(
 	Ok(())
 }
 
-pub fn do_mul_affine_optimized(
-	base: &sp_ark_ed_on_bls12_377::EdwardsAffine<HostEdOnBls12_377>,
-	scalar: &[u64],
-) -> Result<(), Error> {
+pub fn do_mul_affine_optimized(base: &EdwardsAffineOptimized, scalar: &[u64]) -> Result<(), Error> {
 	let _out =
 		<sp_ark_ed_on_bls12_377::EdwardsConfig<HostEdOnBls12_377> as TECurveConfig>::mul_affine(
 			base, scalar,
@@ -71,7 +70,7 @@ pub fn do_mul_projective(
 }
 
 pub fn do_mul_projective_optimized(
-	base: &sp_ark_ed_on_bls12_377::EdwardsProjective<HostEdOnBls12_377>,
+	base: &EdwardsProjectiveOptimized,
 	scalar: &[u64],
 ) -> Result<(), Error> {
 	let _out =
