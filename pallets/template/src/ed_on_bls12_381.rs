@@ -82,7 +82,7 @@ pub fn do_mul_affine_sw(base: &ark_ed_on_bls12_381::SWAffine, scalar: &[u64]) ->
 }
 
 pub fn do_mul_affine_te(
-	base: &[ark_ed_on_bls12_381::EdwardsAffine],
+	base: &ark_ed_on_bls12_381::EdwardsAffine,
 	scalar: &[u64],
 ) -> Result<(), Error> {
 	let _out =
