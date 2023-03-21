@@ -540,10 +540,10 @@ fn msm_sw_ed_on_bls12_381_optimized() {
 	>(10);
 	new_test_ext().execute_with(|| {
 		let (base, scalar) = generate_scalar_args::<ark_ed_on_bls12_381::SWProjective>();
-		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_sw(
+		assert_ok!(TemplateModule::ed_on_bls12_381_msm_sw_optimized(
 			RuntimeOrigin::signed(1),
-			base,
-			scalar
+			bases,
+			scalars
 		));
 	});
 }
