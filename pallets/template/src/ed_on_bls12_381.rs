@@ -56,7 +56,7 @@ pub fn do_msm_sw_optimized(
 }
 
 pub fn do_msm_te(
-	bases: &[EdwardsAffineOptimized],
+	bases: &[ark_ed_on_bls12_381::EdwardsAffine],
 	scalars: &[<ark_ed_on_bls12_381::EdwardsConfig as ark_ec::CurveConfig>::ScalarField],
 ) -> Result<(), Error> {
 	let _out = <ark_ed_on_bls12_381::JubjubConfig as ark_ec::twisted_edwards::TECurveConfig>::msm(
@@ -81,7 +81,10 @@ pub fn do_mul_affine_sw(base: &ark_ed_on_bls12_381::SWAffine, scalar: &[u64]) ->
 	Ok(())
 }
 
-pub fn do_mul_affine_te(base: &EdwardsAffineOptimized, scalar: &[u64]) -> Result<(), Error> {
+pub fn do_mul_affine_te(
+	base: &[ark_ed_on_bls12_381::EdwardsAffine],
+	scalar: &[u64],
+) -> Result<(), Error> {
 	let _out =
 		<ark_ed_on_bls12_381::EdwardsConfig as sp_ark_models::twisted_edwards::TECurveConfig>::mul_affine(
 			base,
