@@ -4,7 +4,7 @@
 | extrinsic                               |  normal(µs)[^1]  |optimized(µs)[^2]|   speedup[^3]   |  dummy(µs)[^4]  |   wasm(µs)[^5]  |  native(µs)[^6] |
 | --------------------------------------- |  --------------- | --------------- | --------------- | --------------- | --------------- | --------------- |
 | groth16_verification (bls12_381)        |    26535.30      |    8244.31      |${\color{green}\bf 3.22 \boldsymbol{\times}}$|    5800.99      |     45070       |      4040       | 
-| bls12_381_pairing                       |    10401.82      |    1642.82      |${\color{green}\bf 5.70 \boldsymbol{\times}}$|    448.97       |     14140       |      1350       |
+| bls12_381_pairing                       |    10401.82      |    1642.82      |${\color{green}\bf 6.33 \boldsymbol{\times}}$|    448.97       |     14140       |      1350       |
 | bls12_381_msm_g1, 10 arguments          |    16932.20      |    6869.28      |${\color{green}\bf 2.46 \boldsymbol{\times}}$|    87.63        |     24650       |      600.44     |
 | bls12_381_msm_g1, 1000 arguments        |    1313899.30    |    653168.11    |${\color{green}\bf 2.01 \boldsymbol{\times}}$|    6486.63      |     191000      |      11160      |
 | bls12_381_msm_g2, 10 arguments          |    115465.19     |    23583.63     |${\color{green}\bf 4.90 \boldsymbol{\times}}$|    10738.18     |     185240      |      1660       |
@@ -13,7 +13,7 @@
 | bls12_381_mul_affine_g1                 |    455.39        |    95.40        |${\color{green}\bf 4.77 \boldsymbol{\times}}$|    9.74         |     39.70       |      0.45       |
 | bls12_381_mul_projective_g2             |    1584.11       |    238.31       |${\color{green}\bf 6.65 \boldsymbol{\times}}$|    18.22        |     37.74       |      1.18       |
 | bls12_381_mul_affine_g2                 |    1285.77       |    207.74       |${\color{green}\bf 6.19 \boldsymbol{\times}}$|    16.41        |     34.40       |      1.19       |
-| bls12_377_pairing                       |    9076.44       |    1641.00      |${\color{green}\bf 10.57 \boldsymbol{\times}}$|    16.64        |     15160       |      1520       |
+| bls12_377_pairing                       |    9076.44       |    1641.00      |${\color{green}\bf 5.53 \boldsymbol{\times}}$|    16.64        |     15160       |      1520       |
 | bls12_377_msm_g1, 10 arguments          |    20745.06      |    9270.83      |${\color{green}\bf 2.24 \boldsymbol{\times}}$|    51.48        |     28620       |      559.16     | 
 | bls12_377_msm_g1, 1000 arguments        |    1287941.57    |    831275.64    |${\color{green}\bf 1.55 \boldsymbol{\times}}$|    4484.67      |     1920000     |      11160      |
 | bls12_377_msm_g2, 10 arguments          |    131852.78     |    34796.36     |${\color{green}\bf 3.79 \boldsymbol{\times}}$|    89.93        |     162870      |      2020       |
@@ -22,7 +22,7 @@
 | bls12_377_mul_affine_g1                 |    459.98        |    89.74        |${\color{green}\bf 5.13 \boldsymbol{\times}}$|    11.11        |     24.49       |      0.45       |
 | bls12_377_mul_projective_g2             |    1625.11       |    290.28       |${\color{green}\bf 5.60 \boldsymbol{\times}}$|    16.64        |     28.26       |      1.42       |
 | bls12_377_mul_affine_g2                 |    1346.71       |    243.37       |${\color{green}\bf 5.53 \boldsymbol{\times}}$|    17.18        |     38.94       |      1.46       |
-| bw6_761_pairing                         |    52427.45      |    6999.06      |${\color{green}\bf 7.39 \boldsymbol{\times}}$|    844.10       |     55440       |      6940       |
+| bw6_761_pairing                         |    52427.45      |    6999.06      |${\color{green}\bf 7.49 \boldsymbol{\times}}$|    844.10       |     55440       |      6940       |
 | bw6_761_msm_g1, 10 arguments            |    155393.79     |    53231.17     |${\color{green}\bf 2.92 \boldsymbol{\times}}$|    161.28       |     206610      |      3490       |
 | bw6_761_msm_g1, 1000 arguments          |    13384952.55   |    5070669.53   |${\color{green}\bf 2.64 \boldsymbol{\times}}$|    13526.84     |     18010000    |      75270      | 
 | bw6_761_msm_g2, 10 arguments            |    141484.94     |    39324.56     |${\color{green}\bf 3.60 \boldsymbol{\times}}$|    161.92       |     212280      |      3430       |
