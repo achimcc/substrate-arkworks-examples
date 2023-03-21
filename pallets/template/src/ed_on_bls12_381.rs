@@ -31,7 +31,7 @@ pub type SWProjectiveOptimized = sp_ark_models::short_weierstrass::Projective<
 	sp_ark_ed_on_bls12_381::SWConfig<HostEdOnBls12_381>,
 >;
 pub type EdwardsAffineOptimized =
-	sp_ark_models::twisted_edwards::Affine<ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381>>;
+	sp_ark_models::twisted_edwards::Affine<sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381>>;
 pub type EdwardsProjectiveOptimized = sp_ark_models::twisted_edwards::Projective<
 	sp_ark_ed_on_bls12_381::EdwardsConfig<HostEdOnBls12_381>,
 >;
