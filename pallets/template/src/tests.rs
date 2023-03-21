@@ -20,19 +20,19 @@ fn groth16_verificaton_optimized() {
 #[test]
 fn pairing_bls12_381() {
 	new_test_ext().execute_with(|| {
-		let (base, scalar) = generate_pairing_args::<ark_bls12_381::Bls12_381>();
-		assert_ok!(TemplateModule::bls12_381_pairing(RuntimeOrigin::signed(1), base, scalar));
+		let (a, b) = generate_pairing_args::<
+			ark_bls12_381::Bls12_381::G1Affine,
+			ark_bls12_381::Bls12_381::G2Affine,
+		>();
+		assert_ok!(TemplateModule::bls12_381_pairing(RuntimeOrigin::signed(1), a, b));
 	});
 }
 #[test]
 fn pairing_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
-		let (base, scalar) = generate_pairing_args::<bls12_381::Bls12_381Optimized>();
-		assert_ok!(TemplateModule::bls12_381_pairing_optimized(
-			RuntimeOrigin::signed(1),
-			base,
-			scalar
-		));
+		let (a, b) =
+			generate_pairing_args::<bls12_381::G1AffineOptimized, bls12_381::G2AffineOptimized>();
+		assert_ok!(TemplateModule::bls12_381_pairing_optimized(RuntimeOrigin::signed(1), a, b));
 	});
 }
 #[test]
