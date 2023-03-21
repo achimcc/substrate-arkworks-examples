@@ -364,7 +364,7 @@ fn msm_g2_bw6_761_optimized() {
 #[test]
 fn mul_projective_sw_ed_on_bls12_381() {
 	new_test_ext().execute_with(|| {
-		let (base, scalar) = generate_scalar_args::<ark_ed_on_bls12_381::EdwardsProjective>();
+		let (base, scalar) = generate_scalar_args::<ark_ed_on_bls12_381::SWProjective>();
 		assert_ok!(TemplateModule::ed_on_bls12_381_mul_projective_sw(
 			RuntimeOrigin::signed(1),
 			base,
