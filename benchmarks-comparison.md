@@ -33,16 +33,16 @@
 | bw6_761_mul_affine_g2                   |    1641.21       |    273.36       |${\color{green}\bf 6.00 \boldsymbol{\times}}$|    21.57        |     34.68       |      1.78       |
 | ed_on_bls12_381_msm_sw, 10 arguments    |    6663.28       |    3686.07      |${\color{green}\bf 1.81 \boldsymbol{\times}}$|    36.30        |     8610        |      376.61     |
 | ed_on_bls12_381_msm_sw, 1000 arguments  |    296140.25     |    215932.66    |${\color{green}\bf 1.37 \boldsymbol{\times}}$|    2465.60      |     430700      |      6010       |
-| ed_on_bls12_381_mul_projective_sw       |    229.24        |    228.69       |${\color{green}\bf 1.00 \boldsymbol{\times}}$|    6.69         |     24.89       |      0.36       |
-| ed_on_bls12_381_mul_affine_sw           |    256.73        |    245.59       |${\color{green}\bf 1.05 \boldsymbol{\times}}$|    6.17         |     36.63       |      0.36       |
+| ed_on_bls12_381_mul_projective_sw       |    297.07        |    55.11        |${\color{green}\bf 5.30 \boldsymbol{\times}}$|    6.69         |     24.89       |      0.36       |
+| ed_on_bls12_381_mul_affine_sw           |    241.37        |    54.09        |${\color{green}\bf 4.46 \boldsymbol{\times}}$|    6.17         |     36.63       |      0.36       |
 | ed_on_bls12_381_msm_te, 10 arguments    |    7813.27       |    3207.47      |${\color{green}\bf 2.44 \boldsymbol{\times}}$|    35.21        |     12470       |      560.82     |
 | ed_on_bls12_381_msm_te, 1000 arguments  |    334199.35     |    242277.02    |${\color{green}\bf 1.38 \boldsymbol{\times}}$|    2391.21      |     533490      |      7890       |
-| ed_on_bls12_381_mul_projective_te       |    246.05        |    219.86       |${\color{green}\bf 1.12 \boldsymbol{\times}}$|    7.69         |     22.37       |      0.83       |  
-| ed_on_bls12_381_mul_affine_te           |    207.72        |    205.39       |${\color{green}\bf 1.01 \boldsymbol{\times}}$|    7.61         |     17.25       |      0.37       |
+| ed_on_bls12_381_mul_projective_te       |    216.63        |    46.84        |${\color{green}\bf 4,62 \boldsymbol{\times}}$|    7.69         |     22.37       |      0.83       |  
+| ed_on_bls12_381_mul_affine_te           |    224.69        |    47.91        |${\color{green}\bf 4.69 \boldsymbol{\times}}$|    7.61         |     17.25       |      0.37       |
 | ed_on_bls12_377_msm, 10 arguments       |    7768.41       |    3192.99      |${\color{green}\bf 2.43 \boldsymbol{\times}}$|    43.24        |     10060       |      553.69     | 
 | ed_on_bls12_377_msm, 1000 arguments     |    357890.37     |    267844.08    |${\color{green}\bf 1.34 \boldsymbol{\times}}$|    2465.60      |     537810      |      7680       |
-| ed_on_bls12_377_mul_projective          |    204.00        |    209.85       |${\color{red}\bf 1.03 \boldsymbol{\times}}$|    7.00         |     22.48       |      0.89       |
-| ed_on_bls12_377_mul_affine              |    208.77        |    210.99       |${\color{red}\bf 1.01 \boldsymbol{\times}}$|    8.47         |     22.34       |      0.86       |
+| ed_on_bls12_377_mul_projective          |    218.20        |    45.03        |${\color{green}\bf 4.85 \boldsymbol{\times}}$|    7.00         |     22.48       |      0.89       |
+| ed_on_bls12_377_mul_affine              |    222.64        |    45.84        |${\color{green}\bf 4.86 \boldsymbol{\times}}$|    8.47         |     22.34       |      0.86       |
 
 [^1]: implemented in a Substrate pallet with [arkworks](https://github.com/arkworks-rs/) library by this repo: https://github.com/achimcc/substrate-arkworks-examples
 [^2]: implemented in a Substrate pallet with [ark-substrate](https://github.com/paritytech/ark-substrate) library, executed through host-function call, computed by this repo: https://github.com/achimcc/substrate-arkworks-examples
