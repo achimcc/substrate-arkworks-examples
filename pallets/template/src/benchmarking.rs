@@ -364,7 +364,7 @@ benchmarks! {
 
 	ed_on_bls12_381_msm_te_1000 {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<ark_ed_on_bls12_381::EdwardsProjective>(10);
+		let (bases, scalars) = generate_msm_args::<ark_ed_on_bls12_381::EdwardsProjective>(1000);
 			}: ed_on_bls12_381_msm_te(RawOrigin::Signed(caller), bases, scalars)
 
 	ed_on_bls12_381_msm_te_1000_optimized {
