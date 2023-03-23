@@ -144,7 +144,7 @@ benchmarks! {
 
 	bls12_381_msm_g2_10_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_models::short_weierstrass::Projective<sp_ark_bls12_381::g2::Config<bls12_381::HostBls12_381>>>(1000);
+		let (bases, scalars) = generate_msm_args::<sp_ark_models::short_weierstrass::Projective<sp_ark_bls12_381::g2::Config<bls12_381::HostBls12_381>>>(10);
 			}: bls12_381_msm_g2_optimized(RawOrigin::Signed(caller), bases, scalars)
 
 	bls12_381_msm_g2_1000 {
