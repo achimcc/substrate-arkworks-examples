@@ -5,18 +5,14 @@ pub use sp_ark_bw6_761::{
 	HostFunctions as BW6_761HostFunctions, BW6_761 as BW6_761_Host,
 };
 pub use sp_ark_models::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group};
-use sp_arkworks::PairingError;
 
 pub struct HostBW6_761 {}
 
 impl BW6_761HostFunctions for HostBW6_761 {
-	fn bw6_761_multi_miller_loop(
-		a: Vec<Vec<u8>>,
-		b: Vec<Vec<u8>>,
-	) -> Result<Vec<u8>, PairingError> {
+	fn bw6_761_multi_miller_loop(a: Vec<Vec<u8>>, b: Vec<Vec<u8>>) -> Result<Vec<u8>, ()> {
 		sp_io::elliptic_curves::bw6_761_multi_miller_loop(a, b)
 	}
-	fn bw6_761_final_exponentiation(f12: Vec<u8>) -> Result<Vec<u8>, PairingError> {
+	fn bw6_761_final_exponentiation(f12: Vec<u8>) -> Result<Vec<u8>, ()> {
 		sp_io::elliptic_curves::bw6_761_final_exponentiation(f12)
 	}
 	fn bw6_761_msm_g1(bases: Vec<Vec<u8>>, bigints: Vec<Vec<u8>>) -> Vec<u8> {
