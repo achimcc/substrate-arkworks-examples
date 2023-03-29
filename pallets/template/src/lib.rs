@@ -24,8 +24,14 @@ pub mod utils;
 
 #[frame_support::pallet]
 pub mod pallet {
-	use crate::{bls12_377, bls12_381, bw6_761, ed_on_bls12_377, ed_on_bls12_381};
+	use crate::{
+		bls12_377, bls12_381, bls12_381::BlsFrOptimized, bw6_761, ed_on_bls12_377, ed_on_bls12_381,
+	};
+	use ark_bls12_381::Fr as BlsFr;
+	use ark_ff::Fp;
+	use ark_groth16::Groth16;
 	use ark_serialize::{CanonicalDeserialize, Compress, Validate};
+	use ark_snark::SNARK;
 	use ark_std::{io::Cursor, vec, vec::Vec};
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
@@ -68,10 +74,39 @@ pub mod pallet {
 	impl<T: Config> Pallet<T> {
 		#[pallet::call_index(0)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn groth16_verification(origin: OriginFor<T>) -> DispatchResult {
+		pub fn groth16_verification(
+			origin: OriginFor<T>,
+			vk: Vec<u8>,
+			c: Vec<u8>,
+			proof: Vec<u8>,
+		) -> DispatchResult {
 			let who = ensure_signed(origin).unwrap();
 
-			let result = crate::bls12_381::do_verify_groth16();
+			let cursor = Cursor::new(&vk);
+			let vk = <Groth16<crate::bls12_381::Bls12_381Optimized> as SNARK<BlsFrOptimized>>::VerifyingKey::deserialize_with_mode(
+				cursor,
+				Compress::No,
+				Validate::No,
+			)
+			.unwrap();
+			let vk = crate::utils::serialize_argument(vk);
+
+			let cursor = Cursor::new(&c);
+			let c: ark_ff::Fp<ark_ff::MontBackend<ark_bls12_381::FrConfig, 4>, 4> =
+				Fp::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
+			let c = crate::utils::serialize_argument(c);
+
+			let cursor = Cursor::new(&proof);
+			let proof =
+				<Groth16<ark_bls12_381::Bls12_381> as SNARK<BlsFr>>::Proof::deserialize_with_mode(
+					cursor,
+					Compress::No,
+					Validate::No,
+				)
+				.unwrap();
+			let proof = crate::utils::serialize_argument(proof);
+
+			let result = crate::bls12_381::do_verify_groth16(vk, c, proof);
 
 			if result.is_ok() {
 				Self::deposit_event(Event::VerificationSuccess { who });
@@ -83,10 +118,39 @@ pub mod pallet {
 
 		#[pallet::call_index(1)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn groth16_verification_optimized(origin: OriginFor<T>) -> DispatchResult {
+		pub fn groth16_verification_optimized(
+			origin: OriginFor<T>,
+			vk: Vec<u8>,
+			c: Vec<u8>,
+			proof: Vec<u8>,
+		) -> DispatchResult {
 			let who = ensure_signed(origin).unwrap();
 
-			let result = crate::bls12_381::do_verify_groth16_optimized();
+			let cursor = Cursor::new(&vk);
+			let vk = <Groth16<bls12_381::Bls12_381Optimized> as SNARK<BlsFrOptimized>>::VerifyingKey::deserialize_with_mode(
+				cursor,
+				Compress::No,
+				Validate::No,
+			)
+			.unwrap();
+			let vk = crate::utils::serialize_argument(vk);
+
+			let cursor = Cursor::new(&c);
+			let c: ark_ff::Fp<ark_ff::MontBackend<ark_bls12_381::FrConfig, 4>, 4> =
+				Fp::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
+			let c = crate::utils::serialize_argument(c);
+
+			let cursor = Cursor::new(&proof);
+			let proof =
+				<Groth16<ark_bls12_381::Bls12_381> as SNARK<BlsFr>>::Proof::deserialize_with_mode(
+					cursor,
+					Compress::No,
+					Validate::No,
+				)
+				.unwrap();
+			let proof = crate::utils::serialize_argument(proof);
+
+			let result = crate::bls12_381::do_verify_groth16_optimized(vk, c, proof);
 
 			if result.is_ok() {
 				Self::deposit_event(Event::VerificationSuccess { who });
