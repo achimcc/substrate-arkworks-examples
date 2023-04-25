@@ -15,24 +15,31 @@ mod tests;
 #[cfg(feature = "runtime-benchmarks")]
 mod benchmarking;
 
-pub mod bls12_377;
-pub mod bls12_381;
-pub mod bw6_761;
-pub mod ed_on_bls12_377;
-pub mod ed_on_bls12_381;
-pub mod utils;
+pub(crate) mod bls12_377;
+pub(crate) mod bls12_381;
+pub(crate) mod bw6_761;
+pub(crate) mod ed_on_bls12_377;
+pub(crate) mod ed_on_bls12_381_bandersnatch;
+pub(crate) mod utils;
+
+pub(crate) use ark_scale::hazmat::ArkScaleProjective;
+const HOST_CALL: ark_scale::Usage = ark_scale::HOST_CALL;
+pub(crate) type ArkScale<T> = ark_scale::ArkScale<T, HOST_CALL>;
 
 #[frame_support::pallet]
 pub mod pallet {
 	use crate::{
-		bls12_377, bls12_381, bls12_381::BlsFrOptimized, bw6_761, ed_on_bls12_377, ed_on_bls12_381,
+		bls12_377, bls12_381, bls12_381::BlsFrOptimized, bw6_761, ed_on_bls12_377,
+		ed_on_bls12_381_bandersnatch, ArkScale, ArkScaleProjective,
 	};
 	use ark_bls12_381::Fr as BlsFr;
-	use ark_ff::Fp;
+	use ark_ec::{pairing::Pairing, CurveConfig};
+	use ark_ff::{Fp, MontBackend};
 	use ark_groth16::Groth16;
 	use ark_serialize::{CanonicalDeserialize, Compress, Validate};
 	use ark_snark::SNARK;
 	use ark_std::{io::Cursor, vec, vec::Vec};
+	use codec::Decode;
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
 
@@ -163,14 +170,12 @@ pub mod pallet {
 		#[pallet::call_index(2)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_pairing(_origin: OriginFor<T>, a: Vec<u8>, b: Vec<u8>) -> DispatchResult {
-			let cursor = Cursor::new(a);
-			let a =
-				ark_bls12_381::G1Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
-					.unwrap();
-			let cursor = Cursor::new(b);
-			let b =
-				ark_bls12_381::G2Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
-					.unwrap();
+			let a = <ArkScale<ark_bls12_381::G1Affine> as Decode>::decode(&mut a.as_slice())
+				.unwrap()
+				.0;
+			let b = <ArkScale<ark_bls12_381::G2Affine> as Decode>::decode(&mut b.as_slice())
+				.unwrap()
+				.0;
 			let _ = crate::bls12_381::do_pairing(a, b);
 			Ok(())
 		}
@@ -182,20 +187,12 @@ pub mod pallet {
 			a: Vec<u8>,
 			b: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(a);
-			let a = bls12_381::G1AffineOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
-			let cursor = Cursor::new(b);
-			let b = bls12_381::G2AffineOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
+			let a = <ArkScale<bls12_381::G1AffineOptimized> as Decode>::decode(&mut a.as_slice())
+				.unwrap()
+				.0;
+			let b = <ArkScale<bls12_381::G2AffineOptimized> as Decode>::decode(&mut b.as_slice())
+				.unwrap()
+				.0;
 			let _ = crate::bls12_381::do_pairing_optimized(a, b);
 			Ok(())
 		}
@@ -204,33 +201,17 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g1(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					ark_bls12_381::G1Affine::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
+			let bases =
+				<ArkScale<Vec<ark_bls12_381::G1Affine>> as Decode>::decode(&mut bases.as_slice())
 					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<ark_bls12_381::g1::Config as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
+					.0;
+			let scalars = <ArkScale<
+				Vec<<ark_bls12_381::Bls12_381 as Pairing>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap().0;
 			let _ = crate::bls12_381::do_msm_g1(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -239,33 +220,18 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g1_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					bls12_381::G1Affine_Host::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<sp_ark_bls12_381::g1::Config<bls12_381::HostBls12_381> as sp_ark_models::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
+			let bases = <ArkScale<Vec<bls12_381::G1AffineOptimized>> as Decode>::decode(
+				&mut bases.as_slice(),
+			)
+			.unwrap()
+			.0;
+			let scalars = <ArkScale<
+				Vec<<bls12_381::Bls12_381Optimized as Pairing>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap().0;
 			let _ = crate::bls12_381::do_msm_g1_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -274,33 +240,17 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g2(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<ark_bls12_381::Bls12_381 as ark_ec::pairing::Pairing>::G2Affine::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
+			let bases =
+				<ArkScale<Vec<ark_bls12_381::G2Affine>> as Decode>::decode(&mut bases.as_slice())
 					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<ark_bls12_381::g2::Config as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
+					.0;
+			let scalars = <ArkScale<
+				Vec<<ark_bls12_381::Bls12_381 as Pairing>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap().0;
 			let _ = crate::bls12_381::do_msm_g2(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -309,33 +259,18 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g2_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					bls12_381::G2AffineOptimized::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<sp_ark_bls12_381::g1::Config<bls12_381::HostBls12_381> as sp_ark_models::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
+			let bases = <ArkScale<Vec<bls12_381::G2AffineOptimized>> as Decode>::decode(
+				&mut bases.as_slice(),
+			)
+			.unwrap()
+			.0;
+			let scalars = <ArkScale<
+				Vec<<ark_bls12_381::Bls12_381 as Pairing>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap().0;
 			let _ = crate::bls12_381::do_msm_g2_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -347,16 +282,13 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = ark_bls12_381::G1Projective::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<ark_bls12_381::G1Projective> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_381::do_mul_projective_g1(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_381::do_mul_projective_g1(&base, &scalar);
 			Ok(())
 		}
 
@@ -367,16 +299,13 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = bls12_381::G1ProjectiveOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<bls12_381::G1ProjectiveOptimized> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_381::do_mul_projective_g1_optimized(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_381::do_mul_projective_g1_optimized(&base, &scalar);
 			Ok(())
 		}
 
@@ -387,13 +316,11 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base =
-				ark_bls12_381::G1Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
-					.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_381::do_mul_affine_g1(&base, &[scalar]);
+			let base = <ArkScale<ark_bls12_381::G1Affine> as Decode>::decode(&mut base.as_slice())
+				.unwrap()
+				.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_381::do_mul_affine_g1(&base, &scalar);
 			Ok(())
 		}
 
@@ -404,16 +331,12 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = bls12_381::G1AffineOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_381::do_mul_affine_g1_optimized(&base, &[scalar]);
+			let base =
+				<ArkScale<bls12_381::G1AffineOptimized> as Decode>::decode(&mut base.as_slice())
+					.unwrap()
+					.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_381::do_mul_affine_g1_optimized(&base, &scalar);
 			Ok(())
 		}
 
@@ -424,16 +347,13 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = ark_bls12_381::G2Projective::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<ark_bls12_381::G2Projective> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_381::do_mul_projective_g2(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_381::do_mul_projective_g2(&base, &scalar);
 			Ok(())
 		}
 
@@ -444,16 +364,13 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = bls12_381::G2ProjectiveOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<bls12_381::G2ProjectiveOptimized> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_381::do_mul_projective_g2_optimized(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_381::do_mul_projective_g2_optimized(&base, &scalar);
 			Ok(())
 		}
 
@@ -464,13 +381,11 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base =
-				ark_bls12_381::G2Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
-					.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_381::do_mul_affine_g2(&base, &[scalar]);
+			let base = <ArkScale<ark_bls12_381::G2Affine> as Decode>::decode(&mut base.as_slice())
+				.unwrap()
+				.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_381::do_mul_affine_g2(&base, &scalar);
 			Ok(())
 		}
 
@@ -481,31 +396,24 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = bls12_381::G2AffineOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_381::do_mul_affine_g2_optimized(&base, &[scalar]);
+			let base =
+				<ArkScale<bls12_381::G2AffineOptimized> as Decode>::decode(&mut base.as_slice())
+					.unwrap()
+					.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_381::do_mul_affine_g2_optimized(&base, &scalar);
 			Ok(())
 		}
 
 		#[pallet::call_index(16)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_pairing(_origin: OriginFor<T>, a: Vec<u8>, b: Vec<u8>) -> DispatchResult {
-			let cursor = Cursor::new(a);
-			let a =
-				ark_bls12_377::G1Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
-					.unwrap();
-			let cursor = Cursor::new(b);
-			let b =
-				ark_bls12_377::G2Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
-					.unwrap();
-
+			let a = <ArkScale<ark_bls12_377::G1Affine> as Decode>::decode(&mut a.as_slice())
+				.unwrap()
+				.0;
+			let b = <ArkScale<ark_bls12_377::G2Affine> as Decode>::decode(&mut b.as_slice())
+				.unwrap()
+				.0;
 			let _ = crate::bls12_377::do_pairing(a, b);
 			Ok(())
 		}
@@ -517,20 +425,12 @@ pub mod pallet {
 			a: Vec<u8>,
 			b: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(a);
-			let a = bls12_377::G1AffineOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
-			let cursor = Cursor::new(b);
-			let b = bls12_377::G2AffineOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
+			let a = <ArkScale<bls12_377::G1AffineOptimized> as Decode>::decode(&mut a.as_slice())
+				.unwrap()
+				.0;
+			let b = <ArkScale<bls12_377::G2AffineOptimized> as Decode>::decode(&mut b.as_slice())
+				.unwrap()
+				.0;
 			let _ = crate::bls12_377::do_pairing_optimized(a, b);
 			Ok(())
 		}
@@ -539,33 +439,17 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g1(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<ark_bls12_377::Bls12_377 as ark_ec::pairing::Pairing>::G1Affine::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
+			let bases =
+				<ArkScale<Vec<ark_bls12_377::G1Affine>> as Decode>::decode(&mut bases.as_slice())
 					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<ark_bls12_377::g1::Config as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
+					.0;
+			let scalars = <ArkScale<
+				Vec<<ark_bls12_377::Bls12_377 as Pairing>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap().0;
 			let _ = crate::bls12_377::do_msm_g1(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -574,33 +458,19 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g1_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<bls12_377::Bls12_377Optimized as sp_ark_models::pairing::Pairing>::G1Affine::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<bls12_377::Bls12_377Optimized as sp_ark_models::pairing::Pairing>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
+			let bases = <ArkScale<Vec<bls12_377::G1AffineOptimized>> as Decode>::decode(
+				&mut bases.as_slice(),
+			)
+			.unwrap()
+			.0;
+			let scalars = <ArkScale<
+				Vec<<bls12_377::Bls12_377Optimized as Pairing>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap()
+			.0;
 			let _ = crate::bls12_377::do_msm_g1_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -609,33 +479,17 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g2(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<ark_bls12_377::Bls12_377 as ark_ec::pairing::Pairing>::G2Affine::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
+			let bases =
+				<ArkScale<Vec<ark_bls12_377::G2Affine>> as Decode>::decode(&mut bases.as_slice())
 					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<ark_bls12_377::g2::Config as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
+					.0;
+			let scalars = <ArkScale<
+				Vec<<ark_bls12_377::Bls12_377 as Pairing>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap().0;
 			let _ = crate::bls12_377::do_msm_g2(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -644,33 +498,19 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g2_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<bls12_377::Bls12_377Optimized as sp_ark_models::pairing::Pairing>::G2Affine::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<bls12_377::Bls12_377Optimized as sp_ark_models::pairing::Pairing>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
+			let bases = <ArkScale<Vec<bls12_377::G2AffineOptimized>> as Decode>::decode(
+				&mut bases.as_slice(),
+			)
+			.unwrap()
+			.0;
+			let scalars = <ArkScale<
+				Vec<<bls12_377::Bls12_377Optimized as Pairing>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap()
+			.0;
 			let _ = crate::bls12_377::do_msm_g2_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -682,16 +522,13 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = ark_bls12_377::G1Projective::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<ark_bls12_377::G1Projective> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_377::do_mul_projective_g1(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_377::do_mul_projective_g1(&base, &scalar);
 			Ok(())
 		}
 
@@ -702,16 +539,13 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = bls12_377::G1ProjectiveOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<bls12_377::G1ProjectiveOptimized> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_377::do_mul_projective_g1_optimized(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_377::do_mul_projective_g1_optimized(&base, &scalar);
 			Ok(())
 		}
 
@@ -722,13 +556,11 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base =
-				ark_bls12_377::G1Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
-					.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_377::do_mul_affine_g1(&base, &[scalar]);
+			let base = <ArkScale<ark_bls12_377::G1Affine> as Decode>::decode(&mut base.as_slice())
+				.unwrap()
+				.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_377::do_mul_affine_g1(&base, &scalar);
 			Ok(())
 		}
 
@@ -739,16 +571,12 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = bls12_377::G1AffineOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_377::do_mul_affine_g1_optimized(&base, &[scalar]);
+			let base =
+				<ArkScale<bls12_377::G1AffineOptimized> as Decode>::decode(&mut base.as_slice())
+					.unwrap()
+					.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_377::do_mul_affine_g1_optimized(&base, &scalar);
 			Ok(())
 		}
 
@@ -759,16 +587,13 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = ark_bls12_377::G2Projective::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<ark_bls12_377::G2Projective> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_377::do_mul_projective_g2(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_377::do_mul_projective_g2(&base, &scalar);
 			Ok(())
 		}
 
@@ -779,16 +604,13 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = bls12_377::G2ProjectiveOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<bls12_377::G2ProjectiveOptimized> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_377::do_mul_projective_g2_optimized(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_377::do_mul_projective_g2_optimized(&base, &scalar);
 			Ok(())
 		}
 
@@ -799,13 +621,11 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base =
-				ark_bls12_377::G2Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
-					.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_377::do_mul_affine_g2(&base, &[scalar]);
+			let base = <ArkScale<ark_bls12_377::G2Affine> as Decode>::decode(&mut base.as_slice())
+				.unwrap()
+				.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_377::do_mul_affine_g2(&base, &scalar);
 			Ok(())
 		}
 
@@ -816,30 +636,24 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = bls12_377::G2AffineOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bls12_377::do_mul_affine_g2_optimized(&base, &[scalar]);
+			let base =
+				<ArkScale<bls12_377::G2AffineOptimized> as Decode>::decode(&mut base.as_slice())
+					.unwrap()
+					.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bls12_377::do_mul_affine_g2_optimized(&base, &scalar);
 			Ok(())
 		}
 
 		#[pallet::call_index(30)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_pairing(_origin: OriginFor<T>, a: Vec<u8>, b: Vec<u8>) -> DispatchResult {
-			let cursor = Cursor::new(a);
-			let a =
-				ark_bw6_761::G1Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
-					.unwrap();
-			let cursor = Cursor::new(b);
-			let b =
-				ark_bw6_761::G2Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
-					.unwrap();
+			let a = <ArkScale<ark_bw6_761::G1Affine> as Decode>::decode(&mut a.as_slice())
+				.unwrap()
+				.0;
+			let b = <ArkScale<ark_bw6_761::G2Affine> as Decode>::decode(&mut b.as_slice())
+				.unwrap()
+				.0;
 			let _ = crate::bw6_761::do_pairing(a, b);
 			Ok(())
 		}
@@ -851,20 +665,12 @@ pub mod pallet {
 			a: Vec<u8>,
 			b: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(a);
-			let a = bw6_761::G1AffineOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
-			let cursor = Cursor::new(b);
-			let b = bw6_761::G2AffineOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
+			let a = <ArkScale<bw6_761::G1AffineOptimized> as Decode>::decode(&mut a.as_slice())
+				.unwrap()
+				.0;
+			let b = <ArkScale<bw6_761::G2AffineOptimized> as Decode>::decode(&mut b.as_slice())
+				.unwrap()
+				.0;
 			let _ = crate::bw6_761::do_pairing_optimized(a, b);
 			Ok(())
 		}
@@ -873,33 +679,17 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g1(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<ark_bw6_761::BW6_761 as ark_ec::pairing::Pairing>::G1Affine::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
+			let bases =
+				<ArkScale<Vec<ark_bw6_761::G1Affine>> as Decode>::decode(&mut bases.as_slice())
 					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<ark_bw6_761::g2::Config as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
+					.0;
+			let scalars = <ArkScale<
+				Vec<<ark_bw6_761::g1::Config as CurveConfig>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap().0;
 			let _ = crate::bw6_761::do_msm_g1(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -908,33 +698,18 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g1_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<bw6_761::BW6_761Optimized as sp_ark_models::pairing::Pairing>::G1Affine::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<bw6_761::BW6_761Optimized as sp_ark_models::pairing::Pairing>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
+			let bases = <ArkScale<Vec<bw6_761::G1AffineOptimized>> as Decode>::decode(
+				&mut bases.as_slice(),
+			)
+			.unwrap()
+			.0;
+			let scalars = <ArkScale<
+				Vec<<ark_bw6_761::g2::Config as CurveConfig>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap().0;
 			let _ = crate::bw6_761::do_msm_g1_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -943,33 +718,17 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g2(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<ark_bw6_761::BW6_761 as sp_ark_models::pairing::Pairing>::G2Affine::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
+			let bases =
+				<ArkScale<Vec<ark_bw6_761::G2Affine>> as Decode>::decode(&mut bases.as_slice())
 					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<ark_bw6_761::g2::Config as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
+					.0;
+			let scalars = <ArkScale<
+				Vec<<ark_bw6_761::g2::Config as CurveConfig>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap().0;
 			let _ = crate::bw6_761::do_msm_g2(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -978,33 +737,18 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g2_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<bw6_761::BW6_761Optimized as sp_ark_models::pairing::Pairing>::G2Affine::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<sp_ark_bw6_761::g2::Config<bw6_761::HostBW6_761> as sp_ark_models::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
+			let bases = <ArkScale<Vec<bw6_761::G2AffineOptimized>> as Decode>::decode(
+				&mut bases.as_slice(),
+			)
+			.unwrap()
+			.0;
+			let scalars = <ArkScale<
+				Vec<<ark_bw6_761::g2::Config as CurveConfig>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap().0;
 			let _ = crate::bw6_761::do_msm_g2_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -1016,16 +760,13 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = ark_bw6_761::G1Projective::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<ark_bw6_761::G1Projective> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bw6_761::do_mul_projective_g1(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bw6_761::do_mul_projective_g1(&base, &scalar);
 			Ok(())
 		}
 
@@ -1036,16 +777,13 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = bw6_761::G1ProjectiveOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<bw6_761::G1ProjectiveOptimized> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bw6_761::do_mul_projective_g1_optimized(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bw6_761::do_mul_projective_g1_optimized(&base, &scalar);
 			Ok(())
 		}
 
@@ -1056,13 +794,11 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base =
-				ark_bw6_761::G1Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
-					.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bw6_761::do_mul_affine_g1(&base, &[scalar]);
+			let base = <ArkScale<ark_bw6_761::G1Affine> as Decode>::decode(&mut base.as_slice())
+				.unwrap()
+				.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bw6_761::do_mul_affine_g1(&base, &scalar);
 			Ok(())
 		}
 
@@ -1073,16 +809,12 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = bw6_761::G1AffineOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bw6_761::do_mul_affine_g1_optimized(&base, &[scalar]);
+			let base =
+				<ArkScale<bw6_761::G1AffineOptimized> as Decode>::decode(&mut base.as_slice())
+					.unwrap()
+					.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bw6_761::do_mul_affine_g1_optimized(&base, &scalar);
 			Ok(())
 		}
 
@@ -1093,16 +825,13 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = ark_bw6_761::G2Projective::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<ark_bw6_761::G2Projective> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bw6_761::do_mul_projective_g2(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bw6_761::do_mul_projective_g2(&base, &scalar);
 			Ok(())
 		}
 
@@ -1113,16 +842,13 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = bw6_761::G2ProjectiveOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<bw6_761::G2ProjectiveOptimized> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bw6_761::do_mul_projective_g2_optimized(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bw6_761::do_mul_projective_g2_optimized(&base, &scalar);
 			Ok(())
 		}
 
@@ -1133,13 +859,11 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base =
-				ark_bw6_761::G2Affine::deserialize_with_mode(cursor, Compress::No, Validate::No)
-					.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bw6_761::do_mul_affine_g2(&base, &[scalar]);
+			let base = <ArkScale<ark_bw6_761::G2Affine> as Decode>::decode(&mut base.as_slice())
+				.unwrap()
+				.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bw6_761::do_mul_affine_g2(&base, &scalar);
 			Ok(())
 		}
 
@@ -1150,314 +874,244 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = bw6_761::G2AffineOptimized::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::bw6_761::do_mul_affine_g2_optimized(&base, &[scalar]);
+			let base =
+				<ArkScale<bw6_761::G2AffineOptimized> as Decode>::decode(&mut base.as_slice())
+					.unwrap()
+					.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::bw6_761::do_mul_affine_g2_optimized(&base, &scalar);
 			Ok(())
 		}
 
 		#[pallet::call_index(44)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_msm_sw(
+		pub fn ed_on_bls12_381_bandersnatch_msm_sw(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					ark_ed_on_bls12_381::SWAffine::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<ark_ed_on_bls12_381::SWConfig as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let _ = crate::ed_on_bls12_381::do_msm_sw(&bases[..], &scalars[..]);
+			let bases =
+				<ArkScale<Vec<ark_ed_on_bls12_381_bandersnatch::SWAffine>> as Decode>::decode(
+					&mut bases.as_slice(),
+				)
+				.unwrap()
+				.0;
+			let scalars = <ArkScale<
+				Vec<<ark_ed_on_bls12_381_bandersnatch::BandersnatchConfig as CurveConfig>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap()
+			.0;
+			let _ = crate::ed_on_bls12_381_bandersnatch::do_msm_sw(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(45)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_msm_sw_optimized(
+		pub fn ed_on_bls12_381_bandersnatch_msm_sw_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					sp_ark_ed_on_bls12_381::SWAffine::<ed_on_bls12_381::HostEdOnBls12_381>::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<sp_ark_ed_on_bls12_381::SWConfig<ed_on_bls12_381::HostEdOnBls12_381> as sp_ark_models::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let _ = crate::ed_on_bls12_381::do_msm_sw_optimized(&bases[..], &scalars[..]);
+			let bases =
+				<ArkScale<Vec<ed_on_bls12_381_bandersnatch::SWAffineOptimized>> as Decode>::decode(
+					&mut bases.as_slice(),
+				)
+				.unwrap()
+				.0;
+			let scalars = <ArkScale<
+				Vec<<ark_ed_on_bls12_381_bandersnatch::BandersnatchConfig as CurveConfig>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap()
+			.0;
+			let _ =
+				crate::ed_on_bls12_381_bandersnatch::do_msm_sw_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(46)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_msm_te(
+		pub fn ed_on_bls12_381_bandersnatch_msm_te(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					ark_ed_on_bls12_381::EdwardsAffine::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<ark_ed_on_bls12_381::EdwardsConfig as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let _ = crate::ed_on_bls12_381::do_msm_te(&bases[..], &scalars[..]);
+			let bases =
+				<ArkScale<Vec<ark_ed_on_bls12_381_bandersnatch::EdwardsAffine>> as Decode>::decode(
+					&mut bases.as_slice(),
+				)
+				.unwrap()
+				.0;
+			let scalars = <ArkScale<
+				Vec<<ark_ed_on_bls12_381_bandersnatch::BandersnatchConfig as ark_ec::models::CurveConfig>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap()
+			.0;
+			let _ = crate::ed_on_bls12_381_bandersnatch::do_msm_te(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(47)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_msm_te_optimized(
+		pub fn ed_on_bls12_381_bandersnatch_msm_te_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					sp_ark_ed_on_bls12_381::EdwardsAffine::<ed_on_bls12_381::HostEdOnBls12_381>::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<sp_ark_ed_on_bls12_381::EdwardsConfig::<ed_on_bls12_381::HostEdOnBls12_381> as sp_ark_models::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let _ = crate::ed_on_bls12_381::do_msm_te_optimized(&bases[..], &scalars[..]);
+			let bases =
+				<ArkScale<Vec<ed_on_bls12_381_bandersnatch::EdwardsAffineOptimized>> as Decode>::decode(
+					&mut bases.as_slice(),
+				)
+				.unwrap()
+				.0;
+			let scalars = <ArkScale<
+				Vec<<ed_on_bls12_381_bandersnatch::BandersnatchConfig as CurveConfig>::ScalarField>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap()
+			.0;
+			let _ =
+				crate::ed_on_bls12_381_bandersnatch::do_msm_te_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
 
 		#[pallet::call_index(48)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_mul_projective_sw(
+		pub fn ed_on_bls12_381_bandersnatch_mul_projective_sw(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = sp_ark_models::short_weierstrass::Projective::<ark_ed_on_bls12_381::SWConfig>::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<ark_ed_on_bls12_381_bandersnatch::SWProjective> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::ed_on_bls12_381::do_mul_projective_sw(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::ed_on_bls12_381_bandersnatch::do_mul_projective_sw(&base, &scalar);
 			Ok(())
 		}
 
 		#[pallet::call_index(49)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_mul_projective_sw_optimized(
+		pub fn ed_on_bls12_381_bandersnatch_mul_projective_sw_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = sp_ark_ed_on_bls12_381::SWProjective::<ed_on_bls12_381::HostEdOnBls12_381>::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<ed_on_bls12_381_bandersnatch::SWProjectiveOptimized> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::ed_on_bls12_381::do_mul_projective_sw_optimized(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ =
+				crate::ed_on_bls12_381_bandersnatch::do_mul_projective_sw_optimized(&base, &scalar);
 			Ok(())
 		}
 
 		#[pallet::call_index(50)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_mul_projective_te(
+		pub fn ed_on_bls12_381_bandersnatch_mul_projective_te(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = ark_ec::twisted_edwards::Projective::<ark_ed_on_bls12_381::JubjubConfig>::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScaleProjective<ark_ed_on_bls12_381_bandersnatch::EdwardsProjective> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::ed_on_bls12_381::do_mul_projective_te(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::ed_on_bls12_381_bandersnatch::do_mul_projective_te(&base, &scalar);
 			Ok(())
 		}
 
 		#[pallet::call_index(51)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_mul_projective_te_optimized(
+		pub fn ed_on_bls12_381_bandersnatch_mul_projective_te_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = sp_ark_ed_on_bls12_381::EdwardsProjective::<
-				ed_on_bls12_381::HostEdOnBls12_381,
-			>::deserialize_with_mode(cursor, Compress::No, Validate::No)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::ed_on_bls12_381::do_mul_projective_te_optimized(&base, &[scalar]);
+			let base =
+				<ArkScaleProjective<ed_on_bls12_381_bandersnatch::EdwardsProjectiveOptimized> as Decode>::decode(
+					&mut base.as_slice(),
+				)
+				.unwrap()
+				.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ =
+				crate::ed_on_bls12_381_bandersnatch::do_mul_projective_te_optimized(&base, &scalar);
 			Ok(())
 		}
 
 		#[pallet::call_index(52)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_mul_affine_sw(
+		pub fn ed_on_bls12_381_bandersnatch_mul_affine_sw(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = ark_ed_on_bls12_381::SWAffine::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScale<ark_ed_on_bls12_381_bandersnatch::SWAffine> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::ed_on_bls12_381::do_mul_affine_sw(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::ed_on_bls12_381_bandersnatch::do_mul_affine_sw(&base, &scalar);
 			Ok(())
 		}
 
 		#[pallet::call_index(53)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_mul_affine_sw_optimized(
+		pub fn ed_on_bls12_381_bandersnatch_mul_affine_sw_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = sp_ark_ed_on_bls12_381::SWAffine::<ed_on_bls12_381::HostEdOnBls12_381>::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::ed_on_bls12_381::do_mul_affine_sw_optimized(&base, &[scalar]);
+			let base =
+				<ArkScale<ed_on_bls12_381_bandersnatch::SWAffineOptimized> as Decode>::decode(
+					&mut base.as_slice(),
+				)
+				.unwrap()
+				.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::ed_on_bls12_381_bandersnatch::do_mul_affine_sw_optimized(&base, &scalar);
 			Ok(())
 		}
 
 		#[pallet::call_index(54)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_mul_affine_te(
+		pub fn ed_on_bls12_381_bandersnatch_mul_affine_te(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = ark_ed_on_bls12_381::EdwardsAffine::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::ed_on_bls12_381::do_mul_affine_te(&base, &[scalar]);
+			let base =
+				<ArkScale<ark_ed_on_bls12_381_bandersnatch::EdwardsAffine> as Decode>::decode(
+					&mut base.as_slice(),
+				)
+				.unwrap()
+				.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::ed_on_bls12_381_bandersnatch::do_mul_affine_te(&base, &scalar);
 			Ok(())
 		}
 
 		#[pallet::call_index(55)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn ed_on_bls12_381_mul_affine_te_optimized(
+		pub fn ed_on_bls12_381_bandersnatch_mul_affine_te_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = sp_ark_ed_on_bls12_381::EdwardsAffine::<ed_on_bls12_381::HostEdOnBls12_381>::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::ed_on_bls12_381::do_mul_affine_te_optimized(&base, &[scalar]);
+			let base =
+				<ArkScale<ed_on_bls12_381_bandersnatch::EdwardsAffineOptimized> as Decode>::decode(
+					&mut base.as_slice(),
+				)
+				.unwrap()
+				.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::ed_on_bls12_381_bandersnatch::do_mul_affine_te_optimized(&base, &scalar);
 			Ok(())
 		}
 
@@ -1465,33 +1119,19 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_msm(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					ark_ed_on_bls12_377::EdwardsAffine::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<ark_ed_on_bls12_377::EdwardsConfig as ark_ec::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
+			let bases = <ArkScale<Vec<ark_ed_on_bls12_377::EdwardsAffine>> as Decode>::decode(
+				&mut bases.as_slice(),
+			)
+			.unwrap()
+			.0;
+			let scalars = <ArkScale<Vec<Fp<MontBackend<ark_ed_on_bls12_377::FrConfig, 4>, 4>>> as Decode>::decode(
+				&mut scalars.as_slice(),
+			)
+			.unwrap()
+			.0;
 			let _ = crate::ed_on_bls12_377::do_msm(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -1500,33 +1140,19 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_msm_optimized(
 			_origin: OriginFor<T>,
-			bases: Vec<Vec<u8>>,
-			scalars: Vec<Vec<u8>>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases: Vec<_> = bases
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					sp_ark_ed_on_bls12_377::EdwardsAffine::<ed_on_bls12_377::HostEdOnBls12_377>::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
-			let scalars: Vec<_> = scalars
-				.iter()
-				.map(|a| {
-					let cursor = Cursor::new(a);
-					<sp_ark_ed_on_bls12_377::EdwardsConfig<ed_on_bls12_377::HostEdOnBls12_377> as sp_ark_models::CurveConfig>::ScalarField::deserialize_with_mode(
-						cursor,
-						Compress::No,
-						Validate::No,
-					)
-					.unwrap()
-				})
-				.collect();
+			let bases = <ArkScale<Vec<ed_on_bls12_377::EdwardsAffineOptimized>> as Decode>::decode(
+				&mut bases.as_slice(),
+			)
+			.unwrap()
+			.0;
+			let scalars = <ArkScale<Vec<Fp<MontBackend<ark_ed_on_bls12_377::FrConfig, 4>, 4>>> as Decode>::decode(
+				&mut scalars.as_slice(),
+			)
+			.unwrap()
+			.0;
 			let _ = crate::ed_on_bls12_377::do_msm_optimized(&bases[..], &scalars[..]);
 			Ok(())
 		}
@@ -1538,16 +1164,14 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = ark_ed_on_bls12_377::EdwardsProjective::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::ed_on_bls12_377::do_mul_projective(&base, &[scalar]);
+			let base =
+				<ArkScaleProjective<ark_ed_on_bls12_377::EdwardsProjective> as Decode>::decode(
+					&mut base.as_slice(),
+				)
+				.unwrap()
+				.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::ed_on_bls12_377::do_mul_projective(&base, &scalar);
 			Ok(())
 		}
 
@@ -1558,14 +1182,12 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = sp_ark_ed_on_bls12_377::EdwardsProjective::<
-				ed_on_bls12_377::HostEdOnBls12_377,
-			>::deserialize_with_mode(cursor, Compress::No, Validate::No)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::ed_on_bls12_377::do_mul_projective_optimized(&base, &[scalar]);
+			let base = <ArkScaleProjective<ed_on_bls12_377::EdwardsProjectiveOptimized> as Decode>::decode(
+				&mut base.as_slice(),
+			)
+			.unwrap().0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::ed_on_bls12_377::do_mul_projective_optimized(&base, &scalar);
 			Ok(())
 		}
 
@@ -1576,16 +1198,13 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = ark_ed_on_bls12_377::EdwardsAffine::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScale<ark_ed_on_bls12_377::EdwardsAffine> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::ed_on_bls12_377::do_mul_affine(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::ed_on_bls12_377::do_mul_affine(&base, &scalar);
 			Ok(())
 		}
 
@@ -1596,16 +1215,13 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let cursor = Cursor::new(base);
-			let base = sp_ark_ed_on_bls12_377::EdwardsAffine::<ed_on_bls12_377::HostEdOnBls12_377>::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
+			let base = <ArkScale<ed_on_bls12_377::EdwardsAffineOptimized> as Decode>::decode(
+				&mut base.as_slice(),
 			)
-			.unwrap();
-			let cursor = Cursor::new(scalar);
-			let scalar = u64::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-			let _ = crate::ed_on_bls12_377::do_mul_affine_optimized(&base, &[scalar]);
+			.unwrap()
+			.0;
+			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
+			let _ = crate::ed_on_bls12_377::do_mul_affine_optimized(&base, &scalar);
 			Ok(())
 		}
 	}
