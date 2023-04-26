@@ -18,6 +18,7 @@ mod benchmarking;
 pub(crate) mod bls12_377;
 pub(crate) mod bls12_381;
 pub(crate) mod bw6_761;
+pub(crate) mod do_nothing;
 pub(crate) mod ed_on_bls12_377;
 pub(crate) mod ed_on_bls12_381_bandersnatch;
 pub(crate) mod utils;
