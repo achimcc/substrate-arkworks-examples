@@ -27,7 +27,7 @@
 | bls12_381_msm_g1_1000                                    | 194969.802  |
 | bls12_381_msm_g1_1000_optimized                          | 30158.225   |
 | bls12_381_msm_g2_10                                      | 21513.87    |
-| bls12_381_msm_g2_10_optimized                            | 2870.328    |
+| bls12_381_msm_g2_10_optimized                            | car8    |
 | bls12_381_msm_g2_1000                                    | 621769.222  |
 | bls12_381_msm_g2_1000_optimized                          | 100801.736  |
 | bls12_381_mul_projective_g1                              | 486.338     |
