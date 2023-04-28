@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 use crate::ArkScale;
 use ark_scale::hazmat::ArkScaleProjective;
 use ark_serialize::{CanonicalSerialize, Compress};

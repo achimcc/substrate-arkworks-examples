@@ -6,21 +6,86 @@ use crate::{
 		generate_scalar_args_projective,
 	},
 };
+use ark_serialize::{CanonicalDeserialize, Compress, Validate};
 use codec::Encode;
 use frame_support::assert_ok;
 
-// #[test]
-// fn groth16_verification() {
-// 	new_test_ext().execute_with(|| {
-// 		assert_ok!(TemplateModule::groth16_verification(RuntimeOrigin::signed(1)));
-// 	});
-// }
-// #[test]
-// fn groth16_verificaton_optimized() {
-// 	new_test_ext().execute_with(|| {
-// 		assert_ok!(TemplateModule::groth16_verification_optimized(RuntimeOrigin::signed(1)));
-// 	});
-// }
+#[test]
+fn groth16_verification() {
+	let vk = <ark_groth16::Groth16<ark_bls12_381::Bls12_381> as ark_snark::SNARK<
+		ark_bls12_381::Fr,
+	>>::VerifyingKey::deserialize_with_mode(
+		crate::benchmarking::VK_SERIALIZED,
+		Compress::Yes,
+		Validate::No,
+	)
+	.unwrap();
+	let vk = crate::utils::serialize_argument(vk);
+
+	let c =
+		ark_ff::Fp::<ark_ff::MontBackend<ark_bls12_381::FrConfig, 4>, 4>::deserialize_with_mode(
+			crate::benchmarking::C_SERIALIZED,
+			Compress::Yes,
+			Validate::No,
+		)
+		.unwrap();
+	let c = crate::utils::serialize_argument(c);
+
+	let proof = <ark_groth16::Groth16<ark_bls12_381::Bls12_381> as ark_snark::SNARK<
+		ark_bls12_381::Fr,
+	>>::Proof::deserialize_with_mode(
+		crate::benchmarking::PROOF_SERIALIZED,
+		Compress::Yes,
+		Validate::No,
+	)
+	.unwrap();
+	let proof = crate::utils::serialize_argument(proof);
+	new_test_ext().execute_with(|| {
+		assert_ok!(TemplateModule::groth16_verification(RuntimeOrigin::signed(1), vk, c, proof));
+	});
+}
+
+#[test]
+fn groth16_verificaton_optimized() {
+	new_test_ext().execute_with(|| {
+		let vk = <ark_groth16::Groth16<bls12_381::Bls12_381Optimized> as ark_snark::SNARK<
+			crate::bls12_381::BlsFrOptimized,
+		>>::VerifyingKey::deserialize_with_mode(
+			crate::benchmarking::VK_SERIALIZED,
+			Compress::Yes,
+			Validate::No,
+		)
+		.unwrap();
+		let vk = crate::utils::serialize_argument(vk);
+
+		let c =
+		ark_ff::Fp::<ark_ff::MontBackend<sp_ark_bls12_381::FrConfig, 4>, 4>::deserialize_with_mode(
+			crate::benchmarking::C_SERIALIZED,
+			Compress::Yes,
+			Validate::No,
+		)
+		.unwrap();
+		let c = crate::utils::serialize_argument(c);
+
+		let proof =
+			<ark_groth16::Groth16<crate::bls12_381::Bls12_381Optimized> as ark_snark::SNARK<
+				sp_ark_bls12_381::Fr,
+			>>::Proof::deserialize_with_mode(
+				crate::benchmarking::PROOF_SERIALIZED,
+				Compress::Yes,
+				Validate::No,
+			)
+			.unwrap();
+		let proof = crate::utils::serialize_argument(proof);
+		assert_ok!(TemplateModule::groth16_verification_optimized(
+			RuntimeOrigin::signed(1),
+			vk,
+			c,
+			proof
+		));
+	});
+}
+
 #[test]
 fn pairing_bls12_381() {
 	new_test_ext().execute_with(|| {
@@ -65,7 +130,7 @@ fn msm_g1_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
 		let (bases, scalars) = generate_msm_args::<
 			sp_ark_models::short_weierstrass::Projective<
-				sp_ark_bls12_381::g1::Config<bls12_381::HostBls12_381>,
+				sp_ark_bls12_381::g1::Config<sp_ark_bls12_381::curves::Host>,
 			>,
 		>(10);
 		assert_ok!(TemplateModule::bls12_381_msm_g1_optimized(
@@ -93,7 +158,7 @@ fn msm_g2_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
 		let (bases, scalars) = generate_msm_args::<
 			sp_ark_models::short_weierstrass::Projective<
-				sp_ark_bls12_381::g2::Config<bls12_381::HostBls12_381>,
+				sp_ark_bls12_381::g2::Config<sp_ark_bls12_381::curves::Host>,
 			>,
 		>(10);
 		assert_ok!(TemplateModule::bls12_381_msm_g2_optimized(
@@ -230,7 +295,7 @@ fn msm_g1_bls12_377() {
 fn msm_g1_bls12_377_optimized() {
 	let (bases, scalars) = generate_msm_args::<
 		ark_ec::short_weierstrass::Projective<
-			sp_ark_bls12_377::g1::Config<bls12_377::HostBls12_377>,
+			sp_ark_bls12_377::g1::Config<sp_ark_bls12_377::curves::Host>,
 		>,
 	>(10);
 	new_test_ext().execute_with(|| {
@@ -257,7 +322,7 @@ fn msm_g2_bls12_377() {
 fn msm_g2_bls12_377_optimized() {
 	let (bases, scalars) = generate_msm_args::<
 		ark_ec::short_weierstrass::Projective<
-			sp_ark_bls12_377::g2::Config<bls12_377::HostBls12_377>,
+			sp_ark_bls12_377::g2::Config<sp_ark_bls12_377::curves::Host>,
 		>,
 	>(10);
 	new_test_ext().execute_with(|| {
@@ -395,7 +460,9 @@ fn msm_g1_bw6_761() {
 fn msm_g1_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
 		let (bases, scalars) = generate_msm_args::<
-			ark_ec::short_weierstrass::Projective<sp_ark_bw6_761::g1::Config<bw6_761::HostBW6_761>>,
+			ark_ec::short_weierstrass::Projective<
+				sp_ark_bw6_761::g1::Config<sp_ark_bw6_761::curves::Host>,
+			>,
 		>(10);
 		assert_ok!(TemplateModule::bw6_761_msm_g1_optimized(
 			RuntimeOrigin::signed(1),
@@ -420,7 +487,9 @@ fn msm_g2_bw6_761() {
 fn msm_g2_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
 		let (bases, scalars) = generate_msm_args::<
-			ark_ec::short_weierstrass::Projective<sp_ark_bw6_761::g2::Config<bw6_761::HostBW6_761>>,
+			ark_ec::short_weierstrass::Projective<
+				sp_ark_bw6_761::g2::Config<sp_ark_bw6_761::curves::Host>,
+			>,
 		>(10);
 		assert_ok!(TemplateModule::bw6_761_msm_g2_optimized(
 			RuntimeOrigin::signed(1),
@@ -532,9 +601,8 @@ fn mul_affine_g2_bw6_761_optimized() {
 #[test]
 fn msm_ed_on_bls12_377() {
 	new_test_ext().execute_with(|| {
-		let (bases, scalars) = generate_msm_args::<
-			sp_ark_ed_on_bls12_377::EdwardsProjective<ed_on_bls12_377::HostEdOnBls12_377>,
-		>(10);
+		let (bases, scalars) =
+			generate_msm_args::<sp_ark_ed_on_bls12_377::curves::EdwardsProjective>(10);
 		assert_ok!(TemplateModule::ed_on_bls12_377_msm(
 			RuntimeOrigin::signed(1),
 			bases.encode(),
@@ -545,9 +613,8 @@ fn msm_ed_on_bls12_377() {
 #[test]
 fn msm_ed_on_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
-		let (bases, scalars) = generate_msm_args::<
-			sp_ark_ed_on_bls12_377::EdwardsProjective<ed_on_bls12_377::HostEdOnBls12_377>,
-		>(10);
+		let (bases, scalars) =
+			generate_msm_args::<sp_ark_ed_on_bls12_377::curves::EdwardsProjective>(10);
 		assert_ok!(TemplateModule::ed_on_bls12_377_msm_optimized(
 			RuntimeOrigin::signed(1),
 			bases.encode(),
@@ -617,13 +684,8 @@ fn msm_sw_ed_on_bls12_381_bandersnatch() {
 #[test]
 fn msm_sw_ed_on_bls12_381_bandersnatch_optimized() {
 	new_test_ext().execute_with(|| {
-		let (bases, scalars) = generate_msm_args::<
-			sp_ark_models::short_weierstrass::Projective<
-				sp_ark_ed_on_bls12_381_bandersnatch::EdwardsConfig<
-					ed_on_bls12_381_bandersnatch::HostEdOnBls12_381Bandersnatch,
-				>,
-			>,
-		>(10);
+		let (bases, scalars) =
+			generate_msm_args::<ed_on_bls12_381_bandersnatch::SWProjectiveOptimized>(10);
 		assert_ok!(TemplateModule::ed_on_bls12_381_bandersnatch_msm_sw_optimized(
 			RuntimeOrigin::signed(1),
 			bases.encode(),
@@ -682,11 +744,8 @@ fn msm_te_ed_on_bls12_381_bandersnatch() {
 #[test]
 fn msm_te_ed_on_bls12_381_bandersnatch_optimized() {
 	new_test_ext().execute_with(|| {
-		let (bases, scalars) = generate_msm_args::<
-			sp_ark_ed_on_bls12_381_bandersnatch::EdwardsProjective<
-				ed_on_bls12_381_bandersnatch::HostEdOnBls12_381Bandersnatch,
-			>,
-		>(10);
+		let (bases, scalars) =
+			generate_msm_args::<ed_on_bls12_381_bandersnatch::EdwardsProjectiveOptimized>(10);
 		assert_ok!(TemplateModule::ed_on_bls12_381_bandersnatch_msm_te_optimized(
 			RuntimeOrigin::signed(1),
 			bases.encode(),
@@ -709,8 +768,9 @@ fn mul_projective_te_ed_on_bls12_381_bandersnatch() {
 }
 #[test]
 fn mul_projective_te_ed_on_bls12_381_bandersnatch_optimized() {
-	let (base, scalar) =
-		generate_scalar_args_projective::<ed_on_bls12_381_bandersnatch::SWProjectiveOptimized>();
+	let (base, scalar) = generate_scalar_args_projective::<
+		ed_on_bls12_381_bandersnatch::EdwardsProjectiveOptimized,
+	>();
 	new_test_ext().execute_with(|| {
 		assert_ok!(TemplateModule::ed_on_bls12_381_bandersnatch_mul_projective_te_optimized(
 			RuntimeOrigin::signed(1),

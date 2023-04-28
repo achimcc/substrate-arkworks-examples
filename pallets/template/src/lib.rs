@@ -15,6 +15,8 @@ mod tests;
 #[cfg(feature = "runtime-benchmarks")]
 mod benchmarking;
 
+#[cfg(test)]
+pub(crate) mod benchmarking;
 pub(crate) mod bls12_377;
 pub(crate) mod bls12_381;
 pub(crate) mod bw6_761;
@@ -964,7 +966,11 @@ pub mod pallet {
 				.unwrap()
 				.0;
 			let scalars = <ArkScale<
-				Vec<<ed_on_bls12_381_bandersnatch::BandersnatchConfig as CurveConfig>::ScalarField>,
+				Vec<
+					<ed_on_bls12_381_bandersnatch::BandersnatchConfig<
+						sp_ark_ed_on_bls12_381_bandersnatch::curves::Host,
+					> as CurveConfig>::ScalarField,
+				>,
 			> as Decode>::decode(&mut scalars.as_slice())
 			.unwrap()
 			.0;
