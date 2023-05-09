@@ -37,6 +37,7 @@ ark-snark = { version = "0.4.0", default-features = false }
 ark-groth16 = { version = "0.4.0", features = [ "r1cs" ], default-features = false }
 ark-crypto-primitives = { version = "0.4.0", features = [ "r1cs", "snark" ], default-features = false } 
 ark-scale = { git = "https://github.com/w3f/ark-scale", features = ["hazmat"], default-features = false }
+sp-io =  { git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration", default-features = false }
 
 [dev-dependencies]
 ark-algebra-bench-templates = { version = "0.4.0", default-features = false }
@@ -71,6 +72,7 @@ std = [
 	"ark-scale/std",
 	"sp-core/std",
 	"sp-runtime/std",
+	"sp-io/std",
 ]
 runtime-benchmarks = ["frame-benchmarking/runtime-benchmarks"]
 try-runtime = ["frame-support/try-runtime"]

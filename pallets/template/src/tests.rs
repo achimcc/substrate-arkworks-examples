@@ -289,7 +289,7 @@ fn msm_g1_bls12_377() {
 }
 #[test]
 fn msm_g1_bls12_377_optimized() {
-	let (bases, scalars) = generate_msm_args::<ark_ec::short_weierstrass::Projective>(10);
+	let (bases, scalars) = generate_msm_args::<sp_bls12_377::curves::g1::G1Projective>(10);
 	new_test_ext().execute_with(|| {
 		assert_ok!(TemplateModule::bls12_377_msm_g1_optimized(
 			RuntimeOrigin::signed(1),
@@ -312,7 +312,7 @@ fn msm_g2_bls12_377() {
 }
 #[test]
 fn msm_g2_bls12_377_optimized() {
-	let (bases, scalars) = generate_msm_args::<ark_ec::short_weierstrass::Projective>(10);
+	let (bases, scalars) = generate_msm_args::<sp_bls12_377::g2::G2Projective>(10);
 	new_test_ext().execute_with(|| {
 		assert_ok!(TemplateModule::bls12_377_msm_g2_optimized(
 			RuntimeOrigin::signed(1),
