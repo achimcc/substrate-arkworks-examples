@@ -966,11 +966,7 @@ pub mod pallet {
 				.unwrap()
 				.0;
 			let scalars = <ArkScale<
-				Vec<
-					<ed_on_bls12_381_bandersnatch::BandersnatchConfig<
-						sp_ark_ed_on_bls12_381_bandersnatch::curves::Host,
-					> as CurveConfig>::ScalarField,
-				>,
+				Vec<<ed_on_bls12_381_bandersnatch::BandersnatchConfig as CurveConfig>::ScalarField>,
 			> as Decode>::decode(&mut scalars.as_slice())
 			.unwrap()
 			.0;

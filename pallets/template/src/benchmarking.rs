@@ -127,7 +127,7 @@ benchmarks! {
 
 	bls12_377_msm_g1_10_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_bls12_377::curves::g1::G1Projective>(10);
+		let (bases, scalars) = generate_msm_args::<sp_bls12_377::curves::g1::G1Projective>(10);
 			}: bls12_377_msm_g1_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	bls12_377_msm_g1_1000 {
@@ -137,7 +137,7 @@ benchmarks! {
 
 	bls12_377_msm_g1_1000_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_bls12_377::curves::g1::G1Projective>(1000);
+		let (bases, scalars) = generate_msm_args::<sp_bls12_377::curves::g1::G1Projective>(1000);
 			}: bls12_377_msm_g1_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	bls12_377_msm_g2_10 {
@@ -147,7 +147,7 @@ benchmarks! {
 
 	bls12_377_msm_g2_10_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_bls12_377::curves::g2::G2Projective>(10);
+		let (bases, scalars) = generate_msm_args::<sp_bls12_377::curves::g2::G2Projective>(10);
 	}: bls12_377_msm_g2_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	bls12_377_msm_g2_1000 {
@@ -157,7 +157,7 @@ benchmarks! {
 
 	bls12_377_msm_g2_1000_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_bls12_377::curves::g2::G2Projective>(1000);
+		let (bases, scalars) = generate_msm_args::<sp_bls12_377::curves::g2::G2Projective>(1000);
 			}: bls12_377_msm_g2_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	bls12_377_mul_projective_g1 {
@@ -167,7 +167,7 @@ benchmarks! {
 
 	bls12_377_mul_projective_g1_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args_projective::<sp_ark_bls12_377::curves::g1::G1Projective>();
+		let (base, scalar) = generate_scalar_args_projective::<sp_bls12_377::curves::g1::G1Projective>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	bls12_377_mul_affine_g1 {
@@ -177,7 +177,7 @@ benchmarks! {
 
 	bls12_377_mul_affine_g1_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args::<sp_ark_bls12_377::curves::g1::G1Affine>();
+		let (base, scalar) = generate_scalar_args::<sp_bls12_377::curves::g1::G1Affine>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	bls12_377_mul_projective_g2 {
@@ -187,7 +187,7 @@ benchmarks! {
 
 	bls12_377_mul_projective_g2_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args_projective::<sp_ark_bls12_377::curves::g2::G2Projective>();
+		let (base, scalar) = generate_scalar_args_projective::<sp_bls12_377::curves::g2::G2Projective>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	bls12_377_mul_affine_g2 {
@@ -197,7 +197,7 @@ benchmarks! {
 
 	bls12_377_mul_affine_g2_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args::<sp_ark_bls12_377::curves::g2::G2Affine>();
+		let (base, scalar) = generate_scalar_args::<sp_bls12_377::curves::g2::G2Affine>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	bls12_381_pairing {
@@ -217,7 +217,7 @@ benchmarks! {
 
 	bls12_381_msm_g1_10_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_bls12_381::curves::g1::G1Projective>(10);
+		let (bases, scalars) = generate_msm_args::<sp_bls12_381::curves::g1::G1Projective>(10);
 	}: bls12_381_msm_g1_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	bls12_381_msm_g1_1000 {
@@ -227,7 +227,7 @@ benchmarks! {
 
 	bls12_381_msm_g1_1000_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_bls12_381::curves::g1::G1Projective>(1000);
+		let (bases, scalars) = generate_msm_args::<sp_bls12_381::curves::g1::G1Projective>(1000);
 			}: bls12_381_msm_g1_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	bls12_381_msm_g2_10 {
@@ -237,7 +237,7 @@ benchmarks! {
 
 	bls12_381_msm_g2_10_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_bls12_381::curves::g2::G2Projective>(10);
+		let (bases, scalars) = generate_msm_args::<sp_bls12_381::curves::g2::G2Projective>(10);
 			}: bls12_381_msm_g2_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	bls12_381_msm_g2_1000 {
@@ -247,7 +247,7 @@ benchmarks! {
 
 	bls12_381_msm_g2_1000_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_bls12_381::curves::g2::G2Projective>(1000);
+		let (bases, scalars) = generate_msm_args::<sp_bls12_381::curves::g2::G2Projective>(1000);
 			}: bls12_381_msm_g2_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	bls12_381_mul_projective_g1 {
@@ -257,7 +257,7 @@ benchmarks! {
 
 	bls12_381_mul_projective_g1_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args_projective::<sp_ark_bls12_381::curves::g1::G1Projective>();
+		let (base, scalar) = generate_scalar_args_projective::<sp_bls12_381::curves::g1::G1Projective>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	bls12_381_mul_affine_g1 {
@@ -267,7 +267,7 @@ benchmarks! {
 
 	bls12_381_mul_affine_g1_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args::<sp_ark_bls12_381::curves::g1::G1Affine>();
+		let (base, scalar) = generate_scalar_args::<sp_bls12_381::curves::g1::G1Affine>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	bls12_381_mul_projective_g2 {
@@ -277,7 +277,7 @@ benchmarks! {
 
 	bls12_381_mul_projective_g2_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args_projective::<sp_ark_bls12_381::curves::g2::G2Projective>();
+		let (base, scalar) = generate_scalar_args_projective::<sp_bls12_381::curves::g2::G2Projective>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	bls12_381_mul_affine_g2 {
@@ -287,7 +287,7 @@ benchmarks! {
 
 	bls12_381_mul_affine_g2_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args::<sp_ark_bls12_381::curves::g2::G2Affine>();
+		let (base, scalar) = generate_scalar_args::<sp_bls12_381::curves::g2::G2Affine>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	bw6_761_pairing {
@@ -307,7 +307,7 @@ benchmarks! {
 
 	bw6_761_msm_g1_10_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_bw6_761::curves::g1::G1Projective>(10);
+		let (bases, scalars) = generate_msm_args::<sp_bw6_761::curves::g1::G1Projective>(10);
 			}: bw6_761_msm_g1_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	bw6_761_msm_g1_1000 {
@@ -317,7 +317,7 @@ benchmarks! {
 
 	bw6_761_msm_g1_1000_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_bw6_761::curves::g1::G1Projective>(1000);
+		let (bases, scalars) = generate_msm_args::<sp_bw6_761::curves::g1::G1Projective>(1000);
 			}: bw6_761_msm_g1_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	bw6_761_msm_g2_10 {
@@ -327,7 +327,7 @@ benchmarks! {
 
 	bw6_761_msm_g2_10_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_bw6_761::curves::g2::G2Projective>(10);
+		let (bases, scalars) = generate_msm_args::<sp_bw6_761::curves::g2::G2Projective>(10);
 			}: bw6_761_msm_g2_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	bw6_761_msm_g2_1000 {
@@ -337,7 +337,7 @@ benchmarks! {
 
 	bw6_761_msm_g2_1000_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_bw6_761::curves::g2::G2Projective>(1000);
+		let (bases, scalars) = generate_msm_args::<sp_bw6_761::curves::g2::G2Projective>(1000);
 			}: bw6_761_msm_g2_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	bw6_761_mul_projective_g1 {
@@ -347,7 +347,7 @@ benchmarks! {
 
 	bw6_761_mul_projective_g1_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args_projective::<sp_ark_bw6_761::curves::g1::G1Projective>();
+		let (base, scalar) = generate_scalar_args_projective::<sp_bw6_761::curves::g1::G1Projective>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	bw6_761_mul_affine_g1 {
@@ -357,7 +357,7 @@ benchmarks! {
 
 	bw6_761_mul_affine_g1_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args::<sp_ark_bw6_761::curves::g1::G1Affine>();
+		let (base, scalar) = generate_scalar_args::<sp_bw6_761::curves::g1::G1Affine>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	bw6_761_mul_projective_g2 {
@@ -367,7 +367,7 @@ benchmarks! {
 
 	bw6_761_mul_projective_g2_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args_projective::<sp_ark_bw6_761::curves::g2::G2Projective>();
+		let (base, scalar) = generate_scalar_args_projective::<sp_bw6_761::curves::g2::G2Projective>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	bw6_761_mul_affine_g2 {
@@ -377,7 +377,7 @@ benchmarks! {
 
 	bw6_761_mul_affine_g2_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args::<sp_ark_bw6_761::curves::g2::G2Affine>();
+		let (base, scalar) = generate_scalar_args::<sp_bw6_761::curves::g2::G2Affine>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	ed_on_bls12_377_msm_10 {
@@ -387,7 +387,7 @@ benchmarks! {
 
 	ed_on_bls12_377_msm_10_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_ed_on_bls12_377::curves::EdwardsProjective>(10);
+		let (bases, scalars) = generate_msm_args::<sp_ed_on_bls12_377::curves::EdwardsProjective>(10);
 			}: ed_on_bls12_377_msm_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	ed_on_bls12_377_msm_1000 {
@@ -397,7 +397,7 @@ benchmarks! {
 
 	ed_on_bls12_377_msm_optimized_1000 {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_ed_on_bls12_377::curves::EdwardsProjective>(1000);
+		let (bases, scalars) = generate_msm_args::<sp_ed_on_bls12_377::curves::EdwardsProjective>(1000);
 			}: ed_on_bls12_377_msm_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	ed_on_bls12_377_mul_projective {
@@ -407,7 +407,7 @@ benchmarks! {
 
 	ed_on_bls12_377_mul_projective_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args_projective::<sp_ark_ed_on_bls12_377::curves::EdwardsProjective>();
+		let (base, scalar) = generate_scalar_args_projective::<sp_ed_on_bls12_377::curves::EdwardsProjective>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	ed_on_bls12_377_mul_affine {
@@ -417,7 +417,7 @@ benchmarks! {
 
 	ed_on_bls12_377_mul_affine_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args::<sp_ark_ed_on_bls12_377::curves::EdwardsAffine>();
+		let (base, scalar) = generate_scalar_args::<sp_ed_on_bls12_377::curves::EdwardsAffine>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	ed_on_bls12_381_bandersnatch_msm_sw_10 {
@@ -427,7 +427,7 @@ benchmarks! {
 
 	ed_on_bls12_381_bandersnatch_msm_sw_10_optimized{
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_ed_on_bls12_381_bandersnatch::curves::SWProjective>(10);
+		let (bases, scalars) = generate_msm_args::<sp_ed_on_bls12_381_bandersnatch::curves::SWProjective>(10);
 			}: ed_on_bls12_381_bandersnatch_msm_sw_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	ed_on_bls12_381_bandersnatch_msm_sw_1000 {
@@ -437,7 +437,7 @@ benchmarks! {
 
 	ed_on_bls12_381_bandersnatch_msm_sw_1000_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_ed_on_bls12_381_bandersnatch::curves::SWProjective>(1000);
+		let (bases, scalars) = generate_msm_args::<sp_ed_on_bls12_381_bandersnatch::curves::SWProjective>(1000);
 			}: ed_on_bls12_381_bandersnatch_msm_sw_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	ed_on_bls12_381_bandersnatch_mul_projective_sw {
@@ -452,7 +452,7 @@ benchmarks! {
 
 	ed_on_bls12_381_bandersnatch_msm_te_10_optimized{
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_ed_on_bls12_381_bandersnatch::curves::EdwardsProjective>(10);
+		let (bases, scalars) = generate_msm_args::<sp_ed_on_bls12_381_bandersnatch::curves::EdwardsProjective>(10);
 			}: ed_on_bls12_381_bandersnatch_msm_te_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	ed_on_bls12_381_bandersnatch_msm_te_1000 {
@@ -462,12 +462,12 @@ benchmarks! {
 
 	ed_on_bls12_381_bandersnatch_msm_te_1000_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (bases, scalars) = generate_msm_args::<sp_ark_ed_on_bls12_381_bandersnatch::curves::EdwardsProjective>(1000);
+		let (bases, scalars) = generate_msm_args::<sp_ed_on_bls12_381_bandersnatch::curves::EdwardsProjective>(1000);
 			}: ed_on_bls12_381_bandersnatch_msm_te_optimized(RawOrigin::Signed(caller), bases.encode(), scalars.encode())
 
 	ed_on_bls12_381_bandersnatch_mul_projective_sw_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args_projective::<sp_ark_ed_on_bls12_381_bandersnatch::curves::SWProjective>();
+		let (base, scalar) = generate_scalar_args_projective::<sp_ed_on_bls12_381_bandersnatch::curves::SWProjective>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	ed_on_bls12_381_bandersnatch_mul_affine_sw {
@@ -477,7 +477,7 @@ benchmarks! {
 
 	ed_on_bls12_381_bandersnatch_mul_affine_sw_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args::<sp_ark_ed_on_bls12_381_bandersnatch::curves::SWAffine>();
+		let (base, scalar) = generate_scalar_args::<sp_ed_on_bls12_381_bandersnatch::curves::SWAffine>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	ed_on_bls12_381_bandersnatch_mul_projective_te {
@@ -487,7 +487,7 @@ benchmarks! {
 
 	ed_on_bls12_381_bandersnatch_mul_projective_te_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args_projective::<sp_ark_ed_on_bls12_381_bandersnatch::curves::EdwardsProjective>();
+		let (base, scalar) = generate_scalar_args_projective::<sp_ed_on_bls12_381_bandersnatch::curves::EdwardsProjective>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	ed_on_bls12_381_bandersnatch_mul_affine_te {
@@ -497,7 +497,7 @@ benchmarks! {
 
 	ed_on_bls12_381_bandersnatch_mul_affine_te_optimized {
 		let caller: T::AccountId = whitelisted_caller();
-		let (base, scalar) = generate_scalar_args::<sp_ark_ed_on_bls12_381_bandersnatch::curves::EdwardsAffine>();
+		let (base, scalar) = generate_scalar_args::<sp_ed_on_bls12_381_bandersnatch::curves::EdwardsAffine>();
 	}: _(RawOrigin::Signed(caller), base.encode(), scalar.encode())
 
 	impl_benchmark_test_suite!(Template, crate::mock::new_test_ext(), crate::mock::Test);

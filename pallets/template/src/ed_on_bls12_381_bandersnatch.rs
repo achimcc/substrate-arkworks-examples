@@ -1,10 +1,10 @@
 use ark_std::io::Error;
-pub use sp_ark_ed_on_bls12_381_bandersnatch::curves::{
+use sp_ark_models::short_weierstrass::SWCurveConfig;
+pub use sp_ed_on_bls12_381_bandersnatch::curves::{
 	BandersnatchConfig, EdwardsAffine as EdwardsAffineOptimized,
 	EdwardsProjective as EdwardsProjectiveOptimized, SWAffine as SWAffineOptimized,
 	SWProjective as SWProjectiveOptimized,
 };
-use sp_ark_models::short_weierstrass::SWCurveConfig;
 
 pub fn do_msm_sw(
 	bases: &[sp_ark_models::short_weierstrass::Affine<
@@ -19,10 +19,10 @@ pub fn do_msm_sw(
 
 pub fn do_msm_sw_optimized(
 	bases: &[SWAffineOptimized],
-	scalars: &[<sp_ark_ed_on_bls12_381_bandersnatch::SWConfig as sp_ark_models::CurveConfig>::ScalarField],
+	scalars: &[<sp_ed_on_bls12_381_bandersnatch::SWConfig as sp_ark_models::CurveConfig>::ScalarField],
 ) -> Result<(), Error> {
 	let _out =
-		<sp_ark_ed_on_bls12_381_bandersnatch::EdwardsConfig as SWCurveConfig>::msm(bases, scalars);
+		<sp_ed_on_bls12_381_bandersnatch::EdwardsConfig as SWCurveConfig>::msm(bases, scalars);
 	Ok(())
 }
 
@@ -38,11 +38,9 @@ pub fn do_msm_te(
 
 pub fn do_msm_te_optimized(
 	bases: &[EdwardsAffineOptimized],
-	scalars: &[<sp_ark_ed_on_bls12_381_bandersnatch::EdwardsConfig as ark_ec::CurveConfig>::ScalarField],
+	scalars: &[<sp_ed_on_bls12_381_bandersnatch::EdwardsConfig as ark_ec::CurveConfig>::ScalarField],
 ) -> Result<(), Error> {
-	let _out = <sp_ark_ed_on_bls12_381_bandersnatch::BandersnatchConfig<
-		sp_ark_ed_on_bls12_381_bandersnatch::curves::Host,
-	> as sp_ark_models::twisted_edwards::TECurveConfig>::msm(bases, scalars);
+	let _out = <sp_ed_on_bls12_381_bandersnatch::BandersnatchConfig as sp_ark_models::twisted_edwards::TECurveConfig>::msm(bases, scalars);
 	Ok(())
 }
 
@@ -69,9 +67,8 @@ pub fn do_mul_affine_te(
 }
 
 pub fn do_mul_affine_sw_optimized(base: &SWAffineOptimized, scalar: &[u64]) -> Result<(), Error> {
-	let _out = <sp_ark_ed_on_bls12_381_bandersnatch::EdwardsConfig as SWCurveConfig>::mul_affine(
-		base, scalar,
-	);
+	let _out =
+		<sp_ed_on_bls12_381_bandersnatch::EdwardsConfig as SWCurveConfig>::mul_affine(base, scalar);
 	Ok(())
 }
 
@@ -80,7 +77,7 @@ pub fn do_mul_affine_te_optimized(
 	scalar: &[u64],
 ) -> Result<(), Error> {
 	let _out =
-		<sp_ark_ed_on_bls12_381_bandersnatch::EdwardsConfig as sp_ark_models::twisted_edwards::TECurveConfig>::mul_affine(
+		<sp_ed_on_bls12_381_bandersnatch::EdwardsConfig as sp_ark_models::twisted_edwards::TECurveConfig>::mul_affine(
 			base,
 			scalar,
 		);
@@ -103,10 +100,9 @@ pub fn do_mul_projective_sw_optimized(
 	base: &SWProjectiveOptimized,
 	scalar: &[u64],
 ) -> Result<(), Error> {
-	let _out =
-		<sp_ark_ed_on_bls12_381_bandersnatch::EdwardsConfig as SWCurveConfig>::mul_projective(
-			base, scalar,
-		);
+	let _out = <sp_ed_on_bls12_381_bandersnatch::EdwardsConfig as SWCurveConfig>::mul_projective(
+		base, scalar,
+	);
 	Ok(())
 }
 
@@ -128,7 +124,7 @@ pub fn do_mul_projective_te_optimized(
 	scalar: &[u64],
 ) -> Result<(), Error> {
 	let _out =
-	<sp_ark_ed_on_bls12_381_bandersnatch::EdwardsConfig as sp_ark_models::twisted_edwards::TECurveConfig>::mul_projective(
+	<sp_ed_on_bls12_381_bandersnatch::EdwardsConfig as sp_ark_models::twisted_edwards::TECurveConfig>::mul_projective(
 			base,
 			scalar,
 		);

@@ -59,17 +59,17 @@ fn groth16_verificaton_optimized() {
 		let vk = crate::utils::serialize_argument(vk);
 
 		let c =
-		ark_ff::Fp::<ark_ff::MontBackend<sp_ark_bls12_381::FrConfig, 4>, 4>::deserialize_with_mode(
-			crate::benchmarking::C_SERIALIZED,
-			Compress::Yes,
-			Validate::No,
-		)
-		.unwrap();
+			ark_ff::Fp::<ark_ff::MontBackend<sp_bls12_381::FrConfig, 4>, 4>::deserialize_with_mode(
+				crate::benchmarking::C_SERIALIZED,
+				Compress::Yes,
+				Validate::No,
+			)
+			.unwrap();
 		let c = crate::utils::serialize_argument(c);
 
 		let proof =
 			<ark_groth16::Groth16<crate::bls12_381::Bls12_381Optimized> as ark_snark::SNARK<
-				sp_ark_bls12_381::Fr,
+				sp_bls12_381::Fr,
 			>>::Proof::deserialize_with_mode(
 				crate::benchmarking::PROOF_SERIALIZED,
 				Compress::Yes,
@@ -129,9 +129,7 @@ fn msm_g1_bls12_381() {
 fn msm_g1_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
 		let (bases, scalars) = generate_msm_args::<
-			sp_ark_models::short_weierstrass::Projective<
-				sp_ark_bls12_381::g1::Config<sp_ark_bls12_381::curves::Host>,
-			>,
+			sp_ark_models::short_weierstrass::Projective<sp_bls12_381::g1::Config>,
 		>(10);
 		assert_ok!(TemplateModule::bls12_381_msm_g1_optimized(
 			RuntimeOrigin::signed(1),
@@ -157,9 +155,7 @@ fn msm_g2_bls12_381() {
 fn msm_g2_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
 		let (bases, scalars) = generate_msm_args::<
-			sp_ark_models::short_weierstrass::Projective<
-				sp_ark_bls12_381::g2::Config<sp_ark_bls12_381::curves::Host>,
-			>,
+			sp_ark_models::short_weierstrass::Projective<sp_bls12_381::g2::Config>,
 		>(10);
 		assert_ok!(TemplateModule::bls12_381_msm_g2_optimized(
 			RuntimeOrigin::signed(1),
@@ -293,11 +289,7 @@ fn msm_g1_bls12_377() {
 }
 #[test]
 fn msm_g1_bls12_377_optimized() {
-	let (bases, scalars) = generate_msm_args::<
-		ark_ec::short_weierstrass::Projective<
-			sp_ark_bls12_377::g1::Config<sp_ark_bls12_377::curves::Host>,
-		>,
-	>(10);
+	let (bases, scalars) = generate_msm_args::<ark_ec::short_weierstrass::Projective>(10);
 	new_test_ext().execute_with(|| {
 		assert_ok!(TemplateModule::bls12_377_msm_g1_optimized(
 			RuntimeOrigin::signed(1),
@@ -320,11 +312,7 @@ fn msm_g2_bls12_377() {
 }
 #[test]
 fn msm_g2_bls12_377_optimized() {
-	let (bases, scalars) = generate_msm_args::<
-		ark_ec::short_weierstrass::Projective<
-			sp_ark_bls12_377::g2::Config<sp_ark_bls12_377::curves::Host>,
-		>,
-	>(10);
+	let (bases, scalars) = generate_msm_args::<ark_ec::short_weierstrass::Projective>(10);
 	new_test_ext().execute_with(|| {
 		assert_ok!(TemplateModule::bls12_377_msm_g2_optimized(
 			RuntimeOrigin::signed(1),
@@ -459,11 +447,8 @@ fn msm_g1_bw6_761() {
 #[test]
 fn msm_g1_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
-		let (bases, scalars) = generate_msm_args::<
-			ark_ec::short_weierstrass::Projective<
-				sp_ark_bw6_761::g1::Config<sp_ark_bw6_761::curves::Host>,
-			>,
-		>(10);
+		let (bases, scalars) =
+			generate_msm_args::<ark_ec::short_weierstrass::Projective<sp_bw6_761::g1::Config>>(10);
 		assert_ok!(TemplateModule::bw6_761_msm_g1_optimized(
 			RuntimeOrigin::signed(1),
 			bases.encode(),
@@ -486,11 +471,8 @@ fn msm_g2_bw6_761() {
 #[test]
 fn msm_g2_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
-		let (bases, scalars) = generate_msm_args::<
-			ark_ec::short_weierstrass::Projective<
-				sp_ark_bw6_761::g2::Config<sp_ark_bw6_761::curves::Host>,
-			>,
-		>(10);
+		let (bases, scalars) =
+			generate_msm_args::<ark_ec::short_weierstrass::Projective<sp_bw6_761::g2::Config>>(10);
 		assert_ok!(TemplateModule::bw6_761_msm_g2_optimized(
 			RuntimeOrigin::signed(1),
 			bases.encode(),
@@ -602,7 +584,7 @@ fn mul_affine_g2_bw6_761_optimized() {
 fn msm_ed_on_bls12_377() {
 	new_test_ext().execute_with(|| {
 		let (bases, scalars) =
-			generate_msm_args::<sp_ark_ed_on_bls12_377::curves::EdwardsProjective>(10);
+			generate_msm_args::<sp_ed_on_bls12_377::curves::EdwardsProjective>(10);
 		assert_ok!(TemplateModule::ed_on_bls12_377_msm(
 			RuntimeOrigin::signed(1),
 			bases.encode(),
@@ -614,7 +596,7 @@ fn msm_ed_on_bls12_377() {
 fn msm_ed_on_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
 		let (bases, scalars) =
-			generate_msm_args::<sp_ark_ed_on_bls12_377::curves::EdwardsProjective>(10);
+			generate_msm_args::<sp_ed_on_bls12_377::curves::EdwardsProjective>(10);
 		assert_ok!(TemplateModule::ed_on_bls12_377_msm_optimized(
 			RuntimeOrigin::signed(1),
 			bases.encode(),

@@ -1,10 +1,10 @@
 use ark_std::io::Error;
-pub use sp_ark_bw6_761::curves::{
+pub use sp_ark_models::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group};
+pub use sp_bw6_761::curves::{
 	g1::{G1Affine as G1AffineOptimized, G1Projective as G1ProjectiveOptimized},
 	g2::{G2Affine as G2AffineOptimized, G2Projective as G2ProjectiveOptimized},
 	BW6_761 as BW6_761Optimized,
 };
-pub use sp_ark_models::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, Group};
 
 pub fn do_msm_g1(
 	bases: &[ark_ec::short_weierstrass::Affine<ark_bw6_761::g1::Config>],
@@ -16,14 +16,10 @@ pub fn do_msm_g1(
 }
 
 pub fn do_msm_g1_optimized(
-	bases: &[sp_ark_models::short_weierstrass::Affine<
-		sp_ark_bw6_761::g1::Config<sp_ark_bw6_761::curves::Host>,
-	>],
-	scalars: &[<sp_ark_bw6_761::g1::Config<sp_ark_bw6_761::curves::Host> as sp_ark_models::CurveConfig>::ScalarField],
+	bases: &[sp_bw6_761::g1::G1Affine],
+	scalars: &[<sp_bw6_761::g1::Config as sp_ark_models::CurveConfig>::ScalarField],
 ) -> Result<(), Error> {
-	let _out = <sp_ark_bw6_761::g1::Config<sp_ark_bw6_761::curves::Host> as SWCurveConfig>::msm(
-		bases, scalars,
-	);
+	let _out = <sp_bw6_761::g1::Config as SWCurveConfig>::msm(bases, scalars);
 	Ok(())
 }
 
@@ -36,14 +32,10 @@ pub fn do_msm_g2(
 }
 
 pub fn do_msm_g2_optimized(
-	bases: &[sp_ark_models::short_weierstrass::Affine<
-		sp_ark_bw6_761::g2::Config<sp_ark_bw6_761::curves::Host>,
-	>],
-	scalars: &[<sp_ark_bw6_761::g2::Config<sp_ark_bw6_761::curves::Host> as sp_ark_models::CurveConfig>::ScalarField],
+	bases: &[sp_ark_models::short_weierstrass::Affine<sp_bw6_761::g2::Config>],
+	scalars: &[<sp_bw6_761::g2::Config as sp_ark_models::CurveConfig>::ScalarField],
 ) -> Result<(), Error> {
-	let _out = <sp_ark_bw6_761::g2::Config<sp_ark_bw6_761::curves::Host> as SWCurveConfig>::msm(
-		bases, scalars,
-	);
+	let _out = <sp_bw6_761::g2::Config as SWCurveConfig>::msm(bases, scalars);
 	Ok(())
 }
 
@@ -56,15 +48,10 @@ pub fn do_mul_affine_g1(
 }
 
 pub fn do_mul_affine_g1_optimized(
-	base: &sp_ark_models::short_weierstrass::Affine<
-		sp_ark_bw6_761::g1::Config<sp_ark_bw6_761::curves::Host>,
-	>,
+	base: &sp_bw6_761::g1::G1Affine,
 	scalar: &[u64],
 ) -> Result<(), Error> {
-	let _out =
-		<sp_ark_bw6_761::g1::Config<sp_ark_bw6_761::curves::Host> as SWCurveConfig>::mul_affine(
-			base, scalar,
-		);
+	let _out = <sp_bw6_761::g1::Config as SWCurveConfig>::mul_affine(base, scalar);
 	Ok(())
 }
 
@@ -77,15 +64,10 @@ pub fn do_mul_projective_g1(
 }
 
 pub fn do_mul_projective_g1_optimized(
-	base: &sp_ark_models::short_weierstrass::Projective<
-		sp_ark_bw6_761::g1::Config<sp_ark_bw6_761::curves::Host>,
-	>,
+	base: &sp_bw6_761::g1::G1Projective,
 	scalar: &[u64],
 ) -> Result<(), Error> {
-	let _out =
-		<sp_ark_bw6_761::g1::Config<sp_ark_bw6_761::curves::Host> as SWCurveConfig>::mul_projective(
-			base, scalar,
-		);
+	let _out = <sp_bw6_761::g1::Config as SWCurveConfig>::mul_projective(base, scalar);
 	Ok(())
 }
 
@@ -98,15 +80,10 @@ pub fn do_mul_affine_g2(
 }
 
 pub fn do_mul_affine_g2_optimized(
-	base: &sp_ark_models::short_weierstrass::Affine<
-		sp_ark_bw6_761::g2::Config<sp_ark_bw6_761::curves::Host>,
-	>,
+	base: &sp_ark_models::short_weierstrass::Affine<sp_bw6_761::g2::Config>,
 	scalar: &[u64],
 ) -> Result<(), Error> {
-	let _out =
-		<sp_ark_bw6_761::g2::Config<sp_ark_bw6_761::curves::Host> as SWCurveConfig>::mul_affine(
-			base, scalar,
-		);
+	let _out = <sp_bw6_761::g2::Config as SWCurveConfig>::mul_affine(base, scalar);
 	Ok(())
 }
 
@@ -119,15 +96,10 @@ pub fn do_mul_projective_g2(
 }
 
 pub fn do_mul_projective_g2_optimized(
-	base: &sp_ark_models::short_weierstrass::Projective<
-		sp_ark_bw6_761::g2::Config<sp_ark_bw6_761::curves::Host>,
-	>,
+	base: &sp_ark_models::short_weierstrass::Projective<sp_bw6_761::g2::Config>,
 	scalar: &[u64],
 ) -> Result<(), Error> {
-	let _out =
-		<sp_ark_bw6_761::g2::Config<sp_ark_bw6_761::curves::Host> as SWCurveConfig>::mul_projective(
-			base, scalar,
-		);
+	let _out = <sp_bw6_761::g2::Config as SWCurveConfig>::mul_projective(base, scalar);
 	Ok(())
 }
 
