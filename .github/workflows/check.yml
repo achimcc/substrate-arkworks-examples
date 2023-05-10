@@ -44,6 +44,9 @@ jobs:
         with:
           toolchain: nightly
           target: wasm32-unknown-unknown 
+
+      - name: Install WASM toolchain
+        run: rustup target add wasm32-unknown-unknown
       
       - name: Install protoc
         uses: taiki-e/install-action@v1
