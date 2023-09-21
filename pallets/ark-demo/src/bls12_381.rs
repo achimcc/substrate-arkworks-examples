@@ -1,3 +1,4 @@
+use crate::utils::{InternalError, ProofFor, VerifyingKeyFor};
 use ark_bls12_381::{Bls12_381, Fr as BlsFr};
 use ark_ec::{pairing::Pairing, CurveConfig};
 use ark_ff::Fp;
@@ -8,7 +9,6 @@ use ark_std::{
 	io::{Cursor, Error},
 	vec::Vec,
 };
-use frame_support::assert_ok;
 pub use sp_bls12_381::{
 	curves::{
 		g1::{G1Affine as G1AffineOptimized, G1Projective as G1ProjectiveOptimized},
@@ -154,14 +154,13 @@ pub fn do_mul_projective_g2_optimized(
 	Ok(())
 }
 
-pub fn do_verify_groth16(vk: Vec<u8>, c: Vec<u8>, proof: Vec<u8>) -> Result<(), Error> {
+pub fn do_verify_groth16(vk: Vec<u8>, c: Vec<u8>, proof: Vec<u8>) -> Result<(), InternalError> {
 	let cursor = Cursor::new(&vk);
 	let vk = <Groth16<Bls12_381> as SNARK<BlsFr>>::VerifyingKey::deserialize_with_mode(
 		cursor,
 		Compress::No,
 		Validate::No,
-	)
-	.unwrap();
+	)?;
 
 	let cursor = Cursor::new(&c);
 	let c = Fp::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
@@ -171,36 +170,32 @@ pub fn do_verify_groth16(vk: Vec<u8>, c: Vec<u8>, proof: Vec<u8>) -> Result<(), 
 		cursor,
 		Compress::No,
 		Validate::No,
-	)
-	.unwrap();
+	)?;
 
-	assert_ok!(Groth16::<Bls12_381>::verify(&vk, &[c], &proof));
+	let result = Groth16::<Bls12_381>::verify(&vk, &[c], &proof)
+		.map_err(|_| InternalError::CircuitSynthesis)?;
+	if !result {
+		return Err(InternalError::Verification)
+	}
 
 	Ok(())
 }
 
-pub fn do_verify_groth16_optimized(vk: Vec<u8>, c: Vec<u8>, proof: Vec<u8>) -> Result<(), Error> {
-	let cursor = Cursor::new(&vk);
-	let vk = <Groth16<Bls12_381Optimized> as SNARK<BlsFrOptimized>>::VerifyingKey::deserialize_with_mode(
-					cursor,
-					Compress::No,
-					Validate::No,
-				)
-				.unwrap();
+pub fn do_verify_groth16_opt(vk: Vec<u8>, c: Vec<u8>, proof: Vec<u8>) -> Result<(), InternalError> {
+	let vk =
+		VerifyingKeyFor::<Bls12_381Optimized, BlsFrOptimized>::deserialize_uncompressed_unchecked(
+			&vk[..],
+		)?;
+	let c = Fp::deserialize_uncompressed_unchecked(&c[..]).unwrap();
+	let proof = ProofFor::<Bls12_381Optimized, BlsFrOptimized>::deserialize_uncompressed_unchecked(
+		&proof[..],
+	)?;
 
-	let cursor = Cursor::new(&c);
-	let c = Fp::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
-
-	let cursor = Cursor::new(&proof);
-	let proof =
-		<Groth16<Bls12_381Optimized> as SNARK<BlsFrOptimized>>::Proof::deserialize_with_mode(
-			cursor,
-			Compress::No,
-			Validate::No,
-		)
-		.unwrap();
-
-	assert_ok!(Groth16::<Bls12_381Optimized>::verify(&vk, &[c], &proof));
+	let result = Groth16::<Bls12_381Optimized>::verify(&vk, &[c], &proof)
+		.map_err(|_| InternalError::CircuitSynthesis)?;
+	if !result {
+		return Err(InternalError::Verification)
+	}
 
 	Ok(())
 }

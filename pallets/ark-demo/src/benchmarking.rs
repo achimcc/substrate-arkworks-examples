@@ -1,5 +1,3 @@
-//! Benchmarking setup for pallet-template
-
 use super::*;
 
 #[allow(unused)]
@@ -86,7 +84,7 @@ benchmarks! {
 		let proof = crate::utils::serialize_argument(proof);
 	}: _(RawOrigin::Signed(caller), vk, c, proof)
 
-	groth16_verification_optimized {
+	groth16_verification_opt {
 		let caller: T::AccountId = whitelisted_caller();
 
 		let vk = <Groth16<bls12_381::Bls12_381Optimized> as SNARK<BlsFrOptimized>>::VerifyingKey::deserialize_with_mode(

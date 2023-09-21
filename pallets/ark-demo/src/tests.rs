@@ -77,7 +77,7 @@ fn groth16_verificaton_optimized() {
 			)
 			.unwrap();
 		let proof = crate::utils::serialize_argument(proof);
-		assert_ok!(TemplateModule::groth16_verification_optimized(
+		assert_ok!(TemplateModule::groth16_verification_opt(
 			RuntimeOrigin::signed(1),
 			vk,
 			c,
@@ -100,6 +100,7 @@ fn pairing_bls12_381() {
 		));
 	});
 }
+
 #[test]
 fn pairing_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
@@ -112,6 +113,7 @@ fn pairing_bls12_381_optimized() {
 		));
 	});
 }
+
 #[test]
 fn msm_g1_bls12_381() {
 	new_test_ext().execute_with(|| {
@@ -125,6 +127,7 @@ fn msm_g1_bls12_381() {
 		));
 	});
 }
+
 #[test]
 fn msm_g1_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
@@ -138,6 +141,7 @@ fn msm_g1_bls12_381_optimized() {
 		));
 	});
 }
+
 #[test]
 fn msm_g2_bls12_381() {
 	new_test_ext().execute_with(|| {
@@ -151,6 +155,7 @@ fn msm_g2_bls12_381() {
 		));
 	});
 }
+
 #[test]
 fn msm_g2_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
@@ -164,6 +169,7 @@ fn msm_g2_bls12_381_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_g1_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
@@ -175,6 +181,7 @@ fn mul_projective_g1_bls12_381_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_g1_bls12_381() {
 	new_test_ext().execute_with(|| {
@@ -186,6 +193,7 @@ fn mul_projective_g1_bls12_381() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_g1_bls12_381() {
 	new_test_ext().execute_with(|| {
@@ -197,6 +205,7 @@ fn mul_affine_g1_bls12_381() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_g1_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
@@ -208,6 +217,7 @@ fn mul_affine_g1_bls12_381_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_g2_bls12_381() {
 	new_test_ext().execute_with(|| {
@@ -219,6 +229,7 @@ fn mul_projective_g2_bls12_381() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_g2_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
@@ -230,6 +241,7 @@ fn mul_projective_g2_bls12_381_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_g2_bls12_381_optimized() {
 	new_test_ext().execute_with(|| {
@@ -241,6 +253,7 @@ fn mul_affine_g2_bls12_381_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_g2_bls12_381() {
 	new_test_ext().execute_with(|| {
@@ -252,6 +265,7 @@ fn mul_affine_g2_bls12_381() {
 		));
 	});
 }
+
 #[test]
 fn pairing_bls12_377() {
 	new_test_ext().execute_with(|| {
@@ -263,6 +277,7 @@ fn pairing_bls12_377() {
 		));
 	});
 }
+
 #[test]
 fn pairing_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
@@ -275,6 +290,7 @@ fn pairing_bls12_377_optimized() {
 		));
 	});
 }
+
 #[test]
 fn msm_g1_bls12_377() {
 	let (bases, scalars) =
@@ -287,6 +303,7 @@ fn msm_g1_bls12_377() {
 		));
 	});
 }
+
 #[test]
 fn msm_g1_bls12_377_optimized() {
 	let (bases, scalars) = generate_msm_args::<sp_bls12_377::curves::g1::G1Projective>(10);
@@ -298,6 +315,7 @@ fn msm_g1_bls12_377_optimized() {
 		));
 	});
 }
+
 #[test]
 fn msm_g2_bls12_377() {
 	let (bases, scalars) =
@@ -310,6 +328,7 @@ fn msm_g2_bls12_377() {
 		));
 	});
 }
+
 #[test]
 fn msm_g2_bls12_377_optimized() {
 	let (bases, scalars) = generate_msm_args::<sp_bls12_377::g2::G2Projective>(10);
@@ -321,6 +340,7 @@ fn msm_g2_bls12_377_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_g1_bls12_377() {
 	new_test_ext().execute_with(|| {
@@ -332,6 +352,7 @@ fn mul_projective_g1_bls12_377() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_g1_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
@@ -343,6 +364,7 @@ fn mul_projective_g1_bls12_377_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_g1_bls12_377() {
 	new_test_ext().execute_with(|| {
@@ -354,6 +376,7 @@ fn mul_affine_g1_bls12_377() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_g1_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
@@ -365,6 +388,7 @@ fn mul_affine_g1_bls12_377_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_g2_bls12_377() {
 	new_test_ext().execute_with(|| {
@@ -376,6 +400,7 @@ fn mul_projective_g2_bls12_377() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_g2_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
@@ -387,6 +412,7 @@ fn mul_projective_g2_bls12_377_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_g2_bls12_377() {
 	new_test_ext().execute_with(|| {
@@ -398,6 +424,7 @@ fn mul_affine_g2_bls12_377() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_g2_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
@@ -409,6 +436,7 @@ fn mul_affine_g2_bls12_377_optimized() {
 		));
 	});
 }
+
 #[test]
 fn pairing_bw6_761() {
 	new_test_ext().execute_with(|| {
@@ -420,6 +448,7 @@ fn pairing_bw6_761() {
 		));
 	});
 }
+
 #[test]
 fn pairing_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
@@ -432,6 +461,7 @@ fn pairing_bw6_761_optimized() {
 		));
 	});
 }
+
 #[test]
 fn msm_g1_bw6_761() {
 	new_test_ext().execute_with(|| {
@@ -444,6 +474,7 @@ fn msm_g1_bw6_761() {
 		));
 	});
 }
+
 #[test]
 fn msm_g1_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
@@ -456,6 +487,7 @@ fn msm_g1_bw6_761_optimized() {
 		));
 	});
 }
+
 #[test]
 fn msm_g2_bw6_761() {
 	new_test_ext().execute_with(|| {
@@ -468,6 +500,7 @@ fn msm_g2_bw6_761() {
 		));
 	});
 }
+
 #[test]
 fn msm_g2_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
@@ -480,6 +513,7 @@ fn msm_g2_bw6_761_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_sw_ed_on_bls12_381_bandersnatch() {
 	new_test_ext().execute_with(|| {
@@ -492,6 +526,7 @@ fn mul_projective_sw_ed_on_bls12_381_bandersnatch() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_g1_bw6_761() {
 	new_test_ext().execute_with(|| {
@@ -503,6 +538,7 @@ fn mul_projective_g1_bw6_761() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_g1_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
@@ -514,6 +550,7 @@ fn mul_projective_g1_bw6_761_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_g1_bw6_761() {
 	new_test_ext().execute_with(|| {
@@ -525,6 +562,7 @@ fn mul_affine_g1_bw6_761() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_g1_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
@@ -536,6 +574,7 @@ fn mul_affine_g1_bw6_761_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_g2_bw6_761() {
 	new_test_ext().execute_with(|| {
@@ -547,6 +586,7 @@ fn mul_projective_g2_bw6_761() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_g2_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
@@ -558,6 +598,7 @@ fn mul_projective_g2_bw6_761_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_g2_bw6_761() {
 	new_test_ext().execute_with(|| {
@@ -569,6 +610,7 @@ fn mul_affine_g2_bw6_761() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_g2_bw6_761_optimized() {
 	new_test_ext().execute_with(|| {
@@ -580,6 +622,7 @@ fn mul_affine_g2_bw6_761_optimized() {
 		));
 	});
 }
+
 #[test]
 fn msm_ed_on_bls12_377() {
 	new_test_ext().execute_with(|| {
@@ -592,6 +635,7 @@ fn msm_ed_on_bls12_377() {
 		));
 	});
 }
+
 #[test]
 fn msm_ed_on_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
@@ -604,6 +648,7 @@ fn msm_ed_on_bls12_377_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_ed_on_bls12_377() {
 	new_test_ext().execute_with(|| {
@@ -616,6 +661,7 @@ fn mul_projective_ed_on_bls12_377() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_ed_on_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
@@ -628,6 +674,7 @@ fn mul_projective_ed_on_bls12_377_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_ed_on_bls12_377() {
 	new_test_ext().execute_with(|| {
@@ -639,6 +686,7 @@ fn mul_affine_ed_on_bls12_377() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_ed_on_bls12_377_optimized() {
 	new_test_ext().execute_with(|| {
@@ -650,6 +698,7 @@ fn mul_affine_ed_on_bls12_377_optimized() {
 		));
 	});
 }
+
 #[test]
 fn msm_sw_ed_on_bls12_381_bandersnatch() {
 	new_test_ext().execute_with(|| {
@@ -663,6 +712,7 @@ fn msm_sw_ed_on_bls12_381_bandersnatch() {
 		));
 	});
 }
+
 #[test]
 fn msm_sw_ed_on_bls12_381_bandersnatch_optimized() {
 	new_test_ext().execute_with(|| {
@@ -675,6 +725,7 @@ fn msm_sw_ed_on_bls12_381_bandersnatch_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_sw_ed_on_bls12_381_bandersnatch_optimized() {
 	new_test_ext().execute_with(|| {
@@ -688,6 +739,7 @@ fn mul_projective_sw_ed_on_bls12_381_bandersnatch_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_sw_ed_on_bls12_381_bandersnatch() {
 	new_test_ext().execute_with(|| {
@@ -699,6 +751,7 @@ fn mul_affine_sw_ed_on_bls12_381_bandersnatch() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_sw_ed_on_bls12_381_bandersnatch_optimized() {
 	new_test_ext().execute_with(|| {
@@ -711,6 +764,7 @@ fn mul_affine_sw_ed_on_bls12_381_bandersnatch_optimized() {
 		));
 	});
 }
+
 #[test]
 fn msm_te_ed_on_bls12_381_bandersnatch() {
 	new_test_ext().execute_with(|| {
@@ -723,6 +777,7 @@ fn msm_te_ed_on_bls12_381_bandersnatch() {
 		));
 	});
 }
+
 #[test]
 fn msm_te_ed_on_bls12_381_bandersnatch_optimized() {
 	new_test_ext().execute_with(|| {
@@ -735,6 +790,7 @@ fn msm_te_ed_on_bls12_381_bandersnatch_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_te_ed_on_bls12_381_bandersnatch() {
 	new_test_ext().execute_with(|| {
@@ -748,6 +804,7 @@ fn mul_projective_te_ed_on_bls12_381_bandersnatch() {
 		));
 	});
 }
+
 #[test]
 fn mul_projective_te_ed_on_bls12_381_bandersnatch_optimized() {
 	let (base, scalar) = generate_scalar_args_projective::<
@@ -761,6 +818,7 @@ fn mul_projective_te_ed_on_bls12_381_bandersnatch_optimized() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_te_ed_on_bls12_381_bandersnatch() {
 	new_test_ext().execute_with(|| {
@@ -773,6 +831,7 @@ fn mul_affine_te_ed_on_bls12_381_bandersnatch() {
 		));
 	});
 }
+
 #[test]
 fn mul_affine_te_ed_on_bls12_381_bandersnatch_optimized() {
 	let (base, scalar) =

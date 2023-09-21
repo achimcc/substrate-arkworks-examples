@@ -1,14 +1,43 @@
 #![allow(dead_code)]
+
 use crate::ArkScale;
+use ark_groth16::Groth16;
 use ark_scale::hazmat::ArkScaleProjective;
-use ark_serialize::{CanonicalSerialize, Compress};
-use ark_std::{io::Cursor, test_rng, vec, vec::Vec, UniformRand};
+use ark_serialize::{CanonicalSerialize, Compress, SerializationError};
+use ark_snark::SNARK;
+use ark_std::{test_rng, vec, vec::Vec, UniformRand};
+
+pub enum InternalError {
+	Serialization,
+	Verification,
+	CircuitSynthesis,
+}
+
+impl<T: crate::Config> From<InternalError> for crate::Error<T> {
+	fn from(value: InternalError) -> Self {
+		match value {
+			InternalError::Verification => crate::Error::Verification,
+			InternalError::Serialization => crate::Error::Serialization,
+			InternalError::CircuitSynthesis => crate::Error::CircuitSynthesis,
+		}
+	}
+}
+
+impl From<SerializationError> for InternalError {
+	fn from(_: SerializationError) -> InternalError {
+		InternalError::Serialization
+	}
+}
+
+pub type VerifyingKeyFor<PairingT, PrimeFieldT> =
+	<Groth16<PairingT> as SNARK<PrimeFieldT>>::VerifyingKey;
+
+pub type ProofFor<PairingT, PrimeFieldT> = <Groth16<PairingT> as SNARK<PrimeFieldT>>::Proof;
 
 pub fn serialize_argument(argument: impl CanonicalSerialize) -> Vec<u8> {
-	let mut serialized_argument = vec![0u8; argument.serialized_size(Compress::No)];
-	let mut cursor = Cursor::new(&mut serialized_argument[..]);
-	argument.serialize_uncompressed(&mut cursor).unwrap();
-	serialized_argument
+	let mut buf = vec![0; argument.serialized_size(Compress::No)];
+	argument.serialize_uncompressed(&mut buf.as_mut_slice()).unwrap();
+	buf
 }
 
 pub fn generate_msm_args<Group: ark_ec::VariableBaseMSM>(

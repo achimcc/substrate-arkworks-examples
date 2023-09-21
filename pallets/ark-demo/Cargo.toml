@@ -1,0 +1,77 @@
+[package]
+name = "pallet-ark-demo"
+version = "4.0.1"
+description = "An example implementation of a groth16 verificaton in a Substrate pallet"
+authors = ["Achim Schneider <achim@parity.io>", "Davide Galassi <davxy@datawok.net>"]
+homepage = "https://substrate.io"
+repository = "https://Apache-2.0"
+edition = "2021"
+publish = false
+
+[package.metadata.docs.rs]
+targets = ["x86_64-unknown-linux-gnu"]
+
+[dependencies]
+codec = { package = "parity-scale-codec", version = "3.6.1", default-features = false, features = [ "derive" ] }
+scale-info = { version = "2.9.0", default-features = false, features = ["derive"] }
+frame-benchmarking = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, optional = true }
+frame-support = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false }
+frame-system = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false }
+sp-io =  { git = "https://github.com/paritytech/polkadot-sdk", default-features = false }
+sp-bls12-381 = { git = "https://github.com/paritytech/substrate-curves", features = ["curve"], default-features = false }
+sp-bls12-377 = { git = "https://github.com/paritytech/substrate-curves", features = ["curve"], default-features = false }
+sp-ed-on-bls12-381-bandersnatch = { git = "https://github.com/paritytech/substrate-curves", default-features = false }
+sp-ed-on-bls12-377 = { git = "https://github.com/paritytech/substrate-curves", default-features = false }
+sp-bw6-761 = { git = "https://github.com/paritytech/substrate-curves", default-features = false }
+sp-ark-models = { version = "0.4.0", default-features = false }
+ark-bls12-381 = { version = "0.4.0", features = ["curve"], default-features = false }
+ark-bls12-377 = { version = "0.4.0", features = ["curve"], default-features = false }
+ark-bw6-761 = { version = "0.4.0", default-features = false }
+ark-ed-on-bls12-381-bandersnatch = { version = "0.4.0", default-features = false }
+ark-ed-on-bls12-377 = { version = "0.4.0", default-features = false }
+ark-serialize = { version = "0.4.0", features = [ "derive" ], default-features = false }
+ark-ff = { version = "0.4.0", default-features = false }
+ark-ec = { version = "0.4.0", default-features = false }
+ark-std = { version = "0.4.0", default-features = false }
+ark-snark = { version = "0.4.0", default-features = false }
+ark-groth16 = { version = "0.4.0", features = [ "r1cs" ], default-features = false }
+ark-crypto-primitives = { version = "0.4.0", default-features = false, features = [ "r1cs", "snark" ] } 
+ark-scale = { version = "0.0.10", default-features = false, features = ["hazmat"] }
+
+[dev-dependencies]
+ark-algebra-bench-templates = { version = "0.4.0", default-features = false }
+sp-core = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false }
+sp-runtime = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false }
+
+[features]
+default = [ "std" ]
+std = [
+	"codec/std",
+	"scale-info/std",
+	"frame-benchmarking/std",
+	"frame-support/std",
+	"frame-system/std",
+	"sp-bls12-381/std",
+	"sp-bls12-377/std",
+	"sp-ed-on-bls12-381-bandersnatch/std",
+	"sp-ed-on-bls12-377/std",
+	"sp-bw6-761/std", 
+	"sp-ark-models/std",
+	"ark-bls12-381/std",
+	"ark-bls12-377/std",
+	"ark-bw6-761/std",
+	"ark-ed-on-bls12-381-bandersnatch/std",
+	"ark-ed-on-bls12-377/std",
+	"ark-serialize/std",
+	"ark-ff/std",
+	"ark-ec/std",
+	"ark-std/std",
+	"ark-groth16/std",
+	"ark-crypto-primitives/std",
+	"ark-scale/std",
+	"sp-core/std",
+	"sp-runtime/std",
+	"sp-io/std",
+]
+runtime-benchmarks = ["frame-benchmarking/runtime-benchmarks"]
+try-runtime = ["frame-support/try-runtime"]

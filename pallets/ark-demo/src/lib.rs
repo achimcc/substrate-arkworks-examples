@@ -1,40 +1,43 @@
 #![cfg_attr(not(feature = "std"), no_std)]
 #![recursion_limit = "1024"]
 
-/// Edit this file to define custom logic or remove it if it is not needed.
-/// Learn more about FRAME and the core library of Substrate FRAME pallets:
-/// <https://docs.substrate.io/reference/frame-pallets/>
-pub use pallet::*;
-
 #[cfg(test)]
 mod mock;
 
+#[cfg(feature = "runtime-benchmarks")]
+mod benchmarking;
+
+#[cfg(test)]
+mod benchmarking;
 #[cfg(test)]
 mod tests;
 
-#[cfg(feature = "runtime-benchmarks")]
-mod benchmarking;
+mod bls12_377;
+mod bls12_381;
+mod bw6_761;
+mod ed_on_bls12_377;
+mod ed_on_bls12_381_bandersnatch;
+mod utils;
+
 pub mod weights;
 pub use weights::*;
 
-#[cfg(test)]
-pub(crate) mod benchmarking;
-pub(crate) mod bls12_377;
-pub(crate) mod bls12_381;
-pub(crate) mod bw6_761;
-pub(crate) mod ed_on_bls12_377;
-pub(crate) mod ed_on_bls12_381_bandersnatch;
-pub(crate) mod utils;
+use ark_scale::hazmat::ArkScaleProjective;
 
-pub(crate) use ark_scale::hazmat::ArkScaleProjective;
 const HOST_CALL: ark_scale::Usage = ark_scale::HOST_CALL;
-pub(crate) type ArkScale<T> = ark_scale::ArkScale<T, HOST_CALL>;
+
+type ArkScale<T> = ark_scale::ArkScale<T, HOST_CALL>;
+
+pub use pallet::*;
 
 #[frame_support::pallet]
 pub mod pallet {
 	use crate::{
-		bls12_377, bls12_381, bls12_381::BlsFrOptimized, bw6_761, ed_on_bls12_377,
-		ed_on_bls12_381_bandersnatch, ArkScale, ArkScaleProjective, WeightInfo,
+		bls12_377, bls12_381,
+		bls12_381::BlsFrOptimized,
+		bw6_761, ed_on_bls12_377, ed_on_bls12_381_bandersnatch, utils,
+		utils::{ProofFor, VerifyingKeyFor},
+		ArkScale, ArkScaleProjective, WeightInfo,
 	};
 	use ark_bls12_381::Fr as BlsFr;
 	use ark_ec::{pairing::Pairing, CurveConfig};
@@ -48,52 +51,35 @@ pub mod pallet {
 	use frame_system::pallet_prelude::*;
 
 	#[pallet::pallet]
-	#[pallet::generate_store(pub(super) trait Store)]
 	pub struct Pallet<T>(_);
 
-	/// Configure the pallet by specifying the parameters and types on which it depends.
 	#[pallet::config]
 	pub trait Config: frame_system::Config {
-		/// Because this pallet emits events, it depends on the runtime's definition of an event.
-		type RuntimeEvent: From<Event<Self>> + IsType<<Self as frame_system::Config>::RuntimeEvent>;
-		/// Type representing the weight of this pallet
+		/// Type representing the call weights for this pallet.
 		type WeightInfo: WeightInfo;
-	}
-
-	// The pallet's runtime storage items.
-	// https://docs.substrate.io/main-docs/build/runtime-storage/
-	#[pallet::storage]
-	#[pallet::getter(fn something)]
-	// Learn more about declaring storage items:
-	// https://docs.substrate.io/main-docs/build/runtime-storage/#declaring-storage-items
-	pub type Something<T> = StorageValue<_, u32>;
-
-	// Pallets use events to inform users when important changes are made.
-	// https://docs.substrate.io/main-docs/build/events-errors/
-	#[pallet::event]
-	#[pallet::generate_deposit(pub(super) fn deposit_event)]
-	pub enum Event<T: Config> {
-		/// Successfull groth16 verification event
-		VerificationSuccess { who: T::AccountId },
 	}
 
 	#[pallet::error]
 	pub enum Error<T> {
-		/// Verification of groth16 proof failed
-		VerificationFailed,
+		/// Verification of Groth16 proof failed.
+		Verification,
+		/// Serialization or deserialization failure.
+		Serialization,
+		/// Circuit synthesis failure.
+		CircuitSynthesis,
 	}
 
 	#[pallet::call]
 	impl<T: Config> Pallet<T> {
 		#[pallet::call_index(0)]
-		#[pallet::weight(T::WeightInfo::groth16_verification())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn groth16_verification(
 			origin: OriginFor<T>,
 			vk: Vec<u8>,
 			c: Vec<u8>,
 			proof: Vec<u8>,
 		) -> DispatchResult {
-			let who = ensure_signed(origin).unwrap();
+			ensure_signed(origin)?;
 
 			let cursor = Cursor::new(&vk);
 			let vk = <Groth16<crate::bls12_381::Bls12_381Optimized> as SNARK<BlsFrOptimized>>::VerifyingKey::deserialize_with_mode(
@@ -119,62 +105,43 @@ pub mod pallet {
 				.unwrap();
 			let proof = crate::utils::serialize_argument(proof);
 
-			let result = crate::bls12_381::do_verify_groth16(vk, c, proof);
+			bls12_381::do_verify_groth16(vk, c, proof).map_err::<Error<T>, _>(Into::into)?;
 
-			if result.is_ok() {
-				Self::deposit_event(Event::VerificationSuccess { who });
-				Ok(())
-			} else {
-				Err(Error::<T>::VerificationFailed.into())
-			}
+			Ok(())
 		}
 
 		#[pallet::call_index(1)]
-		#[pallet::weight(T::WeightInfo::groth16_verification_optimized())]
-		pub fn groth16_verification_optimized(
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn groth16_verification_opt(
 			origin: OriginFor<T>,
 			vk: Vec<u8>,
 			c: Vec<u8>,
 			proof: Vec<u8>,
 		) -> DispatchResult {
-			let who = ensure_signed(origin).unwrap();
+			ensure_signed(origin)?;
 
-			let cursor = Cursor::new(&vk);
-			let vk = <Groth16<bls12_381::Bls12_381Optimized> as SNARK<BlsFrOptimized>>::VerifyingKey::deserialize_with_mode(
-				cursor,
-				Compress::No,
-				Validate::No,
-			)
-			.unwrap();
-			let vk = crate::utils::serialize_argument(vk);
+			let vk = VerifyingKeyFor::<ark_bls12_381::Bls12_381, BlsFr>::deserialize_uncompressed_unchecked(&vk[..])
+				.map_err(|_| Error::<T>::Serialization)?;
+			let vk = utils::serialize_argument(vk);
 
-			let cursor = Cursor::new(&c);
-			let c: ark_ff::Fp<ark_ff::MontBackend<ark_bls12_381::FrConfig, 4>, 4> =
-				Fp::deserialize_with_mode(cursor, Compress::No, Validate::No).unwrap();
+			let c = ark_ff::Fp::<ark_ff::MontBackend<ark_bls12_381::FrConfig, 4>, 4>::deserialize_uncompressed_unchecked(&c[..])
+					.map_err(|_| Error::<T>::Serialization)?;
 			let c = crate::utils::serialize_argument(c);
 
-			let cursor = Cursor::new(&proof);
 			let proof =
-				<Groth16<ark_bls12_381::Bls12_381> as SNARK<BlsFr>>::Proof::deserialize_with_mode(
-					cursor,
-					Compress::No,
-					Validate::No,
+				ProofFor::<ark_bls12_381::Bls12_381, BlsFr>::deserialize_uncompressed_unchecked(
+					&proof[..],
 				)
-				.unwrap();
-			let proof = crate::utils::serialize_argument(proof);
+				.map_err(|_| Error::<T>::Serialization)?;
+			let proof = utils::serialize_argument(proof);
 
-			let result = crate::bls12_381::do_verify_groth16_optimized(vk, c, proof);
+			bls12_381::do_verify_groth16_opt(vk, c, proof).map_err::<Error<T>, _>(Into::into)?;
 
-			if result.is_ok() {
-				Self::deposit_event(Event::VerificationSuccess { who });
-				Ok(())
-			} else {
-				Err(Error::<T>::VerificationFailed.into())
-			}
+			Ok(())
 		}
 
 		#[pallet::call_index(2)]
-		#[pallet::weight(T::WeightInfo::bls12_381_pairing())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_pairing(_origin: OriginFor<T>, a: Vec<u8>, b: Vec<u8>) -> DispatchResult {
 			let a = <ArkScale<ark_bls12_381::G1Affine> as Decode>::decode(&mut a.as_slice())
 				.unwrap()
@@ -187,7 +154,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(3)]
-		#[pallet::weight(T::WeightInfo::bls12_381_pairing_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_pairing_optimized(
 			_origin: OriginFor<T>,
 			a: Vec<u8>,
@@ -204,7 +171,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(4)]
-		#[pallet::weight(T::WeightInfo::bls12_381_msm_g1())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g1(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -223,7 +190,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(5)]
-		#[pallet::weight(T::WeightInfo::bls12_381_msm_g1_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g1_optimized(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -243,7 +210,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(6)]
-		#[pallet::weight(T::WeightInfo::bls12_381_msm_g2())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g2(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -262,7 +229,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(7)]
-		#[pallet::weight(T::WeightInfo::bls12_381_msm_g2_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_msm_g2_optimized(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -282,7 +249,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(8)]
-		#[pallet::weight(T::WeightInfo::bls12_381_mul_projective_g1())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_mul_projective_g1(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -299,7 +266,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(9)]
-		#[pallet::weight(T::WeightInfo::bls12_381_mul_projective_g1_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_mul_projective_g1_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -316,7 +283,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(10)]
-		#[pallet::weight(T::WeightInfo::bls12_381_mul_affine_g1())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_mul_affine_g1(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -331,7 +298,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(11)]
-		#[pallet::weight(T::WeightInfo::bls12_381_mul_affine_g1_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_mul_affine_g1_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -347,7 +314,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(12)]
-		#[pallet::weight(T::WeightInfo::bls12_381_mul_projective_g2())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_mul_projective_g2(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -364,7 +331,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(13)]
-		#[pallet::weight(T::WeightInfo::bls12_381_mul_projective_g2_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_mul_projective_g2_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -381,7 +348,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(14)]
-		#[pallet::weight(T::WeightInfo::bls12_381_mul_affine_g2())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_mul_affine_g2(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -396,7 +363,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(15)]
-		#[pallet::weight(T::WeightInfo::bls12_381_mul_affine_g2_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_mul_affine_g2_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -412,7 +379,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(16)]
-		#[pallet::weight(T::WeightInfo::bls12_377_pairing())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_pairing(_origin: OriginFor<T>, a: Vec<u8>, b: Vec<u8>) -> DispatchResult {
 			let a = <ArkScale<ark_bls12_377::G1Affine> as Decode>::decode(&mut a.as_slice())
 				.unwrap()
@@ -425,7 +392,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(17)]
-		#[pallet::weight(T::WeightInfo::bls12_377_pairing_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_pairing_optimized(
 			_origin: OriginFor<T>,
 			a: Vec<u8>,
@@ -442,7 +409,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(18)]
-		#[pallet::weight(T::WeightInfo::bls12_377_msm_g1())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g1(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -461,7 +428,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(19)]
-		#[pallet::weight(T::WeightInfo::bls12_377_msm_g1_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g1_optimized(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -482,7 +449,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(20)]
-		#[pallet::weight(T::WeightInfo::bls12_377_msm_g2())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g2(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -501,7 +468,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(21)]
-		#[pallet::weight(T::WeightInfo::bls12_377_msm_g2_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_msm_g2_optimized(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -522,7 +489,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(22)]
-		#[pallet::weight(T::WeightInfo::bls12_377_mul_projective_g1())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_mul_projective_g1(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -539,7 +506,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(23)]
-		#[pallet::weight(T::WeightInfo::bls12_377_mul_projective_g1_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_mul_projective_g1_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -556,7 +523,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(24)]
-		#[pallet::weight(T::WeightInfo::bls12_377_mul_affine_g1())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_mul_affine_g1(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -571,7 +538,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(25)]
-		#[pallet::weight(T::WeightInfo::bls12_377_mul_affine_g1_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_mul_affine_g1_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -587,7 +554,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(26)]
-		#[pallet::weight(T::WeightInfo::bls12_377_mul_projective_g2())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_mul_projective_g2(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -604,7 +571,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(27)]
-		#[pallet::weight(T::WeightInfo::bls12_377_mul_projective_g2_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_mul_projective_g2_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -621,7 +588,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(28)]
-		#[pallet::weight(T::WeightInfo::bls12_377_mul_affine_g2())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_mul_affine_g2(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -636,7 +603,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(29)]
-		#[pallet::weight(T::WeightInfo::bls12_377_mul_affine_g2_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_mul_affine_g2_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -652,7 +619,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(30)]
-		#[pallet::weight(T::WeightInfo::bw6_761_pairing())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_pairing(_origin: OriginFor<T>, a: Vec<u8>, b: Vec<u8>) -> DispatchResult {
 			let a = <ArkScale<ark_bw6_761::G1Affine> as Decode>::decode(&mut a.as_slice())
 				.unwrap()
@@ -665,7 +632,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(31)]
-		#[pallet::weight(T::WeightInfo::bw6_761_pairing_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_pairing_optimized(
 			_origin: OriginFor<T>,
 			a: Vec<u8>,
@@ -682,7 +649,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(32)]
-		#[pallet::weight(T::WeightInfo::bw6_761_msm_g1())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g1(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -701,7 +668,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(33)]
-		#[pallet::weight(T::WeightInfo::bw6_761_msm_g1_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g1_optimized(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -721,7 +688,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(34)]
-		#[pallet::weight(T::WeightInfo::bw6_761_msm_g2())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g2(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -740,7 +707,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(35)]
-		#[pallet::weight(T::WeightInfo::bw6_761_msm_g2_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_msm_g2_optimized(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -760,7 +727,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(36)]
-		#[pallet::weight(T::WeightInfo::bw6_761_mul_projective_g1())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_mul_projective_g1(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -777,7 +744,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(37)]
-		#[pallet::weight(T::WeightInfo::bw6_761_mul_projective_g1_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_mul_projective_g1_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -794,7 +761,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(38)]
-		#[pallet::weight(T::WeightInfo::bw6_761_mul_affine_g1())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_mul_affine_g1(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -809,7 +776,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(39)]
-		#[pallet::weight(T::WeightInfo::bw6_761_mul_affine_g1_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_mul_affine_g1_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -825,7 +792,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(40)]
-		#[pallet::weight(T::WeightInfo::bw6_761_mul_projective_g2())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_mul_projective_g2(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -842,7 +809,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(41)]
-		#[pallet::weight(T::WeightInfo::bw6_761_mul_projective_g2_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_mul_projective_g2_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -859,7 +826,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(42)]
-		#[pallet::weight(T::WeightInfo::bw6_761_mul_affine_g2())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_mul_affine_g2(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -874,7 +841,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(43)]
-		#[pallet::weight(T::WeightInfo::bw6_761_mul_affine_g2_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_mul_affine_g2_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -890,7 +857,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(44)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_381_bandersnatch_msm_sw())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_bandersnatch_msm_sw(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -912,7 +879,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(45)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_381_bandersnatch_msm_sw_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_bandersnatch_msm_sw_optimized(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -935,7 +902,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(46)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_381_bandersnatch_msm_te())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_bandersnatch_msm_te(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -957,7 +924,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(47)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_381_bandersnatch_msm_te_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_bandersnatch_msm_te_optimized(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -980,7 +947,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(48)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_381_bandersnatch_mul_projective_sw())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_bandersnatch_mul_projective_sw(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -997,7 +964,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(49)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_381_bandersnatch_mul_projective_sw_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_bandersnatch_mul_projective_sw_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -1015,7 +982,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(50)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_381_bandersnatch_mul_projective_te())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_bandersnatch_mul_projective_te(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -1032,7 +999,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(51)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_381_bandersnatch_mul_projective_te_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_bandersnatch_mul_projective_te_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -1051,7 +1018,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(52)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_381_bandersnatch_mul_affine_sw())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_bandersnatch_mul_affine_sw(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -1068,7 +1035,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(53)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_381_bandersnatch_mul_affine_sw_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_bandersnatch_mul_affine_sw_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -1086,7 +1053,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(54)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_381_bandersnatch_mul_affine_te())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_bandersnatch_mul_affine_te(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -1104,7 +1071,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(55)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_381_bandersnatch_mul_affine_te_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_381_bandersnatch_mul_affine_te_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -1122,7 +1089,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(56)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_377_msm())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_msm(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -1143,7 +1110,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(57)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_377_msm_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_msm_optimized(
 			_origin: OriginFor<T>,
 			bases: Vec<u8>,
@@ -1164,7 +1131,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(58)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_377_mul_projective())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_mul_projective(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -1182,7 +1149,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(59)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_377_mul_projective_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_mul_projective_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -1198,7 +1165,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(60)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_377_mul_affine())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_mul_affine(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
@@ -1215,7 +1182,7 @@ pub mod pallet {
 		}
 
 		#[pallet::call_index(61)]
-		#[pallet::weight(T::WeightInfo::ed_on_bls12_377_mul_affine_optimized())]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn ed_on_bls12_377_mul_affine_optimized(
 			_origin: OriginFor<T>,
 			base: Vec<u8>,
