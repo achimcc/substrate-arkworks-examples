@@ -13,82 +13,36 @@ edition = "2021"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-codec = { package = "parity-scale-codec", version = "3.0.0", features = [ "derive" ], default-features = false }
+codec = { package = "parity-scale-codec", version = "3.2.2", features = [ "derive" ], default-features = false }
 scale-info = { version = "2.1.1", features = ["derive"], default-features = false }
-frame-benchmarking = { version = "4.0.0-dev", optional = true, default-features = false }
-frame-support = { version = "4.0.0-dev",  default-features = false }
-frame-system = { version = "4.0.0-dev", default-features = false }
-sp-ark-bls12-381 = { version = "0.4.0", features = ["curve"], default-features = false }
-sp-ark-bls12-377 = { version = "0.4.0", features = ["curve"], default-features = false }
-sp-ark-ed-on-bls12-381 = { version = "0.4.0", default-features = false }
-sp-ark-ed-on-bls12-377 = { version = "0.4.0", default-features = false }
-sp-ark-bw6-761 = { version = "0.4.0", default-features = false }
+frame-benchmarking = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", version = "4.0.0-dev", optional = true, default-features = false }
+frame-support = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", version = "4.0.0-dev",  default-features = false }
+frame-system = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", version = "4.0.0-dev", default-features = false }
+sp-bls12-381 = { git = "https://github.com/paritytech/sp-curves.git", features = ["curve"], default-features = false }
+sp-bls12-377 = { git = "https://github.com/paritytech/sp-curves.git", features = ["curve"], default-features = false }
+sp-ed-on-bls12-381-bandersnatch = { git = "https://github.com/paritytech/sp-curves.git", default-features = false }
+sp-ed-on-bls12-377 = { git = "https://github.com/paritytech/sp-curves.git", default-features = false }
+sp-bw6-761 = { git = "https://github.com/paritytech/sp-curves.git", default-features = false }
 sp-ark-models = { version = "0.4.0", default-features = false }
 ark-bls12-381 = { version = "0.4.0", features = ["curve"], default-features = false }
 ark-bls12-377 = { version = "0.4.0", features = ["curve"], default-features = false }
 ark-bw6-761 = { version = "0.4.0", default-features = false }
-ark-ed-on-bls12-381 = { version = "0.4.0", default-features = false }
+ark-ed-on-bls12-381-bandersnatch = { version = "0.4.0", default-features = false }
 ark-ed-on-bls12-377 = { version = "0.4.0", default-features = false }
-ark-serialize = { version = "0.4.0", default-features = false, features = [ "derive" ] }
+ark-serialize = { version = "0.4.0", features = [ "derive" ], default-features = false }
 ark-ff = { version = "0.4.0", default-features = false }
 ark-ec = { version = "0.4.0", default-features = false }
 ark-std = { version = "0.4.0", default-features = false }
 ark-snark = { version = "0.4.0", default-features = false }
-ark-groth16 = { version = "0.3.0", default-features = false, features = [ "r1cs" ] }
-sp-io = { version = "7.0.0", default-features = false }
-ark-crypto-primitives = { version = "0.4.0", default-features = false, features = [ "r1cs", "snark" ] } 
+ark-groth16 = { version = "0.4.0", features = [ "r1cs" ], default-features = false }
+ark-crypto-primitives = { version = "0.4.0", features = [ "r1cs", "snark" ], default-features = false } 
+ark-scale = { git = "https://github.com/w3f/ark-scale", features = ["hazmat"], default-features = false }
+sp-io =  { git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration", default-features = false }
 
 [dev-dependencies]
 ark-algebra-bench-templates = { version = "0.4.0", default-features = false }
-sp-core = { version = "7.0.0", default-features = false }
-sp-runtime = { version = "7.0.0", default-features = false }
-criterion = { version = "0.4", default-features = false }
-tracing-subscriber = { version = "0.3.16", default-features = false, features = ["parking_lot"] }
-sc-tracing = { version = "12.0.0", default-features = false }
-
-[[bench]]
-name = "arkworks"
-harness = false
-
-[[bench]]
-name = "bls12_381"
-path = "benches/bls12_381_template.rs"
-harness = false
-
-[[bench]]
-name = "bls12_381_optimized"
-path = "benches/bls12_381_template_optimized.rs"
-harness = false
-
-[[bench]]
-name = "bls12_377"
-path = "benches/bls12_377_template.rs"
-harness = false
-
-[[bench]]
-name = "bls12_377_optimized"
-path = "benches/bls12_377_template_optimized.rs"
-harness = false
-
-[[bench]]
-name = "bw6_761"
-path = "benches/bw6_761_template.rs"
-harness = false
-
-[[bench]]
-name = "bw6_761_optimized"
-path = "benches/bw6_761_template_optimized.rs"
-harness = false
-
-[[bench]]
-name = "ed_on_bls12_377"
-path = "benches/ed_on_bls12_377_template.rs"
-harness = false
-
-[[bench]]
-name = "ed_on_bls12_377_optimized"
-path = "benches/ed_on_bls12_377_template_optimized.rs"
-harness = false
+sp-core = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", version = "7.0.0", default-features = false }
+sp-runtime = { git = "https://github.com/paritytech/substrate.git", "branch" = "achimcc/arkworks-integration", version = "7.0.0", default-features = false }
 
 [features]
 default = [ "std" ]
@@ -98,27 +52,27 @@ std = [
 	"frame-benchmarking/std",
 	"frame-support/std",
 	"frame-system/std",
-	"sp-ark-bls12-381/std",
-	"sp-ark-bls12-377/std",
-	"sp-ark-ed-on-bls12-381/std",
-	"sp-ark-ed-on-bls12-377/std",
-	"sp-ark-bw6-761/std", 
+	"sp-bls12-381/std",
+	"sp-bls12-377/std",
+	"sp-ed-on-bls12-381-bandersnatch/std",
+	"sp-ed-on-bls12-377/std",
+	"sp-bw6-761/std", 
 	"sp-ark-models/std",
 	"ark-bls12-381/std",
 	"ark-bls12-377/std",
 	"ark-bw6-761/std",
-	"ark-ed-on-bls12-381/std",
+	"ark-ed-on-bls12-381-bandersnatch/std",
 	"ark-ed-on-bls12-377/std",
 	"ark-serialize/std",
 	"ark-ff/std",
 	"ark-ec/std",
 	"ark-std/std",
 	"ark-groth16/std",
-	"sp-io/std",
 	"ark-crypto-primitives/std",
+	"ark-scale/std",
 	"sp-core/std",
 	"sp-runtime/std",
-	"tracing-subscriber/std",
+	"sp-io/std",
 ]
 runtime-benchmarks = ["frame-benchmarking/runtime-benchmarks"]
 try-runtime = ["frame-support/try-runtime"]

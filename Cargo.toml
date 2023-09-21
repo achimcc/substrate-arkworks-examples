@@ -9,20 +9,14 @@ members = [
 panic = 'unwind'
 lto = true
 
-[patch.crates-io]
-sp-core = { git = "https://github.com/paritytech/substrate.git", branch = "no-compression" }
-sp-runtime = { git = "https://github.com/paritytech/substrate.git", branch = "no-compression" }
-sp-std = { git = "https://github.com/paritytech/substrate.git", branch = "no-compression" }
-sp-io = { git = "https://github.com/paritytech/substrate.git", branch = "no-compression" }
-frame-benchmarking = { git = "https://github.com/paritytech/substrate.git", branch = "no-compression" }
-frame-support = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "no-compression" }
-frame-system = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "no-compression" }
+[profile.bench]
+lto = true
 
-sp-ark-bls12-381 = { git = "https://github.com/paritytech/ark-substrate", branch = "no-compression" }
-sp-ark-bls12-377 = { git = "https://github.com/paritytech/ark-substrate", branch = "no-compression" }
-sp-ark-bw6-761 = { git = "https://github.com/paritytech/ark-substrate", branch = "no-compression" }
-sp-ark-ed-on-bls12-377 = { git = "https://github.com/paritytech/ark-substrate", branch = "no-compression" }
-sp-ark-ed-on-bls12-381 = { git = "https://github.com/paritytech/ark-substrate", branch = "no-compression" }
-sp-ark-models = { git = "https://github.com/paritytech/ark-substrate", branch = "no-compression" }
-ark-groth16 = { git = "https://github.com/achimcc/groth16", branch = "master" }
+[patch.crates-io]
+sp-ark-bls12-381 = { git = "https://github.com/paritytech/ark-substrate.git" }
+sp-ark-bls12-377 = { git = "https://github.com/paritytech/ark-substrate.git" }
+sp-ark-ed-on-bls12-381-bandersnatch = { git = "https://github.com/paritytech/ark-substrate.git" }
+sp-ark-ed-on-bls12-377 = { git = "https://github.com/paritytech/ark-substrate.git" }
+sp-ark-bw6-761 = { git = "https://github.com/paritytech/ark-substrate.git" }
+sp-ark-models = { git = "https://github.com/paritytech/ark-substrate.git" }
 
