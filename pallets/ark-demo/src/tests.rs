@@ -93,11 +93,7 @@ fn pairing_bls12_381() {
 			<ark_ec::bls12::Bls12<ark_bls12_381::Config> as ark_ec::pairing::Pairing>::G1Affine,
 			<ark_ec::bls12::Bls12<ark_bls12_381::Config> as ark_ec::pairing::Pairing>::G2Affine,
 		>();
-		assert_ok!(TemplateModule::bls12_381_pairing(
-			RuntimeOrigin::signed(1),
-			a.encode(),
-			b.encode()
-		));
+		assert_ok!(TemplateModule::bls12_381_pairing(RuntimeOrigin::signed(1), a, b));
 	});
 }
 

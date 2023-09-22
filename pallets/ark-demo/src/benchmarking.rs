@@ -201,7 +201,7 @@ benchmarks! {
 	bls12_381_pairing {
 		let caller: T::AccountId = whitelisted_caller();
 		let (a, b) = generate_pairing_args::<ark_bls12_381::G1Affine, ark_bls12_381::G2Affine>();
-	}: _(RawOrigin::Signed(caller), a.encode(), b.encode())
+	}: _(RawOrigin::Signed(caller), a, b)
 
 	bls12_381_pairing_optimized {
 		let caller: T::AccountId = whitelisted_caller();

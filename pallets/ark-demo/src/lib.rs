@@ -24,9 +24,9 @@ pub use weights::*;
 
 use ark_scale::hazmat::ArkScaleProjective;
 
-const HOST_CALL: ark_scale::Usage = ark_scale::HOST_CALL;
+const USAGE: ark_scale::Usage = ark_scale::WIRE;
 
-type ArkScale<T> = ark_scale::ArkScale<T, HOST_CALL>;
+type ArkScale<T> = ark_scale::ArkScale<T, USAGE>;
 
 pub use pallet::*;
 
@@ -142,14 +142,12 @@ pub mod pallet {
 
 		#[pallet::call_index(2)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_381_pairing(_origin: OriginFor<T>, a: Vec<u8>, b: Vec<u8>) -> DispatchResult {
-			let a = <ArkScale<ark_bls12_381::G1Affine> as Decode>::decode(&mut a.as_slice())
-				.unwrap()
-				.0;
-			let b = <ArkScale<ark_bls12_381::G2Affine> as Decode>::decode(&mut b.as_slice())
-				.unwrap()
-				.0;
-			let _ = crate::bls12_381::do_pairing(a, b);
+		pub fn bls12_381_pairing(
+			_origin: OriginFor<T>,
+			a: ArkScale<ark_bls12_381::G1Affine>,
+			b: ArkScale<ark_bls12_381::G2Affine>,
+		) -> DispatchResult {
+			let _ = crate::bls12_381::do_pairing(a.0, b.0);
 			Ok(())
 		}
 
