@@ -12,16 +12,20 @@ use sc_transaction_pool_api::OffchainTransactionPoolFactory;
 use sp_consensus_aura::sr25519::AuthorityPair as AuraPair;
 use std::{sync::Arc, time::Duration};
 
+#[cfg(feature = "runtime-benchmarks")]
+type ExtendedHostFunctions = (
+	sp_crypto_ec_utils::elliptic_curves::HostFunctions,
+	frame_benchmarking::benchmarking::HostFunctions,
+);
+
+#[cfg(not(feature = "runtime-benchmarks"))]
+type ExtendedHostFunctions = sp_crypto_ec_utils::elliptic_curves::HostFunctions;
+
 // Our native executor instance.
 pub struct ExecutorDispatch;
 
 impl sc_executor::NativeExecutionDispatch for ExecutorDispatch {
-	/// Only enable the benchmarking host functions when we actually want to benchmark.
-	#[cfg(feature = "runtime-benchmarks")]
-	type ExtendHostFunctions = frame_benchmarking::benchmarking::HostFunctions;
-	/// Otherwise we only use the default Substrate host functions.
-	#[cfg(not(feature = "runtime-benchmarks"))]
-	type ExtendHostFunctions = ();
+	type ExtendHostFunctions = ExtendedHostFunctions;
 
 	fn dispatch(method: &str, data: &[u8]) -> Option<Vec<u8>> {
 		node_ark_demo_runtime::api::dispatch(method, data)

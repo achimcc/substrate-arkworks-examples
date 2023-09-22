@@ -46,6 +46,7 @@ frame-system = { git = "https://github.com/paritytech/polkadot-sdk" }
 sc-rpc = { git = "https://github.com/paritytech/polkadot-sdk" }
 sp-api = { git = "https://github.com/paritytech/polkadot-sdk" }
 sc-rpc-api = { git = "https://github.com/paritytech/polkadot-sdk" }
+sp-crypto-ec-utils = { git = "https://github.com/paritytech/polkadot-sdk" }
 sp-blockchain = { git = "https://github.com/paritytech/polkadot-sdk" }
 sp-block-builder = { git = "https://github.com/paritytech/polkadot-sdk" }
 sc-basic-authorship = { git = "https://github.com/paritytech/polkadot-sdk" }

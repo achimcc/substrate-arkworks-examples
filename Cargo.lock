@@ -5014,6 +5014,7 @@ dependencies = [
  "sp-consensus-aura",
  "sp-consensus-grandpa",
  "sp-core",
+ "sp-crypto-ec-utils",
  "sp-inherents",
  "sp-io",
  "sp-keyring",
