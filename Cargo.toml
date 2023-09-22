@@ -4,7 +4,7 @@ resolver = "2"
 members = [
 #     "node",
     "pallets/ark-demo",
-#     "runtime",
+    "runtime",
 ]
 
 [profile.release]
@@ -13,14 +13,6 @@ lto = true
 
 [profile.bench]
 lto = true
-
-# [patch.crates-io]
-# sp-ark-bls12-381 = { git = "https://github.com/paritytech/ark-substrate.git" }
-# sp-ark-bls12-377 = { git = "https://github.com/paritytech/ark-substrate.git" }
-# sp-ark-ed-on-bls12-381-bandersnatch = { git = "https://github.com/paritytech/ark-substrate.git" }
-# sp-ark-ed-on-bls12-377 = { git = "https://github.com/paritytech/ark-substrate.git" }
-# sp-ark-bw6-761 = { git = "https://github.com/paritytech/ark-substrate.git" }
-# sp-ark-models = { git = "https://github.com/paritytech/ark-substrate.git" }
 
 [patch.crates-io]
 ark-scale = { path = "/home/davxy/develop/w3f/ark-scale" }

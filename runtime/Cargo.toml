@@ -1,57 +1,55 @@
 [package]
-name = "node-template-runtime"
+name = "node-ark-demo-runtime"
 version = "4.0.0-dev"
-description = "A fresh FRAME-based Substrate node, ready for hacking."
-authors = ["Substrate DevHub <https://github.com/substrate-developer-hub>"]
+description = "A FRAME-based Substrate node to test and benchmark ark primitives."
+authors = ["Davide Galassi <davxy@datawok.net>"]
 homepage = "https://substrate.io/"
 edition = "2021"
 license = "MIT-0"
 publish = false
-repository = "https://github.com/substrate-developer-hub/substrate-node-template/"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
 [dependencies]
-codec = { package = "parity-scale-codec", version = "3.2.2", default-features = false, features = ["derive"] }
-scale-info = { version = "2.5.0", default-features = false, features = ["derive"] }
-
-pallet-aura = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-pallet-balances = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-frame-support = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-pallet-grandpa = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-pallet-sudo = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-frame-system = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-frame-try-runtime = { version = "0.10.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", optional = true  }
-pallet-timestamp = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-pallet-transaction-payment = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-frame-executive = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-sp-api = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-sp-block-builder = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-sp-consensus-aura = { version = "0.10.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-sp-consensus-grandpa = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-sp-core = { version = "7.0.0", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-sp-inherents = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-sp-offchain = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-sp-runtime = { version = "7.0.0", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-sp-session = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-sp-std = { version = "5.0.0", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-sp-transaction-pool = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-sp-version = { version = "5.0.0", default-features = false, git = "https://github.com/paritytech/substrate.git" }
+codec = { package = "parity-scale-codec", version = "3.6.1", default-features = false, features = ["derive"] }
+scale-info = { version = "2.9.0", default-features = false, features = ["derive"] }
+pallet-aura = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false  }
+pallet-balances = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+frame-support = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+pallet-grandpa = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+pallet-sudo = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+frame-system = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+frame-try-runtime = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk", optional = true  }
+pallet-timestamp = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+pallet-transaction-payment = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+frame-executive = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+sp-api = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+sp-block-builder = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+sp-consensus-aura = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+sp-consensus-grandpa = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+sp-core = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+sp-inherents = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+sp-offchain = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+sp-runtime = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+sp-session = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+sp-std = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+sp-transaction-pool = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+sp-version = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
 
 # Used for the node template's RPCs
-frame-system-rpc-runtime-api = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
-pallet-transaction-payment-rpc-runtime-api = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git" }
+frame-system-rpc-runtime-api = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
+pallet-transaction-payment-rpc-runtime-api = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk" }
 
 # Used for runtime benchmarking
-frame-benchmarking = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", optional = true  }
-frame-system-benchmarking = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", optional = true  }
+frame-benchmarking = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk", optional = true  }
+frame-system-benchmarking = { default-features = false, git = "https://github.com/paritytech/polkadot-sdk", optional = true  }
 
-# Local Dependencies
-pallet-template = { version = "4.0.0-dev", default-features = false, path = "../pallets/template" }
+# ARK demo pallet
+pallet-ark-demo = { path = "../pallets/ark-demo", default-features = false }
 
 [build-dependencies]
-substrate-wasm-builder = { version = "5.0.0-dev", git = "https://github.com/paritytech/substrate.git", optional = true  }
+substrate-wasm-builder = { git = "https://github.com/paritytech/polkadot-sdk", optional = true  }
 
 [features]
 default = ["std"]
@@ -70,7 +68,7 @@ std = [
 	"pallet-balances/std",
 	"pallet-grandpa/std",
 	"pallet-sudo/std",
-	"pallet-template/std",
+	"pallet-ark-demo/std",
 	"pallet-timestamp/std",
 	"pallet-transaction-payment-rpc-runtime-api/std",
 	"pallet-transaction-payment/std",
@@ -95,7 +93,7 @@ runtime-benchmarks = [
 	"frame-system/runtime-benchmarks",
 	"pallet-balances/runtime-benchmarks",
 	"pallet-grandpa/runtime-benchmarks",
-	"pallet-template/runtime-benchmarks",
+	"pallet-ark-demo/runtime-benchmarks",
 	"pallet-timestamp/runtime-benchmarks",
 	"sp-runtime/runtime-benchmarks",
 ]
@@ -108,7 +106,7 @@ try-runtime = [
 	"pallet-balances/try-runtime",
 	"pallet-grandpa/try-runtime",
 	"pallet-sudo/try-runtime",
-	"pallet-template/try-runtime",
+	"pallet-ark-demo/try-runtime",
 	"pallet-timestamp/try-runtime",
 	"pallet-transaction-payment/try-runtime",
 ]
