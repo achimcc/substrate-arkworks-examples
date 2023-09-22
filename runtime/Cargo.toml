@@ -1,11 +1,11 @@
 [package]
 name = "node-ark-demo-runtime"
-version = "4.0.0-dev"
-description = "A FRAME-based Substrate node to test and benchmark ark primitives."
+version = "0.1.0"
+description = "A FRAME-based Substrate node runtime to test and benchmark arkworks primitives."
 authors = ["Davide Galassi <davxy@datawok.net>"]
 homepage = "https://substrate.io/"
 edition = "2021"
-license = "MIT-0"
+license = "MIT"
 publish = false
 
 [package.metadata.docs.rs]

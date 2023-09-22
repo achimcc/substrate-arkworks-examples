@@ -2,7 +2,7 @@
 resolver = "2"
 
 members = [
-#     "node",
+    "node",
     "pallets/ark-demo",
     "runtime",
 ]

@@ -1,80 +1,81 @@
 [package]
-name = "node-template"
-version = "4.0.0-dev"
-description = "A fresh FRAME-based Substrate node, ready for hacking."
-authors = ["Substrate DevHub <https://github.com/substrate-developer-hub>"]
+name = "node-ark-demo"
+version = "0.1.0"
+description = "A FRAME-based Substrate node to test and benchmark arkworks primitives."
+authors = ["Davide Galassi <davxy@datawok.net>"]
 homepage = "https://substrate.io/"
 edition = "2021"
-license = "Unlicense"
+license = "MIT"
 publish = false
-repository = "https://github.com/substrate-developer-hub/substrate-node-template/"
 build = "build.rs"
 
 [package.metadata.docs.rs]
 targets = ["x86_64-unknown-linux-gnu"]
 
 [[bin]]
-name = "node-template"
+name = "node-ark-demo"
 
 [dependencies]
 clap = { version = "4.0.9", features = ["derive"] }
 futures = { version = "0.3.21", features = ["thread-pool"]}
-
-sc-cli = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-core = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sc-executor = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sc-service = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sc-telemetry = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sc-keystore = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sc-transaction-pool = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sc-transaction-pool-api = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sc-consensus-aura = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-consensus-aura = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-consensus = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sc-consensus = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sc-consensus-grandpa = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-consensus-grandpa = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sc-client-api = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-runtime = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-io =  { git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-timestamp = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-inherents = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-keyring = { version = "7.0.0", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-frame-system = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-pallet-transaction-payment = { version = "4.0.0-dev", default-features = false, git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-
-# These dependencies are used for the node template's RPCs
 jsonrpsee = { version = "0.16.2", features = ["server"] }
-sc-rpc = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-api = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sc-rpc-api = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-blockchain = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sp-block-builder = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-sc-basic-authorship = { version = "0.10.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-substrate-frame-rpc-system = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
-pallet-transaction-payment-rpc = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
+
+sc-cli = { git = "https://github.com/paritytech/polkadot-sdk" }
+sp-core = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-executor = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-network = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-service = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-telemetry = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-keystore = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-transaction-pool = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-transaction-pool-api = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-offchain = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-consensus-aura = { git = "https://github.com/paritytech/polkadot-sdk" }
+sp-consensus-aura = { git = "https://github.com/paritytech/polkadot-sdk" }
+sp-consensus = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-consensus = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-consensus-grandpa = { git = "https://github.com/paritytech/polkadot-sdk" }
+sp-consensus-grandpa = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-client-api = { git = "https://github.com/paritytech/polkadot-sdk" }
+sp-runtime = { git = "https://github.com/paritytech/polkadot-sdk" }
+sp-io =  { git = "https://github.com/paritytech/polkadot-sdk" }
+sp-timestamp = { git = "https://github.com/paritytech/polkadot-sdk" }
+sp-inherents = { git = "https://github.com/paritytech/polkadot-sdk" }
+sp-keyring = { git = "https://github.com/paritytech/polkadot-sdk" }
+frame-system = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-rpc = { git = "https://github.com/paritytech/polkadot-sdk" }
+sp-api = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-rpc-api = { git = "https://github.com/paritytech/polkadot-sdk" }
+sp-blockchain = { git = "https://github.com/paritytech/polkadot-sdk" }
+sp-block-builder = { git = "https://github.com/paritytech/polkadot-sdk" }
+sc-basic-authorship = { git = "https://github.com/paritytech/polkadot-sdk" }
+substrate-frame-rpc-system = { git = "https://github.com/paritytech/polkadot-sdk" }
+pallet-transaction-payment = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false }
+pallet-transaction-payment-rpc = { git = "https://github.com/paritytech/polkadot-sdk" }
 
 # These dependencies are used for runtime benchmarking
-frame-benchmarking = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration"}
-frame-benchmarking-cli = { version = "4.0.0-dev", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
+frame-benchmarking = { git = "https://github.com/paritytech/polkadot-sdk" }
+frame-benchmarking-cli = { git = "https://github.com/paritytech/polkadot-sdk" }
 
 # Local Dependencies
-node-template-runtime = { version = "4.0.0-dev", path = "../runtime" }
+node-ark-demo-runtime = { path = "../runtime" }
 
 # CLI-specific dependencies
-try-runtime-cli = { version = "0.10.0-dev", optional = true, git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
+try-runtime-cli = { git = "https://github.com/paritytech/polkadot-sdk", optional = true }
 
 [build-dependencies]
-substrate-build-script-utils = { version = "3.0.0", git = "https://github.com/paritytech/substrate.git", branch = "achimcc/arkworks-integration" }
+substrate-build-script-utils = { git = "https://github.com/paritytech/polkadot-sdk" }
 
 [features]
 default = []
 # Dependencies that are only required if runtime benchmarking should be build.
 runtime-benchmarks = [
-	"node-template-runtime/runtime-benchmarks",
+	"node-ark-demo-runtime/runtime-benchmarks",
 	"frame-benchmarking/runtime-benchmarks",
 	"frame-benchmarking-cli/runtime-benchmarks",
 ]
-# Enable features that allow the runtime to be tried and debugged. Name might be subject to change
-# in the near future.
-try-runtime = ["node-template-runtime/try-runtime", "try-runtime-cli/try-runtime"]
+# Enable features that allow the runtime to be tried and debugged.
+try-runtime = [
+	"node-ark-demo-runtime/try-runtime",
+	"try-runtime-cli/try-runtime"
+]
