@@ -8,9 +8,10 @@
 //! WASM-EXECUTION: `Compiled`, CHAIN: `Some("dev")`, DB CACHE: 1024
 
 // Executed Command:
-// ./target/debug/node-ark-demo
+// ./target/release/node-ark-demo
 // benchmark
 // pallet
+// --no-min-squares
 // --chain
 // dev
 // --pallet
@@ -39,16 +40,164 @@ impl<T: frame_system::Config> pallet_ark_demo::WeightInfo for WeightInfo<T> {
 		// Proof Size summary in bytes:
 		//  Measured:  `0`
 		//  Estimated: `0`
-		// Minimum execution time: 20_828_358_000 picoseconds.
-		Weight::from_parts(20_852_684_000, 0)
+		// Minimum execution time: 20_427_506_000 picoseconds.
+		Weight::from_parts(20_448_526_000, 0)
 			.saturating_add(Weight::from_parts(0, 0))
 	}
-	fn bls12_377_pairing() -> Weight {
+	fn groth16_verification_opt() -> Weight {
 		// Proof Size summary in bytes:
 		//  Measured:  `0`
 		//  Estimated: `0`
-		// Minimum execution time: 13_312_249_000 picoseconds.
-		Weight::from_parts(13_322_448_000, 0)
+		// Minimum execution time: 3_382_224_000 picoseconds.
+		Weight::from_parts(3_388_326_000, 0)
 			.saturating_add(Weight::from_parts(0, 0))
+	}
+	fn bls12_381_pairing() -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `0`
+		//  Estimated: `0`
+		// Minimum execution time: 9_166_492_000 picoseconds.
+		Weight::from_parts(9_247_254_000, 0)
+			.saturating_add(Weight::from_parts(0, 0))
+	}
+	fn bls12_381_pairing_opt() -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `0`
+		//  Estimated: `0`
+		// Minimum execution time: 2_276_616_000 picoseconds.
+		Weight::from_parts(2_282_668_000, 0)
+			.saturating_add(Weight::from_parts(0, 0))
+	}
+	/// The range of component `x` is `[10, 100]`.
+	fn bls12_381_msm_g1(x: u32, ) -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `0`
+		//  Estimated: `0`
+		// Minimum execution time: 12_075_222_000 picoseconds.
+		Weight::from_parts(4_483_410_018, 0)
+			.saturating_add(Weight::from_parts(0, 0))
+			// Standard Error: 15_973_110
+			.saturating_add(Weight::from_parts(872_003_892, 0).saturating_mul(x.into()))
+	}
+	/// The range of component `x` is `[10, 100]`.
+	fn bls12_381_msm_g1_opt(x: u32, ) -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `0`
+		//  Estimated: `0`
+		// Minimum execution time: 3_774_364_000 picoseconds.
+		Weight::from_parts(612_363_000, 0)
+			.saturating_add(Weight::from_parts(0, 0))
+			// Standard Error: 1_862_713
+			.saturating_add(Weight::from_parts(329_935_888, 0).saturating_mul(x.into()))
+	}
+	/// The range of component `x` is `[10, 100]`.
+	fn bls12_381_msm_g2(x: u32, ) -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `0`
+		//  Estimated: `0`
+		// Minimum execution time: 29_949_060_000 picoseconds.
+		Weight::from_parts(12_884_115_537, 0)
+			.saturating_add(Weight::from_parts(0, 0))
+			// Standard Error: 45_691_699
+			.saturating_add(Weight::from_parts(2_024_785_596, 0).saturating_mul(x.into()))
+	}
+	/// The range of component `x` is `[10, 100]`.
+	fn bls12_381_msm_g2_opt(x: u32, ) -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `0`
+		//  Estimated: `0`
+		// Minimum execution time: 10_216_518_000 picoseconds.
+		Weight::from_parts(1_764_865_703, 0)
+			.saturating_add(Weight::from_parts(0, 0))
+			// Standard Error: 6_005_057
+			.saturating_add(Weight::from_parts(887_704_918, 0).saturating_mul(x.into()))
+	}
+	/// The range of component `x` is `[1, 16]`.
+	fn bls12_381_mul_projective_g1(x: u32, ) -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `0`
+		//  Estimated: `0`
+		// Minimum execution time: 360_791_000 picoseconds.
+		Weight::from_parts(360_791_000, 0)
+			.saturating_add(Weight::from_parts(0, 0))
+			// Standard Error: 7_477_688
+			.saturating_add(Weight::from_parts(341_285_132, 0).saturating_mul(x.into()))
+	}
+	/// The range of component `x` is `[1, 16]`.
+	fn bls12_381_mul_projective_g1_opt(x: u32, ) -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `0`
+		//  Estimated: `0`
+		// Minimum execution time: 58_090_000 picoseconds.
+		Weight::from_parts(6_613_435, 0)
+			.saturating_add(Weight::from_parts(0, 0))
+			// Standard Error: 245_553
+			.saturating_add(Weight::from_parts(52_270_974, 0).saturating_mul(x.into()))
+	}
+	/// The range of component `x` is `[1, 16]`.
+	fn bls12_381_mul_affine_g1(x: u32, ) -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `0`
+		//  Estimated: `0`
+		// Minimum execution time: 917_432_000 picoseconds.
+		Weight::from_parts(610_858_829, 0)
+			.saturating_add(Weight::from_parts(0, 0))
+			// Standard Error: 271_524
+			.saturating_add(Weight::from_parts(307_574_847, 0).saturating_mul(x.into()))
+	}
+	/// The range of component `x` is `[1, 16]`.
+	fn bls12_381_mul_affine_g1_opt(x: u32, ) -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `0`
+		//  Estimated: `0`
+		// Minimum execution time: 350_532_000 picoseconds.
+		Weight::from_parts(304_321_482, 0)
+			.saturating_add(Weight::from_parts(0, 0))
+			// Standard Error: 285_306
+			.saturating_add(Weight::from_parts(51_954_062, 0).saturating_mul(x.into()))
+	}
+	/// The range of component `x` is `[1, 16]`.
+	fn bls12_381_mul_projective_g2(x: u32, ) -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `0`
+		//  Estimated: `0`
+		// Minimum execution time: 1_054_581_000 picoseconds.
+		Weight::from_parts(1_054_581_000, 0)
+			.saturating_add(Weight::from_parts(0, 0))
+			// Standard Error: 22_277_905
+			.saturating_add(Weight::from_parts(1_007_633_914, 0).saturating_mul(x.into()))
+	}
+	/// The range of component `x` is `[1, 16]`.
+	fn bls12_381_mul_projective_g2_opt(x: u32, ) -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `0`
+		//  Estimated: `0`
+		// Minimum execution time: 158_499_000 picoseconds.
+		Weight::from_parts(10_737_798, 0)
+			.saturating_add(Weight::from_parts(0, 0))
+			// Standard Error: 136_877
+			.saturating_add(Weight::from_parts(150_014_370, 0).saturating_mul(x.into()))
+	}
+	/// The range of component `x` is `[1, 16]`.
+	fn bls12_381_mul_affine_g2(x: u32, ) -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `0`
+		//  Estimated: `0`
+		// Minimum execution time: 2_109_443_000 picoseconds.
+		Weight::from_parts(1_220_835_178, 0)
+			.saturating_add(Weight::from_parts(0, 0))
+			// Standard Error: 995_252
+			.saturating_add(Weight::from_parts(907_107_458, 0).saturating_mul(x.into()))
+	}
+	/// The range of component `x` is `[1, 16]`.
+	fn bls12_381_mul_affine_g2_opt(x: u32, ) -> Weight {
+		// Proof Size summary in bytes:
+		//  Measured:  `0`
+		//  Estimated: `0`
+		// Minimum execution time: 937_450_000 picoseconds.
+		Weight::from_parts(790_340_173, 0)
+			.saturating_add(Weight::from_parts(0, 0))
+			// Standard Error: 309_288
+			.saturating_add(Weight::from_parts(150_048_725, 0).saturating_mul(x.into()))
 	}
 }

@@ -9,10 +9,8 @@ members = [
 
 [profile.release]
 panic = 'unwind'
-lto = true
-
-[profile.bench]
-lto = true
+opt-level = 3
+#lto = true
 
 [patch.crates-io]
 ark-scale = { path = "/home/davxy/develop/w3f/ark-scale" }

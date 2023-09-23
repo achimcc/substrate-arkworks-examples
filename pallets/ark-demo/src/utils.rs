@@ -7,28 +7,6 @@ use ark_serialize::{CanonicalSerialize, Compress, SerializationError};
 use ark_snark::SNARK;
 use ark_std::{test_rng, vec, vec::Vec, UniformRand};
 
-pub enum InternalError {
-	Serialization,
-	Verification,
-	CircuitSynthesis,
-}
-
-impl<T: crate::Config> From<InternalError> for crate::Error<T> {
-	fn from(value: InternalError) -> Self {
-		match value {
-			InternalError::Verification => crate::Error::Verification,
-			InternalError::Serialization => crate::Error::Serialization,
-			InternalError::CircuitSynthesis => crate::Error::CircuitSynthesis,
-		}
-	}
-}
-
-impl From<SerializationError> for InternalError {
-	fn from(_: SerializationError) -> InternalError {
-		InternalError::Serialization
-	}
-}
-
 pub type VerifyingKeyFor<PairingT, PrimeFieldT> =
 	<Groth16<PairingT> as SNARK<PrimeFieldT>>::VerifyingKey;
 
@@ -51,11 +29,15 @@ pub fn generate_msm_args<Group: ark_ec::VariableBaseMSM>(
 	(bases, scalars)
 }
 
-fn generate_scalar() -> ArkScale<Vec<u64>> {
+// `words_count` is the scalar length in words, with 1 word assumed to be 64 bits.
+// Most significant bit is set.
+fn generate_scalar(words_count: u32) -> ArkScale<Vec<u64>> {
 	let rng = &mut test_rng();
-	let scalar = vec![u64::rand(rng)];
-	let scalar: ArkScale<Vec<u64>> = scalar.into();
-	scalar
+	let mut scalar: Vec<_> = (0..words_count as usize).map(|_| u64::rand(rng)).collect();
+	// Arkworks assumes scalar to be in **big endian**
+	scalar[0] |= 1 << 63;
+	let scalars: ArkScale<Vec<u64>> = scalar.into();
+	scalars
 }
 
 fn generate_base<Group: CanonicalSerialize + UniformRand>() -> ArkScale<Group> {
@@ -73,17 +55,23 @@ fn generate_base_projective<Group: CanonicalSerialize + UniformRand>() -> ArkSca
 	base
 }
 
+// `words_count` is the scalar length in words, with 1 word assumed to be 64 bits.
+// Most significant bit is set.
 pub fn generate_scalar_args<Group: CanonicalSerialize + UniformRand>(
+	words_count: u32,
 ) -> (ArkScale<Group>, ArkScale<Vec<u64>>) {
-	let serialized_scalar = generate_scalar();
-	let serialized_base = generate_base::<Group>();
-	(serialized_base, serialized_scalar)
+	let base = generate_base::<Group>();
+	let scalar = generate_scalar(words_count);
+	(base, scalar)
 }
 
+// `words_count` is the scalar length in words, with 1 word assumed to be 64 bits.
+// Most significant bit is set.
 pub fn generate_scalar_args_projective<Group: CanonicalSerialize + UniformRand>(
+	words_count: u32,
 ) -> (ArkScaleProjective<Group>, ArkScale<Vec<u64>>) {
-	let scalar = generate_scalar();
 	let base = generate_base_projective::<Group>();
+	let scalar = generate_scalar(words_count);
 	(base, scalar)
 }
 

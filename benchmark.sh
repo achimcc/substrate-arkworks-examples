@@ -1,37 +1,31 @@
 #!/bin/bash
 
-binary="./target/debug/node-ark-demo"
+binary="./target/release/node-ark-demo"
+# binary="./target/debug/node-ark-demo"
 
-action=$1
+NO_DETAILS="--no-min-squares"
+# NO_DETAILS="--no-median-slopes --no-min-squares"
 
-# export RUST_LOG="sassafras=debug"
+steps=3
+repeat=3
 
-case $action in
-    "list")
-        $binary benchmark pallet --list
-        ;;
-    "run")
-        pallet='*'
-        extrinsic='*'
-        if [[ $2 != "" ]]; then
-            pallet=$2
-            if [[ $3 != "" ]]; then
-                extrinsic=$3
-            fi
-        fi
-        $binary benchmark pallet \
-            --chain dev \
-            --pallet $pallet \
-            --extrinsic "$extrinsic" \
-            --steps 3 \
-            --repeat 3 \
-            --output weights.rs
-            ;;
+if [[ $1 == "" ]]; then
+    $binary benchmark pallet --list
+    exit 0
+fi
+    
+pallet="$1"
+extrinsic='*'
 
-    *)
-        echo "Usage: benchmark <command>"
-        echo "  Commands:"
-        echo "  - list"
-        echo "  - run [pallet] [extrinsic]"
-        ;;
-esac
+if [[ $2 != "" ]]; then
+    extrinsic="$2"
+fi
+
+$binary benchmark pallet \
+    $NO_DETAILS \
+    --chain dev \
+    --pallet $pallet \
+    --extrinsic "$extrinsic" \
+    --steps $steps \
+    --repeat $repeat \
+    --output weights.rs
