@@ -72,8 +72,11 @@ default = []
 # Dependencies that are only required if runtime benchmarking should be build.
 runtime-benchmarks = [
 	"node-ark-demo-runtime/runtime-benchmarks",
-	"frame-benchmarking/runtime-benchmarks",
 	"frame-benchmarking-cli/runtime-benchmarks",
+	"frame-benchmarking/runtime-benchmarks",
+	"frame-system/runtime-benchmarks",
+	"sc-service/runtime-benchmarks",
+	"sp-runtime/runtime-benchmarks",
 ]
 # Enable features that allow the runtime to be tried and debugged.
 try-runtime = [
