@@ -1,6 +1,6 @@
-use crate::utils::{ProofFor, VerifyingKeyFor};
+use crate::utils::{ProofFor, ScalarFieldFor, VerifyingKeyFor};
 use ark_bls12_381::{Bls12_381, Fr, G1Affine, G1Projective, G2Affine, G2Projective};
-use ark_ec::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr, CurveConfig};
+use ark_ec::{pairing::Pairing, short_weierstrass::SWCurveConfig, AffineRepr};
 use ark_ff::Fp;
 use ark_groth16::Groth16;
 use ark_serialize::CanonicalDeserialize;
@@ -44,10 +44,8 @@ pub fn pairing_opt(a: G1AffineOpt, b: G2AffineOpt) {
 }
 
 #[inline]
-pub fn msm_g1(bases: &[G1Affine], scalars: &[<G1Affine as AffineRepr>::ScalarField]) {
-	let _out = <ark_bls12_381::g1::Config as ark_ec::models::short_weierstrass::SWCurveConfig>::msm(
-		bases, scalars,
-	);
+pub fn msm_g1(bases: &[G1Affine], scalars: &[ScalarFieldFor<G1Affine>]) {
+	let _out = <ark_bls12_381::g1::Config as SWCurveConfig>::msm(bases, scalars);
 }
 
 #[inline]
@@ -56,18 +54,12 @@ pub fn msm_g1_opt(bases: &[G1AffineOpt], scalars: &[<G1AffineOpt as AffineRepr>:
 }
 
 #[inline]
-pub fn msm_g2(
-	bases: &[G2Affine],
-	scalars: &[<ark_bls12_381::g2::Config as CurveConfig>::ScalarField],
-) {
+pub fn msm_g2(bases: &[G2Affine], scalars: &[ScalarFieldFor<G2Affine>]) {
 	let _out = <ark_bls12_381::g2::Config as SWCurveConfig>::msm(bases, scalars);
 }
 
 #[inline]
-pub fn msm_g2_opt(
-	bases: &[G2AffineOpt],
-	scalars: &[<sp_bls12_381::g2::Config as CurveConfig>::ScalarField],
-) {
+pub fn msm_g2_opt(bases: &[G2AffineOpt], scalars: &[ScalarFieldFor<G2AffineOpt>]) {
 	let _out = <sp_bls12_381::g2::Config as SWCurveConfig>::msm(bases, scalars);
 }
 
