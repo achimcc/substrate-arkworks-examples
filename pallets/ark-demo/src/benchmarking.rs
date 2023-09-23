@@ -265,7 +265,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_377_msm_g2(x: Linear<MSM_LEN_MIN, MSM_LEN_MAX>) {
-		let (bases, scalars) = generate_msm_args::<ark_bls12_377::G1Projective>(x);
+		let (bases, scalars) = generate_msm_args::<ark_bls12_377::G2Projective>(x);
 
 		#[extrinsic_call]
 		bls12_377_msm_g2(RawOrigin::None, bases.encode(), scalars.encode());
@@ -310,6 +310,7 @@ mod benchmarks {
 		#[extrinsic_call]
 		bls12_377_mul_affine_g1_opt(RawOrigin::None, base.encode(), scalar.encode());
 	}
+
 	#[benchmark]
 	fn bls12_377_mul_projective_g2(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
 		let (base, scalar) = generate_scalar_args_projective::<ark_bls12_377::G2Projective>(x);
