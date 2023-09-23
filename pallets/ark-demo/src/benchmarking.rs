@@ -6,11 +6,8 @@ use crate::utils::{
 };
 #[allow(unused)]
 use crate::Pallet as Template;
-// use ark_bls12_381::{Bls12_381, Fr as BlsFr, FrConfig, G1Affine, G2Affine};
 use ark_ff::{Fp, MontBackend};
-use ark_groth16::Groth16;
-use ark_serialize::{CanonicalDeserialize, Compress, Validate};
-use ark_snark::SNARK;
+use ark_serialize::CanonicalDeserialize;
 use ark_std::vec;
 use codec::Encode;
 use frame_benchmarking::v2::*;
@@ -66,7 +63,7 @@ mod benchmarks {
 	// Min number of elements for multi scalar multiplication
 	const MSM_LEN_MIN: u32 = 10;
 	// Max number of elements for multi scalar multiplication
-	const MSM_LEN_MAX: u32 = 100;
+	const MSM_LEN_MAX: u32 = 1000;
 
 	// Scalar min words for single scalar multiplication (1 = 64 bit)
 	const SCALAR_WORDS_MIN: u32 = 1;
@@ -299,316 +296,319 @@ mod benchmarks {
 	// 	#[extrinsic_call]
 	// 	bls12_377_msm_g1_opt(RawOrigin::None, bases.encode(), scalars.encode())
 	// }
+
+	#[benchmark]
+	fn ed_on_bls12_381_bandersnatch_msm_sw(x: Linear<MSM_LEN_MIN, MSM_LEN_MAX>) {
+		let (bases, scalars) =
+			generate_msm_args::<ark_ed_on_bls12_381_bandersnatch::SWProjective>(x);
+
+		#[extrinsic_call]
+		ed_on_bls12_381_bandersnatch_msm_sw(RawOrigin::None, bases.encode(), scalars.encode());
+	}
+
+	#[benchmark]
+	fn ed_on_bls12_381_bandersnatch_msm_sw_opt(x: Linear<MSM_LEN_MIN, MSM_LEN_MAX>) {
+		let (bases, scalars) =
+			generate_msm_args::<sp_ed_on_bls12_381_bandersnatch::SWProjective>(x);
+
+		#[extrinsic_call]
+		ed_on_bls12_381_bandersnatch_msm_sw_opt(RawOrigin::None, bases.encode(), scalars.encode());
+	}
+
+	#[benchmark]
+	fn ed_on_bls12_381_bandersnatch_msm_te(x: Linear<MSM_LEN_MIN, MSM_LEN_MAX>) {
+		let (bases, scalars) =
+			generate_msm_args::<ark_ed_on_bls12_381_bandersnatch::EdwardsProjective>(x);
+
+		#[extrinsic_call]
+		ed_on_bls12_381_bandersnatch_msm_te(RawOrigin::None, bases.encode(), scalars.encode());
+	}
+
+	#[benchmark]
+	fn ed_on_bls12_381_bandersnatch_msm_te_opt(x: Linear<MSM_LEN_MIN, MSM_LEN_MAX>) {
+		let (bases, scalars) =
+			generate_msm_args::<sp_ed_on_bls12_381_bandersnatch::EdwardsProjective>(x);
+
+		#[extrinsic_call]
+		ed_on_bls12_381_bandersnatch_msm_te_opt(RawOrigin::None, bases.encode(), scalars.encode());
+	}
+
+	#[benchmark]
+	fn ed_on_bls12_381_bandersnatch_mul_projective_sw(
+		x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>,
+	) {
+		let (base, scalar) =
+			generate_scalar_args_projective::<ark_ed_on_bls12_381_bandersnatch::SWProjective>(x);
+
+		#[extrinsic_call]
+		ed_on_bls12_381_bandersnatch_mul_projective_sw(
+			RawOrigin::None,
+			base.encode(),
+			scalar.encode(),
+		);
+	}
+
+	#[benchmark]
+	fn ed_on_bls12_381_bandersnatch_mul_projective_sw_opt(
+		x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>,
+	) {
+		let (base, scalar) =
+			generate_scalar_args_projective::<sp_ed_on_bls12_381_bandersnatch::SWProjective>(x);
+
+		#[extrinsic_call]
+		ed_on_bls12_381_bandersnatch_mul_projective_sw_opt(
+			RawOrigin::None,
+			base.encode(),
+			scalar.encode(),
+		);
+	}
+
+	#[benchmark]
+	fn ed_on_bls12_381_bandersnatch_mul_affine_sw(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
+		let (base, scalar) = generate_scalar_args::<ark_ed_on_bls12_381_bandersnatch::SWAffine>(x);
+
+		#[extrinsic_call]
+		ed_on_bls12_381_bandersnatch_mul_affine_sw(RawOrigin::None, base.encode(), scalar.encode());
+	}
+	#[benchmark]
+	fn ed_on_bls12_381_bandersnatch_mul_affine_sw_opt(
+		x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>,
+	) {
+		let (base, scalar) = generate_scalar_args::<sp_ed_on_bls12_381_bandersnatch::SWAffine>(x);
+
+		#[extrinsic_call]
+		ed_on_bls12_381_bandersnatch_mul_affine_sw_opt(
+			RawOrigin::None,
+			base.encode(),
+			scalar.encode(),
+		);
+	}
+
+	#[benchmark]
+	fn ed_on_bls12_381_bandersnatch_mul_projective_te(
+		x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>,
+	) {
+		let (base, scalar) = generate_scalar_args_projective::<
+			ark_ed_on_bls12_381_bandersnatch::EdwardsProjective,
+		>(x);
+
+		#[extrinsic_call]
+		ed_on_bls12_381_bandersnatch_mul_projective_te(
+			RawOrigin::None,
+			base.encode(),
+			scalar.encode(),
+		);
+	}
+
+	#[benchmark]
+	fn ed_on_bls12_381_bandersnatch_mul_projective_te_opt(
+		x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>,
+	) {
+		let (base, scalar) = generate_scalar_args_projective::<
+			sp_ed_on_bls12_381_bandersnatch::EdwardsProjective,
+		>(x);
+
+		#[extrinsic_call]
+		ed_on_bls12_381_bandersnatch_mul_projective_te_opt(
+			RawOrigin::None,
+			base.encode(),
+			scalar.encode(),
+		);
+	}
+
+	#[benchmark]
+	fn ed_on_bls12_381_bandersnatch_mul_affine_te(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
+		let (base, scalar) =
+			generate_scalar_args::<ark_ed_on_bls12_381_bandersnatch::EdwardsAffine>(x);
+
+		#[extrinsic_call]
+		ed_on_bls12_381_bandersnatch_mul_affine_te(RawOrigin::None, base.encode(), scalar.encode());
+	}
+
+	#[benchmark]
+	fn ed_on_bls12_381_bandersnatch_mul_affine_te_opt(
+		x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>,
+	) {
+		let (base, scalar) =
+			generate_scalar_args::<sp_ed_on_bls12_381_bandersnatch::EdwardsAffine>(x);
+
+		#[extrinsic_call]
+		ed_on_bls12_381_bandersnatch_mul_affine_te_opt(
+			RawOrigin::None,
+			base.encode(),
+			scalar.encode(),
+		);
+	}
 }
 
 // benchmarks! {
 
 // 	bls12_377_mul_projective_g1 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (base, scalar) = generate_scalar_args_projective::<ark_bls12_377::G1Projective>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
-// 	bls12_377_mul_projective_g1_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bls12_377_mul_projective_g1_opt {
 // 		let (base, scalar) = generate_scalar_args_projective::<sp_bls12_377::curves::g1::G1Projective>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 // 	bls12_377_mul_affine_g1 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (base, scalar) =
 // generate_scalar_args::<ark_ec::short_weierstrass::Affine<ark_bls12_377::g1::Config>>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
-// 	bls12_377_mul_affine_g1_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bls12_377_mul_affine_g1_opt {
 // 		let (base, scalar) = generate_scalar_args::<sp_bls12_377::curves::g1::G1Affine>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 // 	bls12_377_mul_projective_g2 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (base, scalar) =
 // generate_scalar_args_projective::<ark_ec::short_weierstrass::Projective<ark_bls12_377::g2::Config>>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
-// 	bls12_377_mul_projective_g2_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bls12_377_mul_projective_g2_opt {
 // 		let (base, scalar) = generate_scalar_args_projective::<sp_bls12_377::curves::g2::G2Projective>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 // 	bls12_377_mul_affine_g2 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (base, scalar) =
 // generate_scalar_args::<ark_ec::short_weierstrass::Affine<ark_bls12_377::g2::Config>>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
-// 	bls12_377_mul_affine_g2_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bls12_377_mul_affine_g2_opt {
 // 		let (base, scalar) = generate_scalar_args::<sp_bls12_377::curves::g2::G2Affine>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 // 	bls12_381_msm_g1_1000 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (bases, scalars) =
 // generate_msm_args::<ark_ec::short_weierstrass::Projective<ark_bls12_381::g1::Config>>(1000);
 // 			}: bls12_381_msm_g1(RawOrigin::None, bases.encode(), scalars.encode())
 
-// 	bls12_381_msm_g1_1000_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bls12_381_msm_g1_1000_opt {
 // 		let (bases, scalars) = generate_msm_args::<sp_bls12_381::curves::g1::G1Projective>(1000);
-// 			}: bls12_381_msm_g1_optimized(RawOrigin::None, bases.encode(), scalars.encode())
+// 			}: bls12_381_msm_g1_opt(RawOrigin::None, bases.encode(), scalars.encode())
 
 // 	bls12_381_msm_g2_1000 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (bases, scalars) =
 // generate_msm_args::<ark_ec::short_weierstrass::Projective<ark_bls12_381::g2::Config>>(1000);
 // 			}: bls12_381_msm_g2(RawOrigin::None, bases.encode(), scalars.encode())
 
-// 	bls12_381_msm_g2_1000_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bls12_381_msm_g2_1000_opt {
 // 		let (bases, scalars) = generate_msm_args::<sp_bls12_381::curves::g2::G2Projective>(1000);
-// 			}: bls12_381_msm_g2_optimized(RawOrigin::None, bases.encode(), scalars.encode())
+// 			}: bls12_381_msm_g2_opt(RawOrigin::None, bases.encode(), scalars.encode())
 
 // 	bw6_761_pairing {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (a, b) = generate_pairing_args::<ark_bw6_761::G1Affine, ark_bw6_761::G2Affine>();
-// 	}: _(RawOrigin::None, a.encode(), b.encode())
+// 	(RawOrigin::None, a.encode(), b.encode());
 
-// 	bw6_761_pairing_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bw6_761_pairing_opt {
 // 		let (a, b) = generate_pairing_args::<bw6_761::G1AffineOpt, bw6_761::G2AffineOpt>();
-// 	}: _(RawOrigin::None, a.encode(), b.encode())
+// 	(RawOrigin::None, a.encode(), b.encode());
 
 // 	bw6_761_msm_g1_10 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (bases, scalars) =
 // generate_msm_args::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g1::Config>>(10);
 // 			}: bw6_761_msm_g1(RawOrigin::None, bases.encode(), scalars.encode())
 
-// 	bw6_761_msm_g1_10_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bw6_761_msm_g1_10_opt {
 // 		let (bases, scalars) = generate_msm_args::<sp_bw6_761::curves::g1::G1Projective>(10);
-// 			}: bw6_761_msm_g1_optimized(RawOrigin::None, bases.encode(), scalars.encode())
+// 			}: bw6_761_msm_g1_opt(RawOrigin::None, bases.encode(), scalars.encode())
 
 // 	bw6_761_msm_g1_1000 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (bases, scalars) =
 // generate_msm_args::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g1::Config>>(1000);
 // 			}: bw6_761_msm_g1(RawOrigin::None, bases.encode(), scalars.encode())
 
-// 	bw6_761_msm_g1_1000_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bw6_761_msm_g1_1000_opt {
 // 		let (bases, scalars) = generate_msm_args::<sp_bw6_761::curves::g1::G1Projective>(1000);
-// 			}: bw6_761_msm_g1_optimized(RawOrigin::None, bases.encode(), scalars.encode())
+// 			}: bw6_761_msm_g1_opt(RawOrigin::None, bases.encode(), scalars.encode())
 
 // 	bw6_761_msm_g2_10 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (bases, scalars) =
 // generate_msm_args::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g2::Config>>(10);
 // 			}: bw6_761_msm_g2(RawOrigin::None, bases.encode(), scalars.encode())
 
-// 	bw6_761_msm_g2_10_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bw6_761_msm_g2_10_opt {
 // 		let (bases, scalars) = generate_msm_args::<sp_bw6_761::curves::g2::G2Projective>(10);
-// 			}: bw6_761_msm_g2_optimized(RawOrigin::None, bases.encode(), scalars.encode())
+// 			}: bw6_761_msm_g2_opt(RawOrigin::None, bases.encode(), scalars.encode())
 
 // 	bw6_761_msm_g2_1000 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (bases, scalars) =
 // generate_msm_args::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g2::Config>>(1000);
 // 			}: bw6_761_msm_g2(RawOrigin::None, bases.encode(), scalars.encode())
 
-// 	bw6_761_msm_g2_1000_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bw6_761_msm_g2_1000_opt {
 // 		let (bases, scalars) = generate_msm_args::<sp_bw6_761::curves::g2::G2Projective>(1000);
-// 			}: bw6_761_msm_g2_optimized(RawOrigin::None, bases.encode(), scalars.encode())
+// 			}: bw6_761_msm_g2_opt(RawOrigin::None, bases.encode(), scalars.encode())
 
 // 	bw6_761_mul_projective_g1 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (base, scalar) =
 // generate_scalar_args_projective::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g1::Config>>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
-// 	bw6_761_mul_projective_g1_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bw6_761_mul_projective_g1_opt {
 // 		let (base, scalar) = generate_scalar_args_projective::<sp_bw6_761::curves::g1::G1Projective>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 // 	bw6_761_mul_affine_g1 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (base, scalar) =
 // generate_scalar_args::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g1::Config>>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
-// 	bw6_761_mul_affine_g1_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bw6_761_mul_affine_g1_opt {
 // 		let (base, scalar) = generate_scalar_args::<sp_bw6_761::curves::g1::G1Affine>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 // 	bw6_761_mul_projective_g2 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (base, scalar) =
 // generate_scalar_args_projective::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g2::Config>>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
-// 	bw6_761_mul_projective_g2_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bw6_761_mul_projective_g2_opt {
 // 		let (base, scalar) = generate_scalar_args_projective::<sp_bw6_761::curves::g2::G2Projective>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 // 	bw6_761_mul_affine_g2 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (base, scalar) =
 // generate_scalar_args::<ark_ec::short_weierstrass::Affine<ark_bw6_761::g2::Config>>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
-// 	bw6_761_mul_affine_g2_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	bw6_761_mul_affine_g2_opt {
 // 		let (base, scalar) = generate_scalar_args::<sp_bw6_761::curves::g2::G2Affine>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 // 	ed_on_bls12_377_msm_10 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (bases, scalars) = generate_msm_args::<ark_ed_on_bls12_377::EdwardsProjective>(10);
 // 			}: ed_on_bls12_377_msm(RawOrigin::None, bases.encode(), scalars.encode())
 
-// 	ed_on_bls12_377_msm_10_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	ed_on_bls12_377_msm_10_opt {
 // 		let (bases, scalars) = generate_msm_args::<sp_ed_on_bls12_377::curves::EdwardsProjective>(10);
-// 			}: ed_on_bls12_377_msm_optimized(RawOrigin::None, bases.encode(), scalars.encode())
+// 			}: ed_on_bls12_377_msm_opt(RawOrigin::None, bases.encode(), scalars.encode())
 
 // 	ed_on_bls12_377_msm_1000 {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (bases, scalars) = generate_msm_args::<ark_ed_on_bls12_377::EdwardsProjective>(1000);
 // 			}: ed_on_bls12_377_msm(RawOrigin::None, bases.encode(), scalars.encode())
 
-// 	ed_on_bls12_377_msm_optimized_1000 {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	ed_on_bls12_377_msm_opt_1000 {
 // 		let (bases, scalars) = generate_msm_args::<sp_ed_on_bls12_377::curves::EdwardsProjective>(1000);
-// 			}: ed_on_bls12_377_msm_optimized(RawOrigin::None, bases.encode(), scalars.encode())
+// 			}: ed_on_bls12_377_msm_opt(RawOrigin::None, bases.encode(), scalars.encode())
 
 // 	ed_on_bls12_377_mul_projective {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (base, scalar) = generate_scalar_args_projective::<ark_ed_on_bls12_377::EdwardsProjective>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
-// 	ed_on_bls12_377_mul_projective_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	ed_on_bls12_377_mul_projective_opt {
 // 		let (base, scalar) =
 // generate_scalar_args_projective::<sp_ed_on_bls12_377::curves::EdwardsProjective>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 // 	ed_on_bls12_377_mul_affine {
-// 		let caller: T::AccountId = whitelisted_caller();
 // 		let (base,
 // scalar)=generate_scalar_args::<ark_ec::twisted_edwards::Affine<ark_ed_on_bls12_377::EdwardsConfig>>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
-// 	ed_on_bls12_377_mul_affine_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
+// 	ed_on_bls12_377_mul_affine_opt {
 // 		let (base, scalar) = generate_scalar_args::<sp_ed_on_bls12_377::curves::EdwardsAffine>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
-
-// 	ed_on_bls12_381_bandersnatch_msm_sw_10 {
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (bases, scalars) =
-// generate_msm_args::<ark_ec::short_weierstrass::Projective<ark_ed_on_bls12_381_bandersnatch::EdwardsConfig>>(10);
-// 			}: ed_on_bls12_381_bandersnatch_msm_sw(RawOrigin::None, bases.encode(),
-// scalars.encode())
-
-// 	ed_on_bls12_381_bandersnatch_msm_sw_10_optimized{
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (bases, scalars) =
-// generate_msm_args::<sp_ed_on_bls12_381_bandersnatch::curves::SWProjective>(10);
-// 			}: ed_on_bls12_381_bandersnatch_msm_sw_optimized(RawOrigin::None, bases.encode(),
-// scalars.encode())
-
-// 	ed_on_bls12_381_bandersnatch_msm_sw_1000 {
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (bases, scalars) =
-// generate_msm_args::<ark_ec::short_weierstrass::Projective<ark_ed_on_bls12_381_bandersnatch::EdwardsConfig>>(1000);
-// 			}: ed_on_bls12_381_bandersnatch_msm_sw(RawOrigin::None, bases.encode(),
-// scalars.encode())
-
-// 	ed_on_bls12_381_bandersnatch_msm_sw_1000_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (bases, scalars) =
-// generate_msm_args::<sp_ed_on_bls12_381_bandersnatch::curves::SWProjective>(1000);
-// 			}: ed_on_bls12_381_bandersnatch_msm_sw_optimized(RawOrigin::None, bases.encode(),
-// scalars.encode())
-
-// 	ed_on_bls12_381_bandersnatch_mul_projective_sw {
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (base, scalar) =
-// generate_scalar_args_projective::<ark_ed_on_bls12_381_bandersnatch::SWProjective>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
-
-// 	ed_on_bls12_381_bandersnatch_msm_te_10 {
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (bases, scalars) =
-// generate_msm_args::<ark_ed_on_bls12_381_bandersnatch::EdwardsProjective>(10);
-// 			}: ed_on_bls12_381_bandersnatch_msm_te(RawOrigin::None, bases.encode(),
-// scalars.encode())
-
-// 	ed_on_bls12_381_bandersnatch_msm_te_10_optimized{
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (bases, scalars) =
-// generate_msm_args::<sp_ed_on_bls12_381_bandersnatch::curves::EdwardsProjective>(10);
-// 			}: ed_on_bls12_381_bandersnatch_msm_te_optimized(RawOrigin::None, bases.encode(),
-// scalars.encode())
-
-// 	ed_on_bls12_381_bandersnatch_msm_te_1000 {
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (bases, scalars) =
-// generate_msm_args::<ark_ed_on_bls12_381_bandersnatch::EdwardsProjective>(1000);
-// 			}: ed_on_bls12_381_bandersnatch_msm_te(RawOrigin::None, bases.encode(),
-// scalars.encode())
-
-// 	ed_on_bls12_381_bandersnatch_msm_te_1000_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (bases, scalars) =
-// generate_msm_args::<sp_ed_on_bls12_381_bandersnatch::curves::EdwardsProjective>(1000);
-// 			}: ed_on_bls12_381_bandersnatch_msm_te_optimized(RawOrigin::None, bases.encode(),
-// scalars.encode())
-
-// 	ed_on_bls12_381_bandersnatch_mul_projective_sw_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (base, scalar) =
-// generate_scalar_args_projective::<sp_ed_on_bls12_381_bandersnatch::curves::SWProjective>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
-
-// 	ed_on_bls12_381_bandersnatch_mul_affine_sw {
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (base, scalar) = generate_scalar_args::<ark_ed_on_bls12_381_bandersnatch::SWAffine>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
-
-// 	ed_on_bls12_381_bandersnatch_mul_affine_sw_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (base, scalar) = generate_scalar_args::<sp_ed_on_bls12_381_bandersnatch::curves::SWAffine>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
-
-// 	ed_on_bls12_381_bandersnatch_mul_projective_te {
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (base, scalar) =
-// generate_scalar_args_projective::<ark_ed_on_bls12_381_bandersnatch::EdwardsProjective>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
-
-// 	ed_on_bls12_381_bandersnatch_mul_projective_te_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (base, scalar) =
-// generate_scalar_args_projective::<sp_ed_on_bls12_381_bandersnatch::curves::EdwardsProjective>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
-
-// 	ed_on_bls12_381_bandersnatch_mul_affine_te {
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (base, scalar) =
-// generate_scalar_args::<ark_ec::twisted_edwards::Affine<ark_ed_on_bls12_381_bandersnatch::EdwardsConfig>>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
-
-// 	ed_on_bls12_381_bandersnatch_mul_affine_te_optimized {
-// 		let caller: T::AccountId = whitelisted_caller();
-// 		let (base, scalar) =
-// generate_scalar_args::<sp_ed_on_bls12_381_bandersnatch::curves::EdwardsAffine>();
-// 	}: _(RawOrigin::None, base.encode(), scalar.encode())
+// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 // 	impl_benchmark_test_suite!(Template, crate::mock::new_test_ext(), crate::mock::Test);
 // }

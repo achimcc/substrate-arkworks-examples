@@ -1,9 +1,10 @@
 #![allow(dead_code)]
 
 use crate::ArkScale;
+use ark_ec::AffineRepr;
 use ark_groth16::Groth16;
 use ark_scale::hazmat::ArkScaleProjective;
-use ark_serialize::{CanonicalSerialize, Compress, SerializationError};
+use ark_serialize::{CanonicalSerialize, Compress};
 use ark_snark::SNARK;
 use ark_std::{test_rng, vec, vec::Vec, UniformRand};
 
@@ -11,6 +12,8 @@ pub type VerifyingKeyFor<PairingT, PrimeFieldT> =
 	<Groth16<PairingT> as SNARK<PrimeFieldT>>::VerifyingKey;
 
 pub type ProofFor<PairingT, PrimeFieldT> = <Groth16<PairingT> as SNARK<PrimeFieldT>>::Proof;
+
+pub type ScalarFieldFor<AffineT> = <AffineT as AffineRepr>::ScalarField;
 
 pub fn serialize_argument(argument: impl CanonicalSerialize) -> Vec<u8> {
 	let mut buf = vec![0; argument.serialized_size(Compress::No)];

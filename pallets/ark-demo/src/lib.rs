@@ -33,19 +33,12 @@ pub use pallet::*;
 #[frame_support::pallet]
 pub mod pallet {
 	use crate::{
-		bls12_377,
-		bls12_381::{self, Bls12_381Opt, BlsFrOpt, G1AffineOpt, G2AffineOpt},
-		bw6_761, ed_on_bls12_377, ed_on_bls12_381_bandersnatch, utils,
-		utils::{ProofFor, VerifyingKeyFor},
-		ArkScale, ArkScaleProjective, WeightInfo,
+		bls12_377, bls12_381, bw6_761, ed_on_bls12_377, ed_on_bls12_381_bandersnatch,
+		utils::ScalarFieldFor, ArkScale, ArkScaleProjective, WeightInfo,
 	};
-	use ark_bls12_381::{Fr as BlsFr, G1Affine, G2Affine};
-	use ark_ec::{pairing::Pairing, CurveConfig};
+	use ark_ec::CurveConfig;
 	use ark_ff::{Fp, MontBackend};
-	use ark_groth16::Groth16;
-	use ark_serialize::{CanonicalDeserialize, Compress, Validate};
-	use ark_snark::SNARK;
-	use ark_std::{io::Cursor, vec, vec::Vec};
+	use ark_std::{vec, vec::Vec};
 	use codec::Decode;
 	use frame_support::pallet_prelude::*;
 	use frame_system::pallet_prelude::*;
@@ -126,11 +119,10 @@ pub mod pallet {
 		) -> DispatchResult {
 			let bases =
 				ArkScale::<Vec<ark_bls12_381::G1Affine>>::decode(&mut bases.as_slice()).unwrap();
-			let scalars =
-				ArkScale::<Vec<<ark_bls12_381::Bls12_381 as Pairing>::ScalarField>>::decode(
-					&mut scalars.as_slice(),
-				)
-				.unwrap();
+			let scalars = ArkScale::<Vec<ScalarFieldFor<ark_bls12_381::G1Affine>>>::decode(
+				&mut scalars.as_slice(),
+			)
+			.unwrap();
 
 			bls12_381::msm_g1(&bases.0, &scalars.0);
 			Ok(())
@@ -145,11 +137,10 @@ pub mod pallet {
 		) -> DispatchResult {
 			let bases =
 				ArkScale::<Vec<sp_bls12_381::G1Affine>>::decode(&mut bases.as_slice()).unwrap();
-			let scalars =
-				ArkScale::<Vec<<sp_bls12_381::Bls12_381 as Pairing>::ScalarField>>::decode(
-					&mut scalars.as_slice(),
-				)
-				.unwrap();
+			let scalars = ArkScale::<Vec<ScalarFieldFor<sp_bls12_381::G1Affine>>>::decode(
+				&mut scalars.as_slice(),
+			)
+			.unwrap();
 
 			bls12_381::msm_g1_opt(&bases.0, &scalars.0);
 			Ok(())
@@ -163,11 +154,10 @@ pub mod pallet {
 			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases =
-				<ArkScale<Vec<ark_bls12_381::G2Affine>> as Decode>::decode(&mut bases.as_slice())
-					.unwrap();
-			let scalars = <ArkScale<
-				Vec<<ark_bls12_381::Bls12_381 as Pairing>::ScalarField>,
-			> as Decode>::decode(&mut scalars.as_slice())
+				ArkScale::<Vec<ark_bls12_381::G2Affine>>::decode(&mut bases.as_slice()).unwrap();
+			let scalars = ArkScale::<Vec<ScalarFieldFor<ark_bls12_381::G2Affine>>>::decode(
+				&mut scalars.as_slice(),
+			)
 			.unwrap();
 
 			bls12_381::msm_g2(&bases.0, &scalars.0);
@@ -183,11 +173,10 @@ pub mod pallet {
 		) -> DispatchResult {
 			let bases =
 				ArkScale::<Vec<sp_bls12_381::G2Affine>>::decode(&mut bases.as_slice()).unwrap();
-			let scalars =
-				ArkScale::<Vec<<sp_bls12_381::Bls12_381 as Pairing>::ScalarField>>::decode(
-					&mut scalars.as_slice(),
-				)
-				.unwrap();
+			let scalars = ArkScale::<Vec<ScalarFieldFor<sp_bls12_381::G2Affine>>>::decode(
+				&mut scalars.as_slice(),
+			)
+			.unwrap();
 
 			bls12_381::msm_g2_opt(&bases.0, &scalars.0);
 			Ok(())
@@ -246,9 +235,8 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base =
-				<ArkScale<bls12_381::G1AffineOpt> as Decode>::decode(&mut base.as_slice()).unwrap();
-			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap();
+			let base = ArkScale::<sp_bls12_381::G1Affine>::decode(&mut base.as_slice()).unwrap();
+			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
 			bls12_381::mul_affine_g1_opt(&base.0, &scalar.0);
 			Ok(())
@@ -277,10 +265,9 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base = <ArkScaleProjective<bls12_381::G2ProjectiveOpt> as Decode>::decode(
-				&mut base.as_slice(),
-			)
-			.unwrap();
+			let base =
+				ArkScaleProjective::<sp_bls12_381::G2Projective>::decode(&mut base.as_slice())
+					.unwrap();
 			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap();
 
 			bls12_381::mul_projective_g2_opt(&base.0, &scalar.0);
@@ -309,9 +296,8 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base =
-				<ArkScale<bls12_381::G2AffineOpt> as Decode>::decode(&mut base.as_slice()).unwrap();
-			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap();
+			let base = ArkScale::<sp_bls12_381::G2Affine>::decode(&mut base.as_slice()).unwrap();
+			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
 			bls12_381::mul_affine_g2_opt(&base.0, &scalar.0);
 			Ok(())
@@ -327,7 +313,7 @@ pub mod pallet {
 				.unwrap()
 				.0;
 
-			bls12_377::do_pairing(a, b);
+			bls12_377::pairing(a, b);
 			Ok(())
 		}
 
@@ -341,7 +327,7 @@ pub mod pallet {
 				.unwrap()
 				.0;
 
-			bls12_377::do_pairing_opt(a, b);
+			bls12_377::pairing_opt(a, b);
 			Ok(())
 		}
 
@@ -354,14 +340,14 @@ pub mod pallet {
 		) -> DispatchResult {
 			let bases =
 				<ArkScale<Vec<ark_bls12_377::G1Affine>> as Decode>::decode(&mut bases.as_slice())
-					.unwrap()
-					.0;
-			let scalars = <ArkScale<
-				Vec<<ark_bls12_377::Bls12_377 as Pairing>::ScalarField>,
-			> as Decode>::decode(&mut scalars.as_slice())
-			.unwrap().0;
+					.unwrap();
+			let scalars =
+				<ArkScale<Vec<ScalarFieldFor<ark_bls12_377::G1Affine>>> as Decode>::decode(
+					&mut scalars.as_slice(),
+				)
+				.unwrap();
 
-			bls12_377::do_msm_g1(&bases[..], &scalars[..]);
+			bls12_377::msm_g1(&bases.0, &scalars.0);
 			Ok(())
 		}
 
@@ -373,16 +359,15 @@ pub mod pallet {
 			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases =
-				<ArkScale<Vec<bls12_377::G1AffineOpt>> as Decode>::decode(&mut bases.as_slice())
-					.unwrap()
-					.0;
-			let scalars = <ArkScale<
-				Vec<<bls12_377::Bls12_377Opt as Pairing>::ScalarField>,
-			> as Decode>::decode(&mut scalars.as_slice())
-			.unwrap()
-			.0;
+				<ArkScale<Vec<sp_bls12_377::G1Affine>> as Decode>::decode(&mut bases.as_slice())
+					.unwrap();
+			let scalars =
+				<ArkScale<Vec<ScalarFieldFor<sp_bls12_377::G1Affine>>> as Decode>::decode(
+					&mut scalars.as_slice(),
+				)
+				.unwrap();
 
-			bls12_377::do_msm_g1_opt(&bases[..], &scalars[..]);
+			bls12_377::msm_g1_opt(&bases.0, &scalars.0);
 			Ok(())
 		}
 
@@ -794,238 +779,224 @@ pub mod pallet {
 		// 	Ok(())
 		// }
 
-		// #[pallet::call_index(44)]
-		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		// pub fn ed_on_bls12_381_bandersnatch_msm_sw(
-		// 	_origin: OriginFor<T>,
-		// 	bases: Vec<u8>,
-		// 	scalars: Vec<u8>,
-		// ) -> DispatchResult {
-		// 	let bases =
-		// 		<ArkScale<Vec<ark_ed_on_bls12_381_bandersnatch::SWAffine>> as Decode>::decode(
-		// 			&mut bases.as_slice(),
-		// 		)
-		// 		.unwrap()
-		// 		.0;
-		// 	let scalars = <ArkScale<
-		// 		Vec<<ark_ed_on_bls12_381_bandersnatch::BandersnatchConfig as CurveConfig>::ScalarField>,
-		// 	> as Decode>::decode(&mut scalars.as_slice())
-		// 	.unwrap()
-		// 	.0;
-		// 	let _ = crate::ed_on_bls12_381_bandersnatch::do_msm_sw(&bases[..], &scalars[..]);
-		// 	Ok(())
-		// }
+		#[pallet::call_index(44)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_bandersnatch_msm_sw(
+			_: OriginFor<T>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
+		) -> DispatchResult {
+			let bases = ArkScale::<Vec<ark_ed_on_bls12_381_bandersnatch::SWAffine>>::decode(
+				&mut bases.as_slice(),
+			)
+			.unwrap();
+			let scalars = ArkScale::<
+				Vec<ScalarFieldFor<ark_ed_on_bls12_381_bandersnatch::SWAffine>>,
+			>::decode(&mut scalars.as_slice())
+			.unwrap();
 
-		// #[pallet::call_index(45)]
-		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		// pub fn ed_on_bls12_381_bandersnatch_msm_sw_opt(
-		// 	_origin: OriginFor<T>,
-		// 	bases: Vec<u8>,
-		// 	scalars: Vec<u8>,
-		// ) -> DispatchResult {
-		// 	let bases =
-		// 		<ArkScale<Vec<ed_on_bls12_381_bandersnatch::SWAffineOpt>> as Decode>::decode(
-		// 			&mut bases.as_slice(),
-		// 		)
-		// 		.unwrap()
-		// 		.0;
-		// 	let scalars = <ArkScale<
-		// 		Vec<<ark_ed_on_bls12_381_bandersnatch::BandersnatchConfig as CurveConfig>::ScalarField>,
-		// 	> as Decode>::decode(&mut scalars.as_slice())
-		// 	.unwrap()
-		// 	.0;
-		// 	let _ =
-		// 		crate::ed_on_bls12_381_bandersnatch::do_msm_sw_opt(&bases[..], &scalars[..]);
-		// 	Ok(())
-		// }
+			ed_on_bls12_381_bandersnatch::msm_sw(&bases.0, &scalars.0);
+			Ok(())
+		}
 
-		// #[pallet::call_index(46)]
-		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		// pub fn ed_on_bls12_381_bandersnatch_msm_te(
-		// 	_origin: OriginFor<T>,
-		// 	bases: Vec<u8>,
-		// 	scalars: Vec<u8>,
-		// ) -> DispatchResult {
-		// 	let bases =
-		// 		<ArkScale<Vec<ark_ed_on_bls12_381_bandersnatch::EdwardsAffine>> as Decode>::decode(
-		// 			&mut bases.as_slice(),
-		// 		)
-		// 		.unwrap()
-		// 		.0;
-		// 	let scalars = <ArkScale<
-		// 		Vec<<ark_ed_on_bls12_381_bandersnatch::BandersnatchConfig as
-		// ark_ec::models::CurveConfig>::ScalarField>,
-		// 	> as Decode>::decode(&mut scalars.as_slice())
-		// 	.unwrap()
-		// 	.0;
-		// 	let _ = crate::ed_on_bls12_381_bandersnatch::do_msm_te(&bases[..], &scalars[..]);
-		// 	Ok(())
-		// }
+		#[pallet::call_index(45)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_bandersnatch_msm_sw_opt(
+			_: OriginFor<T>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
+		) -> DispatchResult {
+			let bases = ArkScale::<Vec<sp_ed_on_bls12_381_bandersnatch::SWAffine>>::decode(
+				&mut bases.as_slice(),
+			)
+			.unwrap();
+			let scalars =
+				ArkScale::<Vec<ScalarFieldFor<sp_ed_on_bls12_381_bandersnatch::SWAffine>>>::decode(
+					&mut scalars.as_slice(),
+				)
+				.unwrap();
 
-		// #[pallet::call_index(47)]
-		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		// pub fn ed_on_bls12_381_bandersnatch_msm_te_opt(
-		// 	_origin: OriginFor<T>,
-		// 	bases: Vec<u8>,
-		// 	scalars: Vec<u8>,
-		// ) -> DispatchResult {
-		// 	let bases =
-		// 		<ArkScale<Vec<ed_on_bls12_381_bandersnatch::EdwardsAffineOpt>> as Decode>::decode(
-		// 			&mut bases.as_slice(),
-		// 		)
-		// 		.unwrap()
-		// 		.0;
-		// 	let scalars = <ArkScale<
-		// 		Vec<<ed_on_bls12_381_bandersnatch::BandersnatchConfig as CurveConfig>::ScalarField>,
-		// 	> as Decode>::decode(&mut scalars.as_slice())
-		// 	.unwrap()
-		// 	.0;
-		// 	let _ =
-		// 		crate::ed_on_bls12_381_bandersnatch::do_msm_te_opt(&bases[..], &scalars[..]);
-		// 	Ok(())
-		// }
+			ed_on_bls12_381_bandersnatch::msm_sw_opt(&bases.0, &scalars.0);
+			Ok(())
+		}
 
-		// #[pallet::call_index(48)]
-		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		// pub fn ed_on_bls12_381_bandersnatch_mul_projective_sw(
-		// 	_origin: OriginFor<T>,
-		// 	base: Vec<u8>,
-		// 	scalar: Vec<u8>,
-		// ) -> DispatchResult {
-		// 	let base = <ArkScaleProjective<ark_ed_on_bls12_381_bandersnatch::SWProjective> as
-		// Decode>::decode( 		&mut base.as_slice(),
-		// 	)
-		// 	.unwrap()
-		// 	.0;
-		// 	let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
-		// 	let _ = crate::ed_on_bls12_381_bandersnatch::do_mul_projective_sw(&base, &scalar);
-		// 	Ok(())
-		// }
+		#[pallet::call_index(46)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_bandersnatch_msm_te(
+			_origin: OriginFor<T>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
+		) -> DispatchResult {
+			let bases = ArkScale::<Vec<ark_ed_on_bls12_381_bandersnatch::EdwardsAffine>>::decode(
+				&mut bases.as_slice(),
+			)
+			.unwrap();
+			let scalars = ArkScale::<
+				Vec<ScalarFieldFor<ark_ed_on_bls12_381_bandersnatch::EdwardsAffine>>,
+			>::decode(&mut scalars.as_slice())
+			.unwrap();
 
-		// #[pallet::call_index(49)]
-		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		// pub fn ed_on_bls12_381_bandersnatch_mul_projective_sw_opt(
-		// 	_origin: OriginFor<T>,
-		// 	base: Vec<u8>,
-		// 	scalar: Vec<u8>,
-		// ) -> DispatchResult {
-		// 	let base = <ArkScaleProjective<ed_on_bls12_381_bandersnatch::SWProjectiveOpt> as
-		// Decode>::decode( 		&mut base.as_slice(),
-		// 	)
-		// 	.unwrap()
-		// 	.0;
-		// 	let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
-		// 	let _ =
-		// 		crate::ed_on_bls12_381_bandersnatch::do_mul_projective_sw_opt(&base, &scalar);
-		// 	Ok(())
-		// }
+			ed_on_bls12_381_bandersnatch::msm_te(&bases.0, &scalars.0);
+			Ok(())
+		}
 
-		// #[pallet::call_index(50)]
-		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		// pub fn ed_on_bls12_381_bandersnatch_mul_projective_te(
-		// 	_origin: OriginFor<T>,
-		// 	base: Vec<u8>,
-		// 	scalar: Vec<u8>,
-		// ) -> DispatchResult {
-		// 	let base = <ArkScaleProjective<ark_ed_on_bls12_381_bandersnatch::EdwardsProjective> as
-		// Decode>::decode( 		&mut base.as_slice(),
-		// 	)
-		// 	.unwrap()
-		// 	.0;
-		// 	let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
-		// 	let _ = crate::ed_on_bls12_381_bandersnatch::do_mul_projective_te(&base, &scalar);
-		// 	Ok(())
-		// }
+		#[pallet::call_index(47)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_bandersnatch_msm_te_opt(
+			_origin: OriginFor<T>,
+			bases: Vec<u8>,
+			scalars: Vec<u8>,
+		) -> DispatchResult {
+			let bases = ArkScale::<Vec<sp_ed_on_bls12_381_bandersnatch::EdwardsAffine>>::decode(
+				&mut bases.as_slice(),
+			)
+			.unwrap();
+			let scalars = <ArkScale<
+				Vec<ScalarFieldFor<sp_ed_on_bls12_381_bandersnatch::EdwardsAffine>>,
+			> as Decode>::decode(&mut scalars.as_slice())
+			.unwrap();
 
-		// #[pallet::call_index(51)]
-		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		// pub fn ed_on_bls12_381_bandersnatch_mul_projective_te_opt(
-		// 	_origin: OriginFor<T>,
-		// 	base: Vec<u8>,
-		// 	scalar: Vec<u8>,
-		// ) -> DispatchResult {
-		// 	let base =
-		// 		<ArkScaleProjective<ed_on_bls12_381_bandersnatch::EdwardsProjectiveOpt> as
-		// Decode>::decode( 			&mut base.as_slice(),
-		// 		)
-		// 		.unwrap()
-		// 		.0;
-		// 	let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
-		// 	let _ =
-		// 		crate::ed_on_bls12_381_bandersnatch::do_mul_projective_te_opt(&base, &scalar);
-		// 	Ok(())
-		// }
+			ed_on_bls12_381_bandersnatch::msm_te_opt(&bases.0, &scalars.0);
+			Ok(())
+		}
 
-		// #[pallet::call_index(52)]
-		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		// pub fn ed_on_bls12_381_bandersnatch_mul_affine_sw(
-		// 	_origin: OriginFor<T>,
-		// 	base: Vec<u8>,
-		// 	scalar: Vec<u8>,
-		// ) -> DispatchResult {
-		// 	let base = <ArkScale<ark_ed_on_bls12_381_bandersnatch::SWAffine> as Decode>::decode(
-		// 		&mut base.as_slice(),
-		// 	)
-		// 	.unwrap()
-		// 	.0;
-		// 	let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
-		// 	let _ = crate::ed_on_bls12_381_bandersnatch::do_mul_affine_sw(&base, &scalar);
-		// 	Ok(())
-		// }
+		#[pallet::call_index(48)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_bandersnatch_mul_projective_sw(
+			_: OriginFor<T>,
+			base: Vec<u8>,
+			scalar: Vec<u8>,
+		) -> DispatchResult {
+			let base =
+				ArkScaleProjective::<ark_ed_on_bls12_381_bandersnatch::SWProjective>::decode(
+					&mut base.as_slice(),
+				)
+				.unwrap();
+			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
-		// #[pallet::call_index(53)]
-		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		// pub fn ed_on_bls12_381_bandersnatch_mul_affine_sw_opt(
-		// 	_origin: OriginFor<T>,
-		// 	base: Vec<u8>,
-		// 	scalar: Vec<u8>,
-		// ) -> DispatchResult {
-		// 	let base =
-		// 		<ArkScale<ed_on_bls12_381_bandersnatch::SWAffineOpt> as Decode>::decode(
-		// 			&mut base.as_slice(),
-		// 		)
-		// 		.unwrap()
-		// 		.0;
-		// 	let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
-		// 	let _ = crate::ed_on_bls12_381_bandersnatch::do_mul_affine_sw_opt(&base, &scalar);
-		// 	Ok(())
-		// }
+			ed_on_bls12_381_bandersnatch::mul_projective_sw(&base.0, &scalar.0);
+			Ok(())
+		}
 
-		// #[pallet::call_index(54)]
-		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		// pub fn ed_on_bls12_381_bandersnatch_mul_affine_te(
-		// 	_origin: OriginFor<T>,
-		// 	base: Vec<u8>,
-		// 	scalar: Vec<u8>,
-		// ) -> DispatchResult {
-		// 	let base =
-		// 		<ArkScale<ark_ed_on_bls12_381_bandersnatch::EdwardsAffine> as Decode>::decode(
-		// 			&mut base.as_slice(),
-		// 		)
-		// 		.unwrap()
-		// 		.0;
-		// 	let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
-		// 	let _ = crate::ed_on_bls12_381_bandersnatch::do_mul_affine_te(&base, &scalar);
-		// 	Ok(())
-		// }
+		#[pallet::call_index(49)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_bandersnatch_mul_projective_sw_opt(
+			_: OriginFor<T>,
+			base: Vec<u8>,
+			scalar: Vec<u8>,
+		) -> DispatchResult {
+			let base = ArkScaleProjective::<sp_ed_on_bls12_381_bandersnatch::SWProjective>::decode(
+				&mut base.as_slice(),
+			)
+			.unwrap();
+			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
-		// #[pallet::call_index(55)]
-		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		// pub fn ed_on_bls12_381_bandersnatch_mul_affine_te_opt(
-		// 	_origin: OriginFor<T>,
-		// 	base: Vec<u8>,
-		// 	scalar: Vec<u8>,
-		// ) -> DispatchResult {
-		// 	let base =
-		// 		<ArkScale<ed_on_bls12_381_bandersnatch::EdwardsAffineOpt> as Decode>::decode(
-		// 			&mut base.as_slice(),
-		// 		)
-		// 		.unwrap()
-		// 		.0;
-		// 	let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap().0;
-		// 	let _ = crate::ed_on_bls12_381_bandersnatch::do_mul_affine_te_opt(&base, &scalar);
-		// 	Ok(())
-		// }
+			ed_on_bls12_381_bandersnatch::mul_projective_sw_opt(&base.0, &scalar.0);
+			Ok(())
+		}
+
+		#[pallet::call_index(50)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_bandersnatch_mul_projective_te(
+			_: OriginFor<T>,
+			base: Vec<u8>,
+			scalar: Vec<u8>,
+		) -> DispatchResult {
+			let base =
+				ArkScaleProjective::<ark_ed_on_bls12_381_bandersnatch::EdwardsProjective>::decode(
+					&mut base.as_slice(),
+				)
+				.unwrap();
+			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
+
+			ed_on_bls12_381_bandersnatch::mul_projective_te(&base.0, &scalar.0);
+			Ok(())
+		}
+
+		#[pallet::call_index(51)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_bandersnatch_mul_projective_te_opt(
+			_: OriginFor<T>,
+			base: Vec<u8>,
+			scalar: Vec<u8>,
+		) -> DispatchResult {
+			let base =
+				ArkScaleProjective::<sp_ed_on_bls12_381_bandersnatch::EdwardsProjective>::decode(
+					&mut base.as_slice(),
+				)
+				.unwrap();
+			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
+
+			ed_on_bls12_381_bandersnatch::mul_projective_te_opt(&base.0, &scalar.0);
+			Ok(())
+		}
+
+		#[pallet::call_index(52)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_bandersnatch_mul_affine_sw(
+			_: OriginFor<T>,
+			base: Vec<u8>,
+			scalar: Vec<u8>,
+		) -> DispatchResult {
+			let base = ArkScale::<ark_ed_on_bls12_381_bandersnatch::SWAffine>::decode(
+				&mut base.as_slice(),
+			)
+			.unwrap();
+			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
+
+			ed_on_bls12_381_bandersnatch::mul_affine_sw(&base.0, &scalar.0);
+			Ok(())
+		}
+
+		#[pallet::call_index(53)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_bandersnatch_mul_affine_sw_opt(
+			_: OriginFor<T>,
+			base: Vec<u8>,
+			scalar: Vec<u8>,
+		) -> DispatchResult {
+			let base =
+				ArkScale::<sp_ed_on_bls12_381_bandersnatch::SWAffine>::decode(&mut base.as_slice())
+					.unwrap();
+			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
+
+			ed_on_bls12_381_bandersnatch::mul_affine_sw_opt(&base.0, &scalar.0);
+			Ok(())
+		}
+
+		#[pallet::call_index(54)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_bandersnatch_mul_affine_te(
+			_: OriginFor<T>,
+			base: Vec<u8>,
+			scalar: Vec<u8>,
+		) -> DispatchResult {
+			let base = ArkScale::<ark_ed_on_bls12_381_bandersnatch::EdwardsAffine>::decode(
+				&mut base.as_slice(),
+			)
+			.unwrap();
+			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
+
+			ed_on_bls12_381_bandersnatch::mul_affine_te(&base.0, &scalar.0);
+			Ok(())
+		}
+
+		#[pallet::call_index(55)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn ed_on_bls12_381_bandersnatch_mul_affine_te_opt(
+			_: OriginFor<T>,
+			base: Vec<u8>,
+			scalar: Vec<u8>,
+		) -> DispatchResult {
+			let base = ArkScale::<sp_ed_on_bls12_381_bandersnatch::EdwardsAffine>::decode(
+				&mut base.as_slice(),
+			)
+			.unwrap();
+			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
+
+			ed_on_bls12_381_bandersnatch::mul_affine_te_opt(&base.0, &scalar.0);
+			Ok(())
+		}
 
 		// #[pallet::call_index(56)]
 		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
