@@ -301,20 +301,22 @@ pub mod pallet {
 
 		#[pallet::call_index(16)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_377_pairing(_: OriginFor<T>, a: Vec<u8>, b: Vec<u8>) -> DispatchResult {
-			let a = ArkScale::<ark_bls12_377::G1Affine>::decode(&mut a.as_slice()).unwrap();
-			let b = ArkScale::<ark_bls12_377::G2Affine>::decode(&mut b.as_slice()).unwrap();
-
+		pub fn bls12_377_pairing(
+			_: OriginFor<T>,
+			a: ArkScale<ark_bls12_377::G1Affine>,
+			b: ArkScale<ark_bls12_377::G2Affine>,
+		) -> DispatchResult {
 			bls12_377::pairing(a.0, b.0);
 			Ok(())
 		}
 
 		#[pallet::call_index(17)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bls12_377_pairing_opt(_: OriginFor<T>, a: Vec<u8>, b: Vec<u8>) -> DispatchResult {
-			let a = ArkScale::<sp_bls12_377::G1Affine>::decode(&mut a.as_slice()).unwrap();
-			let b = ArkScale::<sp_bls12_377::G2Affine>::decode(&mut b.as_slice()).unwrap();
-
+		pub fn bls12_377_pairing_opt(
+			_: OriginFor<T>,
+			a: ArkScale<sp_bls12_377::G1Affine>,
+			b: ArkScale<sp_bls12_377::G2Affine>,
+		) -> DispatchResult {
 			bls12_377::pairing_opt(a.0, b.0);
 			Ok(())
 		}
@@ -517,33 +519,25 @@ pub mod pallet {
 
 		#[pallet::call_index(30)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn bw6_761_pairing(_origin: OriginFor<T>, a: Vec<u8>, b: Vec<u8>) -> DispatchResult {
-			let a = <ArkScale<ark_bw6_761::G1Affine> as Decode>::decode(&mut a.as_slice())
-				.unwrap()
-				.0;
-			let b = <ArkScale<ark_bw6_761::G2Affine> as Decode>::decode(&mut b.as_slice())
-				.unwrap()
-				.0;
-			bw6_761::pairing(a, b);
+		pub fn bw6_761_pairing(
+			_: OriginFor<T>,
+			a: ArkScale<ark_bw6_761::G1Affine>,
+			b: ArkScale<ark_bw6_761::G2Affine>,
+		) -> DispatchResult {
+			bw6_761::pairing(a.0, b.0);
 			Ok(())
 		}
 
-		// #[pallet::call_index(31)]
-		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		// pub fn bw6_761_pairing_opt(
-		// 	_origin: OriginFor<T>,
-		// 	a: Vec<u8>,
-		// 	b: Vec<u8>,
-		// ) -> DispatchResult {
-		// 	let a = <ArkScale<bw6_761::G1AffineOpt> as Decode>::decode(&mut a.as_slice())
-		// 		.unwrap()
-		// 		.0;
-		// 	let b = <ArkScale<bw6_761::G2AffineOpt> as Decode>::decode(&mut b.as_slice())
-		// 		.unwrap()
-		// 		.0;
-		// 	let _ = crate::bw6_761::do_pairing_opt(a, b);
-		// 	Ok(())
-		// }
+		#[pallet::call_index(31)]
+		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
+		pub fn bw6_761_pairing_opt(
+			_: OriginFor<T>,
+			a: ArkScale<sp_bw6_761::g1::G1Affine>,
+			b: ArkScale<sp_bw6_761::g2::G2Affine>,
+		) -> DispatchResult {
+			bw6_761::pairing_opt(a.0, b.0);
+			Ok(())
+		}
 
 		// #[pallet::call_index(32)]
 		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]

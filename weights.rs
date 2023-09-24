@@ -17,7 +17,7 @@
 // --pallet
 // pallet_ark_demo
 // --extrinsic
-// ed_on_bls12_377_mul_affine_opt
+// bls12_377_pairing_opt
 // --steps
 // 3
 // --repeat
@@ -36,15 +36,12 @@ use core::marker::PhantomData;
 /// Weight functions for `pallet_ark_demo`.
 pub struct WeightInfo<T>(PhantomData<T>);
 impl<T: frame_system::Config> pallet_ark_demo::WeightInfo for WeightInfo<T> {
-	/// The range of component `x` is `[1, 16]`.
-	fn ed_on_bls12_377_mul_affine_opt(x: u32, ) -> Weight {
+	fn bls12_377_pairing_opt() -> Weight {
 		// Proof Size summary in bytes:
 		//  Measured:  `0`
 		//  Estimated: `0`
-		// Minimum execution time: 275_317_000 picoseconds.
-		Weight::from_parts(256_963_059, 0)
+		// Minimum execution time: 3_482_267_000 picoseconds.
+		Weight::from_parts(3_482_919_000, 0)
 			.saturating_add(Weight::from_parts(0, 0))
-			// Standard Error: 250_792
-			.saturating_add(Weight::from_parts(21_530_126, 0).saturating_mul(x.into()))
 	}
 }

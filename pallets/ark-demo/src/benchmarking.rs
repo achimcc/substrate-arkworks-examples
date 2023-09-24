@@ -240,7 +240,7 @@ mod benchmarks {
 		let (a, b) = generate_pairing_args::<ark_bls12_377::G1Affine, ark_bls12_377::G2Affine>();
 
 		#[extrinsic_call]
-		bls12_377_pairing(RawOrigin::None, a.encode(), b.encode());
+		bls12_377_pairing(RawOrigin::None, a, b);
 	}
 
 	#[benchmark]
@@ -248,7 +248,7 @@ mod benchmarks {
 		let (a, b) = generate_pairing_args::<sp_bls12_377::G1Affine, sp_bls12_377::G2Affine>();
 
 		#[extrinsic_call]
-		bls12_377_pairing_opt(RawOrigin::None, a.encode(), b.encode());
+		bls12_377_pairing_opt(RawOrigin::None, a, b);
 	}
 
 	#[benchmark]
@@ -351,15 +351,21 @@ mod benchmarks {
 	// Benchmarks for bw5-761
 	// ---------------------------------------------
 
-	// #[benchmark]
-	// 	bw6_761_pairing {
-	// 		let (a, b) = generate_pairing_args::<ark_bw6_761::G1Affine, ark_bw6_761::G2Affine>();
-	// 	(RawOrigin::None, a.encode(), b.encode());
+	#[benchmark]
+	fn bw6_761_pairing() {
+		let (a, b) = generate_pairing_args::<ark_bw6_761::G1Affine, ark_bw6_761::G2Affine>();
 
-	// #[benchmark]
-	// 	bw6_761_pairing_opt {
-	// 		let (a, b) = generate_pairing_args::<bw6_761::G1AffineOpt, bw6_761::G2AffineOpt>();
-	// 	(RawOrigin::None, a.encode(), b.encode());
+		#[extrinsic_call]
+		bw6_761_pairing(RawOrigin::None, a, b);
+	}
+
+	#[benchmark]
+	fn bw6_761_pairing_opt() {
+		let (a, b) = generate_pairing_args::<sp_bw6_761::g1::G1Affine, sp_bw6_761::g2::G2Affine>();
+
+		#[extrinsic_call]
+		bw6_761_pairing_opt(RawOrigin::None, a, b);
+	}
 
 	// #[benchmark]
 	// 	bw6_761_msm_g1 {
