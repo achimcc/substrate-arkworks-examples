@@ -58,7 +58,7 @@ pub mod pallet {
 
 		#[pallet::call_index(0)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn groth16_verification(
+		pub fn bls12_381_groth16_verification(
 			_: OriginFor<T>,
 			vk: Vec<u8>,
 			c: Vec<u8>,
@@ -70,7 +70,7 @@ pub mod pallet {
 
 		#[pallet::call_index(1)]
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
-		pub fn groth16_verification_opt(
+		pub fn bls12_381_groth16_verification_opt(
 			_: OriginFor<T>,
 			vk: Vec<u8>,
 			c: Vec<u8>,
