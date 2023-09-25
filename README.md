@@ -26,10 +26,10 @@ cargo build -p node-ark-demo --features runtime benchmarks
 ./benchmark.sh
 
 # Run all 'ark-pallet' benchmarks
-./benchmarks.sh ark-pallet
+./benchmarks.sh all
 
-# Run a specific 'ark-pallet' benchmark (e.g. 'ed_on_bls12_377_mul_affine_opt')
-./benchmarks.sh ark-pallet ed_on_bls12_377_mul_affine_opt
+# Run a specific benchmark (e.g. 'ed_on_bls12_377_mul_affine_opt')
+./benchmarks.sh ed_on_bls12_377_mul_affine_opt
 ```
 
 The results are then written in the `results/<datetime>/results.csv` file.

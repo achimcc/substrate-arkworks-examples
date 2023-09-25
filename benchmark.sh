@@ -1,16 +1,16 @@
 #!/bin/bash
 
-steps=2
-repeat=1
+repeat=20
+steps=50
 
 pallet="pallet_ark"
 
-binary="./target/release/node-ark-demo"
-# binary="./target/debug/node-ark-demo"
+binary="./target/release/node-ark"
+# binary="./target/debug/node-ark"
 
-# results_dir="./results/$(date +'%Y%m%d-%H%M%S')"
 results_dir="./results"
-rm -rf $results_dir
+# results_dir="./results/$(date +'%Y%m%d-%H%M%S')"
+
 # Create results folder if not exists
 mkdir -p "$results_dir"
 
@@ -22,8 +22,12 @@ if [[ $extrinsic == "" ]]; then
     echo "Available extrinsics for '$pallet':"
     $binary benchmark pallet --pallet $pallet --list | grep $pallet | awk '{ print "- " $2 }'
     echo ""
-    echo "Use '*' to run all benchmarks"
+    echo "Use 'all' to run all benchmarks"
     exit 0
+fi
+
+if [[ $extrinsic == "all" ]]; then
+    extrinsic='*'
 fi
 
 # Do the benchmarking
