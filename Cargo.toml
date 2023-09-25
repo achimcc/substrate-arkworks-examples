@@ -3,14 +3,13 @@ resolver = "2"
 
 members = [
     "node",
-    "pallets/ark-demo",
+    "pallets/ark",
     "runtime",
 ]
 
 [profile.release]
 panic = 'unwind'
 opt-level = 3
-#lto = true
 
 [patch.crates-io]
 ark-scale = { path = "/home/davxy/develop/w3f/ark-scale" }

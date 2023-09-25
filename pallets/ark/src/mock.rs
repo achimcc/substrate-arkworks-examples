@@ -1,4 +1,4 @@
-use crate as pallet_ark_demo;
+use crate as pallet_ark;
 use frame_support::traits::{ConstU16, ConstU32, ConstU64, Everything};
 use frame_system::mocking::MockBlock;
 use sp_core::H256;
@@ -10,7 +10,7 @@ use sp_runtime::{
 frame_support::construct_runtime!(
 	pub enum Test {
 		System: frame_system,
-		TemplateModule: pallet_ark_demo,
+		Ark: pallet_ark,
 	}
 );
 
@@ -40,7 +40,7 @@ impl frame_system::Config for Test {
 	type MaxConsumers = ConstU32<16>;
 }
 
-impl pallet_ark_demo::Config for Test {
+impl pallet_ark::Config for Test {
 	type WeightInfo = ();
 }
 

@@ -1,10 +1,9 @@
 [package]
-name = "pallet-ark-demo"
-version = "4.0.1"
-description = "An example implementation of a groth16 verificaton in a Substrate pallet"
+name = "pallet-ark"
+version = "0.1.0"
+description = "A pallet showing usage of Arkworks primitives backed by Substrate host functions"
 authors = ["Achim Schneider <achim@parity.io>", "Davide Galassi <davxy@datawok.net>"]
-homepage = "https://substrate.io"
-repository = "https://Apache-2.0"
+license = "MIT"
 edition = "2021"
 publish = false
 
