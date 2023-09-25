@@ -1,9 +1,8 @@
 [package]
-name = "node-ark-demo-runtime"
+name = "node-ark-runtime"
 version = "0.1.0"
-description = "A FRAME-based Substrate node runtime to test and benchmark arkworks primitives."
+description = "A FRAME-based Substrate node runtime to test and benchmark Arkworks primitives."
 authors = ["Davide Galassi <davxy@datawok.net>"]
-homepage = "https://substrate.io/"
 edition = "2021"
 license = "MIT"
 publish = false
@@ -47,7 +46,7 @@ frame-benchmarking = { git = "https://github.com/paritytech/polkadot-sdk", defau
 frame-system-benchmarking = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false, optional = true }
 
 # ARK demo pallet
-pallet-ark-demo = { path = "../pallets/ark-demo", default-features = false }
+pallet-ark = { path = "../pallets/ark", default-features = false }
 
 [build-dependencies]
 substrate-wasm-builder = { git = "https://github.com/paritytech/polkadot-sdk", optional = true  }
@@ -69,7 +68,7 @@ std = [
 	"pallet-balances/std",
 	"pallet-grandpa/std",
 	"pallet-sudo/std",
-	"pallet-ark-demo/std",
+	"pallet-ark/std",
 	"pallet-timestamp/std",
 	"pallet-transaction-payment-rpc-runtime-api/std",
 	"pallet-transaction-payment/std",
@@ -95,7 +94,7 @@ runtime-benchmarks = [
 	"pallet-balances/runtime-benchmarks",
 	"pallet-grandpa/runtime-benchmarks",
 	"pallet-sudo/runtime-benchmarks",
-	"pallet-ark-demo/runtime-benchmarks",
+	"pallet-ark/runtime-benchmarks",
 	"pallet-timestamp/runtime-benchmarks",
 	"sp-runtime/runtime-benchmarks",
 ]
@@ -108,7 +107,7 @@ try-runtime = [
 	"pallet-balances/try-runtime",
 	"pallet-grandpa/try-runtime",
 	"pallet-sudo/try-runtime",
-	"pallet-ark-demo/try-runtime",
+	"pallet-ark/try-runtime",
 	"pallet-timestamp/try-runtime",
 	"pallet-transaction-payment/try-runtime",
 ]

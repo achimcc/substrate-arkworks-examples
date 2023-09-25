@@ -4,7 +4,7 @@
 
 use crate::service::FullClient;
 
-use node_ark_demo_runtime as runtime;
+use node_ark_runtime as runtime;
 use runtime::{AccountId, Balance, BalancesCall, SystemCall};
 use sc_cli::Result;
 use sc_client_api::BlockBackend;

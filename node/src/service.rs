@@ -1,7 +1,7 @@
 //! Service and ServiceFactory implementation. Specialized wrapper over substrate service.
 
 use futures::FutureExt;
-use node_ark_demo_runtime::{self, opaque::Block, RuntimeApi};
+use node_ark_runtime::{self, opaque::Block, RuntimeApi};
 use sc_client_api::{Backend, BlockBackend};
 use sc_consensus_aura::{ImportQueueParams, SlotProportion, StartAuraParams};
 use sc_consensus_grandpa::SharedVoterState;
@@ -28,11 +28,11 @@ impl sc_executor::NativeExecutionDispatch for ExecutorDispatch {
 	type ExtendHostFunctions = ExtendedHostFunctions;
 
 	fn dispatch(method: &str, data: &[u8]) -> Option<Vec<u8>> {
-		node_ark_demo_runtime::api::dispatch(method, data)
+		node_ark_runtime::api::dispatch(method, data)
 	}
 
 	fn native_version() -> sc_executor::NativeVersion {
-		node_ark_demo_runtime::native_version()
+		node_ark_runtime::native_version()
 	}
 }
 

@@ -5,7 +5,7 @@ use crate::{
 	service,
 };
 use frame_benchmarking_cli::{BenchmarkCmd, ExtrinsicFactory, SUBSTRATE_REFERENCE_HARDWARE};
-use node_ark_demo_runtime::{Block, EXISTENTIAL_DEPOSIT};
+use node_ark_runtime::{Block, EXISTENTIAL_DEPOSIT};
 use sc_cli::SubstrateCli;
 use sc_service::PartialComponents;
 use sp_keyring::Sr25519Keyring;

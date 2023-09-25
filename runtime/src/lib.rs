@@ -46,8 +46,8 @@ use pallet_transaction_payment::{ConstFeeMultiplier, CurrencyAdapter, Multiplier
 pub use sp_runtime::BuildStorage;
 pub use sp_runtime::{Perbill, Permill};
 
-/// Import the ark-demo pallet.
-pub use pallet_ark_demo;
+/// Import the ark pallet.
+pub use pallet_ark;
 
 /// An index to a block.
 pub type BlockNumber = u32;
@@ -270,8 +270,8 @@ impl pallet_sudo::Config for Runtime {
 }
 
 /// Configure the pallet-template in pallets/template.
-impl pallet_ark_demo::Config for Runtime {
-	type WeightInfo = pallet_ark_demo::weights::SubstrateWeight<Runtime>;
+impl pallet_ark::Config for Runtime {
+	type WeightInfo = pallet_ark::weights::SubstrateWeight<Runtime>;
 }
 
 // Create the runtime by composing the FRAME pallets that were previously configured.
@@ -284,8 +284,8 @@ construct_runtime!(
 		Balances: pallet_balances,
 		TransactionPayment: pallet_transaction_payment,
 		Sudo: pallet_sudo,
-		// Include the custom logic from the pallet-ark-demo in the runtime.
-		ArkDemo: pallet_ark_demo,
+		// Include the custom logic from the pallet-ark in the runtime.
+		Ark: pallet_ark,
 	}
 );
 
@@ -332,7 +332,7 @@ mod benches {
 		[frame_system, SystemBench::<Runtime>]
 		[pallet_balances, Balances]
 		[pallet_timestamp, Timestamp]
-		[pallet_ark_demo, ArkDemo]
+		[pallet_ark, Ark]
 	);
 }
 

@@ -1,9 +1,8 @@
 [package]
-name = "node-ark-demo"
+name = "node-ark"
 version = "0.1.0"
-description = "A FRAME-based Substrate node to test and benchmark arkworks primitives."
+description = "A FRAME-based Substrate node to test and benchmark Arkworks primitives."
 authors = ["Davide Galassi <davxy@datawok.net>"]
-homepage = "https://substrate.io/"
 edition = "2021"
 license = "MIT"
 publish = false
@@ -13,7 +12,7 @@ build = "build.rs"
 targets = ["x86_64-unknown-linux-gnu"]
 
 [[bin]]
-name = "node-ark-demo"
+name = "node-ark"
 
 [dependencies]
 clap = { version = "4.0.9", features = ["derive"] }
@@ -59,7 +58,7 @@ frame-benchmarking = { git = "https://github.com/paritytech/polkadot-sdk" }
 frame-benchmarking-cli = { git = "https://github.com/paritytech/polkadot-sdk" }
 
 # Local Dependencies
-node-ark-demo-runtime = { path = "../runtime" }
+node-ark-runtime = { path = "../runtime" }
 
 # CLI-specific dependencies
 try-runtime-cli = { git = "https://github.com/paritytech/polkadot-sdk", optional = true }
@@ -71,7 +70,7 @@ substrate-build-script-utils = { git = "https://github.com/paritytech/polkadot-s
 default = []
 # Dependencies that are only required if runtime benchmarking should be build.
 runtime-benchmarks = [
-	"node-ark-demo-runtime/runtime-benchmarks",
+	"node-ark-runtime/runtime-benchmarks",
 	"frame-benchmarking-cli/runtime-benchmarks",
 	"frame-benchmarking/runtime-benchmarks",
 	"frame-system/runtime-benchmarks",
@@ -80,6 +79,6 @@ runtime-benchmarks = [
 ]
 # Enable features that allow the runtime to be tried and debugged.
 try-runtime = [
-	"node-ark-demo-runtime/try-runtime",
+	"node-ark-runtime/try-runtime",
 	"try-runtime-cli/try-runtime"
 ]

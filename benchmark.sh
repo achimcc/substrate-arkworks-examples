@@ -3,7 +3,7 @@
 steps=2
 repeat=1
 
-pallet="pallet_ark_demo"
+pallet="pallet_ark"
 
 binary="./target/release/node-ark-demo"
 # binary="./target/debug/node-ark-demo"

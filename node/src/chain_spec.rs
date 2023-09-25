@@ -1,4 +1,4 @@
-use node_ark_demo_runtime::{
+use node_ark_runtime::{
 	AccountId, AuraConfig, BalancesConfig, GrandpaConfig, RuntimeGenesisConfig, Signature,
 	SudoConfig, SystemConfig, WASM_BINARY,
 };
