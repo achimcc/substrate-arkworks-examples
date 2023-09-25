@@ -367,71 +367,73 @@ mod benchmarks {
 		bw6_761_pairing_opt(RawOrigin::None, a, b);
 	}
 
+	// --- NEW FROM HERE
+
 	// #[benchmark]
-	// 	bw6_761_msm_g1 {
+	// 	fn bw6_761_msm_g1 {
 	// 		let (bases, scalars) =
 	// generate_msm_args::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g1::Config>>(1000);
 	// 			}: bw6_761_msm_g1(RawOrigin::None, bases.encode(), scalars.encode())
 
 	// #[benchmark]
-	// 	bw6_761_msm_g1_opt {
+	// 	fn bw6_761_msm_g1_opt {
 	// 		let (bases, scalars) = generate_msm_args::<sp_bw6_761::curves::g1::G1Projective>(1000);
 	// 			}: bw6_761_msm_g1_opt(RawOrigin::None, bases.encode(), scalars.encode())
 
 	// #[benchmark]
-	// 	bw6_761_msm_g2 {
+	// 	fn bw6_761_msm_g2 {
 	// 		let (bases, scalars) =
 	// generate_msm_args::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g2::Config>>(10);
 	// 			}: bw6_761_msm_g2(RawOrigin::None, bases.encode(), scalars.encode())
 
 	// #[benchmark]
-	// 	bw6_761_msm_g2_opt {
+	// 	fn bw6_761_msm_g2_opt {
 	// 		let (bases, scalars) = generate_msm_args::<sp_bw6_761::curves::g2::G2Projective>(10);
 	// 			}: bw6_761_msm_g2_opt(RawOrigin::None, bases.encode(), scalars.encode())
 
 	// #[benchmark]
-	// 	bw6_761_mul_projective_g1 {
+	// 	fn bw6_761_mul_projective_g1 {
 	// 		let (base, scalar) =
 	// generate_scalar_args_projective::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g1::Config>>();
 	// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 	// #[benchmark]
-	// 	bw6_761_mul_projective_g1_opt {
+	// 	fn bw6_761_mul_projective_g1_opt {
 	// 		let (base, scalar) =
 	// generate_scalar_args_projective::<sp_bw6_761::curves::g1::G1Projective>(); 	(RawOrigin::None,
 	// base.encode(), scalar.encode());
 
 	// #[benchmark]
-	// 	bw6_761_mul_affine_g1 {
+	// 	fn bw6_761_mul_affine_g1 {
 	// 		let (base, scalar) =
 	// generate_scalar_args::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g1::Config>>();
 	// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 	// #[benchmark]
-	// 	bw6_761_mul_affine_g1_opt {
+	// 	fn bw6_761_mul_affine_g1_opt {
 	// 		let (base, scalar) = generate_scalar_args::<sp_bw6_761::curves::g1::G1Affine>();
 	// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 	// #[benchmark]
-	// 	bw6_761_mul_projective_g2 {
+	// 	fn bw6_761_mul_projective_g2 {
 	// 		let (base, scalar) =
 	// generate_scalar_args_projective::<ark_ec::short_weierstrass::Projective<ark_bw6_761::g2::Config>>();
 	// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 	// #[benchmark]
-	// 	bw6_761_mul_projective_g2_opt {
+	// 	fn bw6_761_mul_projective_g2_opt {
 	// 		let (base, scalar) =
 	// generate_scalar_args_projective::<sp_bw6_761::curves::g2::G2Projective>(); 	(RawOrigin::None,
 	// base.encode(), scalar.encode());
 
 	// #[benchmark]
-	// 	bw6_761_mul_affine_g2 {
+	// 	fn bw6_761_mul_affine_g2 {
 	// 		let (base, scalar) =
 	// generate_scalar_args::<ark_ec::short_weierstrass::Affine<ark_bw6_761::g2::Config>>();
 	// 	(RawOrigin::None, base.encode(), scalar.encode());
 
 	// #[benchmark]
-	// 	bw6_761_mul_affine_g2_opt {
+	// 	fn bw6_761_mul_affine_g2_opt {
 	// 		let (base, scalar) = generate_scalar_args::<sp_bw6_761::curves::g2::G2Affine>();
 	// 	(RawOrigin::None, base.encode(), scalar.encode());
 
