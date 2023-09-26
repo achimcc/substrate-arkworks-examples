@@ -10,10 +10,3 @@ members = [
 [profile.release]
 panic = 'unwind'
 opt-level = 3
-
-[patch.crates-io]
-ark-scale = { path = "/home/davxy/develop/w3f/ark-scale" }
-
-[patch."https://github.com/w3f/ring-vrf"]
-dleq_vrf = { path = "/home/davxy/develop/w3f/ring-vrf/dleq_vrf" }
-bandersnatch_vrfs = { path = "/home/davxy/develop/w3f/ring-vrf/bandersnatch_vrfs" }

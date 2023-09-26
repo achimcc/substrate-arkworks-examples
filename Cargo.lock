@@ -508,13 +508,14 @@ dependencies = [
 [[package]]
 name = "ark-scale"
 version = "0.0.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "49b08346a3e38e2be792ef53ee168623c9244d968ff00cd70fb9932f6fe36393"
 dependencies = [
  "ark-ec",
  "ark-ff",
  "ark-serialize",
  "ark-std",
  "parity-scale-codec",
- "scale-info",
 ]
 
 [[package]]
@@ -534,6 +535,7 @@ dependencies = [
 [[package]]
 name = "ark-secret-scalar"
 version = "0.0.2"
+source = "git+https://github.com/w3f/ring-vrf?rev=f4fe253#f4fe2534ccc6d916cd10d9c16891e673728ec8b4"
 dependencies = [
  "ark-ec",
  "ark-ff",
@@ -593,6 +595,7 @@ dependencies = [
 [[package]]
 name = "ark-transcript"
 version = "0.0.2"
+source = "git+https://github.com/w3f/ring-vrf?rev=f4fe253#f4fe2534ccc6d916cd10d9c16891e673728ec8b4"
 dependencies = [
  "ark-ff",
  "ark-serialize",
@@ -809,6 +812,7 @@ dependencies = [
 [[package]]
 name = "bandersnatch_vrfs"
 version = "0.0.1"
+source = "git+https://github.com/w3f/ring-vrf?rev=f4fe253#f4fe2534ccc6d916cd10d9c16891e673728ec8b4"
 dependencies = [
  "ark-bls12-381",
  "ark-ec",
@@ -2171,10 +2175,11 @@ dependencies = [
 [[package]]
 name = "dleq_vrf"
 version = "0.0.2"
+source = "git+https://github.com/w3f/ring-vrf?rev=f4fe253#f4fe2534ccc6d916cd10d9c16891e673728ec8b4"
 dependencies = [
  "ark-ec",
  "ark-ff",
- "ark-scale 0.0.11",
+ "ark-scale 0.0.10",
  "ark-secret-scalar",
  "ark-serialize",
  "ark-std",
@@ -5285,7 +5290,7 @@ dependencies = [
  "ark-ed-on-bls12-381-bandersnatch",
  "ark-ff",
  "ark-groth16",
- "ark-scale 0.0.10",
+ "ark-scale 0.0.11",
  "ark-serialize",
  "ark-snark",
  "ark-std",
