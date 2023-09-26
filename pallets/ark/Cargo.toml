@@ -22,7 +22,6 @@ sp-bls12-377 = { git = "https://github.com/paritytech/substrate-curves", feature
 sp-ed-on-bls12-381-bandersnatch = { git = "https://github.com/paritytech/substrate-curves", default-features = false }
 sp-ed-on-bls12-377 = { git = "https://github.com/paritytech/substrate-curves", default-features = false }
 sp-bw6-761 = { git = "https://github.com/paritytech/substrate-curves", default-features = false }
-sp-ark-models = { version = "0.4.0", default-features = false }
 ark-bls12-381 = { version = "0.4.0", features = ["curve"], default-features = false }
 ark-bls12-377 = { version = "0.4.0", features = ["curve"], default-features = false }
 ark-bw6-761 = { version = "0.4.0", default-features = false }
@@ -55,7 +54,6 @@ std = [
 	"sp-ed-on-bls12-381-bandersnatch/std",
 	"sp-ed-on-bls12-377/std",
 	"sp-bw6-761/std", 
-	"sp-ark-models/std",
 	"ark-bls12-381/std",
 	"ark-bls12-377/std",
 	"ark-bw6-761/std",

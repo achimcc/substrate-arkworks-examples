@@ -5294,7 +5294,6 @@ dependencies = [
  "frame-system",
  "parity-scale-codec",
  "scale-info",
- "sp-ark-models 0.4.0",
  "sp-bls12-377",
  "sp-bls12-381",
  "sp-bw6-761",
@@ -8147,7 +8146,7 @@ dependencies = [
  "ark-scale 0.0.10",
  "ark-std",
  "parity-scale-codec",
- "sp-ark-models 0.4.1-beta",
+ "sp-ark-models",
 ]
 
 [[package]]
@@ -8161,7 +8160,7 @@ dependencies = [
  "ark-serialize",
  "ark-std",
  "parity-scale-codec",
- "sp-ark-models 0.4.1-beta",
+ "sp-ark-models",
 ]
 
 [[package]]
@@ -8174,7 +8173,7 @@ dependencies = [
  "ark-scale 0.0.10",
  "ark-std",
  "parity-scale-codec",
- "sp-ark-models 0.4.1-beta",
+ "sp-ark-models",
 ]
 
 [[package]]
@@ -8189,7 +8188,7 @@ dependencies = [
  "ark-serialize",
  "ark-std",
  "parity-scale-codec",
- "sp-ark-models 0.4.1-beta",
+ "sp-ark-models",
 ]
 
 [[package]]
@@ -8205,24 +8204,7 @@ dependencies = [
  "ark-std",
  "parity-scale-codec",
  "sp-ark-bls12-381",
- "sp-ark-models 0.4.1-beta",
-]
-
-[[package]]
-name = "sp-ark-models"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "28fa906b809d7a346b2aa32a4bd0c884a75f9f588f9a4a07272f63eaf8a10765"
-dependencies = [
- "ark-ec",
- "ark-ff",
- "ark-serialize",
- "ark-std",
- "derivative",
- "getrandom 0.2.10",
- "itertools",
- "num-traits",
- "zeroize",
+ "sp-ark-models",
 ]
 
 [[package]]
@@ -8287,7 +8269,7 @@ source = "git+https://github.com/paritytech/substrate-curves#7a417fa3254c1d56fb3
 dependencies = [
  "ark-std",
  "sp-ark-bls12-381",
- "sp-ark-models 0.4.1-beta",
+ "sp-ark-models",
  "sp-crypto-ec-utils",
 ]
 
