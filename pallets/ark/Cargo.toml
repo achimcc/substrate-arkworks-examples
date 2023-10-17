@@ -17,8 +17,8 @@ frame-benchmarking = { git = "https://github.com/paritytech/polkadot-sdk", defau
 frame-support = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false }
 frame-system = { git = "https://github.com/paritytech/polkadot-sdk", default-features = false }
 sp-io =  { git = "https://github.com/paritytech/polkadot-sdk", default-features = false }
-sp-bls12-381 = { git = "https://github.com/paritytech/substrate-curves", features = ["curve"], default-features = false }
-sp-bls12-377 = { git = "https://github.com/paritytech/substrate-curves", features = ["curve"], default-features = false }
+sp-bls12-381 = { git = "https://github.com/paritytech/substrate-curves", default-features = false }
+sp-bls12-377 = { git = "https://github.com/paritytech/substrate-curves", default-features = false }
 sp-ed-on-bls12-381-bandersnatch = { git = "https://github.com/paritytech/substrate-curves", default-features = false }
 sp-ed-on-bls12-377 = { git = "https://github.com/paritytech/substrate-curves", default-features = false }
 sp-bw6-761 = { git = "https://github.com/paritytech/substrate-curves", default-features = false }
