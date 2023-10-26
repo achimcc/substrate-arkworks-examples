@@ -95,8 +95,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_381_pairing_opt(
 			_: OriginFor<T>,
-			a: ArkScale<sp_bls12_381::G1Affine>,
-			b: ArkScale<sp_bls12_381::G2Affine>,
+			a: ArkScale<sp_ark_bls12_381::G1Affine>,
+			b: ArkScale<sp_ark_bls12_381::G2Affine>,
 		) -> DispatchResult {
 			bls12_381::pairing_opt(a.0, b.0);
 			Ok(())
@@ -128,8 +128,8 @@ pub mod pallet {
 			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases =
-				ArkScale::<Vec<sp_bls12_381::G1Affine>>::decode(&mut bases.as_slice()).unwrap();
-			let scalars = ArkScale::<Vec<ScalarFieldFor<sp_bls12_381::G1Affine>>>::decode(
+				ArkScale::<Vec<sp_ark_bls12_381::G1Affine>>::decode(&mut bases.as_slice()).unwrap();
+			let scalars = ArkScale::<Vec<ScalarFieldFor<sp_ark_bls12_381::G1Affine>>>::decode(
 				&mut scalars.as_slice(),
 			)
 			.unwrap();
@@ -164,8 +164,8 @@ pub mod pallet {
 			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases =
-				ArkScale::<Vec<sp_bls12_381::G2Affine>>::decode(&mut bases.as_slice()).unwrap();
-			let scalars = ArkScale::<Vec<ScalarFieldFor<sp_bls12_381::G2Affine>>>::decode(
+				ArkScale::<Vec<sp_ark_bls12_381::G2Affine>>::decode(&mut bases.as_slice()).unwrap();
+			let scalars = ArkScale::<Vec<ScalarFieldFor<sp_ark_bls12_381::G2Affine>>>::decode(
 				&mut scalars.as_slice(),
 			)
 			.unwrap();
@@ -198,7 +198,7 @@ pub mod pallet {
 			scalar: Vec<u8>,
 		) -> DispatchResult {
 			let base =
-				ArkScaleProjective::<sp_bls12_381::G1Projective>::decode(&mut base.as_slice())
+				ArkScaleProjective::<sp_ark_bls12_381::G1Projective>::decode(&mut base.as_slice())
 					.unwrap();
 			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
@@ -227,7 +227,8 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base = ArkScale::<sp_bls12_381::G1Affine>::decode(&mut base.as_slice()).unwrap();
+			let base =
+				ArkScale::<sp_ark_bls12_381::G1Affine>::decode(&mut base.as_slice()).unwrap();
 			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
 			bls12_381::mul_affine_g1_opt(&base.0, &scalar.0);
@@ -258,7 +259,7 @@ pub mod pallet {
 			scalar: Vec<u8>,
 		) -> DispatchResult {
 			let base =
-				ArkScaleProjective::<sp_bls12_381::G2Projective>::decode(&mut base.as_slice())
+				ArkScaleProjective::<sp_ark_bls12_381::G2Projective>::decode(&mut base.as_slice())
 					.unwrap();
 			let scalar = <ArkScale<Vec<u64>> as Decode>::decode(&mut scalar.as_slice()).unwrap();
 
@@ -288,7 +289,8 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base = ArkScale::<sp_bls12_381::G2Affine>::decode(&mut base.as_slice()).unwrap();
+			let base =
+				ArkScale::<sp_ark_bls12_381::G2Affine>::decode(&mut base.as_slice()).unwrap();
 			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
 			bls12_381::mul_affine_g2_opt(&base.0, &scalar.0);
@@ -314,8 +316,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bls12_377_pairing_opt(
 			_: OriginFor<T>,
-			a: ArkScale<sp_bls12_377::G1Affine>,
-			b: ArkScale<sp_bls12_377::G2Affine>,
+			a: ArkScale<sp_ark_bls12_377::G1Affine>,
+			b: ArkScale<sp_ark_bls12_377::G2Affine>,
 		) -> DispatchResult {
 			bls12_377::pairing_opt(a.0, b.0);
 			Ok(())
@@ -347,8 +349,8 @@ pub mod pallet {
 			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases =
-				ArkScale::<Vec<sp_bls12_377::G1Affine>>::decode(&mut bases.as_slice()).unwrap();
-			let scalars = ArkScale::<Vec<ScalarFieldFor<sp_bls12_377::G1Affine>>>::decode(
+				ArkScale::<Vec<sp_ark_bls12_377::G1Affine>>::decode(&mut bases.as_slice()).unwrap();
+			let scalars = ArkScale::<Vec<ScalarFieldFor<sp_ark_bls12_377::G1Affine>>>::decode(
 				&mut scalars.as_slice(),
 			)
 			.unwrap();
@@ -383,8 +385,8 @@ pub mod pallet {
 			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases =
-				ArkScale::<Vec<sp_bls12_377::G2Affine>>::decode(&mut bases.as_slice()).unwrap();
-			let scalars = ArkScale::<Vec<ScalarFieldFor<sp_bls12_377::G2Affine>>>::decode(
+				ArkScale::<Vec<sp_ark_bls12_377::G2Affine>>::decode(&mut bases.as_slice()).unwrap();
+			let scalars = ArkScale::<Vec<ScalarFieldFor<sp_ark_bls12_377::G2Affine>>>::decode(
 				&mut scalars.as_slice(),
 			)
 			.unwrap();
@@ -417,7 +419,7 @@ pub mod pallet {
 			scalar: Vec<u8>,
 		) -> DispatchResult {
 			let base =
-				ArkScaleProjective::<sp_bls12_377::G1Projective>::decode(&mut base.as_slice())
+				ArkScaleProjective::<sp_ark_bls12_377::G1Projective>::decode(&mut base.as_slice())
 					.unwrap();
 			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
@@ -446,7 +448,8 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base = ArkScale::<sp_bls12_377::G1Affine>::decode(&mut base.as_slice()).unwrap();
+			let base =
+				ArkScale::<sp_ark_bls12_377::G1Affine>::decode(&mut base.as_slice()).unwrap();
 			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
 			bls12_377::mul_affine_g1_opt(&base.0, &scalar.0);
@@ -477,7 +480,7 @@ pub mod pallet {
 			scalar: Vec<u8>,
 		) -> DispatchResult {
 			let base =
-				ArkScaleProjective::<sp_bls12_377::G2Projective>::decode(&mut base.as_slice())
+				ArkScaleProjective::<sp_ark_bls12_377::G2Projective>::decode(&mut base.as_slice())
 					.unwrap();
 			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
@@ -506,7 +509,8 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base = ArkScale::<sp_bls12_377::G2Affine>::decode(&mut base.as_slice()).unwrap();
+			let base =
+				ArkScale::<sp_ark_bls12_377::G2Affine>::decode(&mut base.as_slice()).unwrap();
 			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
 			bls12_377::mul_affine_g2_opt(&base.0, &scalar.0);
@@ -532,8 +536,8 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1).ref_time())]
 		pub fn bw6_761_pairing_opt(
 			_: OriginFor<T>,
-			a: ArkScale<sp_bw6_761::g1::G1Affine>,
-			b: ArkScale<sp_bw6_761::g2::G2Affine>,
+			a: ArkScale<sp_ark_bw6_761::g1::G1Affine>,
+			b: ArkScale<sp_ark_bw6_761::g2::G2Affine>,
 		) -> DispatchResult {
 			bw6_761::pairing_opt(a.0, b.0);
 			Ok(())
@@ -563,8 +567,9 @@ pub mod pallet {
 			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases =
-				ArkScale::<Vec<sp_bw6_761::g1::G1Affine>>::decode(&mut bases.as_slice()).unwrap();
-			let scalars = ArkScale::<Vec<ScalarFieldFor<sp_bw6_761::g1::G1Affine>>>::decode(
+				ArkScale::<Vec<sp_ark_bw6_761::g1::G1Affine>>::decode(&mut bases.as_slice())
+					.unwrap();
+			let scalars = ArkScale::<Vec<ScalarFieldFor<sp_ark_bw6_761::g1::G1Affine>>>::decode(
 				&mut scalars.as_slice(),
 			)
 			.unwrap();
@@ -594,8 +599,9 @@ pub mod pallet {
 			scalars: Vec<u8>,
 		) -> DispatchResult {
 			let bases =
-				ArkScale::<Vec<sp_bw6_761::g2::G2Affine>>::decode(&mut bases.as_slice()).unwrap();
-			let scalars = ArkScale::<Vec<ScalarFieldFor<sp_bw6_761::g2::G2Affine>>>::decode(
+				ArkScale::<Vec<sp_ark_bw6_761::g2::G2Affine>>::decode(&mut bases.as_slice())
+					.unwrap();
+			let scalars = ArkScale::<Vec<ScalarFieldFor<sp_ark_bw6_761::g2::G2Affine>>>::decode(
 				&mut scalars.as_slice(),
 			)
 			.unwrap();
@@ -627,9 +633,10 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base =
-				ArkScaleProjective::<sp_bw6_761::g1::G1Projective>::decode(&mut base.as_slice())
-					.unwrap();
+			let base = ArkScaleProjective::<sp_ark_bw6_761::g1::G1Projective>::decode(
+				&mut base.as_slice(),
+			)
+			.unwrap();
 			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
 			bw6_761::mul_projective_g1_opt(&base.0, &scalar.0);
@@ -657,7 +664,8 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base = ArkScale::<sp_bw6_761::g1::G1Affine>::decode(&mut base.as_slice()).unwrap();
+			let base =
+				ArkScale::<sp_ark_bw6_761::g1::G1Affine>::decode(&mut base.as_slice()).unwrap();
 			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
 			bw6_761::mul_affine_g1_opt(&base.0, &scalar.0);
@@ -687,9 +695,10 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base =
-				ArkScaleProjective::<sp_bw6_761::g2::G2Projective>::decode(&mut base.as_slice())
-					.unwrap();
+			let base = ArkScaleProjective::<sp_ark_bw6_761::g2::G2Projective>::decode(
+				&mut base.as_slice(),
+			)
+			.unwrap();
 			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
 			bw6_761::mul_projective_g2_opt(&base.0, &scalar.0);
@@ -717,7 +726,8 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base = ArkScale::<sp_bw6_761::g2::G2Affine>::decode(&mut base.as_slice()).unwrap();
+			let base =
+				ArkScale::<sp_ark_bw6_761::g2::G2Affine>::decode(&mut base.as_slice()).unwrap();
 			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
 			bw6_761::mul_affine_g2_opt(&base.0, &scalar.0);
@@ -755,15 +765,14 @@ pub mod pallet {
 			bases: Vec<u8>,
 			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases = ArkScale::<Vec<sp_ed_on_bls12_381_bandersnatch::SWAffine>>::decode(
+			let bases = ArkScale::<Vec<sp_ark_ed_on_bls12_381_bandersnatch::SWAffine>>::decode(
 				&mut bases.as_slice(),
 			)
 			.unwrap();
-			let scalars =
-				ArkScale::<Vec<ScalarFieldFor<sp_ed_on_bls12_381_bandersnatch::SWAffine>>>::decode(
-					&mut scalars.as_slice(),
-				)
-				.unwrap();
+			let scalars = ArkScale::<
+				Vec<ScalarFieldFor<sp_ark_ed_on_bls12_381_bandersnatch::SWAffine>>,
+			>::decode(&mut scalars.as_slice())
+			.unwrap();
 
 			ed_on_bls12_381_bandersnatch::msm_sw_opt(&bases.0, &scalars.0);
 			Ok(())
@@ -796,12 +805,13 @@ pub mod pallet {
 			bases: Vec<u8>,
 			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases = ArkScale::<Vec<sp_ed_on_bls12_381_bandersnatch::EdwardsAffine>>::decode(
-				&mut bases.as_slice(),
-			)
-			.unwrap();
+			let bases =
+				ArkScale::<Vec<sp_ark_ed_on_bls12_381_bandersnatch::EdwardsAffine>>::decode(
+					&mut bases.as_slice(),
+				)
+				.unwrap();
 			let scalars = <ArkScale<
-				Vec<ScalarFieldFor<sp_ed_on_bls12_381_bandersnatch::EdwardsAffine>>,
+				Vec<ScalarFieldFor<sp_ark_ed_on_bls12_381_bandersnatch::EdwardsAffine>>,
 			> as Decode>::decode(&mut scalars.as_slice())
 			.unwrap();
 
@@ -834,10 +844,11 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base = ArkScaleProjective::<sp_ed_on_bls12_381_bandersnatch::SWProjective>::decode(
-				&mut base.as_slice(),
-			)
-			.unwrap();
+			let base =
+				ArkScaleProjective::<sp_ark_ed_on_bls12_381_bandersnatch::SWProjective>::decode(
+					&mut base.as_slice(),
+				)
+				.unwrap();
 			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
 			ed_on_bls12_381_bandersnatch::mul_projective_sw_opt(&base.0, &scalar.0);
@@ -870,7 +881,7 @@ pub mod pallet {
 			scalar: Vec<u8>,
 		) -> DispatchResult {
 			let base =
-				ArkScaleProjective::<sp_ed_on_bls12_381_bandersnatch::EdwardsProjective>::decode(
+				ArkScaleProjective::<sp_ark_ed_on_bls12_381_bandersnatch::EdwardsProjective>::decode(
 					&mut base.as_slice(),
 				)
 				.unwrap();
@@ -904,9 +915,10 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base =
-				ArkScale::<sp_ed_on_bls12_381_bandersnatch::SWAffine>::decode(&mut base.as_slice())
-					.unwrap();
+			let base = ArkScale::<sp_ark_ed_on_bls12_381_bandersnatch::SWAffine>::decode(
+				&mut base.as_slice(),
+			)
+			.unwrap();
 			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 
 			ed_on_bls12_381_bandersnatch::mul_affine_sw_opt(&base.0, &scalar.0);
@@ -937,7 +949,7 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base = ArkScale::<sp_ed_on_bls12_381_bandersnatch::EdwardsAffine>::decode(
+			let base = ArkScale::<sp_ark_ed_on_bls12_381_bandersnatch::EdwardsAffine>::decode(
 				&mut base.as_slice(),
 			)
 			.unwrap();
@@ -978,12 +990,13 @@ pub mod pallet {
 			bases: Vec<u8>,
 			scalars: Vec<u8>,
 		) -> DispatchResult {
-			let bases =
-				ArkScale::<Vec<sp_ed_on_bls12_377::EdwardsAffine>>::decode(&mut bases.as_slice())
-					.unwrap();
+			let bases = ArkScale::<Vec<sp_ark_ed_on_bls12_377::EdwardsAffine>>::decode(
+				&mut bases.as_slice(),
+			)
+			.unwrap();
 
 			let scalars =
-				ArkScale::<Vec<ScalarFieldFor<sp_ed_on_bls12_377::EdwardsAffine>>>::decode(
+				ArkScale::<Vec<ScalarFieldFor<sp_ark_ed_on_bls12_377::EdwardsAffine>>>::decode(
 					&mut scalars.as_slice(),
 				)
 				.unwrap();
@@ -1016,7 +1029,7 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base = ArkScaleProjective::<sp_ed_on_bls12_377::EdwardsProjective>::decode(
+			let base = ArkScaleProjective::<sp_ark_ed_on_bls12_377::EdwardsProjective>::decode(
 				&mut base.as_slice(),
 			)
 			.unwrap();
@@ -1048,8 +1061,9 @@ pub mod pallet {
 			base: Vec<u8>,
 			scalar: Vec<u8>,
 		) -> DispatchResult {
-			let base = ArkScale::<sp_ed_on_bls12_377::EdwardsAffine>::decode(&mut base.as_slice())
-				.unwrap();
+			let base =
+				ArkScale::<sp_ark_ed_on_bls12_377::EdwardsAffine>::decode(&mut base.as_slice())
+					.unwrap();
 
 			let scalar = ArkScale::<Vec<u64>>::decode(&mut scalar.as_slice()).unwrap();
 			ed_on_bls12_377::mul_affine_opt(&base.0, &scalar.0);

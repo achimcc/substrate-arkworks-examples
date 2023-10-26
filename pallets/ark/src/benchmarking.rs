@@ -98,20 +98,21 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_381_groth16_verification_opt() {
-		let vk = VerifyingKeyFor::<sp_bls12_381::Bls12_381, sp_bls12_381::Fr>::deserialize_compressed_unchecked(
+		let vk = VerifyingKeyFor::<sp_ark_bls12_381::Bls12_381, sp_ark_bls12_381::Fr>::deserialize_compressed_unchecked(
 			VK_SERIALIZED,
 		)
 		.unwrap();
 		let vk = serialize_argument(vk);
 
-		let c = Fp::<MontBackend<sp_bls12_381::FrConfig, 4>, 4>::deserialize_compressed_unchecked(
-			C_SERIALIZED,
-		)
-		.unwrap();
+		let c =
+			Fp::<MontBackend<sp_ark_bls12_381::FrConfig, 4>, 4>::deserialize_compressed_unchecked(
+				C_SERIALIZED,
+			)
+			.unwrap();
 		let c = serialize_argument(c);
 
 		let proof =
-			ProofFor::<sp_bls12_381::Bls12_381, sp_bls12_381::Fr>::deserialize_compressed_unchecked(PROOF_SERIALIZED)
+			ProofFor::<sp_ark_bls12_381::Bls12_381, sp_ark_bls12_381::Fr>::deserialize_compressed_unchecked(PROOF_SERIALIZED)
 				.unwrap();
 		let proof = serialize_argument(proof);
 
@@ -129,7 +130,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_381_pairing_opt() {
-		let (a, b) = make_pairing_args::<sp_bls12_381::G1Affine, sp_bls12_381::G2Affine>();
+		let (a, b) = make_pairing_args::<sp_ark_bls12_381::G1Affine, sp_ark_bls12_381::G2Affine>();
 
 		#[extrinsic_call]
 		bls12_381_pairing_opt(RawOrigin::None, a, b);
@@ -145,7 +146,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_381_msm_g1_opt(x: Linear<MSM_LEN_MIN, MSM_LEN_MAX>) {
-		let (bases, scalars) = make_msm_args::<sp_bls12_381::G1Projective>(x);
+		let (bases, scalars) = make_msm_args::<sp_ark_bls12_381::G1Projective>(x);
 
 		#[extrinsic_call]
 		bls12_381_msm_g1_opt(RawOrigin::None, bases.encode(), scalars.encode());
@@ -161,7 +162,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_381_msm_g2_opt(x: Linear<MSM_LEN_MIN, MSM_LEN_MAX>) {
-		let (bases, scalars) = make_msm_args::<sp_bls12_381::G2Projective>(x);
+		let (bases, scalars) = make_msm_args::<sp_ark_bls12_381::G2Projective>(x);
 
 		#[extrinsic_call]
 		bls12_381_msm_g2_opt(RawOrigin::None, bases.encode(), scalars.encode());
@@ -177,7 +178,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_381_mul_projective_g1_opt(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
-		let (base, scalar) = make_scalar_args_projective::<sp_bls12_381::G1Projective>(x);
+		let (base, scalar) = make_scalar_args_projective::<sp_ark_bls12_381::G1Projective>(x);
 
 		#[extrinsic_call]
 		bls12_381_mul_projective_g1_opt(RawOrigin::None, base.encode(), scalar.encode());
@@ -193,7 +194,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_381_mul_affine_g1_opt(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
-		let (base, scalar) = make_scalar_args::<sp_bls12_381::G1Affine>(x);
+		let (base, scalar) = make_scalar_args::<sp_ark_bls12_381::G1Affine>(x);
 
 		#[extrinsic_call]
 		bls12_381_mul_affine_g1_opt(RawOrigin::None, base.encode(), scalar.encode());
@@ -209,7 +210,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_381_mul_projective_g2_opt(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
-		let (base, scalar) = make_scalar_args_projective::<sp_bls12_381::G2Projective>(x);
+		let (base, scalar) = make_scalar_args_projective::<sp_ark_bls12_381::G2Projective>(x);
 
 		#[extrinsic_call]
 		bls12_381_mul_projective_g2_opt(RawOrigin::None, base.encode(), scalar.encode());
@@ -225,7 +226,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_381_mul_affine_g2_opt(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
-		let (base, scalar) = make_scalar_args::<sp_bls12_381::G2Affine>(x);
+		let (base, scalar) = make_scalar_args::<sp_ark_bls12_381::G2Affine>(x);
 
 		#[extrinsic_call]
 		bls12_381_mul_affine_g2_opt(RawOrigin::None, base.encode(), scalar.encode());
@@ -245,7 +246,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_377_pairing_opt() {
-		let (a, b) = make_pairing_args::<sp_bls12_377::G1Affine, sp_bls12_377::G2Affine>();
+		let (a, b) = make_pairing_args::<sp_ark_bls12_377::G1Affine, sp_ark_bls12_377::G2Affine>();
 
 		#[extrinsic_call]
 		bls12_377_pairing_opt(RawOrigin::None, a, b);
@@ -261,7 +262,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_377_msm_g1_opt(x: Linear<MSM_LEN_MIN, MSM_LEN_MAX>) {
-		let (bases, scalars) = make_msm_args::<sp_bls12_377::G1Projective>(x);
+		let (bases, scalars) = make_msm_args::<sp_ark_bls12_377::G1Projective>(x);
 
 		#[extrinsic_call]
 		bls12_377_msm_g1_opt(RawOrigin::None, bases.encode(), scalars.encode());
@@ -277,7 +278,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_377_msm_g2_opt(x: Linear<MSM_LEN_MIN, MSM_LEN_MAX>) {
-		let (bases, scalars) = make_msm_args::<sp_bls12_377::G2Projective>(x);
+		let (bases, scalars) = make_msm_args::<sp_ark_bls12_377::G2Projective>(x);
 
 		#[extrinsic_call]
 		bls12_377_msm_g2_opt(RawOrigin::None, bases.encode(), scalars.encode());
@@ -293,7 +294,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_377_mul_projective_g1_opt(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
-		let (base, scalar) = make_scalar_args_projective::<sp_bls12_377::G1Projective>(x);
+		let (base, scalar) = make_scalar_args_projective::<sp_ark_bls12_377::G1Projective>(x);
 
 		#[extrinsic_call]
 		bls12_377_mul_projective_g1_opt(RawOrigin::None, base.encode(), scalar.encode());
@@ -309,7 +310,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_377_mul_affine_g1_opt(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
-		let (base, scalar) = make_scalar_args::<sp_bls12_377::G1Affine>(x);
+		let (base, scalar) = make_scalar_args::<sp_ark_bls12_377::G1Affine>(x);
 
 		#[extrinsic_call]
 		bls12_377_mul_affine_g1_opt(RawOrigin::None, base.encode(), scalar.encode());
@@ -325,7 +326,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_377_mul_projective_g2_opt(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
-		let (base, scalar) = make_scalar_args_projective::<sp_bls12_377::G2Projective>(x);
+		let (base, scalar) = make_scalar_args_projective::<sp_ark_bls12_377::G2Projective>(x);
 
 		#[extrinsic_call]
 		bls12_377_mul_projective_g2_opt(RawOrigin::None, base.encode(), scalar.encode());
@@ -341,7 +342,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bls12_377_mul_affine_g2_opt(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
-		let (base, scalar) = make_scalar_args::<sp_bls12_377::G2Affine>(x);
+		let (base, scalar) = make_scalar_args::<sp_ark_bls12_377::G2Affine>(x);
 
 		#[extrinsic_call]
 		bls12_377_mul_affine_g2_opt(RawOrigin::None, base.encode(), scalar.encode());
@@ -361,7 +362,8 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bw6_761_pairing_opt() {
-		let (a, b) = make_pairing_args::<sp_bw6_761::g1::G1Affine, sp_bw6_761::g2::G2Affine>();
+		let (a, b) =
+			make_pairing_args::<sp_ark_bw6_761::g1::G1Affine, sp_ark_bw6_761::g2::G2Affine>();
 
 		#[extrinsic_call]
 		bw6_761_pairing_opt(RawOrigin::None, a, b);
@@ -377,7 +379,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bw6_761_msm_g1_opt(x: Linear<MSM_LEN_MIN, MSM_LEN_MAX>) {
-		let (bases, scalars) = make_msm_args::<sp_bw6_761::g1::G1Projective>(x);
+		let (bases, scalars) = make_msm_args::<sp_ark_bw6_761::g1::G1Projective>(x);
 
 		#[extrinsic_call]
 		bw6_761_msm_g1_opt(RawOrigin::None, bases.encode(), scalars.encode());
@@ -393,7 +395,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bw6_761_msm_g2_opt(x: Linear<MSM_LEN_MIN, MSM_LEN_MAX>) {
-		let (bases, scalars) = make_msm_args::<sp_bw6_761::g2::G2Projective>(x);
+		let (bases, scalars) = make_msm_args::<sp_ark_bw6_761::g2::G2Projective>(x);
 
 		#[extrinsic_call]
 		bw6_761_msm_g2_opt(RawOrigin::None, bases.encode(), scalars.encode())
@@ -409,7 +411,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bw6_761_mul_projective_g1_opt(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
-		let (base, scalar) = make_scalar_args_projective::<sp_bw6_761::g1::G1Projective>(x);
+		let (base, scalar) = make_scalar_args_projective::<sp_ark_bw6_761::g1::G1Projective>(x);
 
 		#[extrinsic_call]
 		bw6_761_mul_projective_g1_opt(RawOrigin::None, base.encode(), scalar.encode());
@@ -425,7 +427,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bw6_761_mul_affine_g1_opt(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
-		let (base, scalar) = make_scalar_args::<sp_bw6_761::g1::G1Affine>(x);
+		let (base, scalar) = make_scalar_args::<sp_ark_bw6_761::g1::G1Affine>(x);
 
 		#[extrinsic_call]
 		bw6_761_mul_affine_g1_opt(RawOrigin::None, base.encode(), scalar.encode());
@@ -441,7 +443,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bw6_761_mul_projective_g2_opt(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
-		let (base, scalar) = make_scalar_args_projective::<sp_bw6_761::g2::G2Projective>(x);
+		let (base, scalar) = make_scalar_args_projective::<sp_ark_bw6_761::g2::G2Projective>(x);
 
 		#[extrinsic_call]
 		bw6_761_mul_projective_g2_opt(RawOrigin::None, base.encode(), scalar.encode());
@@ -457,7 +459,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn bw6_761_mul_affine_g2_opt(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
-		let (base, scalar) = make_scalar_args::<sp_bw6_761::g2::G2Affine>(x);
+		let (base, scalar) = make_scalar_args::<sp_ark_bw6_761::g2::G2Affine>(x);
 
 		#[extrinsic_call]
 		bw6_761_mul_affine_g2_opt(RawOrigin::None, base.encode(), scalar.encode());
@@ -477,7 +479,8 @@ mod benchmarks {
 
 	#[benchmark]
 	fn ed_on_bls12_381_bandersnatch_msm_sw_opt(x: Linear<MSM_LEN_MIN, MSM_LEN_MAX>) {
-		let (bases, scalars) = make_msm_args::<sp_ed_on_bls12_381_bandersnatch::SWProjective>(x);
+		let (bases, scalars) =
+			make_msm_args::<sp_ark_ed_on_bls12_381_bandersnatch::SWProjective>(x);
 
 		#[extrinsic_call]
 		ed_on_bls12_381_bandersnatch_msm_sw_opt(RawOrigin::None, bases.encode(), scalars.encode());
@@ -495,7 +498,7 @@ mod benchmarks {
 	#[benchmark]
 	fn ed_on_bls12_381_bandersnatch_msm_te_opt(x: Linear<MSM_LEN_MIN, MSM_LEN_MAX>) {
 		let (bases, scalars) =
-			make_msm_args::<sp_ed_on_bls12_381_bandersnatch::EdwardsProjective>(x);
+			make_msm_args::<sp_ark_ed_on_bls12_381_bandersnatch::EdwardsProjective>(x);
 
 		#[extrinsic_call]
 		ed_on_bls12_381_bandersnatch_msm_te_opt(RawOrigin::None, bases.encode(), scalars.encode());
@@ -521,7 +524,7 @@ mod benchmarks {
 		x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>,
 	) {
 		let (base, scalar) =
-			make_scalar_args_projective::<sp_ed_on_bls12_381_bandersnatch::SWProjective>(x);
+			make_scalar_args_projective::<sp_ark_ed_on_bls12_381_bandersnatch::SWProjective>(x);
 
 		#[extrinsic_call]
 		ed_on_bls12_381_bandersnatch_mul_projective_sw_opt(
@@ -543,7 +546,7 @@ mod benchmarks {
 	fn ed_on_bls12_381_bandersnatch_mul_affine_sw_opt(
 		x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>,
 	) {
-		let (base, scalar) = make_scalar_args::<sp_ed_on_bls12_381_bandersnatch::SWAffine>(x);
+		let (base, scalar) = make_scalar_args::<sp_ark_ed_on_bls12_381_bandersnatch::SWAffine>(x);
 
 		#[extrinsic_call]
 		ed_on_bls12_381_bandersnatch_mul_affine_sw_opt(
@@ -572,8 +575,9 @@ mod benchmarks {
 	fn ed_on_bls12_381_bandersnatch_mul_projective_te_opt(
 		x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>,
 	) {
-		let (base, scalar) =
-			make_scalar_args_projective::<sp_ed_on_bls12_381_bandersnatch::EdwardsProjective>(x);
+		let (base, scalar) = make_scalar_args_projective::<
+			sp_ark_ed_on_bls12_381_bandersnatch::EdwardsProjective,
+		>(x);
 
 		#[extrinsic_call]
 		ed_on_bls12_381_bandersnatch_mul_projective_te_opt(
@@ -595,7 +599,8 @@ mod benchmarks {
 	fn ed_on_bls12_381_bandersnatch_mul_affine_te_opt(
 		x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>,
 	) {
-		let (base, scalar) = make_scalar_args::<sp_ed_on_bls12_381_bandersnatch::EdwardsAffine>(x);
+		let (base, scalar) =
+			make_scalar_args::<sp_ark_ed_on_bls12_381_bandersnatch::EdwardsAffine>(x);
 
 		#[extrinsic_call]
 		ed_on_bls12_381_bandersnatch_mul_affine_te_opt(
@@ -619,7 +624,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn ed_on_bls12_377_msm_opt(x: Linear<MSM_LEN_MIN, MSM_LEN_MAX>) {
-		let (bases, scalars) = make_msm_args::<sp_ed_on_bls12_377::EdwardsProjective>(x);
+		let (bases, scalars) = make_msm_args::<sp_ark_ed_on_bls12_377::EdwardsProjective>(x);
 
 		#[extrinsic_call]
 		ed_on_bls12_377_msm_opt(RawOrigin::None, bases.encode(), scalars.encode())
@@ -637,7 +642,7 @@ mod benchmarks {
 	#[benchmark]
 	fn ed_on_bls12_377_mul_projective_opt(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
 		let (base, scalar) =
-			make_scalar_args_projective::<sp_ed_on_bls12_377::EdwardsProjective>(x);
+			make_scalar_args_projective::<sp_ark_ed_on_bls12_377::EdwardsProjective>(x);
 
 		#[extrinsic_call]
 		ed_on_bls12_377_mul_projective_opt(RawOrigin::None, base.encode(), scalar.encode());
@@ -655,7 +660,7 @@ mod benchmarks {
 
 	#[benchmark]
 	fn ed_on_bls12_377_mul_affine_opt(x: Linear<SCALAR_WORDS_MIN, SCALAR_WORDS_MAX>) {
-		let (base, scalar) = make_scalar_args::<sp_ed_on_bls12_377::EdwardsAffine>(x);
+		let (base, scalar) = make_scalar_args::<sp_ark_ed_on_bls12_377::EdwardsAffine>(x);
 
 		#[extrinsic_call]
 		ed_on_bls12_377_mul_affine_opt(RawOrigin::None, base.encode(), scalar.encode());

@@ -45,20 +45,20 @@ fn bls12_381_groth16_verification() {
 
 #[test]
 fn bls12_381_groth16_verificaton_opt() {
-	let vk = VerifyingKeyFor::<sp_bls12_381::Bls12_381, sp_bls12_381::Fr>::deserialize_compressed_unchecked(
+	let vk = VerifyingKeyFor::<sp_ark_bls12_381::Bls12_381, sp_ark_bls12_381::Fr>::deserialize_compressed_unchecked(
 			VK_SERIALIZED,
 		)
 		.unwrap();
 	let vk = serialize_argument(vk);
 
-	let c = Fp::<MontBackend<sp_bls12_381::FrConfig, 4>, 4>::deserialize_compressed_unchecked(
+	let c = Fp::<MontBackend<sp_ark_bls12_381::FrConfig, 4>, 4>::deserialize_compressed_unchecked(
 		C_SERIALIZED,
 	)
 	.unwrap();
 	let c = serialize_argument(c);
 
 	let proof =
-		ProofFor::<sp_bls12_381::Bls12_381, sp_bls12_381::Fr>::deserialize_compressed_unchecked(
+		ProofFor::<sp_ark_bls12_381::Bls12_381, sp_ark_bls12_381::Fr>::deserialize_compressed_unchecked(
 			PROOF_SERIALIZED,
 		)
 		.unwrap();
@@ -80,7 +80,7 @@ fn bls12_381_pairing() {
 
 #[test]
 fn bls12_381_pairing_opt() {
-	let (a, b) = make_pairing_args::<sp_bls12_381::G1Affine, sp_bls12_381::G2Affine>();
+	let (a, b) = make_pairing_args::<sp_ark_bls12_381::G1Affine, sp_ark_bls12_381::G2Affine>();
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bls12_381_pairing_opt(RuntimeOrigin::none(), a, b));
@@ -98,7 +98,7 @@ fn bls12_381_msm_g1() {
 
 #[test]
 fn bls12_381_msm_g1_opt() {
-	let (bases, scalars) = make_msm_args::<sp_bls12_381::G1Projective>(MSM_LEN);
+	let (bases, scalars) = make_msm_args::<sp_ark_bls12_381::G1Projective>(MSM_LEN);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bls12_381_msm_g1_opt(
@@ -120,7 +120,7 @@ fn bls12_381_msm_g2() {
 
 #[test]
 fn bls12_381_msm_g2_opt() {
-	let (bases, scalars) = make_msm_args::<sp_bls12_381::G2Projective>(MSM_LEN);
+	let (bases, scalars) = make_msm_args::<sp_ark_bls12_381::G2Projective>(MSM_LEN);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bls12_381_msm_g2_opt(
@@ -146,7 +146,8 @@ fn bls12_381_mul_projective_g1() {
 
 #[test]
 fn bls12_381_mul_projective_g1_opt() {
-	let (base, scalar) = make_scalar_args_projective::<sp_bls12_381::G1Projective>(SCALAR_WORDS);
+	let (base, scalar) =
+		make_scalar_args_projective::<sp_ark_bls12_381::G1Projective>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bls12_381_mul_projective_g1(
@@ -172,7 +173,7 @@ fn bls12_381_mul_affine_g1() {
 
 #[test]
 fn bls12_381_mul_affine_g1_opt() {
-	let (base, scalar) = make_scalar_args::<sp_bls12_381::G1Affine>(SCALAR_WORDS);
+	let (base, scalar) = make_scalar_args::<sp_ark_bls12_381::G1Affine>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bls12_381_mul_affine_g1_opt(
@@ -198,7 +199,8 @@ fn bls12_381_mul_projective_g2() {
 
 #[test]
 fn bls12_381_mul_projective_g2_opt() {
-	let (base, scalar) = make_scalar_args_projective::<sp_bls12_381::G2Projective>(SCALAR_WORDS);
+	let (base, scalar) =
+		make_scalar_args_projective::<sp_ark_bls12_381::G2Projective>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bls12_381_mul_projective_g2_opt(
@@ -224,7 +226,7 @@ fn bls12_381_mul_affine_g2() {
 
 #[test]
 fn bls12_381_mul_affine_g2_opt() {
-	let (base, scalar) = make_scalar_args::<sp_bls12_381::G2Affine>(SCALAR_WORDS);
+	let (base, scalar) = make_scalar_args::<sp_ark_bls12_381::G2Affine>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bls12_381_mul_affine_g2(
@@ -250,7 +252,7 @@ fn bls12_377_pairing() {
 
 #[test]
 fn bls12_377_pairing_opt() {
-	let (a, b) = make_pairing_args::<sp_bls12_377::G1Affine, sp_bls12_377::G2Affine>();
+	let (a, b) = make_pairing_args::<sp_ark_bls12_377::G1Affine, sp_ark_bls12_377::G2Affine>();
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bls12_377_pairing_opt(RuntimeOrigin::none(), a, b));
@@ -268,7 +270,7 @@ fn bls12_377_msm_g1() {
 
 #[test]
 fn bls12_377_msm_g1_opt() {
-	let (bases, scalars) = make_msm_args::<sp_bls12_377::g1::G1Projective>(MSM_LEN);
+	let (bases, scalars) = make_msm_args::<sp_ark_bls12_377::g1::G1Projective>(MSM_LEN);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bls12_377_msm_g1_opt(
@@ -290,7 +292,7 @@ fn bls12_377_msm_g2() {
 
 #[test]
 fn bls12_377_msm_g2_opt() {
-	let (bases, scalars) = make_msm_args::<sp_bls12_377::G2Projective>(MSM_LEN);
+	let (bases, scalars) = make_msm_args::<sp_ark_bls12_377::G2Projective>(MSM_LEN);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bls12_377_msm_g2_opt(
@@ -318,7 +320,7 @@ fn bls12_377_mul_projective_g1() {
 fn bls12_377_mul_projective_g1_opt() {
 	new_test_ext().execute_with(|| {
 		let (base, scalar) =
-			make_scalar_args_projective::<sp_bls12_377::G1Projective>(SCALAR_WORDS);
+			make_scalar_args_projective::<sp_ark_bls12_377::G1Projective>(SCALAR_WORDS);
 
 		assert_ok!(Ark::bls12_377_mul_projective_g1_opt(
 			RuntimeOrigin::none(),
@@ -343,7 +345,7 @@ fn bls12_377_mul_affine_g1() {
 
 #[test]
 fn bls12_377_mul_affine_g1_opt() {
-	let (base, scalar) = make_scalar_args::<sp_bls12_377::G1Affine>(SCALAR_WORDS);
+	let (base, scalar) = make_scalar_args::<sp_ark_bls12_377::G1Affine>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bls12_377_mul_affine_g1_opt(
@@ -369,7 +371,8 @@ fn bls12_377_mul_projective_g2() {
 
 #[test]
 fn bls12_377_mul_projective_g2_opt() {
-	let (base, scalar) = make_scalar_args_projective::<sp_bls12_377::G2Projective>(SCALAR_WORDS);
+	let (base, scalar) =
+		make_scalar_args_projective::<sp_ark_bls12_377::G2Projective>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bls12_377_mul_projective_g2_opt(
@@ -395,7 +398,7 @@ fn bls12_377_mul_affine_g2() {
 
 #[test]
 fn bls12_377_mul_affine_g2_opt() {
-	let (base, scalar) = make_scalar_args::<sp_bls12_377::G2Affine>(SCALAR_WORDS);
+	let (base, scalar) = make_scalar_args::<sp_ark_bls12_377::G2Affine>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bls12_377_mul_affine_g2_opt(
@@ -421,7 +424,7 @@ fn bw6_761_pairing() {
 
 #[test]
 fn bw6_761_pairing_opt() {
-	let (a, b) = make_pairing_args::<sp_bw6_761::g1::G1Affine, sp_bw6_761::g2::G2Affine>();
+	let (a, b) = make_pairing_args::<sp_ark_bw6_761::g1::G1Affine, sp_ark_bw6_761::g2::G2Affine>();
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bw6_761_pairing_opt(RuntimeOrigin::none(), a, b));
@@ -439,7 +442,7 @@ fn bw6_761_msm_g1() {
 
 #[test]
 fn bw6_761_msm_g1_opt() {
-	let (bases, scalars) = make_msm_args::<sp_bw6_761::g1::G1Projective>(MSM_LEN);
+	let (bases, scalars) = make_msm_args::<sp_ark_bw6_761::g1::G1Projective>(MSM_LEN);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bw6_761_msm_g1_opt(
@@ -461,7 +464,7 @@ fn bw6_761_msm_g2() {
 
 #[test]
 fn bw6_761_msm_g2_opt() {
-	let (bases, scalars) = make_msm_args::<sp_bw6_761::g2::G2Projective>(MSM_LEN);
+	let (bases, scalars) = make_msm_args::<sp_ark_bw6_761::g2::G2Projective>(MSM_LEN);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bw6_761_msm_g2_opt(
@@ -487,7 +490,8 @@ fn bw6_761_mul_projective_g1() {
 
 #[test]
 fn bw6_761_mul_projective_g1_opt() {
-	let (base, scalar) = make_scalar_args_projective::<sp_bw6_761::g1::G1Projective>(SCALAR_WORDS);
+	let (base, scalar) =
+		make_scalar_args_projective::<sp_ark_bw6_761::g1::G1Projective>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bw6_761_mul_projective_g1_opt(
@@ -513,7 +517,7 @@ fn bw6_761_mul_affine_g1() {
 
 #[test]
 fn bw6_761_mul_affine_g1_opt() {
-	let (base, scalar) = make_scalar_args::<sp_bw6_761::g1::G1Affine>(SCALAR_WORDS);
+	let (base, scalar) = make_scalar_args::<sp_ark_bw6_761::g1::G1Affine>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bw6_761_mul_affine_g1_opt(
@@ -539,7 +543,8 @@ fn bw6_761_mul_projective_g2() {
 
 #[test]
 fn bw6_761_mul_projective_g2_opt() {
-	let (base, scalar) = make_scalar_args_projective::<sp_bw6_761::g2::G2Projective>(SCALAR_WORDS);
+	let (base, scalar) =
+		make_scalar_args_projective::<sp_ark_bw6_761::g2::G2Projective>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bw6_761_mul_projective_g2_opt(
@@ -565,7 +570,7 @@ fn bw6_761_mul_affine_g2() {
 
 #[test]
 fn bw6_761_mul_affine_g2_opt() {
-	let (base, scalar) = make_scalar_args::<sp_bw6_761::g2::G2Affine>(SCALAR_WORDS);
+	let (base, scalar) = make_scalar_args::<sp_ark_bw6_761::g2::G2Affine>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::bw6_761_mul_affine_g2_opt(
@@ -595,7 +600,8 @@ fn ed_on_bls12_381_bandersnatch_msm_sw() {
 
 #[test]
 fn ed_on_bls12_381_bandersnatch_msm_sw_opt() {
-	let (bases, scalars) = make_msm_args::<sp_ed_on_bls12_381_bandersnatch::SWProjective>(MSM_LEN);
+	let (bases, scalars) =
+		make_msm_args::<sp_ark_ed_on_bls12_381_bandersnatch::SWProjective>(MSM_LEN);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::ed_on_bls12_381_bandersnatch_msm_sw_opt(
@@ -623,7 +629,7 @@ fn ed_on_bls12_381_bandersnatch_msm_te() {
 #[test]
 fn ed_on_bls12_381_bandersnatch_msm_te_opt() {
 	let (bases, scalars) =
-		make_msm_args::<sp_ed_on_bls12_381_bandersnatch::EdwardsProjective>(MSM_LEN);
+		make_msm_args::<sp_ark_ed_on_bls12_381_bandersnatch::EdwardsProjective>(MSM_LEN);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::ed_on_bls12_381_bandersnatch_msm_te_opt(
@@ -652,7 +658,7 @@ fn ed_on_bls12_381_bandersnatch_mul_projective_sw() {
 fn ed_on_bls12_381_bandersnatch_mul_projective_sw_opt() {
 	new_test_ext().execute_with(|| {
 		let (base, scalar) = make_scalar_args_projective::<
-			sp_ed_on_bls12_381_bandersnatch::SWProjective,
+			sp_ark_ed_on_bls12_381_bandersnatch::SWProjective,
 		>(SCALAR_WORDS);
 
 		assert_ok!(Ark::ed_on_bls12_381_bandersnatch_mul_projective_sw_opt(
@@ -680,7 +686,7 @@ fn ed_on_bls12_381_bandersnatch_mul_affine_sw() {
 #[test]
 fn ed_on_bls12_381_bandersnatch_mul_affine_sw_opt() {
 	let (base, scalar) =
-		make_scalar_args::<sp_ed_on_bls12_381_bandersnatch::SWAffine>(SCALAR_WORDS);
+		make_scalar_args::<sp_ark_ed_on_bls12_381_bandersnatch::SWAffine>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::ed_on_bls12_381_bandersnatch_mul_affine_sw_opt(
@@ -738,7 +744,7 @@ fn ed_on_bls12_381_bandersnatch_mul_affine_te() {
 #[test]
 fn ed_on_bls12_381_bandersnatch_mul_affine_te_opt() {
 	let (base, scalar) =
-		make_scalar_args::<sp_ed_on_bls12_381_bandersnatch::EdwardsAffine>(SCALAR_WORDS);
+		make_scalar_args::<sp_ark_ed_on_bls12_381_bandersnatch::EdwardsAffine>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::ed_on_bls12_381_bandersnatch_mul_affine_te_opt(
@@ -768,7 +774,7 @@ fn ed_on_bls12_377_msm() {
 
 #[test]
 fn ed_on_bls12_377_msm_opt() {
-	let (bases, scalars) = make_msm_args::<sp_ed_on_bls12_377::EdwardsProjective>(SCALAR_WORDS);
+	let (bases, scalars) = make_msm_args::<sp_ark_ed_on_bls12_377::EdwardsProjective>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::ed_on_bls12_377_msm_opt(
@@ -796,7 +802,7 @@ fn ed_on_bls12_377_mul_projective() {
 #[test]
 fn ed_on_bls12_377_mul_projective_opt() {
 	let (base, scalar) =
-		make_scalar_args_projective::<sp_ed_on_bls12_377::EdwardsProjective>(SCALAR_WORDS);
+		make_scalar_args_projective::<sp_ark_ed_on_bls12_377::EdwardsProjective>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::ed_on_bls12_377_mul_projective_opt(
@@ -824,7 +830,7 @@ fn ed_on_bls12_377_mul_affine() {
 
 #[test]
 fn ed_on_bls12_377_mul_affine_opt() {
-	let (base, scalar) = make_scalar_args::<sp_ed_on_bls12_377::EdwardsAffine>(SCALAR_WORDS);
+	let (base, scalar) = make_scalar_args::<sp_ark_ed_on_bls12_377::EdwardsAffine>(SCALAR_WORDS);
 
 	new_test_ext().execute_with(|| {
 		assert_ok!(Ark::ed_on_bls12_377_mul_affine_opt(
