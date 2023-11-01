@@ -3,12 +3,12 @@
 Examples using Arkworks curve arithmetic via [Substrate](https://github.com/paritytech/polkadot-sdk/) framework.
 
 The benchmarks are offered in two flavors:
-- Using the upstream Arkworks curves configuration: in this way the full set of curves arithmetic is built
-  and run in wasm directly by the pallet code.
-- Using the optimized [Substrate host functions](https://github.com/paritytech/
-  substrate-curves): in this way some of the more computationally expensive
-  curves arithmetic operations are delegated to the host to be run at native
-  speed.
+- Using the [Arkworks](https://github.com/arkworks-rs) upstream curves:
+  in this way the full set of curves arithmetic is built and run in wasm
+  directly by the pallet code.
+- Using the [Arkworks Substrate](https://github.com/paritytech/arkworks-substrate) curves:
+  in this way some of the more computationally expensive curves arithmetic
+  operations are delegated to the host to be run at native speed.
 
 Host functions are provided for:
 - Pairings
